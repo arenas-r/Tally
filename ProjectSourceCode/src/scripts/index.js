@@ -6,7 +6,6 @@ const app = express();
 const handlebars = require('express-handlebars'); //to enable express to work with handlebars
 const Handlebars = require('handlebars'); // to include the templating engine responsible for compiling templates
 const path = require('path');
-const pgp = require('pg-promise')(); // To connect to the Postgres DB from the node server
 const bodyParser = require('body-parser');
 const session = require('express-session'); // To set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
 const bcrypt = require('bcryptjs'); //  To hash passwords
@@ -15,14 +14,8 @@ const PORT = process.env.PORT || 3000;
 
 // Initialization
 app.use(bodyParser.json());
-const dbConfig = {
-    host: 'db',
-    port: 5432,
-    database: process.env.POSTGRES_DB,
-    user: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-}
-const db = pgp(dbConfig);
+
+const db = require('./db')
 
 // test database connection
 db.connect()
