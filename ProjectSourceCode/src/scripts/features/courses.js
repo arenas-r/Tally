@@ -8,4 +8,12 @@ router.get("/courses", async (req, res) => {
     res.status(200);
 });
 
+router.get("/courses/:id", async (req, res) => {
+    res.status(200);
+});
+
+router.get("/courses/:id/assignments", async (req, res) => {
+    res.status(200);
+});
+
 module.exports = router;
