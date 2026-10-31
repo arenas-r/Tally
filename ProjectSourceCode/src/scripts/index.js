@@ -30,11 +30,11 @@ db.connect()
 // create `ExpressHandlebars` instance and configure the layouts and partials dir.
 const hbs = handlebars.create({
   extname: 'hbs',
-  layoutsDir: __dirname + '/templates/layouts',
-  partialsDir: __dirname + '/views/partials',
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, '../templates/layouts'),
+  partialsDir: path.join(__dirname, '../templates/partials'),
 });
 
-// Register `hbs` as our view engine using its bound `engine()` function.
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '../templates'));
