@@ -1,17 +1,24 @@
 const express = require("express");
 const router = express.Router();
 
-const db = require("../db")
+const db = require("../db");
 
-router.get("/courses", async (req, res) => {
-    const id = req.session.user.id ?? "igotsomesalt"; // TODO: REFACTOR THIS LATER
-    const courses = db.any(
-        `   SELECT *
+async function getUser(req) {
+    return req.session.user.id ?? "igotsomesalt"; // TODO: REFACTOR THIS LATER
+}
+
+export async function getCourses(userId) {
+    return courses = await db.any(
+        `SELECT *
             FROM courses
             WHERE user_id = $1;`,
-        [id]
+        [userId]
     );
+}
 
+router.get("/courses", async (req, res) => {
+    const userId = getUser(req);
+    const courses = getCourses(userId);
     res.render('courses', courses);
 });
 
