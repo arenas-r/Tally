@@ -69,7 +69,7 @@ router.get("/", async (req, res) => {
     }
 
     // Temporary user until login is fully connected
-    const userId = req.session.user_id || 1;
+    const userId = req.session.user_id;
 
     // Get assignments from the database
     const assignments =
