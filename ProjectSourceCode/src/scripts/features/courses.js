@@ -35,9 +35,18 @@ export async function getUpcomingAssignments(userId, courseId) {
 }
 
 router.get("/courses", async (req, res) => {
-    const userId = getUser(req);
-    const courses = getCourses(userId);
-    res.render('courses', courses);
+    try {
+        const userId = getUser(req);
+        const courses = await getCourses(userId);
+
+        res.render("courses", {
+            courses
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal server error");
+    }
 });
 
 router.get("/courses/:id", async (req, res) => {
