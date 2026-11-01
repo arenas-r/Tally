@@ -16,6 +16,24 @@ export async function getCourses(userId) {
     );
 }
 
+export async function getUpcomingAssignments(userId, courseId) {
+    return await db.any(
+        `
+        SELECT a.*
+        FROM assignments a
+        JOIN courses c
+            ON a.course_id = c.course_id
+        WHERE c.user_id = $1
+          AND c.course_id = $2
+          AND a.completed = FALSE
+          AND a.due_date >= CURRENT_TIMESTAMP
+        ORDER BY a.due_date
+        LIMIT 3;
+        `,
+        [userId, courseId]
+    );
+}
+
 router.get("/courses", async (req, res) => {
     const userId = getUser(req);
     const courses = getCourses(userId);
