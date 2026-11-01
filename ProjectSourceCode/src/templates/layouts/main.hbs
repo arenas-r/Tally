@@ -7,6 +7,11 @@
     <title>{{title}}</title>
 
     <link rel="stylesheet" href="/styles/main.css">
+
+    {{#if stylesheet}}
+        <link rel="stylesheet" href="/styles/{{stylesheet}}">
+    {{/if}}
+
 </head>
 
 <body>

@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 // Initialization
 app.use(bodyParser.json());
 
-const db = require('./db')
+const db = require('./db');
 
 // test database connection
 db.connect()
