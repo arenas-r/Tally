@@ -30,7 +30,6 @@ db.connect()
 // create `ExpressHandlebars` instance and configure the layouts and partials dir.
 const hbs = handlebars.create({
   extname: 'hbs',
-  defaultLayout: 'main',
   layoutsDir: path.join(__dirname, '../templates/layouts'),
   partialsDir: path.join(__dirname, '../templates/partials'),
 });
