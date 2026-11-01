@@ -50,11 +50,36 @@ router.get("/courses", async (req, res) => {
 });
 
 router.get("/courses/:id", async (req, res) => {
-    res.status(200);
-});
+    try {
+        const userId = getUser(req);
+        const courseId = req.params.id;
 
-router.get("/courses/:id/assignments", async (req, res) => {
-    res.status(200);
+        const courses = await getCourses(userId);
+
+        const selectedCourse = await getCourse(
+            userId,
+            courseId
+        );
+
+        if (!selectedCourse) {
+            return res.status(404).send("Course not found");
+        }
+
+        const assignments = await getUpcomingAssignments(
+            userId,
+            courseId
+        );
+
+        res.render("courses", {
+            courses,
+            selectedCourse,
+            assignments
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal server error");
+    }
 });
 
 module.exports = router;
