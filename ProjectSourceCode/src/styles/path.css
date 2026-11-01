@@ -1,0 +1,15 @@
+.node-card {
+    background-color: #8398b9; /*dark background for the box */
+    border: 2px solid #38bdf8;  /* Draws a border around the box */
+    border-radius: 8px;        /* Rounds the corners */
+    padding: 16px;             /* Adds breathing room inside the box */
+    width: 200px;              /* Sets a clean width for the card */
+    text-align: center;        /* Centers the text inside */
+}
+.content{
+    display: none;
+    overflow: hidden;
+}
+.node-card.active .content {
+    display: block; 
+}
