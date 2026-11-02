@@ -4,5 +4,16 @@ const router = express.Router();
 const db = require("../db")
 
 // Requests here
+router.get("/courses", async (req, res) => {
+    res.status(200);
+});
+
+router.get("/courses/:id", async (req, res) => {
+    res.status(200);
+});
+
+router.get("/courses/:id/assignments", async (req, res) => {
+    res.status(200);
+});
 
 module.exports = router;
