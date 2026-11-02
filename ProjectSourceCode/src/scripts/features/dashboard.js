@@ -4,5 +4,8 @@ const router = express.Router();
 const db = require("../db")
 
 // Requests here
+router.get("/", (req,res) => {
+    res.render("dashboard");
+});
 
 module.exports = router;
