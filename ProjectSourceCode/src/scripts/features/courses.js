@@ -44,7 +44,7 @@ async function getUpcomingAssignments(userId, courseId) {
     );
 }
 
-router.get("/courses", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const userId = await getUser(req);
         const courses = await getCourses(userId);
@@ -59,7 +59,7 @@ router.get("/courses", async (req, res) => {
     }
 });
 
-router.get("/courses/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         const userId = await getUser(req);
         const courseId = req.params.id;
