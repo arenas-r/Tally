@@ -4,19 +4,29 @@ const router = express.Router();
 const db = require("../db");
 
 async function getUser(req) {
-    return req.session.user.id ?? "igotsomesalt"; // TODO: REFACTOR THIS LATER
+    return req.session.user.user_id ?? "igotsomesalt"; // TODO: REFACTOR THIS LATER
 }
 
-export async function getCourses(userId) {
-    return courses = await db.any(
+async function getCourses(userId) {
+    return await db.any(
         `SELECT *
-            FROM courses
-            WHERE user_id = $1;`,
+         FROM courses
+         WHERE user_id = $1;`,
         [userId]
     );
 }
 
-export async function getUpcomingAssignments(userId, courseId) {
+async function getCourse(userId, courseId) {
+    return await db.oneOrNone(
+        `SELECT *
+         FROM courses
+         WHERE user_id = $1
+           AND course_id = $2;`,
+        [userId, courseId]
+    );
+}
+
+async function getUpcomingAssignments(userId, courseId) {
     return await db.any(
         `
         SELECT a.*
@@ -36,7 +46,7 @@ export async function getUpcomingAssignments(userId, courseId) {
 
 router.get("/courses", async (req, res) => {
     try {
-        const userId = getUser(req);
+        const userId = await getUser(req);
         const courses = await getCourses(userId);
 
         res.render("courses", {
@@ -51,7 +61,7 @@ router.get("/courses", async (req, res) => {
 
 router.get("/courses/:id", async (req, res) => {
     try {
-        const userId = getUser(req);
+        const userId = await getUser(req);
         const courseId = req.params.id;
 
         const courses = await getCourses(userId);
@@ -82,4 +92,8 @@ router.get("/courses/:id", async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = {
+    router,
+    getCourses,
+    getUpcomingAssignments
+};
