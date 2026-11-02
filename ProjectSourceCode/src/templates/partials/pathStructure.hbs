@@ -1,0 +1,38 @@
+<!-- <link rel="stylesheet" href=".css"> -->
+<link rel="stylesheet" href="/styles/path.css">
+<!-- Outer Container / Card Box -->
+<div class="path-structure">
+    {{#each assignment}}
+<!-- Outer Container / Card Box -->
+    <div class="node-card">
+    <!-- Node Content Inside -->
+    <!--Place Holder for {each}, need to loop-->
+        <button type="button" class="collapsible">
+            <span class="node-assignment">{{Assignment}}</span>
+            <span class="card-text text-muted mb-2">📅 {{dueDate}}</span>
+        </button>
+        
+        <div class = "content">
+            <!--Can add feature later to add different filters-->
+            <p class="node-priority">{{Priority}}</p>
+            <!--Can add completion status that makes this dissapear and go into the compelted section or something-->        
+            <p class="node-status">{{Status}}</p>
+            <p class="node-time">{{estimatedTime}}</p>
+            <p class="node-descriptions">{{Description}}</p>        
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {    
+        const collapsibles = document.querySelectorAll(".collapsible");
+        
+        collapsibles.forEach(button=>{
+            button.addEventListener("click",function(){
+                const card = this.closest(".node-card");
+                card.classList.toggle("active");
+            });
+        });
+    });
+</script>

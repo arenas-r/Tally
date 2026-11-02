@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +13,11 @@
         <link rel="stylesheet" href="/styles/{{stylesheet}}">
     {{/if}}
 
+    {{#if isPathPage}}
+        <link rel="stylesheet" href="/styles/path.css">
+    {{/if}}
 </head>
 
 <body>
     {{{body}}}
 </body>
-</html>

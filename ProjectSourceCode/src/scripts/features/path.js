@@ -7,13 +7,28 @@ const db = require("../db")
 
 // GET route for /path
 router.get('/', (req, res) => {
-    // Pass test data to your Handlebars template
-    res.render('partials/PathStructure', {
-        title: 'Homework Path',
-        assignments: [
-            { id: 1, name: 'CSCI 2400 - Lab 1', dueDate: 'Tomorrow', details: 'Complete binary lab' },
-            { id: 2, name: 'MATH 2400 - HW 4', dueDate: 'Friday', details: 'Section 14.3 exercises' }
-        ]
+    const sampleAssignments = [
+        {
+            Assignment: 'Calculus Homework 3',
+            dueDate: 'January 8, 2007',
+            Priority: 'High',
+            Status: 'In Progress',
+            estimatedTime: '2 hours',
+            Description: 'Complete problems 1-15 on washer method.'
+        },
+        {
+            Assignment: 'Data Structures Lab 6',
+            dueDate: 'January 8, 2007',
+            Priority: 'Medium',
+            Status: 'Not Started',
+            estimatedTime: '3 hours',
+            Description: 'Implement binary search peak-finding algorithm.'
+        }
+    ];
+
+    res.render('path', {
+        title: 'Homework Path Dashboard',
+        assignment: sampleAssignments // This array feeds into your Handlebars partial
     });
 });
 
