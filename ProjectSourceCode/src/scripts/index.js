@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 // Initialization
 app.use(bodyParser.json());
 
-const db = require('./db')
+const db = require('./db');
 
 // test database connection
 db.connect()
@@ -34,10 +34,10 @@ const hbs = handlebars.create({
   partialsDir: path.join(__dirname, '../templates/partials'),
 });
 
-// Register `hbs` as our view engine using its bound `engine()` function.
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, '../pages'));
+app.set('views', path.join(__dirname, '../templates'));
+app.use('/styles', express.static(path.join(__dirname, '../styles')));
 app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
 
 // initialize session variables
