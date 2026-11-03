@@ -9,20 +9,20 @@ const db = require("../db")
 router.get('/', (req, res) => {
     const sampleAssignments = [
         {
-            Assignment_Name: 'Calculus Homework 3',
-            Due_Date: 'due in 1 day, 6:00pm',
-            Priority: 'High',
-            Completed: 'In Progress',
-            Estimated_Time: '2 hours',
-            Description: 'Complete problems 1-15 on washer method.'
+            assignment_name: 'Calculus Homework 3',
+            due_date: 'due in 1 day, 6:00pm',
+            priority: 'High',
+            completed: 'True',
+            estimated_time: '2 hours',
+            description: 'Complete problems 1-15 on washer method.'
         },
         {
-            Assignment_Name: 'Data Structures Lab 6',
-            Due_Date: 'in two days, 11:59 pm',
-            Priority: 'Medium',
-            Completed: 'Not Started',
-            estimatedTime: '3 hours',
-            Description: 'Implement binary search peak-finding algorithm.'
+            assignment_name: 'Data Structures Lab 6',
+            due_date: 'in two days, 11:59 pm',
+            priority: 'Medium',
+            completed: 'False',
+            estimated_time: '3 hours',
+            description: 'Implement binary search peak-finding algorithm.'
         }
     ];
 

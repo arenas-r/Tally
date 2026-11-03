@@ -62,7 +62,7 @@ app.use(express.static(path.join(__dirname, "../"))); // Allows files to be acce
 
 // Import feature modules
 const calendarRoutes = require("./features/calendar");
-const coursesRoutes = require("./features/courses");
+const { router: coursesRoutes } = require("./features/courses");
 const dashboardRoutes = require("./features/dashboard");
 const importRoutes = require("./features/import");
 const loginRoutes = require("./features/login");

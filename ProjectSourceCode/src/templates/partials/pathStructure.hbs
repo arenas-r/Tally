@@ -8,17 +8,17 @@
     <!-- Node Content Inside -->
     <!--Place Holder for {each}, need to loop-->
         <button type="button" class="collapsible">
-            <span class="node-assignment">{{Assignment_Name}}</span>
-            <span class="card-text text-muted mb-2">📅 {{Due_Date}}</span>
+            <span class="node-assignment">{{assignment_name}}</span>
+            <span class="card-text text-muted mb-2">📅 {{due_date}}</span>
         </button>
         
         <div class = "content">
             <!--Can add feature later to add different filters-->
-            <p class="node-priority">Priority: {{Priority}}</p>
+            <p class="node-priority">Priority: {{priority}}</p>
             <!--Can add completion status that makes this dissapear and go into the compelted section or something-->        
-            <p class="node-status">Status: {{Completed}}</p>
-            <p class="node-time">Estimated Time: {{Estimated_Time}}</p>
-            <p class="node-descriptions">Description: {{Description}}</p>        
+            <p class="node-status">Status: {{completed}}</p>
+            <p class="node-time">Estimated Time: {{estimated_time}}</p>
+            <p class="node-descriptions">Description: {{description}}</p>        
         </div>
     </div>
     {{/each}}
