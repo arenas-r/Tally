@@ -4,9 +4,6 @@ const router = express.Router();
 const db = require("../db");
 
 // Requests here
-router.get("/", (req,res) => {
-    res.send("Courses page in progress(this is a test)")
-});
 async function getUser(req) {
     return req.session.user.user_id ?? "igotsomesalt"; // TODO: REFACTOR THIS LATER
 }

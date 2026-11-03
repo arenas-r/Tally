@@ -211,9 +211,4 @@ router.get("/events", async (req, res) => {
 });
 
 // Requests here
-router.get("/", (req,res) => {
-    res.send("Calendar page is in progress (this is a temporary test)")
-});
-
-
-module.exports = router;
+router.get("/", (req,res)
