@@ -2,6 +2,9 @@
   <section class="auth-card" aria-labelledby="login-title">
     <h1 id="login-title">Welcome to Tally</h1>
     <p class="auth-intro">Sign in to keep your coursework on track.</p>
+    {{#if success}}
+    <p class="form-success" role="status">{{success}}</p>
+    {{/if}}
 
     {{#if error}}
       <p class="form-error" role="alert">{{error}}</p>
