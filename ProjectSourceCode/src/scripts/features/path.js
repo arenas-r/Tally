@@ -28,7 +28,8 @@ router.get('/', (req, res) => {
 
     res.render('path', {
         title: 'Homework Path Dashboard',
-        assignment: sampleAssignments // This array feeds into your Handlebars partial
+        assignment: sampleAssignments, // This array feeds into your Handlebars partial
+        isPathPage: true
     });
 });
 
