@@ -96,3 +96,9 @@ body {
   background: #fff0f0;
 }
 
+.form-success {
+  padding: 12px;
+  border-radius: 8px;
+  color: #1f5e3b;
+  background: #eaf7ef;
+}

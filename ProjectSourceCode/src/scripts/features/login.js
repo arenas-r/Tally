@@ -120,6 +120,14 @@ router.post("/register", async (req, res) => {
 
     return res.redirect("/login?registered=1");
   } catch (error) {
+    if (error.code === "23505") {
+      return res.status(409).render("register", {
+        title: "Create an account | Tally",
+        error: "That email or username is already in use.",
+        formData,
+      });
+    }
+
     console.error("Registration failed:", error.message);
     return res.status(500).render("register", {
       title: "Create an account | Tally",
