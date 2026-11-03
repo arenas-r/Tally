@@ -31,7 +31,7 @@ CREATE TABLE assignments (
     course_id INTEGER NOT NULL,
     assignment_name VARCHAR(150) NOT NULL,
     description TEXT,
-    due_date TIMESTAMP NOT NULL,
+    due_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     priority VARCHAR(15)
         CHECK (priority IN ('low', 'medium', 'high')),
@@ -44,10 +44,10 @@ CREATE TABLE assignments (
     CONSTRAINT fk_assignments_course
         FOREIGN KEY (course_id)
         REFERENCES courses(course_id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
 
     CONSTRAINT unique_course_assignment
-        UNIQUE (course_id, assignment_name, due_date);
+        UNIQUE (course_id, assignment_name, due_date)
 );
 
 
