@@ -7,7 +7,7 @@
 <div class="container-fluid">
     div class=<"row">
 
-        <div class="col-md-3">
+        <div class="col-md-3 bg-light p-4 min-vh-100">
             <h2>Tally</h2>
             <p>Dashboard</p>
             <p>Calendar</p>
@@ -15,13 +15,51 @@
             <p>Study Path</p>
         </div>
 
-        <div class="col-md-9">
-            <h1>Dashboard</h1>
+        <div class="col-md-9 p-4">
+            <h1 class="mb-4 text-primary">Dashboard</h1>
             <p>Welcome to Tally!</p>
+            <div class="row row-cols-1 row-cols-md-3  mt-3">
+
+                <div class="col">
+                    <div class="card h-100 shadow-sm rounded-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Upcoming Assignments</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">Due Soon</h6>
+                            <p class="card-text">Upcoming assignments will appear here.</p>
+                            <a href="/calendar" class="card-link">View Calendar</a>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col">
+                    <div class="card h-100 shadow-sm rounded-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Weekly Workload</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">This Week</h6>
+                            <p class="card-text">Weekly workload will appear here.</p>
+                            <a href="/path" class="card-link">View Study Path</a>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col">
+                    <div class="card h-100 shadow-sm rounded-3">
+                        <div class="card-body">
+                            <h5 class="card-title">My Courses</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">Enrolled Courses</h6>
+                            <p class="card-text">Courses will appear here.</p>
+                            <a href="/courses" class="card-link">View Courses</a>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+
         </div>
 </div>
 
-<ul class="nav flex-column">
+<ul class="nav nav-pills flex-column">
     <li class="nav-item">
         <a class="nav-link Dashboard" aria-current="page" href="#">Active</a>
     </li>
@@ -33,5 +71,20 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/path">Study Path</a> 
+    </li>
+</ul>
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Act
+    <li>
+    <li class="nav-item">
+        <a class="nav-link" href="/calendar">Calendar</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/courses">Courses</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/path">Study Path</a>
     </li>
 </ul>
