@@ -1,0 +1,6 @@
+.env
+node_modules/
+
+# macOS DS Store files
+.DS_Store
+**/.DS_Store
