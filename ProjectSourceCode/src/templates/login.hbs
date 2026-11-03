@@ -1,0 +1,36 @@
+<main class="auth-page">
+  <section class="auth-card" aria-labelledby="login-title">
+    <h1 id="login-title">Welcome to Tally</h1>
+    <p class="auth-intro">Sign in to keep your coursework on track.</p>
+
+    {{#if error}}
+      <p class="form-error" role="alert">{{error}}</p>
+    {{/if}}
+
+    <form action="/login" method="POST">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button type="submit">Log in</button>
+    </form>
+
+    <p class="auth-switch">
+      New to Tally? <a href="/login/register">Create an account</a>
+    </p>
+  </section>
+</main>
