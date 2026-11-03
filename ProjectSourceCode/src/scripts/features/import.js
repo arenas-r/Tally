@@ -53,9 +53,9 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
                 ? courseMatches[courseMatches.length - 1][1] : '';
 
             const courseCode = course.match(/^[A-Z]+\s*\d+/)?.[0].replace(/\s/g, '') || '';
-            // const description = event.description || null;
-            const description = null;
-            const dueDate = event.end || null;
+            const description = event.description || null;
+            // const description = null; // testing purposes
+            const dueDate = event.end;
 
             const userId = 1; // Temp, change when session data added
             // const url = event.url;
@@ -77,7 +77,7 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
 
             const courseResult = await db.one(courseQuery, [
                 userId,
-                courseCode,
+                course,
                 courseCode
             ]);
 
@@ -91,7 +91,7 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
                     description,
                     due_date
                 )
-                VALUES ($1, $2, $3, $4)
+                VALUES ($1, $2, $3, ${dueDate ? "$4" : "DEFAULT"})
                 ON CONFLICT (course_id, assignment_name, due_date)
                 DO NOTHING
 
@@ -106,12 +106,21 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
             // console.log('Due-date:', event.end);
             // console.log('URL', event.url);
 
-            const assignmentResult = await db.any(assignmentQuery, [
-               courseId,
-               title,
-               description,
-               dueDate
-            ]);
+            let assignmentResult;
+            if(dueDate) {
+                 assignmentResult = await db.any(assignmentQuery, [
+                    courseId,
+                    title,
+                    description,
+                    dueDate
+                ]);
+            } else {
+                assignmentResult = await db.any(assignmentQuery, [
+                    courseId,
+                    title,
+                    description
+                ]);
+            }
 
             console.log(assignmentResult);
         }
