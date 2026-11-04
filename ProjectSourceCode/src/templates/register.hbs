@@ -1,0 +1,61 @@
+<main class="auth-page">
+  <section class="auth-card" aria-labelledby="register-title">
+    <h1 id="register-title">Create your Tally account</h1>
+    <p class="auth-intro">Keep your coursework and deadlines organized.</p>
+
+    {{#if error}}
+      <p class="form-error" role="alert">{{error}}</p>
+    {{/if}}
+
+    <form action="/login/register" method="POST">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="text"
+        minlength="2"
+        maxlength="64"
+        autocomplete="username"
+        value="{{formData.username}}"
+        required
+      >
+
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        maxlength="200"
+        autocomplete="email"
+        value="{{formData.email}}"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        minlength="8"
+        autocomplete="new-password"
+        required
+      >
+
+      <label for="confirmPassword">Confirm password</label>
+      <input
+        id="confirmPassword"
+        name="confirmPassword"
+        type="password"
+        minlength="8"
+        autocomplete="new-password"
+        required
+      >
+
+      <button type="submit">Create account</button>
+    </form>
+
+    <p class="auth-switch">
+      Already have an account? <a href="/login">Log in</a>
+    </p>
+  </section>
+</main>

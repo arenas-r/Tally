@@ -58,11 +58,11 @@ app.use(
 // Middleware
 app.use(express.urlencoded({ extended: true })); // Better req.body with richer parsing
 app.use(express.json()); // Lets express parse JSON bodies
-// app.use(express.static(path.join(__dirname, "../public"))); // Allows files to be accessible to browser directly
+app.use(express.static(path.join(__dirname, "../"))); // Allows files to be accessible to browser directly
 
 // Import feature modules
 const calendarRoutes = require("./features/calendar");
-const coursesRoutes = require("./features/courses");
+const { router: coursesRoutes } = require("./features/courses");
 const dashboardRoutes = require("./features/dashboard");
 const importRoutes = require("./features/import");
 const loginRoutes = require("./features/login");
