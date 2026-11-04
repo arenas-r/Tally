@@ -213,5 +213,5 @@ router.get("/events", requireAuth, async (req, res) => {
   }
 });
 
-
-module.exports = router;
+// Requests here
+router.get("/", (req,res))

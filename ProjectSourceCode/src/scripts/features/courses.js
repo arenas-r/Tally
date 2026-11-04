@@ -3,6 +3,7 @@ const router = express.Router();
 
 const db = require("../db");
 
+// Requests here
 async function getUser(req) {
     return req.session.user.user_id ?? "igotsomesalt"; // TODO: REFACTOR THIS LATER
 }

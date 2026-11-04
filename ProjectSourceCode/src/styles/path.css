@@ -1,0 +1,58 @@
+body{
+    background-color: #0b0f19;
+    color:#f8fafc;
+    font-family: sans-serif;
+    margin:0;
+}
+
+.node-card {
+    background-color: #0f172a; /*dark background for the box */
+    border: 2px solid #38bdf8;  /* Draws a border around the box */
+    border-radius: 14px;        /* Rounds the corners */
+    padding: 24px;             /* Adds breathing room inside the box */
+    width: 200px;              /* Sets a clean width for the card */
+    text-align: left;        /* Centers the text inside */
+
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+.content{
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+.node-card.active .content {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ce2121; 
+}
+/*
+.node-priority.High{
+    border-left: 5-x solid #ff4d4d;
+    background-color: rgba(255,77,77,0.03);
+}
+.node-priority.low{
+    border-left: 5-x solid #dad3d3;
+}*/
+
+.path-structure{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:50px
+}
+.node-card:not(:last-child)::after{
+    content: "↓";
+    position: absolute;
+    bottom: -35px;      /* Pulls it down into the gap */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #a43636;        /* Match your text/theme color */
+    font-weight: bold;
+}
