@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
     <h1 class="mb-4 text-primary">Dashboard</h1>
     <p>Welcome to Tally!</p>
@@ -9,7 +10,34 @@
                 <div class="card-body">
                     <h5 class="card-title">Upcoming Assignments</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Due Soon</h6>
-                    <p class="card-text">Upcoming assignments will appear here.</p>
+
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
+                            Soft Dev Group Project
+                            <span class="badge text-bg-danger">High Priority</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
+                            Linear Math HW
+                            <span class="badge text-bg-warning">Medium Priority</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
+                            CSCI 2400 Lab 6
+                            <span class="badge text-bg-danger">High Priority</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
+                            Bio Lab Report
+                            <span class="badge text-bg-warning">Medium Priority</span>
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
+                            English Essay
+                            <span class="badge text-bg-success">Low Priority</span>
+                        </li>
+                    </ul>
+
                     <a href="/calendar" class="card-link">View Calendar</a>
                 </div>
             </div>
@@ -20,7 +48,20 @@
                 <div class="card-body">
                     <h5 class="card-title">Weekly Workload</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">This Week</h6>
-                    <p class="card-text">Weekly workload will appear here.</p>
+
+                    <p class="card-text">Track your assignment completion this week.</p>
+
+                    <div class="progress mb-3"
+                         role="progressbar"
+                         aria-label="Weekly assignment completion"
+                         aria-valuenow="25"
+                         aria-valuemin="0"
+                         aria-valuemax="100">
+                        <div class="progress-bar" style="width: 25%">
+                            25%
+                        </div>
+                    </div>
+
                     <a href="/path" class="card-link">View Study Path</a>
                 </div>
             </div>
@@ -31,7 +72,21 @@
                 <div class="card-body">
                     <h5 class="card-title">My Courses</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Enrolled Courses</h6>
-                    <p class="card-text">Courses will appear here.</p>
+
+                    <div class="list-group mb-3">
+                        <a href="/courses" class="list-group-item list-group-item-action">
+                            CSCI 3308 - Software Development
+                        </a>
+
+                        <a href="/courses" class="list-group-item list-group-item-action">
+                            CSCI 2400 - Computer Systems
+                        </a>
+
+                        <a href="/courses" class="list-group-item list-group-item-action">
+                            MATH 2130 - Linear Algebra
+                        </a>
+                    </div>
+
                     <a href="/courses" class="card-link">View Courses</a>
                 </div>
             </div>
@@ -39,29 +94,3 @@
 
     </div>
 </div>
-
-<ul class="list-group">
-    <li class="list-group-item d-flex justify-content-between align-items-center">Soft Dev Group Project</li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">Linear Math hw</li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">CSCI 2400 Lab 6</li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">Bio Lab Report</li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">English Essay</li>
-</ul>
-
-<span class="badge text-bg-secondary">Low Priority</span></h1>
-<span class="badge text-bg-secondary">Medium Priority</span></h2>
-<span class="badge text-bg-secondary">High Priority</span></h3>
-
-<div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-    <div class="progress-bar" style="width: 25%">25%</div>
-</div>
-
-<div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action-active" aria-current="true">
-        The current link item
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-
-
-
