@@ -7,8 +7,6 @@ const db = require("../db")
 router.get("/", async (req,res) => {
     res.render("dashboard");
 
-    module.exports = router;
-
 const userID = req.session.user.user_id;
 
 const assignments = await db.any(
@@ -27,3 +25,5 @@ ORDER BY a.due_date ASC;`,
 [userid]
 );
 });
+
+module.exports = router;
