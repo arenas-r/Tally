@@ -4,6 +4,11 @@ const router = express.Router();
 const db = require("../db");
 const { setUserSession } = require("./auth");
 
+router.use((req, res, next) => {
+  res.locals.stylesheet = "login.css";
+  next();
+});
+
 router.get("/", (req, res) => {
   res.render("login", {
     title: "Log in | Tally",
