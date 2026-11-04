@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const db = require("../db");
-const { requireAuth, getCurrentUser } = require("./auth");
+const { requireAuth, getCurrentUser } = require(".d/auth");
 
 
 // Get all assignments for one month
@@ -213,7 +213,5 @@ router.get("/events", requireAuth, async (req, res) => {
   }
 });
 
-// Requests here
-router.get("/", (req,res))
 
 module.exports = router;
