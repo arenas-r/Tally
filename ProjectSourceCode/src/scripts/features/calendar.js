@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const db = require("../db");
-const { requireAuth, getCurrentUser } = require("../auth");
+const { requireAuth, getCurrentUser } = require("./auth");
 
 
 // Get all assignments for one month
