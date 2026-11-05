@@ -1,5 +1,17 @@
 <div class="calendar-page">
 
+    <button
+        type="button"
+        id="add-assignment-button"
+        onclick="toggleAssignmentForm()">
+        + Add Assignment
+    </button>
+
+    <div id="assignment-form-container" hidden>
+        <h2>New Assignment</h2>
+        <p>The assignment form will go here.</p>
+    </div>
+
     <header class="calendar-header">
         <h1>Calendar</h1>
 
@@ -67,3 +79,10 @@
     </div>
 
 </div>
+
+<script>
+    function toggleAssignmentForm() {
+        const container = document.getElementById("assignment-form-container");
+        container.hidden = !container.hidden;
+    }
+</script>
