@@ -8,9 +8,81 @@
     </button>
 
     <div id="assignment-form-container" hidden>
-        <h2>New Assignment</h2>
-        <p>The assignment form will go here.</p>
-    </div>
+    <h2>New Assignment</h2>
+
+    <form id="new-assignment-form" onsubmit="return false;">
+
+        <!-- Course -->
+        <label for="course_id">Course</label>
+        <select id="course_id" name="course_id" required>
+            <option value="" selected disabled>
+                Courses will load in the next step
+            </option>
+        </select>
+
+        <!-- Assignment Name -->
+        <label for="assignment_name">Assignment Name</label>
+        <input
+            type="text"
+            id="assignment_name"
+            name="assignment_name"
+            maxlength="150"
+            required
+        >
+
+        <!-- Description -->
+        <label for="description">Description</label>
+        <textarea
+            id="description"
+            name="description"
+            rows="3"
+        ></textarea>
+
+        <!-- Due Date -->
+        <label for="due_date">Due Date and Time</label>
+        <input
+            type="datetime-local"
+            id="due_date"
+            name="due_date"
+            required
+        >
+
+        <!-- Priority -->
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority">
+            <option value="">No Priority</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+
+        <!-- Estimated Time -->
+        <label for="estimated_time">Estimated Time (minutes)</label>
+        <input
+            type="number"
+            id="estimated_time"
+            name="estimated_time"
+            min="0"
+        >
+
+        <!-- Completion Status -->
+        <label for="completed">
+            <input
+                type="checkbox"
+                id="completed"
+                name="completed"
+                value="true"
+            >
+            Completed
+        </label>
+
+        <!-- Save Button -->
+        <button type="button" disabled>
+            Save Assignment
+        </button>
+
+    </form>
+</div>
 
     <header class="calendar-header">
         <h1>Calendar</h1>
