@@ -1,87 +1,335 @@
-/* Calendar layout */
+
+/* Calendar page */
 .calendar-page {
+    box-sizing: border-box;
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 10px;
+    margin: 24px auto;
+    padding: 24px;
+
+    font-family: Arial, sans-serif;
+    color: #202a36;
 }
 
-/* Header and month navigation */
+.calendar-page * {
+    box-sizing: border-box;
+}
+
+/* Match login page background */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #202a36;
+    background: #f3f6f9;
+}
+
+/* Calendar header */
+.calendar-page .calendar-header h1 {
+    margin: 20px 0;
+    font-size: 2rem;
+    color: #202a36;
+}
+
+/* Month navigation */
 .calendar-page .calendar-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.calendar-page .calendar-navigation h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.calendar-page .calendar-navigation a {
+    color: #205e4b;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.calendar-page .calendar-navigation a:hover {
+    color: #27745c;
+    text-decoration: underline;
+}
+
+/* Add Assignment and Save buttons */
+.calendar-page #add-assignment-button,
+.calendar-page #new-assignment-form button[type="submit"] {
+    padding: 13px 18px;
+    border: 0;
+    border-radius: 8px;
+
+    background: #27745c;
+    color: #ffffff;
+
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.calendar-page #add-assignment-button:hover,
+.calendar-page #new-assignment-form button[type="submit"]:hover {
+    background: #205e4b;
+}
+
+.calendar-page button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Assignment form container */
+.calendar-page #assignment-form-container {
+    max-width: 700px;
+    margin: 20px 0;
+    padding: 32px;
+
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    box-shadow: 0 12px 36px rgba(25, 48, 74, 0.1);
+}
+
+.calendar-page #assignment-form-container[hidden] {
+    display: none;
+}
+
+.calendar-page #assignment-form-container h2 {
+    margin: 0 0 20px;
+    font-size: 1.5rem;
+}
+
+/* Assignment form */
+.calendar-page #new-assignment-form {
+    display: grid;
+    gap: 10px;
+}
+
+.calendar-page #new-assignment-form label {
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* Form inputs */
+.calendar-page #new-assignment-form input:not([type="checkbox"]),
+.calendar-page #new-assignment-form select,
+.calendar-page #new-assignment-form textarea {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 12px 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #202a36;
+    font: inherit;
+}
+
+.calendar-page #new-assignment-form textarea {
+    resize: vertical;
+}
+
+/* Form input focus */
+.calendar-page #new-assignment-form input:focus,
+.calendar-page #new-assignment-form select:focus,
+.calendar-page #new-assignment-form textarea:focus {
+    outline: 3px solid rgba(39, 116, 92, 0.2);
+    border-color: #27745c;
+}
+
+/* Completed checkbox */
+.calendar-page #new-assignment-form input[type="checkbox"] {
+    accent-color: #27745c;
 }
 
 /* Weekday names */
 .calendar-page .calendar-weekdays {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
 .calendar-page .calendar-weekdays div {
+    padding: 12px 6px;
+
+    background: #eaf0ed;
+    color: #202a36;
+
+    border: 1px solid #e2e8f0;
+
     text-align: center;
-    font-weight: bold;
-    padding: 8px;
-    border: 1px solid #ccc;
+    font-weight: 700;
+    font-size: 0.9rem;
 }
 
 /* Calendar grid */
 .calendar-page .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
-/* Individual day boxes */
+/* Individual calendar days */
 .calendar-page .calendar-day {
+    min-width: 0;
     min-height: 120px;
-    padding: 6px;
-    border: 1px solid #ccc;
+    padding: 8px;
+
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+
+    overflow-wrap: anywhere;
 }
 
-/* Empty boxes before the first day */
+/* Blank days before the first day */
 .calendar-page .calendar-day.blank {
-    background-color: #f2f2f2;
+    background: #edf1f5;
 }
 
 /* Day number */
 .calendar-page .day-number {
-    font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+
+    color: #202a36;
+    font-weight: 700;
+    font-size: 0.9rem;
 }
 
-/* Assignment information */
+/* Assignment cards */
 .calendar-page .calendar-assignment {
-    margin-bottom: 5px;
-    padding: 5px;
-    border: 1px solid #999;
+    min-width: 0;
+    margin-bottom: 6px;
+    padding: 8px;
+
+    background: #f3f6f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+
     font-size: 12px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
 }
 
+/* Assignment titles */
+.calendar-page .calendar-assignment strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #202a36;
+}
+
+/* Assignment details */
 .calendar-page .calendar-assignment span {
     display: block;
+    color: #657386;
 }
 
-/* Assignment notification */
+/* Priority indicators */
+.calendar-page .calendar-assignment.high {
+    border-left: 4px solid #d9534f;
+}
+
+.calendar-page .calendar-assignment.medium {
+    border-left: 4px solid #d9a441;
+}
+
+.calendar-page .calendar-assignment.low {
+    border-left: 4px solid #27745c;
+}
+
+/* Duplicate assignment notification */
 .assignment-toast {
     position: fixed;
     top: 20px;
     left: 20px;
 
+    max-width: min(360px, calc(100vw - 40px));
     padding: 14px 20px;
 
-    background-color: #fff0f0;
+    background: #fff0f0;
     color: #8a1c1c;
 
     border: 1px solid #d9534f;
     border-radius: 8px;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 36px rgba(25, 48, 74, 0.1);
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
 
     z-index: 1000;
 }
 
-/* Hide the notification when inactive */
 .assignment-toast[hidden] {
     display: none;
+}
+
+/* Tablet screens */
+@media (max-width: 900px) {
+    .calendar-page {
+        margin: 16px auto;
+        padding: 16px;
+    }
+
+    .calendar-page .calendar-day {
+        min-height: 100px;
+        padding: 6px;
+    }
+
+    .calendar-page .calendar-assignment {
+        padding: 6px;
+        font-size: 11px;
+    }
+}
+
+/* Mobile screens */
+@media (max-width: 650px) {
+    .calendar-page {
+        margin: 0 auto;
+        padding: 12px;
+        overflow-x: auto;
+    }
+
+    .calendar-page .calendar-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .calendar-page .calendar-navigation {
+        gap: 8px;
+    }
+
+    .calendar-page .calendar-navigation h2 {
+        font-size: 1.15rem;
+    }
+
+    .calendar-page .calendar-navigation a {
+        font-size: 0.85rem;
+    }
+
+    .calendar-page #add-assignment-button {
+        width: 100%;
+    }
+
+    .calendar-page #assignment-form-container {
+        padding: 20px;
+    }
+
+    /* Keep the seven calendar columns aligned.
+       On small devices, scroll horizontally. */
+    .calendar-page .calendar-weekdays,
+    .calendar-page .calendar-grid {
+        min-width: 700px;
+    }
+
+    .calendar-page .calendar-day {
+        min-height: 100px;
+    }
+
+    .calendar-page .calendar-assignment {
+        font-size: 11px;
+    }
 }
