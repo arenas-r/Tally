@@ -1,5 +1,5 @@
 
-/* Calendar page */
+/* Main calendar page */
 .calendar-page {
     box-sizing: border-box;
     max-width: 1200px;
@@ -14,7 +14,7 @@
     box-sizing: border-box;
 }
 
-/* Match login page background */
+/* Match the login page theme */
 body {
     margin: 0;
     min-height: 100vh;
@@ -23,14 +23,14 @@ body {
     background: #f3f6f9;
 }
 
-/* Calendar header */
+/* Calendar title */
 .calendar-page .calendar-header h1 {
     margin: 20px 0;
     font-size: 2rem;
     color: #202a36;
 }
 
-/* Month navigation */
+/* Previous and next month navigation */
 .calendar-page .calendar-navigation {
     display: flex;
     justify-content: space-between;
@@ -76,12 +76,13 @@ body {
     background: #205e4b;
 }
 
+/* Disable buttons while saving */
 .calendar-page button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-/* Assignment form container */
+/* New assignment form container */
 .calendar-page #assignment-form-container {
     max-width: 700px;
     margin: 20px 0;
@@ -103,7 +104,7 @@ body {
     font-size: 1.5rem;
 }
 
-/* Assignment form */
+/* Assignment form layout */
 .calendar-page #new-assignment-form {
     display: grid;
     gap: 10px;
@@ -114,8 +115,8 @@ body {
     font-weight: 600;
 }
 
-/* Form inputs */
-.calendar-page #new-assignment-form input:not([type="checkbox"]),
+/* Form inputs and dropdowns */
+.calendar-page #new-assignment-form input,
 .calendar-page #new-assignment-form select,
 .calendar-page #new-assignment-form textarea {
     width: 100%;
@@ -135,7 +136,7 @@ body {
     resize: vertical;
 }
 
-/* Form input focus */
+/* Highlight selected form fields */
 .calendar-page #new-assignment-form input:focus,
 .calendar-page #new-assignment-form select:focus,
 .calendar-page #new-assignment-form textarea:focus {
@@ -143,12 +144,7 @@ body {
     border-color: #27745c;
 }
 
-/* Completed checkbox */
-.calendar-page #new-assignment-form input[type="checkbox"] {
-    accent-color: #27745c;
-}
-
-/* Weekday names */
+/* Days of the week */
 .calendar-page .calendar-weekdays {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -167,7 +163,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Calendar grid */
+/* Seven-column calendar grid */
 .calendar-page .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -185,12 +181,12 @@ body {
     overflow-wrap: anywhere;
 }
 
-/* Blank days before the first day */
+/* Empty days before the month starts */
 .calendar-page .calendar-day.blank {
     background: #edf1f5;
 }
 
-/* Day number */
+/* Day numbers */
 .calendar-page .day-number {
     margin-bottom: 8px;
 
@@ -199,8 +195,10 @@ body {
     font-size: 0.9rem;
 }
 
-/* Assignment cards */
+/* Clickable assignment cards */
 .calendar-page .calendar-assignment {
+    display: block;
+    width: 100%;
     min-width: 0;
     margin-bottom: 6px;
     padding: 8px;
@@ -209,26 +207,35 @@ body {
     border: 1px solid #e2e8f0;
     border-radius: 8px;
 
+    font-family: inherit;
     font-size: 12px;
     line-height: 1.5;
+    text-align: left;
 
     overflow-wrap: anywhere;
+    cursor: pointer;
 }
 
-/* Assignment titles */
+/* Highlight assignments when hovered */
+.calendar-page .calendar-assignment:hover {
+    background: #eaf7ef;
+    border-color: #27745c;
+}
+
+/* Assignment names */
 .calendar-page .calendar-assignment strong {
     display: block;
     margin-bottom: 4px;
     color: #202a36;
 }
 
-/* Assignment details */
+/* Course and due time */
 .calendar-page .calendar-assignment span {
     display: block;
     color: #657386;
 }
 
-/* Priority indicators */
+/* Assignment priority colors */
 .calendar-page .calendar-assignment.high {
     border-left: 4px solid #d9534f;
 }
@@ -241,7 +248,7 @@ body {
     border-left: 4px solid #27745c;
 }
 
-/* Duplicate assignment notification */
+/* Assignment error notification */
 .assignment-toast {
     position: fixed;
     top: 20px;
@@ -264,11 +271,94 @@ body {
     z-index: 1000;
 }
 
+/* Hide notifications when inactive */
 .assignment-toast[hidden] {
     display: none;
 }
 
-/* Tablet screens */
+/* Assignment details pop-up */
+#assignment-details-dialog {
+    width: min(90%, 500px);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 30px;
+
+    background: #ffffff;
+    color: #202a36;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    box-shadow: 0 12px 36px rgba(25, 48, 74, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Darken the background behind the pop-up */
+#assignment-details-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* Assignment details title */
+#assignment-details-dialog h2 {
+    margin-top: 0;
+    overflow-wrap: anywhere;
+}
+
+/* Assignment details text */
+#assignment-details-dialog p {
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* Preserve description line breaks */
+#details-description {
+    white-space: pre-wrap;
+}
+
+/* Close button for assignment details */
+#close-details-button {
+    margin-top: 14px;
+    padding: 13px 18px;
+
+    background: #27745c;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#close-details-button:hover {
+    background: #205e4b;
+}
+
+/* Assignment completion checkbox */
+#assignment-details-dialog label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#details-completed {
+    width: 18px;
+    height: 18px;
+    accent-color: #27745c;
+    cursor: pointer;
+}
+
+/* Disable checkbox while saving changes */
+#details-completed:disabled {
+    cursor: not-allowed;
+}
+
+/* Adjust calendar for tablets */
 @media (max-width: 900px) {
     .calendar-page {
         margin: 16px auto;
@@ -286,7 +376,7 @@ body {
     }
 }
 
-/* Mobile screens */
+/* Adjust calendar for mobile devices */
 @media (max-width: 650px) {
     .calendar-page {
         margin: 0 auto;
@@ -318,8 +408,7 @@ body {
         padding: 20px;
     }
 
-    /* Keep the seven calendar columns aligned.
-       On small devices, scroll horizontally. */
+    /* Allow horizontal scrolling on small screens */
     .calendar-page .calendar-weekdays,
     .calendar-page .calendar-grid {
         min-width: 700px;
