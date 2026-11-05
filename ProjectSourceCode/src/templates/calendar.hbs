@@ -10,7 +10,10 @@
     <div id="assignment-form-container" hidden>
     <h2>New Assignment</h2>
 
-    <form id="new-assignment-form" onsubmit="return false;">
+    <form
+        id="new-assignment-form"
+        action="/calendar/add"
+        method="POST">
 
         <!-- Course -->
         <label for="course_id">Course</label>
@@ -85,7 +88,7 @@
         </label>
 
         <!-- Save Button -->
-        <button type="button" disabled>
+        <button type="submit">
             Save Assignment
         </button>
 

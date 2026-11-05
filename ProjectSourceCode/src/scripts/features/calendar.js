@@ -157,7 +157,7 @@ router.get("/", async (req, res) => {
 
     // Send calendar information to calendar.hbs
     res.render("calendar", {
-      
+
       title: "Calendar",
 
       stylesheet: "calendar.css",
@@ -217,5 +217,103 @@ router.get("/events", async (req, res) => {
   }
 });
 
+// Add a new assignment to the database
+router.post("/add", async (req, res) => {
+  try {
+
+    // Temporary test user
+    const userId = 1;
+
+    // Get assignment information from the form
+    const courseId = Number(req.body.course_id);
+    const assignmentName = (req.body.assignment_name || "").trim();
+    const description = req.body.description || null;
+    const dueDate = req.body.due_date;
+    const priority = req.body.priority || null;
+
+    const estimatedTime =
+      req.body.estimated_time === "" ||
+      req.body.estimated_time == null
+        ? null
+        : Number(req.body.estimated_time);
+
+    const completed = req.body.completed === "true";
+
+    // Validate required fields
+    if (
+      !Number.isInteger(courseId) ||
+      courseId <= 0 ||
+      !assignmentName ||
+      assignmentName.length > 150 ||
+      !dueDate
+    ) {
+      return res.status(400).send("Invalid assignment information");
+    }
+
+    // Validate optional fields
+    if (
+      (priority !== null && !["low", "medium", "high"].includes(priority)) ||
+      (estimatedTime !== null &&
+        (!Number.isSafeInteger(estimatedTime) || estimatedTime < 0))
+    ) {
+      return res.status(400).send("Invalid priority or estimated time");
+    }
+
+    // Make sure the selected course belongs to the test user
+    const course = await db.oneOrNone(
+      `
+      SELECT course_id
+      FROM courses
+      WHERE course_id = $1
+        AND user_id = $2;
+      `,
+      [courseId, userId]
+    );
+
+    if (!course) {
+      return res.status(400).send("Invalid course selected");
+    }
+
+    // Save assignment to PostgreSQL
+    await db.none(
+      `
+      INSERT INTO assignments (
+        course_id,
+        assignment_name,
+        description,
+        due_date,
+        priority,
+        estimated_time,
+        completed
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, $7);
+      `,
+      [
+        courseId,
+        assignmentName,
+        description,
+        dueDate,
+        priority,
+        estimatedTime,
+        completed
+      ]
+    );
+
+    // Return to the calendar month containing the assignment
+    const month = dueDate.substring(0, 7);
+
+    res.redirect(303, `/calendar?month=${month}`);
+
+  } catch (error) {
+
+    console.error("Error adding assignment:", error);
+
+    if (error.code === "23505") {
+      return res.status(409).send("Assignment already exists");
+    }
+
+    res.status(500).send("Unable to add assignment");
+  }
+});
 
 module.exports = router;
