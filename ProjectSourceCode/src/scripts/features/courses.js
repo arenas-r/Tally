@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-
+ 
 const db = require("../db");
-
+ 
 // Requests here
 async function getUser(req) {
-    return req.session.user.user_id ?? "igotsomesalt"; // TODO: REFACTOR THIS LATER
+    return 1; // TODO: REFACTOR THIS LATER
 }
-
+ 
 async function getCourses(userId) {
     return await db.any(
         `SELECT *
@@ -16,7 +16,7 @@ async function getCourses(userId) {
         [userId]
     );
 }
-
+ 
 async function getCourse(userId, courseId) {
     return await db.oneOrNone(
         `SELECT *
@@ -26,7 +26,7 @@ async function getCourse(userId, courseId) {
         [userId, courseId]
     );
 }
-
+ 
 async function getUpcomingAssignments(userId, courseId) {
     return await db.any(
         `
@@ -44,55 +44,55 @@ async function getUpcomingAssignments(userId, courseId) {
         [userId, courseId]
     );
 }
-
+ 
 router.get("/", async (req, res) => {
     try {
         const userId = await getUser(req);
         const courses = await getCourses(userId);
-
+ 
         res.render("courses", {
             courses
         });
-
+ 
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal server error");
     }
 });
-
+ 
 router.get("/:id", async (req, res) => {
     try {
         const userId = await getUser(req);
         const courseId = req.params.id;
-
+ 
         const courses = await getCourses(userId);
-
+ 
         const selectedCourse = await getCourse(
             userId,
             courseId
         );
-
+ 
         if (!selectedCourse) {
             return res.status(404).send("Course not found");
         }
-
+ 
         const assignments = await getUpcomingAssignments(
             userId,
             courseId
         );
-
+ 
         res.render("courses", {
             courses,
             selectedCourse,
             assignments
         });
-
+ 
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal server error");
     }
 });
-
+ 
 module.exports = {
     router,
     getCourses,
