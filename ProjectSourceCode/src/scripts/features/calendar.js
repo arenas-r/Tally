@@ -209,7 +209,4 @@ router.get("/events", async (req, res) => {
   }
 });
 
-// Requests here
-router.get("/", (req,res))
-
 module.exports = router;
