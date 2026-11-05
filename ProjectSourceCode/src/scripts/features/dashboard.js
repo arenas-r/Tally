@@ -10,9 +10,6 @@ router.get("/", async (req, res) => {
         // Temporary test user
         const userID = 1;
 
-<<<<<<< HEAD
-const userID = req.session.user.user_id;
-=======
         // Get upcoming incomplete assignments
         const assignments = await db.any(
             `
@@ -36,7 +33,6 @@ const userID = req.session.user.user_id;
         res.render("dashboard", {
             assignments: assignments
         });
->>>>>>> origin/main
 
     } catch (error) {
         console.error("Dashboard error:", error);
@@ -44,8 +40,4 @@ const userID = req.session.user.user_id;
     }
 });
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> origin/main
