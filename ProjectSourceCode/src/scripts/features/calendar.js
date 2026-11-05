@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const db = require("../db");
+const { getCourses } = require("./courses");
 
 
 // Get all assignments for one month
@@ -74,7 +75,10 @@ router.get("/", async (req, res) => {
 
     // Get assignments from the database
     const assignments =
-      await getCalendarAssignments(userId, year, month);
+    await getCalendarAssignments(userId, year, month);
+
+    // Get courses for the assignment form
+    const courses = await getCourses(userId);
 
 
     // Group assignments by due date
@@ -153,6 +157,7 @@ router.get("/", async (req, res) => {
 
     // Send calendar information to calendar.hbs
     res.render("calendar", {
+      
       title: "Calendar",
 
       stylesheet: "calendar.css",
@@ -160,6 +165,8 @@ router.get("/", async (req, res) => {
       monthLabel: `${monthName} ${year}`,
 
       days: days,
+
+      courses: courses,
 
       previousMonth:
         `${previousYear}-${String(previousMonth).padStart(2, "0")}`,

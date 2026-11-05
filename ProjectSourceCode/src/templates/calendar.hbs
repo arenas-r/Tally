@@ -14,10 +14,18 @@
 
         <!-- Course -->
         <label for="course_id">Course</label>
+
         <select id="course_id" name="course_id" required>
             <option value="" selected disabled>
-                Courses will load in the next step
+                Select a Course
             </option>
+
+            {{#each courses}}
+                <option value="{{course_id}}">
+                    {{course_code}} - {{course_name}}
+                </option>
+            {{/each}}
+
         </select>
 
         <!-- Assignment Name -->
