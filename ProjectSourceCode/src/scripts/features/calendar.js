@@ -34,7 +34,7 @@ async function getCalendarAssignments(userId, year, month) {
       a.priority,
       a.completed,
       TO_CHAR(a.due_date, 'YYYY-MM-DD') AS due_day,
-      TO_CHAR(a.due_date, 'HH24:MI') AS due_time,
+      TO_CHAR(a.due_date, 'FMHH12:MI AM') AS due_time,
       c.course_name,
       c.course_code
     FROM assignments a
