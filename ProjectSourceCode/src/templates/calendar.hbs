@@ -1,5 +1,12 @@
 <div class="calendar-page">
 
+    <div
+        id="assignment-toast"
+        class="assignment-toast"
+        role="alert"
+        hidden>
+    </div>
+
     <button
         type="button"
         id="add-assignment-button"
@@ -168,4 +175,60 @@
         const container = document.getElementById("assignment-form-container");
         container.hidden = !container.hidden;
     }
+
+    // Display notification
+    function showToast(message) {
+        const toast = document.getElementById("assignment-toast");
+
+        toast.textContent = message;
+        toast.hidden = false;
+
+        // Automatically hide after 10 seconds
+        clearTimeout(window.assignmentToastTimer);
+
+        window.assignmentToastTimer = setTimeout(() => {
+            toast.hidden = true;
+        }, 10000);
+    }
+
+    // Submit the assignment
+    const form = document.getElementById("new-assignment-form");
+
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const saveButton = form.querySelector('button[type="submit"]');
+        saveButton.disabled = true;
+
+        try {
+            const formData = new FormData(form);
+
+            const response = await fetch("/calendar/add", {
+                method: "POST",
+                body: new URLSearchParams(formData)
+            });
+
+            // Duplicate assignment
+            if (response.status === 409) {
+                showToast("This assignment already exists.");
+                return;
+            }
+
+            // Other errors
+            if (!response.ok) {
+                showToast("Unable to save assignment. Please try again.");
+                return;
+            }
+
+            // Successful submission: navigate to the assignment's month
+            window.location.assign(response.url);
+
+        } catch (error) {
+            console.error("Assignment submission error:", error);
+            showToast("Unable to connect to the server.");
+
+        } finally {
+            saveButton.disabled = false;
+        }
+    });
 </script>
