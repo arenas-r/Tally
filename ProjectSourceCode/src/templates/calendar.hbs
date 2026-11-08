@@ -1,5 +1,96 @@
+
 <div class="calendar-page">
 
+    <!-- Assignment error notifications -->
+    <div
+        id="assignment-toast"
+        class="assignment-toast"
+        role="alert"
+        hidden>
+    </div>
+
+    <!-- Show or hide the assignment form -->
+    <button
+        type="button"
+        id="add-assignment-button"
+        onclick="toggleAssignmentForm()">
+        + Add Assignment
+    </button>
+
+    <!-- Form for adding new assignments -->
+    <div id="assignment-form-container" hidden>
+        <h2>New Assignment</h2>
+
+        <form
+            id="new-assignment-form"
+            action="/calendar/add"
+            method="POST">
+
+            <!-- Course selection -->
+            <label for="course_id">Course</label>
+            <select id="course_id" name="course_id" required>
+                <option value="" selected disabled>
+                    Select a Course
+                </option>
+
+                {{#each courses}}
+                    <option value="{{course_id}}">
+                        {{course_code}} - {{course_name}}
+                    </option>
+                {{/each}}
+            </select>
+
+            <!-- Assignment information -->
+            <label for="assignment_name">Assignment Name</label>
+            <input
+                type="text"
+                id="assignment_name"
+                name="assignment_name"
+                maxlength="150"
+                required
+            >
+
+            <label for="description">Description</label>
+            <textarea
+                id="description"
+                name="description"
+                rows="3"
+            ></textarea>
+
+            <label for="due_date">Due Date and Time</label>
+            <input
+                type="datetime-local"
+                id="due_date"
+                name="due_date"
+                required
+            >
+
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority">
+                <option value="">No Priority</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+
+            <label for="estimated_time">
+                Estimated Time (minutes)
+            </label>
+            <input
+                type="number"
+                id="estimated_time"
+                name="estimated_time"
+                min="0"
+            >
+
+            <button type="submit">
+                Save Assignment
+            </button>
+
+        </form>
+    </div>
+
+    <!-- Calendar header and month navigation -->
     <header class="calendar-header">
         <h1>Calendar</h1>
 
@@ -16,6 +107,7 @@
         </div>
     </header>
 
+    <!-- Days of the week -->
     <div class="calendar-weekdays">
         <div>Sun</div>
         <div>Mon</div>
@@ -26,12 +118,14 @@
         <div>Sat</div>
     </div>
 
+    <!-- Calendar days and assignments -->
     <div class="calendar-grid">
 
         {{#each days}}
 
             {{#if isBlank}}
 
+                <!-- Blank days before the month starts -->
                 <div class="calendar-day blank"></div>
 
             {{else}}
@@ -42,9 +136,23 @@
                         {{day}}
                     </div>
 
+                    <!-- Clickable assignments with details stored in data attributes -->
                     {{#each assignments}}
 
-                        <div class="calendar-assignment {{priority}}">
+                        <button
+                            type="button"
+                            class="calendar-assignment {{priority}}"
+                            data-id="{{assignment_id}}"
+                            data-name="{{assignment_name}}"
+                            data-course="{{course_code}} {{course_name}}"
+                            data-date="{{due_day}}"
+                            data-time="{{due_time}}"
+                            data-description="{{description}}"
+                            data-priority="{{priority}}"
+                            data-estimated="{{estimated_time}}"
+                            data-completed="{{completed}}"
+                            onclick="openAssignmentDetails(this)">
+
                             <strong>{{assignment_name}}</strong>
 
                             <span>
@@ -54,7 +162,8 @@
                             <span>
                                 {{due_time}}
                             </span>
-                        </div>
+
+                        </button>
 
                     {{/each}}
 
@@ -67,3 +176,224 @@
     </div>
 
 </div>
+
+<!-- Assignment details pop-up -->
+<dialog
+    id="assignment-details-dialog"
+    aria-labelledby="details-name">
+
+    <h2 id="details-name"></h2>
+
+    <p id="details-course"></p>
+
+    <!-- Assignment information -->
+    <p>
+        <strong>Due Date:</strong>
+        <span id="details-due"></span>
+    </p>
+
+    <p>
+        <strong>Description:</strong>
+        <span id="details-description"></span>
+    </p>
+
+    <p>
+        <strong>Priority:</strong>
+        <span id="details-priority"></span>
+    </p>
+
+    <p>
+        <strong>Estimated Time:</strong>
+        <span id="details-estimated"></span>
+    </p>
+
+    <!-- Update assignment completion -->
+    <label for="details-completed">
+        <input
+            type="checkbox"
+            id="details-completed"
+        >
+        Completed
+    </label>
+
+    <!-- Show an error if the completion update fails -->
+    <p id="completion-error" role="alert" hidden>
+        Unable to update completion status. Please try again.
+    </p>
+
+    <!-- Close the details pop-up -->
+    <button
+        type="button"
+        id="close-details-button"
+        onclick="document.getElementById('assignment-details-dialog').close()">
+        Close
+    </button>
+
+</dialog>
+
+<script>
+
+    // Track the assignment currently being viewed
+    let selectedAssignment = null;
+
+    // Show or hide the new assignment form
+    function toggleAssignmentForm() {
+        const container = document.getElementById("assignment-form-container");
+        container.hidden = !container.hidden;
+    }
+
+    // Display a notification for 10 seconds
+    function showToast(message) {
+        const toast = document.getElementById("assignment-toast");
+
+        toast.textContent = message;
+        toast.hidden = false;
+
+        // Reset the notification timer
+        clearTimeout(window.assignmentToastTimer);
+
+        window.assignmentToastTimer = setTimeout(() => {
+            toast.hidden = true;
+        }, 10000);
+    }
+
+    // Send new assignments without a normal form submission
+    const form = document.getElementById("new-assignment-form");
+
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        // Prevent duplicate clicks while saving
+        const saveButton = form.querySelector('button[type="submit"]');
+        saveButton.disabled = true;
+
+        try {
+            const formData = new FormData(form);
+
+            const response = await fetch("/calendar/add", {
+                method: "POST",
+                body: new URLSearchParams(formData)
+            });
+
+            // Handle duplicate assignments
+            if (response.status === 409) {
+                showToast("This assignment already exists.");
+                return;
+            }
+
+            // Handle other submission errors
+            if (!response.ok) {
+                showToast("Unable to save assignment. Please try again.");
+                return;
+            }
+
+            // Navigate to the new assignment's month
+            window.location.assign(response.url);
+
+        } catch (error) {
+            console.error("Assignment submission error:", error);
+            showToast("Unable to connect to the server.");
+
+        } finally {
+            saveButton.disabled = false;
+        }
+    });
+
+    // Fill and open the assignment details pop-up
+    function openAssignmentDetails(assignment) {
+        const data = assignment.dataset;
+
+        selectedAssignment = assignment;
+
+        // Clear previous errors
+        document.getElementById("completion-error").hidden = true;
+
+        // Display the selected assignment's information
+        document.getElementById("details-name").textContent =
+            data.name;
+
+        document.getElementById("details-course").textContent =
+            data.course;
+
+        document.getElementById("details-due").textContent =
+            `${data.date} at ${data.time}`;
+
+        document.getElementById("details-description").textContent =
+            data.description || "No description provided";
+
+        document.getElementById("details-priority").textContent =
+            data.priority || "Not specified";
+
+        document.getElementById("details-estimated").textContent =
+            data.estimated ? `${data.estimated} minutes` : "Not specified";
+
+        // Load the saved completion status
+        document.getElementById("details-completed").checked =
+            data.completed === "true";
+
+        document.getElementById("assignment-details-dialog").showModal();
+    }
+
+    // Save completion changes to the server
+    const completionCheckbox =
+        document.getElementById("details-completed");
+
+    completionCheckbox.addEventListener("change", async function() {
+
+        // Get the selected assignment and checkbox value
+        const assignment = selectedAssignment;
+        const assignmentId = assignment.dataset.id;
+        const completed = completionCheckbox.checked;
+
+        const errorMessage =
+            document.getElementById("completion-error");
+
+        // Disable the checkbox while saving
+        errorMessage.hidden = true;
+        completionCheckbox.disabled = true;
+
+        try {
+            const response = await fetch(
+                `/calendar/${assignmentId}/completed`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: new URLSearchParams({
+                        completed: String(completed)
+                    })
+                }
+            );
+
+            // Check if the update succeeded
+            if (!response.ok) {
+                throw new Error("Unable to update assignment");
+            }
+
+            const updatedAssignment = await response.json();
+
+            // Update the assignment's stored status
+            assignment.dataset.completed =
+                String(updatedAssignment.completed);
+
+        } catch (error) {
+            console.error("Completion update error:", error);
+
+            // Restore the old status if saving fails
+            if (selectedAssignment === assignment) {
+                completionCheckbox.checked =
+                    assignment.dataset.completed === "true";
+
+                errorMessage.hidden = false;
+            }
+
+        } finally {
+            // Re-enable the checkbox after saving
+            if (selectedAssignment === assignment) {
+                completionCheckbox.disabled = false;
+            }
+        }
+    });
+
+</script>
