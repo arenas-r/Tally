@@ -3,7 +3,6 @@ const router = express.Router();
 
 const db = require("../db");
 
-
 // Get all assignments for one month
 async function getCalendarAssignments(userId, year, month) {
 
@@ -69,8 +68,8 @@ router.get("/", async (req, res) => {
       month = today.getMonth() + 1;
     }
 
-    // Get logged-in user
-    const userId = req.session.user_id;
+    // Temporary test user until authentication is integrated
+    const userId = 1;
 
     // Get assignments from the database
     const assignments =
@@ -190,8 +189,8 @@ router.get("/events", async (req, res) => {
     const month =
       Number(req.query.month) || today.getMonth() + 1;
 
-    // Get logged-in user
-    const userId = req.session.user_id;
+    // Temporary test user until authentication is integrated
+    const userId = 1;
 
     // Get assignments from database
     const assignments =
@@ -210,4 +209,4 @@ router.get("/events", async (req, res) => {
   }
 });
 
-// Requests here
+module.exports = router;
