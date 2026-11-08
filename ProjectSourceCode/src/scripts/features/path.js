@@ -38,14 +38,21 @@ router.get('/',async (req, res)=>{
 
     try{
         const assignmentData = await db.any(`
-            SELECT * FROM assignments
+            SELECT
+            assignment_name,
+            description,
+            TO_CHAR(due_date, 'Mon DD, YYYY') AS due_date,
+            priority,
+            estimated_time,
+            completed
+            FROM assignments
             ORDER BY assignments.due_date DESC
             `);
 
-            res.status(200).json({
-                status: "Success",
-                data: assignmentData
-            })
+            res.render('path',{
+                assignment: assignmentData,
+                isPathPage: true
+            });
     }catch(err){
         res.status(400).json({
             status:"Error",

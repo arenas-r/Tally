@@ -68,3 +68,13 @@ CREATE TABLE assignment_files (
         REFERENCES assignments(assignment_id)
         ON DELETE CASCADE
 );
+INSERT INTO users (username, email, password_hash)
+VALUES('testuser', 'testuser@example.com','fakepasswordhash');
+
+
+INSERT INTO courses(user_id, course_name, course_code)
+VALUES (1,'Calculus', 'Math123');
+
+
+INSERT INTO assignments (course_id, assignment_name, description, due_date, priority, estimated_time, completed) 
+values (2,'Homework 5', 'Homework for math class','2026-11-29', 'high', 2, true);
