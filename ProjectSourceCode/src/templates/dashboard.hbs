@@ -11,31 +11,16 @@
                     <h5 class="card-title">Upcoming Assignments</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Due Soon</h6>
 
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
-                            Soft Dev Group Project
-                            <span class="badge text-bg-danger">High Priority</span>
-                        </li>
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
-                            Linear Math HW
-                            <span class="badge text-bg-warning">Medium Priority</span>
-                        </li>
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
-                            CSCI 2400 Lab 6
-                            <span class="badge text-bg-danger">High Priority</span>
-                        </li>
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
-                            Bio Lab Report
-                            <span class="badge text-bg-warning">Medium Priority</span>
-                        </li>
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
-                            English Essay
-                            <span class="badge text-bg-success">Low Priority</span>
-                        </li>
+                    <ul class="list_group">
+                        {{#each assignments}}
+                            <li class="list-group-item d-flex justify-content-between
+                            align-items-center">
+                                {{this.assignment_name}}
+                                <span class="badge text-bg-secondary">
+                                    {{this.priority}}
+                                </span>
+                            </li>
+                        {{/each}}
                     </ul>
 
                     <a href="/calendar" class="card-link">View Calendar</a>
@@ -73,19 +58,21 @@
                     <h5 class="card-title">My Courses</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Enrolled Courses</h6>
 
-                    <div class="list-group mb-3">
-                        <a href="/courses" class="list-group-item list-group-item-action">
-                            CSCI 3308 - Software Development
-                        </a>
-
-                        <a href="/courses" class="list-group-item list-group-item-action">
-                            CSCI 2400 - Computer Systems
-                        </a>
-
-                        <a href="/courses" class="list-group-item list-group-item-action">
-                            MATH 2130 - Linear Algebra
-                        </a>
-                    </div>
+                    <ul class="list-group">
+                        {{#each courses}}
+                            <li class="list-group-item d-flex justify-content-between
+                            align-items-center">
+                                {{this.course_name}}
+                                <span class="badge text-bg-secondary">
+                                    {{this.course_code}}
+                                </span>
+                            </li>
+                        {{else}}
+                            <li class="list-group-item">
+                                No courses added yet
+                            </li>
+                        {{/each}}
+                    </ul>
 
                     <a href="/courses" class="card-link">View Courses</a>
                 </div>
