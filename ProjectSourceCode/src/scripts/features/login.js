@@ -1,8 +1,10 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
-const db = require("../db");
+const { db } = require("../db");
 const { setUserSession } = require("./auth");
+
+const validateRegistration = require('../validateRegistration');
 
 router.use((req, res, next) => {
   res.locals.stylesheet = "login.css";
@@ -70,34 +72,17 @@ router.post("/register", async (req, res) => {
 
   const formData = { username, email };
 
-  if (username.length < 2 || username.length > 64) {
-    return res.status(400).render("register", {
-      title: "Create an account | Tally",
-      error: "Username must be between 2 and 64 characters.",
-      formData,
-    });
-  }
+  const validationError = validateRegistration({
+    username,
+    email,
+    password,
+    confirmPassword,
+  });
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200) {
+  if (validationError) {
     return res.status(400).render("register", {
       title: "Create an account | Tally",
-      error: "Enter a valid email address.",
-      formData,
-    });
-  }
-
-  if (password.length < 8) {
-    return res.status(400).render("register", {
-      title: "Create an account | Tally",
-      error: "Password must be at least 8 characters.",
-      formData,
-    });
-  }
-
-  if (password !== confirmPassword) {
-    return res.status(400).render("register", {
-      title: "Create an account | Tally",
-      error: "Passwords do not match.",
+      error: validationError,
       formData,
     });
   }
