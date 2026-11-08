@@ -6,6 +6,7 @@ const { db } = require("../db")
 // Requests here
 
 // GET route for /path
+/*
 router.get('/', (req, res) => {
     const sampleAssignments = [
         {
@@ -32,5 +33,24 @@ router.get('/', (req, res) => {
         isPathPage: true
     });
 });
+*/
+router.get('/',async (req, res)=>{
 
+    try{
+        const assignmentData = await db.any(`
+            SELECT * FROM assignments
+            ORDER BY assignments.due_date DESC
+            `);
+
+            res.status(200).json({
+                status: "Success",
+                data: assignmentData
+            })
+    }catch(err){
+        res.status(400).json({
+            status:"Error",
+            message: err.message
+        });
+    }
+});
 module.exports = router;
