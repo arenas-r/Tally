@@ -4,7 +4,6 @@ const router = express.Router();
 const { db } = require("../db")
 
 // Requests here
-<<<<<<< HEAD
 
 // GET route for /path
 router.get('/', (req, res) => {
@@ -35,6 +34,3 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
-=======
-//router.get("/",(req,res) 
->>>>>>> 12e7d0f (dashboard queries for assignments, courses, workload)
