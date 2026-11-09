@@ -40,7 +40,7 @@
 let lastKnownCount = {{totalCount}};
 
 async function smartPoll() {
-    // Will keep for now, Don't poll if user is typing but still need to add this functioanlity of manual editing
+    // Will keep for now, Don't poll if user is typing but still need to add this functionality of manual editing
     if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
         return; 
     }
