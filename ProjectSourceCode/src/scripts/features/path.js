@@ -46,12 +46,14 @@ router.get('/',async (req, res)=>{
             estimated_time,
             completed
             FROM assignments
-            ORDER BY assignments.due_date DESC
+            ORDER BY assignments.due_date ASC
+
+
             `);
 
             //Get metadata that will be used to detect changes from the database, find the number of assignments in databse
             const countResult = await db.one(
-                'SELECT COUNT * FROM assignments'
+                'SELECT COUNT(*) FROM assignments'
             );
             //Convert database count into clean JS integer
             const totalCount = parseInt(countResult.count)
