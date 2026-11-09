@@ -7,7 +7,7 @@ const router = express.Router();
 const multer = require("multer");
 const ical = require("node-ical");
 
-const db = require("../db");
+const { db } = require("../db");
 
 // Multer will temporarily store the file in the server's RAM as a buffer
 // Memory will be naturally released once done parsing
