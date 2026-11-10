@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  {{#if stylesheet}}<link rel="stylesheet" href="/styles/{{stylesheet}}">{{/if}}
+</head>
+<body class="auth-body">
+  <header class="auth-topbar">
+    <a class="brand" href="/" aria-label="Tally home">
+      <img src="/images/tally-mark.svg" alt="" width="36" height="36">
+      <span>Tally</span>
+    </a>
+    <a class="auth-home-link" href="/">Back to home</a>
+  </header>
+  {{{body}}}
+</body>
+</html>
