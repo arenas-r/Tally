@@ -56,9 +56,19 @@ body {
     text-decoration: underline;
 }
 
-/* Add Assignment and Save buttons */
+/* Makes buttons separated */
+.calendar-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Add Assignment, Import, and Save buttons */
 .calendar-page #add-assignment-button,
-.calendar-page #new-assignment-form button[type="submit"] {
+.calendar-page #new-assignment-form button[type="submit"],
+.calendar-page #import-calendar-button,
+.calendar-page #import-calendar-form button[type="submit"] {
     padding: 13px 18px;
     border: 0;
     border-radius: 8px;
@@ -72,7 +82,9 @@ body {
 }
 
 .calendar-page #add-assignment-button:hover,
-.calendar-page #new-assignment-form button[type="submit"]:hover {
+.calendar-page #new-assignment-form button[type="submit"]:hover, 
+.calendar-page #import-calendar-button:hover,
+.calendar-page #import-calendar-form button[type="submit"]:hover {
     background: #205e4b;
 }
 
@@ -82,8 +94,9 @@ body {
     cursor: not-allowed;
 }
 
-/* New assignment form container */
-.calendar-page #assignment-form-container {
+/* New assignment/import form container */
+.calendar-page #assignment-form-container,
+.calendar-page #import-calendar-form-container {
     max-width: 700px;
     margin: 20px 0;
     padding: 32px;
@@ -95,17 +108,20 @@ body {
     box-shadow: 0 12px 36px rgba(25, 48, 74, 0.1);
 }
 
-.calendar-page #assignment-form-container[hidden] {
+.calendar-page #assignment-form-container[hidden],
+.calendar-page #import-calendar-form-container[hidden] {
     display: none;
 }
 
-.calendar-page #assignment-form-container h2 {
+.calendar-page #assignment-form-container h2,
+.calendar-page #import-calendar-form-container h2 {
     margin: 0 0 20px;
     font-size: 1.5rem;
 }
 
-/* Assignment form layout */
-.calendar-page #new-assignment-form {
+/* Assignment/Import form layout */
+.calendar-page #new-assignment-form,
+.calendar-page #import-calendar-form {
     display: grid;
     gap: 10px;
 }
