@@ -20,21 +20,22 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const email = (req.body.email || "").trim().toLowerCase();
+  const loginInput = (req.body.email || "").trim();
+  const loginInputLower = loginInput.toLowerCase();
   const password = req.body.password || "";
 
   try {
     const user = await db.oneOrNone(
       `SELECT user_id, username, email, password_hash
-       FROM users
-       WHERE email = $1`,
-      [email]
+      FROM users
+      WHERE LOWER(email) = $1 OR LOWER(username) = $1`,
+      [loginInputLower]
     );
 
     if (!user || !(await bcrypt.compare(password, user.password_hash))) {
       return res.status(401).render("login", {
         title: "Log in | Tally",
-        error: "Email or password is incorrect.",
+        error: "Email/username or password is incorrect.",
       });
     }
 
