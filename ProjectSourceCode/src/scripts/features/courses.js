@@ -1,14 +1,8 @@
 const express = require("express");
 const router = express.Router();
-<<<<<<< HEAD
- 
-const db = require("../db");
- 
-=======
 
 const { db } = require("../db");
 
->>>>>>> main
 // Requests here
 async function getUser(req) {
     return 1; // TODO: REFACTOR THIS LATER
