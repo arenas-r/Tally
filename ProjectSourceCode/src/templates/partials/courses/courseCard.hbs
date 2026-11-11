@@ -1,0 +1,30 @@
+
+<a href="/courses/{{course.course_id}}" class="course-link">
+
+    <div class="card course-card h-100">
+
+        {{#if course.image}}
+            <img
+                src="{{course.image}}"
+                class="course-image"
+                alt="{{course.course_name}}"
+            >
+        {{else}}
+            <div class="course-image-placeholder">
+                <span>{{course.course_code}}</span>
+            </div>
+        {{/if}}
+
+        <div class="course-card-footer">
+            <h5 class="course-name">
+                {{course.course_name}}
+            </h5>
+
+            <p class="course-code">
+                {{course.course_code}}
+            </p>
+        </div>
+
+    </div>
+
+</a>

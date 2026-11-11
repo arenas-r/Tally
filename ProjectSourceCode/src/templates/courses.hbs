@@ -1,0 +1,12 @@
+<div class="container py-4 courses-page">
+
+    {{> courses/courseGrid courses=courses}}
+
+    {{#if selectedCourse}}
+        {{> courses/courseDetails
+            course=selectedCourse
+            assignments=assignments
+        }}
+    {{/if}}
+
+</div>
