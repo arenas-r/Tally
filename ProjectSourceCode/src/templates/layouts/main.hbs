@@ -2,50 +2,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{title}}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/styles/main.css">
     {{#if stylesheet}}
         <link rel="stylesheet" href="/styles/{{stylesheet}}">
     {{/if}}
 </head>
 
-<body>
-    <div class="container-fluid">
-        <div class="row">
-
-            <!-- Shared Sidebar Navigation -->
-            <nav class="col-md-3 bg-light p-4 min-vh-100">
-                <h2>Tally</h2>
-
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/calendar">Calendar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/courses">Courses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/path">Study Path</a>
-                    </li>
-                </ul>
-            </nav>
-
-            <!-- Main Page Content -->
-            <main class="col-md-9 p-4">
-                {{{body}}}
-            </main>
-
-        </div>
-    </div>
+<body class="app-body">
+  <header class="app-topbar">
+    <a class="brand" href="/dashboard" aria-label="Tally dashboard">
+      <img src="/images/tally-mark.svg" alt="" width="36" height="36">
+      <span>Tally</span>
+    </a>
+    <a class="topbar-link" href="/login">Account</a>
+  </header>
+  <div class="app-shell">
+    <aside class="app-sidebar" aria-label="Main navigation">
+      <p class="sidebar-label">Your workspace</p>
+      <nav class="app-nav">
+        <a href="/dashboard"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span>Dashboard</a>
+        <a href="/calendar"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M8 13h2M14 13h2M8 16h2"/></svg></span>Calendar</a>
+        <a href="/courses"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 8-4 8 4-8 4-8-4Z"/><path d="m4 12 8 4 8-4M4 17l8 4 8-4"/></svg></span>Courses</a>
+        <a href="/path"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="6" cy="19" r="2"/><path d="M8 5h4a4 4 0 0 1 4 4v1M8 19h4a4 4 0 0 0 4-4v-1"/></svg></span>Study Path</a>
+      </nav>
+    </aside>
+    <main class="app-content">{{{body}}}</main>
+  </div>
 </body>
 
 </html>

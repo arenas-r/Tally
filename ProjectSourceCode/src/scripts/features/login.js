@@ -8,6 +8,7 @@ const validateRegistration = require('../validateRegistration');
 
 router.use((req, res, next) => {
   res.locals.stylesheet = "login.css";
+  res.locals.layout = "auth";
   next();
 });
 

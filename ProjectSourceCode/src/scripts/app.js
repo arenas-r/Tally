@@ -61,12 +61,13 @@ const calendarRoutes = require("./features/calendar");
 const { router: coursesRoutes } = require("./features/courses");
 const dashboardRoutes = require("./features/dashboard");
 const importRoutes = require("./features/import");
+const landingRoutes = require("./features/landing");
 const loginRoutes = require("./features/login");
 const pathRoutes = require("./features/path");
 
 
 // Connect each module to its URL
-// app.use("/", landingPageRoutes);
+app.use("/", landingRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/calendar", calendarRoutes);
 app.use("/courses", coursesRoutes);
