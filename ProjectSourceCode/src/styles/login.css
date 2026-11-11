@@ -12,8 +12,32 @@ body {
   background: #f3f6f9;
 }
 
-.auth-page {
+.auth-body {
   min-height: 100vh;
+  background: #faf9f5;
+}
+
+.auth-topbar {
+  height: 72px;
+  padding: 0 clamp(20px, 5vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: 1px solid #e6e9e2;
+}
+
+.auth-home-link {
+  color: #53635b;
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-home-link:hover { color: #245b4c; }
+
+.auth-page {
+  min-height: calc(100vh - 72px);
   display: grid;
   place-items: center;
   padding: 24px;

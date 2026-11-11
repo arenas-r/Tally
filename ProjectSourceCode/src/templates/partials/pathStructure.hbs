@@ -1,7 +1,7 @@
 <!-- <link rel="stylesheet" href=".css"> -->
 <link rel="stylesheet" href="/styles/path.css">
 <!-- Outer Container / Card Box -->
-<div class="path-structure">
+<div class="path-structure" id="assignment-container">
     {{#each assignment}}
 <!-- Outer Container / Card Box -->
     <div class="node-card">
@@ -23,16 +23,76 @@
     </div>
     {{/each}}
 </div>
+<!--Changed to dynamic collapsible listener and will now work for cards added at any time-->
+<script>
+    document.addEventListener("click", function(event){
+        const button = event.target.closest(".collapsible");
+        if(button){
+            const card = button.closest(".node-card");
+            if(card){
+                card.classList.toggle("active");
+            }
+        }
+    });
+</script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {    
-        const collapsibles = document.querySelectorAll(".collapsible");
-        
-        collapsibles.forEach(button=>{
-            button.addEventListener("click",function(){
-                const card = this.closest(".node-card");
-                card.classList.toggle("active");
-            });
+let lastKnownCount = {{totalCount}};
+
+async function smartPoll() {
+    // Will keep for now, Don't poll if user is typing but still need to add this functionality of manual editing
+    if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+        return; 
+    }
+    //Get latest assignment data from the path
+    try {
+        const response = await window.fetch('/path', {
+            headers: { 'Accept': 'application/json' }
         });
-    });
+        const result = await response.json();
+        //Check to see if more cards have been added
+        if (result.status === "Success") {
+            if (result.count !== lastKnownCount) {
+                lastKnownCount = result.count;
+                updateDOM(result.data);
+            }
+        }
+    } catch (error) {
+        console.error("Polling error:", error);
+    }
+}
+
+function updateDOM(assignments) {
+    const container = document.getElementById('assignment-container');
+    
+    container.style.opacity = '0.5';
+
+    setTimeout(() => {
+        container.innerHTML = "";
+
+        // Rebuilds each item using the Handlebars layout structure
+        assignments.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'node-card';
+            card.innerHTML = `
+                <button type="button" class="collapsible">
+                    <span class="node-assignment">${item.assignment_name}</span>
+                    <span class="card-text text-muted mb-2">📅 ${item.due_date}</span>
+                </button>
+                <div class="content">
+                    <p class="node-priority">Priority: ${item.priority}</p>
+                    <p class="node-status">Status: ${item.completed}</p>
+                    <p class="node-time">Estimated Time: ${item.estimated_time}</p>
+                    <p class="node-descriptions">Description: ${item.description}</p>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        container.style.opacity = '1';
+    }, 150);
+}
+
+// Poll every 5 seconds
+setInterval(smartPoll, 5000);
 </script>
