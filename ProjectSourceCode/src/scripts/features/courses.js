@@ -51,6 +51,8 @@ router.get("/", async (req, res) => {
         const courses = await getCourses(userId);
  
         res.render("courses", {
+            title: "Courses",
+            stylesheet: "courses.css",
             courses
         });
  
@@ -82,6 +84,8 @@ router.get("/:id", async (req, res) => {
         );
  
         res.render("courses", {
+            title: selectedCourse.name,
+            stylesheet: "courses.css",
             courses,
             selectedCourse,
             assignments
