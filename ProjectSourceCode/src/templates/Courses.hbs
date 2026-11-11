@@ -47,56 +47,69 @@
                 {{selectedCourse.course_code}}
             </p>
 
-            <!-- Collapse Button -->
+            <div class="assignments-panel mt-4">
+
+            <!-- Dropdown Header -->
             <button
-                class="btn btn-outline-secondary"
+                class="assignments-toggle w-100"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#upcomingAssignments"
-                aria-expanded="false"
+                aria-expanded="true"
                 aria-controls="upcomingAssignments"
             >
-                Upcoming Assignments
+                <span class="d-flex align-items-center gap-2">
+                    <i class="bi bi-calendar3"></i>
+                    <span>Upcoming Assignments</span>
+                </span>
+
+                <i class="bi bi-chevron-down toggle-chevron"></i>
             </button>
 
+            <!-- Dropdown Content -->
+            <div class="collapse show" id="upcomingAssignments">
+                <div class="assignments-list">
 
-            <!-- Collapsible Assignments -->
-            <div class="collapse mt-3" id="upcomingAssignments">
+                    {{#each assignments}}
+                        <div class="assignment-item">
+                            <div class="d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <h6 class="assignment-name">
+                                        {{assignment_name}}
+                                    </h6>
 
-                {{#each assignments}}
+                                    <p class="assignment-due">
+                                        <i class="bi bi-clock me-1"></i>
+                                        Due {{due_date}}
+                                    </p>
+                                </div>
 
-                    <div class="card mb-2 shadow-sm">
-                        <div class="card-body">
-
-                            <h6 class="card-title mb-1">
-                                {{assignment_name}}
-                            </h6>
-
-                            <p class="card-text text-muted mb-1">
-                                Due: {{due_date}}
-                            </p>
+                                <span class="assignment-status">
+                                    Upcoming
+                                </span>
+                            </div>
 
                             {{#if description}}
-                                <p class="card-text">
+                                <p class="assignment-description">
                                     {{description}}
                                 </p>
                             {{/if}}
+                        </div>
+                        {{else}}
+                            <div class="assignments-empty">
+                                <i class="bi bi-check-circle me-2"></i>
+                                No upcoming assignments.
+                            </div>
+                        {{/each}}
 
                         </div>
-                    </div>
+                    </div> <!-- assignments-list -->
+                </div> <!-- upcomingAssignments -->
 
-                {{else}}
+            </div> <!-- assignments-panel -->
 
-                    <p class="text-muted">
-                        No upcoming assignments.
-                    </p>
+        </div> <!-- mt-5 -->
 
-                {{/each}}
+    {{/if}} <!-- selectedCourse -->
 
-            </div>
-
-        </div>
-
-    {{/if}}
-
-</div>
+</div> <!-- container -->
