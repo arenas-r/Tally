@@ -1,115 +1,12 @@
-<div class="container py-4">
+<div class="container py-4 courses-page">
 
-    <div class="row g-4">
-        {{#each courses}}
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-
-                <a href="/courses/{{course_id}}"
-                   class="text-decoration-none text-dark">
-
-                    <div class="card h-100 shadow-sm">
-
-                        <!-- Course Image -->
-                        <img
-                            src="{{image}}"
-                            class="card-img-top"
-                            alt="{{course_name}}"
-                            style="height: 180px; object-fit: cover;"
-                        >
-
-                        <!-- Course Footer -->
-                        <div class="card-footer bg-white border-0 py-3">
-                            <h5 class="card-title mb-1">
-                                {{course_name}}
-                            </h5>
-
-                            <p class="card-text text-muted mb-0">
-                                {{course_code}}
-                            </p>
-                        </div>
-
-                    </div>
-
-                </a>
-
-            </div>
-        {{/each}}
-    </div>
-
+    {{> courses/courseGrid courses=courses}}
 
     {{#if selectedCourse}}
+        {{> courses/courseDetails
+            course=selectedCourse
+            assignments=assignments
+        }}
+    {{/if}}
 
-        <div class="mt-5">
-
-            <h3>{{selectedCourse.course_name}}</h3>
-
-            <p class="text-muted">
-                {{selectedCourse.course_code}}
-            </p>
-
-            <div class="assignments-panel mt-4">
-
-            <!-- Dropdown Header -->
-            <button
-                class="assignments-toggle w-100"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#upcomingAssignments"
-                aria-expanded="true"
-                aria-controls="upcomingAssignments"
-            >
-                <span class="d-flex align-items-center gap-2">
-                    <i class="bi bi-calendar3"></i>
-                    <span>Upcoming Assignments</span>
-                </span>
-
-                <i class="bi bi-chevron-down toggle-chevron"></i>
-            </button>
-
-            <!-- Dropdown Content -->
-            <div class="collapse show" id="upcomingAssignments">
-                <div class="assignments-list">
-
-                    {{#each assignments}}
-                        <div class="assignment-item">
-                            <div class="d-flex justify-content-between align-items-start gap-3">
-                                <div>
-                                    <h6 class="assignment-name">
-                                        {{assignment_name}}
-                                    </h6>
-
-                                    <p class="assignment-due">
-                                        <i class="bi bi-clock me-1"></i>
-                                        Due {{due_date}}
-                                    </p>
-                                </div>
-
-                                <span class="assignment-status">
-                                    Upcoming
-                                </span>
-                            </div>
-
-                            {{#if description}}
-                                <p class="assignment-description">
-                                    {{description}}
-                                </p>
-                            {{/if}}
-                        </div>
-                        {{else}}
-                            <div class="assignments-empty">
-                                <i class="bi bi-check-circle me-2"></i>
-                                No upcoming assignments.
-                            </div>
-                        {{/each}}
-
-                        </div>
-                    </div> <!-- assignments-list -->
-                </div> <!-- upcomingAssignments -->
-
-            </div> <!-- assignments-panel -->
-
-        </div> <!-- mt-5 -->
-
-    {{/if}} <!-- selectedCourse -->
-
-</div> <!-- container -->
+</div>

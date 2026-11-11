@@ -1,0 +1,38 @@
+
+<div class="course-details">
+
+    <div class="course-details-header">
+        <p class="course-details-label">
+            Selected Course
+        </p>
+
+        <h2 class="course-details-heading">
+            {{course.course_name}}
+        </h2>
+
+        <p class="course-details-code">
+            {{course.course_code}}
+        </p>
+    </div>
+
+    <div class="assignments-panel">
+
+        <button
+            class="assignments-toggle"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#upcomingAssignments"
+            aria-expanded="true"
+            aria-controls="upcomingAssignments"
+        >
+            <span>Upcoming Assignments</span>
+            <span class="toggle-icon">▾</span>
+        </button>
+
+        <div class="collapse show" id="upcomingAssignments">
+            {{> courses/assignmentsList assignments=assignments}}
+        </div>
+
+    </div>
+
+</div>

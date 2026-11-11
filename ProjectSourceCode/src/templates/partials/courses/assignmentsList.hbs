@@ -1,0 +1,42 @@
+
+<div class="assignments-list">
+
+    {{#each assignments}}
+
+        <div class="assignment-card">
+
+            <div class="assignment-top-row">
+
+                <div>
+                    <h6 class="assignment-name">
+                        {{assignment_name}}
+                    </h6>
+
+                    <p class="assignment-due">
+                        Due {{due_date}}
+                    </p>
+                </div>
+
+                <span class="assignment-status">
+                    Upcoming
+                </span>
+
+            </div>
+
+            {{#if description}}
+                <p class="assignment-description">
+                    {{description}}
+                </p>
+            {{/if}}
+
+        </div>
+
+    {{else}}
+
+        <p class="assignments-empty">
+            No upcoming assignments.
+        </p>
+
+    {{/each}}
+
+</div>
