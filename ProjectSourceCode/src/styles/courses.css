@@ -1,0 +1,127 @@
+
+.course-image {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #e2e8f0;
+}
+
+.course-card-footer {
+  padding: 20px;
+  background: #fff;
+}
+
+.course-name {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #202a36;
+}
+
+.course-code {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #657386;
+}
+
+.course-details {
+  margin-top: 48px;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(25, 48, 74, 0.1);
+}
+
+.course-details-heading {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.course-details-code {
+  margin: 0 0 24px;
+  color: #657386;
+}
+
+.assignments-toggle {
+  padding: 12px 18px;
+  border: 1px solid #27745c;
+  border-radius: 8px;
+  color: #fff;
+  background: #27745c;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.assignments-toggle:hover,
+.assignments-toggle:active {
+  color: #fff;
+  background: #205e4b;
+  border-color: #205e4b;
+}
+
+.assignments-toggle:focus-visible {
+  outline: 3px solid rgba(39, 116, 92, 0.25);
+  outline-offset: 3px;
+}
+
+.assignments-list {
+  margin-top: 20px;
+}
+
+.assignment-card {
+  margin-bottom: 12px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #27745c;
+  border-radius: 8px;
+}
+
+.assignment-name {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.assignment-due {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  color: #657386;
+}
+
+.assignment-description {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.assignments-empty {
+  margin: 0;
+  padding: 16px;
+  border-radius: 8px;
+  color: #657386;
+  background: #f3f6f9;
+}
+
+@media (max-width: 575.98px) {
+  .courses-page {
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+
+  .course-details {
+    margin-top: 32px;
+    padding: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course-card,
+  .assignments-toggle {
+    transition: none;
+  }
+}
