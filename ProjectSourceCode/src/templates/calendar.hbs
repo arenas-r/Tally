@@ -9,13 +9,23 @@
         hidden>
     </div>
 
-    <!-- Show or hide the assignment form -->
-    <button
-        type="button"
-        id="add-assignment-button"
-        onclick="toggleAssignmentForm()">
-        + Add Assignment
-    </button>
+    <div class="calendar-buttons">
+        <!-- Show or hide the assignment form -->
+        <button
+            type="button"
+            id="add-assignment-button"
+            onclick="toggleForms('assignment')">
+            + Add Assignment
+        </button>
+
+        <!-- Show or hide the import form -->
+        <button
+            type="button"
+            id="import-calendar-button"
+            onclick="toggleForms('import')">
+            + Import Calendar
+        </button>
+    </div>
 
     <!-- Form for adding new assignments -->
     <div id="assignment-form-container" hidden>
@@ -87,6 +97,19 @@
                 Save Assignment
             </button>
 
+        </form>
+    </div>
+
+    <!-- Form for importing calendars -->
+    <div id="import-calendar-form-container" hidden>
+        <h2>Import Calendar</h2>
+
+        <form id="import-calendar-form"
+            action="/import/icalSubmission" 
+            method="POST" 
+            enctype="multipart/form-data">
+                <input type="file" name="icalFile" accept=".ics, .ical">
+                <button type="submit">Upload</button>
         </form>
     </div>
 
@@ -236,10 +259,27 @@
     // Track the assignment currently being viewed
     let selectedAssignment = null;
 
-    // Show or hide the new assignment form
-    function toggleAssignmentForm() {
-        const container = document.getElementById("assignment-form-container");
-        container.hidden = !container.hidden;
+    // Show or hide the assignment and import form
+    function toggleForms(form) {
+        const assignmentContainer = document.getElementById("assignment-form-container");
+        const importContainer = document.getElementById("import-calendar-form-container");
+
+        switch(form) {
+            case "assignment":
+                if (!importContainer.hidden) {
+                    importContainer.hidden = !importContainer.hidden;
+                }
+
+                assignmentContainer.hidden = !assignmentContainer.hidden;
+                break;
+            case "import":
+                if (!assignmentContainer.hidden) {
+                    assignmentContainer.hidden = !assignmentContainer.hidden;
+                }
+
+                importContainer.hidden = !importContainer.hidden;
+                break;
+        }
     }
 
     // Display a notification for 10 seconds

@@ -22,7 +22,7 @@ const upload = multer({
 
 // basic testing route
 router.get('/', (req, res) => {
-    res.render('importTest')
+    res.redirect('/calendar')
 });
 
 // Submission route. Sends ical file for parsing
@@ -38,6 +38,9 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
 
         //2. Parse the string data immediately
         const parsedData = await ical.async.parseICS(icalData);
+
+        const userId = 1; // Temp, change when session data added
+        // const url = event.url;
 
         //3. Store the parsed data into the database
         for (const event of Object.values(parsedData)) {
@@ -57,8 +60,13 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
             // const description = null; // testing purposes
             const dueDate = event.end;
 
-            const userId = 1; // Temp, change when session data added
-            // const url = event.url;
+            // console.log("Assignment:", event.summary);
+            // console.log("Start:", event.start);
+            // console.log("End:", event.end);
+            // console.log("Start ISO:", event.start?.toISOString());
+            // console.log("End ISO:", event.end?.toISOString());
+            // console.log("Date Only:", event.datetype);
+            // console.log("Is Date Only:", event.start?.dateOnly);
 
             // 1. Find or create the course
             const courseQuery = `
@@ -122,14 +130,12 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
                 ]);
             }
 
-            console.log(assignmentResult);
+            // console.log(assignmentResult);
         }
 
         //4. Respond to the client. Memory should clear afterwards
-        res.status(200).json({
-            message: 'Calendar parsed successfully!',
-            eventsFound: Object.keys(parsedData).length,
-        });
+        console.log('Calendar parsed successfully with', Object.keys(parsedData).length, 'assignments');
+        res.redirect('/calendar')
     } catch (err) {
         console.error('Parsing failed:', err);
         res.status(500).send('Failed to parse iCal file.');
