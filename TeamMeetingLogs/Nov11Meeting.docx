@@ -1,0 +1,15 @@
+Update on application/PRs for the upcoming week:
+
+- Clicking on complete doesn't do anything yet
+- Can check upcoming assignments and courses
+- Study path is prioritized by due date now, but will be changed by priority this week (personalized)
+- Testing and making sure all of our respective pieces are working for this week
+- Deleting events
+- Amazon sw3 adding user files, actions for the pages
+- Need to fix date and time when importing assignments
+
+Next Steps:
+
+- Testing: recommended to add testing for any feature you are adding, not specifically grading for testing
+- Upload release notes
+- Start thinking about write up and project presentation
