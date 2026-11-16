@@ -264,6 +264,38 @@ body {
     border-left: 4px solid #27745c;
 }
 
+
+/* Completed assignments: muted green with a clear status indicator */
+.calendar-page .calendar-assignment[data-completed="true"] {
+    background: #e8f4ed;
+    border-color: #b7d9c4;
+    border-left: 4px solid #27745c;
+}
+
+/* Keep completed assignments green when hovered */
+.calendar-page .calendar-assignment[data-completed="true"]:hover {
+    background: #d9ecdf;
+    border-color: #27745c;
+}
+
+/* Strike through completed assignment names */
+.calendar-page .calendar-assignment[data-completed="true"] strong {
+    color: #47725e;
+    text-decoration: line-through;
+}
+
+/* Add a checkmark before completed assignment names */
+.calendar-page .calendar-assignment[data-completed="true"] strong::before {
+    content: "✓ ";
+    color: #27745c;
+    font-weight: 700;
+}
+
+/* Make secondary information less prominent */
+.calendar-page .calendar-assignment[data-completed="true"] span {
+    color: #658171;
+}
+
 /* Assignment error notification */
 .assignment-toast {
     position: fixed;
@@ -291,6 +323,26 @@ body {
 .assignment-toast[hidden] {
     display: none;
 }
+
+
+/* Success notification appearance */
+.assignment-toast.success {
+    background: #e8f4ed;
+    color: #205e4b;
+    border-color: #27745c;
+}
+
+/* Toast displayed within the assignment dialog */
+#assignment-details-dialog .dialog-toast {
+    position: sticky;
+    top: 0;
+    left: auto;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 14px;
+    z-index: 2;
+}
+
 
 /* Assignment details pop-up */
 #assignment-details-dialog {
@@ -541,14 +593,6 @@ body {
     font-size: 0.8rem;
 }
 
-
-/* Success notifications on the calendar */
-.assignment-toast.success {
-    background: #eaf7ef;
-    color: #1f5e3b;
-    border-color: #27745c;
-}
-
 /* Help text for the new assignment file input */
 #new-assignment-form .attachment-help {
     margin: 0 0 12px;
@@ -556,3 +600,4 @@ body {
     font-size: 0.85rem;
     line-height: 1.5;
 }
+

@@ -1,16 +1,17 @@
 
 <div class="calendar-page">
 
-    <!-- Assignment error notifications -->
+    <!-- Calendar-level notifications for success and error messages -->
     <div
         id="assignment-toast"
         class="assignment-toast"
-        role="alert"
+        role="status"
+        aria-live="polite"
         hidden>
     </div>
 
+    <!-- Controls for opening the assignment and import forms -->
     <div class="calendar-buttons">
-        <!-- Show or hide the assignment form -->
         <button
             type="button"
             id="add-assignment-button"
@@ -18,7 +19,6 @@
             + Add Assignment
         </button>
 
-        <!-- Show or hide the import form -->
         <button
             type="button"
             id="import-calendar-button"
@@ -27,7 +27,7 @@
         </button>
     </div>
 
-    <!-- Form for adding new assignments -->
+    <!-- Form for manually creating an assignment -->
     <div id="assignment-form-container" hidden>
         <h2>New Assignment</h2>
 
@@ -36,7 +36,7 @@
             action="/calendar/add"
             method="POST">
 
-            <!-- Course selection -->
+            <!-- Associate the assignment with an existing course -->
             <label for="course_id">Course</label>
             <select id="course_id" name="course_id" required>
                 <option value="" selected disabled>
@@ -50,7 +50,7 @@
                 {{/each}}
             </select>
 
-            <!-- Assignment information -->
+            <!-- Basic assignment information -->
             <label for="assignment_name">Assignment Name</label>
             <input
                 type="text"
@@ -75,6 +75,7 @@
                 required
             >
 
+            <!-- Optional assignment planning information -->
             <label for="priority">Priority</label>
             <select id="priority" name="priority">
                 <option value="">No Priority</option>
@@ -93,12 +94,10 @@
                 min="0"
             >
 
-
-            <!-- Optional assignment attachments -->
+            <!-- Files are uploaded to S3 after the assignment is created -->
             <label for="new-assignment-files">
                 Assignment Files (Optional)
             </label>
-
             <input
                 type="file"
                 id="new-assignment-files"
@@ -112,28 +111,33 @@
                 Maximum 10 MB per file.
             </p>
 
-
             <button type="submit">
                 Save Assignment
             </button>
-
         </form>
     </div>
 
-    <!-- Form for importing calendars -->
+    <!-- Form for importing assignments from an iCalendar file -->
     <div id="import-calendar-form-container" hidden>
         <h2>Import Calendar</h2>
 
-        <form id="import-calendar-form"
-            action="/import/icalSubmission" 
-            method="POST" 
+        <form
+            id="import-calendar-form"
+            action="/import/icalSubmission"
+            method="POST"
             enctype="multipart/form-data">
-                <input type="file" name="icalFile" accept=".ics, .ical">
-                <button type="submit">Upload</button>
+
+            <input
+                type="file"
+                name="icalFile"
+                accept=".ics,.ical"
+            >
+
+            <button type="submit">Upload</button>
         </form>
     </div>
 
-    <!-- Calendar header and month navigation -->
+    <!-- Calendar heading and month navigation -->
     <header class="calendar-header">
         <h1>Calendar</h1>
 
@@ -150,7 +154,7 @@
         </div>
     </header>
 
-    <!-- Days of the week -->
+    <!-- Weekday headings -->
     <div class="calendar-weekdays">
         <div>Sun</div>
         <div>Mon</div>
@@ -161,27 +165,26 @@
         <div>Sat</div>
     </div>
 
-    <!-- Calendar days and assignments -->
+    <!-- Calendar grid populated by the calendar route -->
     <div class="calendar-grid">
-
         {{#each days}}
 
             {{#if isBlank}}
-
-                <!-- Blank days before the month starts -->
+                <!-- Placeholder before the first day of the month -->
                 <div class="calendar-day blank"></div>
-
             {{else}}
-
                 <div class="calendar-day">
-
                     <div class="day-number">
                         {{day}}
                     </div>
 
-                    <!-- Clickable assignments with details stored in data attributes -->
                     {{#each assignments}}
 
+                        <!--
+                            Assignment information is stored in data attributes.
+                            This allows the popup to display details without
+                            making an additional database request.
+                        -->
                         <button
                             type="button"
                             class="calendar-assignment {{priority}}"
@@ -205,28 +208,34 @@
                             <span>
                                 {{due_time}}
                             </span>
-
                         </button>
 
                     {{/each}}
-
                 </div>
-
             {{/if}}
 
         {{/each}}
-
     </div>
-
 </div>
 
-<!-- Assignment details pop-up -->
+<!-- Modal displaying the selected assignment and its attachments -->
 <dialog
     id="assignment-details-dialog"
     aria-labelledby="details-name">
 
-    <h2 id="details-name"></h2>
+    <!--
+        Modal notifications are placed inside the dialog because
+        page-level notifications can appear behind an open modal.
+    -->
+    <div
+        id="details-toast"
+        class="assignment-toast dialog-toast"
+        role="status"
+        aria-live="polite"
+        hidden>
+    </div>
 
+    <h2 id="details-name"></h2>
     <p id="details-course"></p>
 
     <!-- Assignment information -->
@@ -250,7 +259,10 @@
         <span id="details-estimated"></span>
     </p>
 
-    <!-- Update assignment completion -->
+    <!--
+        Completion changes are saved immediately.
+        The calendar card updates after the server confirms the change.
+    -->
     <label for="details-completed">
         <input
             type="checkbox"
@@ -259,272 +271,322 @@
         Completed
     </label>
 
-    <!-- Show an error if the completion update fails -->
+    <!-- Reserved for accessibility and completion error feedback -->
     <p id="completion-error" role="alert" hidden>
         Unable to update completion status. Please try again.
     </p>
 
+    <!-- S3 assignment attachments -->
+    <section
+        id="assignment-attachments"
+        aria-labelledby="attachments-heading">
 
-<!-- Assignment file attachments -->
-<section id="assignment-attachments" aria-labelledby="attachments-heading">
+        <h3 id="attachments-heading">Attachments</h3>
 
-    <h3 id="attachments-heading">Attachments</h3>
+        <p class="attachment-help">
+            Upload PDF, Word, Excel, PowerPoint, text, or image files.
+            Maximum file size: 10 MB.
+        </p>
 
-    <p class="attachment-help">
-        Upload PDF, Word, Excel, PowerPoint, text, or image files.
-        Maximum file size: 10 MB.
-    </p>
+        <!-- Upload an attachment to the currently selected assignment -->
+        <form id="attachment-upload-form">
+            <label for="attachment-file">Choose a file</label>
 
-    <form id="attachment-upload-form">
-        <label for="attachment-file">Choose a file</label>
+            <input
+                type="file"
+                id="attachment-file"
+                name="attachment"
+                accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.rtf,.png,.jpg,.jpeg"
+                required
+            >
 
-        <input
-            type="file"
-            id="attachment-file"
-            name="attachment"
-            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.rtf,.png,.jpg,.jpeg"
-            required
-        >
+            <button
+                type="submit"
+                id="attachment-upload-button">
+                Upload File
+            </button>
+        </form>
 
-        <button type="submit" id="attachment-upload-button">
-            Upload File
-        </button>
-    </form>
+        <!-- Inline loading and upload status -->
+        <p
+            id="attachment-message"
+            role="status"
+            aria-live="polite">
+        </p>
 
-    <p id="attachment-message" role="status" aria-live="polite"></p>
+        <!-- Uploaded files are loaded from the S3-backed API -->
+        <h4>Uploaded Files</h4>
+        <ul id="attachment-list"></ul>
+    </section>
 
-    <h4>Uploaded Files</h4>
-    <ul id="attachment-list"></ul>
-
-</section>
-
-
-    <!-- Close the details pop-up -->
     <button
         type="button"
         id="close-details-button"
         onclick="document.getElementById('assignment-details-dialog').close()">
         Close
     </button>
-
 </dialog>
 
 <script>
-
-    // Track the assignment currently being viewed
+    // Keep track of the calendar card currently displayed in the modal.
     let selectedAssignment = null;
 
-    // Show or hide the assignment and import form
+    // Show one form at a time to avoid crowding the Calendar page.
     function toggleForms(form) {
-        const assignmentContainer = document.getElementById("assignment-form-container");
-        const importContainer = document.getElementById("import-calendar-form-container");
+        const assignmentContainer =
+            document.getElementById("assignment-form-container");
 
-        switch(form) {
-            case "assignment":
-                if (!importContainer.hidden) {
-                    importContainer.hidden = !importContainer.hidden;
-                }
+        const importContainer =
+            document.getElementById("import-calendar-form-container");
 
-                assignmentContainer.hidden = !assignmentContainer.hidden;
-                break;
-            case "import":
-                if (!assignmentContainer.hidden) {
-                    assignmentContainer.hidden = !assignmentContainer.hidden;
-                }
-
-                importContainer.hidden = !importContainer.hidden;
-                break;
+        if (form === "assignment") {
+            importContainer.hidden = true;
+            assignmentContainer.hidden = !assignmentContainer.hidden;
+        } else if (form === "import") {
+            assignmentContainer.hidden = true;
+            importContainer.hidden = !importContainer.hidden;
         }
     }
 
-    
+    /*
+     * Display a temporary success or error notification.
+     * Notifications appear inside the modal when it is open,
+     * and at the page level otherwise.
+     */
     function showToast(message, type = "error") {
-        const toast = document.getElementById("assignment-toast");
+        const pageToast =
+            document.getElementById("assignment-toast");
+
+        const dialogToast =
+            document.getElementById("details-toast");
+
+        const dialog =
+            document.getElementById("assignment-details-dialog");
+
+        const toast = dialog.open ? dialogToast : pageToast;
+
+        // Clear any existing notification before showing a new one.
+        pageToast.hidden = true;
+        dialogToast.hidden = true;
 
         toast.textContent = message;
         toast.classList.toggle("success", type === "success");
+
+        toast.setAttribute(
+            "role",
+            type === "error" ? "alert" : "status"
+        );
+
         toast.hidden = false;
 
+        // Only the newest notification should control the hide timer.
         clearTimeout(window.assignmentToastTimer);
 
         window.assignmentToastTimer = setTimeout(() => {
             toast.hidden = true;
-        }, 10000);
+        }, type === "success" ? 4500 : 8000);
     }
 
+    /*
+     * Display the result of an operation after a redirect.
+     * Query-string notices are removed afterward so they do not
+     * appear again when the user refreshes the page.
+     */
+    const noticeParams = new URLSearchParams(window.location.search);
+    const notice = noticeParams.get("notice");
 
-// Show the result of creating an assignment.
-const noticeParams = new URLSearchParams(window.location.search);
-const notice = noticeParams.get("notice");
-
-if (notice === "created") {
-    showToast("Assignment created successfully!", "success");
-}
-
-if (notice === "created-uploaded") {
-    showToast(
-        "Assignment created and all files uploaded successfully!",
-        "success"
-    );
-}
-
-if (notice === "created-upload-warning") {
-    showToast(
-        "Assignment created, but one or more files failed to upload. Open the assignment to retry."
-    );
-}
-
-// Remove the notification parameter so refreshing does not repeat it.
-if (notice) {
-    const cleanUrl = new URL(window.location.href);
-    cleanUrl.searchParams.delete("notice");
-
-    window.history.replaceState(
-        {},
-        "",
-        cleanUrl.pathname + cleanUrl.search
-    );
-}
-
-    
-// Create an assignment, then upload any selected attachments.
-const form = document.getElementById("new-assignment-form");
-
-form.addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    const saveButton = form.querySelector('button[type="submit"]');
-    const originalButtonText = saveButton.textContent;
-    const fileInput = document.getElementById("new-assignment-files");
-    const selectedFiles = Array.from(fileInput.files);
-
-    // Match the backend's 10 MB per-file limit.
-    const MAX_FILE_SIZE = 10 * 1024 * 1024;
-
-    for (const file of selectedFiles) {
-        if (file.size > MAX_FILE_SIZE) {
-            showToast(`${file.name} exceeds the 10 MB file limit.`);
-            return;
-        }
+    if (notice === "imported") {
+        showToast(
+            "Calendar file processed successfully.",
+            "success"
+        );
+    } else if (notice === "created") {
+        showToast(
+            "Assignment created successfully!",
+            "success"
+        );
+    } else if (notice === "created-uploaded") {
+        showToast(
+            "Assignment created and all files uploaded successfully!",
+            "success"
+        );
+    } else if (notice === "created-upload-warning") {
+        showToast(
+            "Assignment created, but one or more files failed to upload. Open the assignment to retry."
+        );
     }
 
-    saveButton.disabled = true;
-    saveButton.textContent = "Creating assignment...";
+    if (notice) {
+        const cleanUrl = new URL(window.location.href);
+        cleanUrl.searchParams.delete("notice");
 
-    try {
-        // Only send text fields to /calendar/add.
-        const assignmentData = new FormData(form);
-        assignmentData.delete("assignment_files");
+        window.history.replaceState(
+            {},
+            "",
+            cleanUrl.pathname + cleanUrl.search + cleanUrl.hash
+        );
+    }
 
-        const createResponse = await fetch("/calendar/add", {
-            method: "POST",
-            headers: {
-                "Accept": "application/json"
-            },
-            body: new URLSearchParams(assignmentData)
-        });
+    /*
+     * Create an assignment first, then upload its selected files.
+     *
+     * The attachment endpoint needs an existing assignment ID,
+     * so file uploads cannot occur until assignment creation succeeds.
+     */
+    const form = document.getElementById("new-assignment-form");
 
-        if (createResponse.status === 409) {
-            showToast("This assignment already exists.");
-            return;
-        }
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
 
-        if (!createResponse.ok) {
-            throw new Error(
-                "Unable to create assignment. Check the form and try again."
-            );
-        }
+        const saveButton =
+            form.querySelector('button[type="submit"]');
 
-        const created = await createResponse.json();
+        const originalButtonText = saveButton.textContent;
 
-        if (!created.assignmentId || !created.redirectUrl) {
-            throw new Error("The server did not return an assignment ID.");
-        }
+        const fileInput =
+            document.getElementById("new-assignment-files");
 
-        let failedUploads = 0;
+        const selectedFiles = Array.from(fileInput.files);
 
-        // Upload files individually using the existing S3 route.
+        // Match the backend's 10 MB per-file upload limit.
+        const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
         for (const file of selectedFiles) {
-            saveButton.textContent = `Uploading ${file.name}...`;
-
-            const uploadData = new FormData();
-            uploadData.append("attachment", file);
-
-            try {
-                const uploadResponse = await fetch(
-                    `/calendar/${encodeURIComponent(created.assignmentId)}/files`,
-                    {
-                        method: "POST",
-                        body: uploadData
-                    }
+            if (file.size > MAX_FILE_SIZE) {
+                showToast(
+                    `${file.name} exceeds the 10 MB file limit.`
                 );
-
-                if (!uploadResponse.ok) {
-                    failedUploads++;
-                    console.error(
-                        "File upload failed:",
-                        file.name,
-                        uploadResponse.status
-                    );
-                }
-
-            } catch (uploadError) {
-                failedUploads++;
-                console.error(
-                    `Error uploading ${file.name}:`,
-                    uploadError
-                );
+                return;
             }
         }
 
-        // Navigate to the month containing the new assignment.
-        const redirectUrl = new URL(
-            created.redirectUrl,
-            window.location.origin
-        );
+        saveButton.disabled = true;
+        saveButton.textContent = "Creating assignment...";
 
-        // Preserve a notification after the page reload.
-        if (failedUploads > 0) {
-            redirectUrl.searchParams.set(
-                "notice",
-                "created-upload-warning"
+        try {
+            // The assignment creation route receives only form fields.
+            const assignmentData = new FormData(form);
+            assignmentData.delete("assignment_files");
+
+            const createResponse = await fetch("/calendar/add", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json"
+                },
+                body: new URLSearchParams(assignmentData)
+            });
+
+            if (createResponse.status === 409) {
+                showToast("This assignment already exists.");
+                return;
+            }
+
+            if (!createResponse.ok) {
+                throw new Error(
+                    "Unable to create assignment. Check the form and try again."
+                );
+            }
+
+            const created = await createResponse.json();
+
+            if (!created.assignmentId || !created.redirectUrl) {
+                throw new Error(
+                    "The server did not return an assignment ID."
+                );
+            }
+
+            let failedUploads = 0;
+
+            // Send each selected file to its assignment's S3 upload route.
+            for (const file of selectedFiles) {
+                saveButton.textContent =
+                    `Uploading ${file.name}...`;
+
+                const uploadData = new FormData();
+                uploadData.append("attachment", file);
+
+                try {
+                    const uploadResponse = await fetch(
+                        `/calendar/${encodeURIComponent(created.assignmentId)}/files`,
+                        {
+                            method: "POST",
+                            body: uploadData
+                        }
+                    );
+
+                    if (!uploadResponse.ok) {
+                        failedUploads++;
+
+                        console.error(
+                            "File upload failed:",
+                            file.name,
+                            uploadResponse.status
+                        );
+                    }
+                } catch (uploadError) {
+                    failedUploads++;
+
+                    console.error(
+                        `Error uploading ${file.name}:`,
+                        uploadError
+                    );
+                }
+            }
+
+            // Navigate to the month containing the new assignment.
+            const redirectUrl = new URL(
+                created.redirectUrl,
+                window.location.origin
             );
-        } else if (selectedFiles.length > 0) {
-            redirectUrl.searchParams.set(
-                "notice",
-                "created-uploaded"
+
+            // Preserve the correct notification across the page reload.
+            if (failedUploads > 0) {
+                redirectUrl.searchParams.set(
+                    "notice",
+                    "created-upload-warning"
+                );
+            } else if (selectedFiles.length > 0) {
+                redirectUrl.searchParams.set(
+                    "notice",
+                    "created-uploaded"
+                );
+            } else {
+                redirectUrl.searchParams.set(
+                    "notice",
+                    "created"
+                );
+            }
+
+            window.location.assign(
+                redirectUrl.pathname + redirectUrl.search
             );
-        } else {
-            redirectUrl.searchParams.set(
-                "notice",
-                "created"
+
+        } catch (error) {
+            console.error("Assignment creation error:", error);
+
+            showToast(
+                error.message || "Unable to create assignment."
             );
+
+        } finally {
+            saveButton.disabled = false;
+            saveButton.textContent = originalButtonText;
         }
+    });
 
-        window.location.assign(
-            redirectUrl.pathname + redirectUrl.search
-        );
-
-    } catch (error) {
-        console.error("Assignment creation error:", error);
-        showToast(error.message || "Unable to create assignment.");
-
-    } finally {
-        saveButton.disabled = false;
-        saveButton.textContent = originalButtonText;
-    }
-});
-
-    // Fill and open the assignment details pop-up
+    /*
+     * Populate and open the assignment details modal.
+     * The selected calendar card supplies the displayed information.
+     */
     function openAssignmentDetails(assignment) {
         const data = assignment.dataset;
 
         selectedAssignment = assignment;
 
-        // Clear previous errors
+        // Clear status messages from the previously opened assignment.
         document.getElementById("completion-error").hidden = true;
+        document.getElementById("details-toast").hidden = true;
 
-        // Display the selected assignment's information
         document.getElementById("details-name").textContent =
             data.name;
 
@@ -541,45 +603,64 @@ form.addEventListener("submit", async function(event) {
             data.priority || "Not specified";
 
         document.getElementById("details-estimated").textContent =
-            data.estimated ? `${data.estimated} minutes` : "Not specified";
+            data.estimated
+                ? `${data.estimated} minutes`
+                : "Not specified";
 
-        // Load the saved completion status
-        document.getElementById("details-completed").checked =
+        // Restore the assignment's saved completion status.
+        const completionCheckbox =
+            document.getElementById("details-completed");
+
+        completionCheckbox.checked =
             data.completed === "true";
 
+        completionCheckbox.disabled = false;
+
+        // Reset the attachment form before loading this assignment's files.
         document.getElementById("attachment-upload-form").reset();
-        document.getElementById("attachment-message").textContent = "";
+
+        document.getElementById("attachment-message").textContent =
+            "";
 
         document.getElementById("assignment-details-dialog").showModal();
 
         loadAssignmentFiles(data.id);
     }
 
-    // Save completion changes to the server
+    /*
+     * Save completion changes using the existing Calendar API.
+     *
+     * The calendar card is updated only after the server confirms
+     * the change, allowing the completed CSS styling to update
+     * immediately without reloading the Calendar.
+     */
     const completionCheckbox =
         document.getElementById("details-completed");
 
     completionCheckbox.addEventListener("change", async function() {
-
-        // Get the selected assignment and checkbox value
         const assignment = selectedAssignment;
+
+        if (!assignment) {
+            return;
+        }
+
         const assignmentId = assignment.dataset.id;
         const completed = completionCheckbox.checked;
 
         const errorMessage =
             document.getElementById("completion-error");
 
-        // Disable the checkbox while saving
         errorMessage.hidden = true;
         completionCheckbox.disabled = true;
 
         try {
             const response = await fetch(
-                `/calendar/${assignmentId}/completed`,
+                `/calendar/${encodeURIComponent(assignmentId)}/completed`,
                 {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
                     },
                     body: new URLSearchParams({
                         completed: String(completed)
@@ -587,153 +668,317 @@ form.addEventListener("submit", async function(event) {
                 }
             );
 
-            // Check if the update succeeded
             if (!response.ok) {
-                throw new Error("Unable to update assignment");
+                throw new Error(
+                    "Unable to update assignment"
+                );
             }
 
             const updatedAssignment = await response.json();
 
-            // Update the assignment's stored status
+            // Update the card only after the database update succeeds.
             assignment.dataset.completed =
                 String(updatedAssignment.completed);
+
+            if (selectedAssignment === assignment) {
+                completionCheckbox.checked =
+                    Boolean(updatedAssignment.completed);
+
+                showToast(
+                    updatedAssignment.completed
+                        ? "Assignment marked as completed."
+                        : "Assignment marked as incomplete.",
+                    "success"
+                );
+            }
 
         } catch (error) {
             console.error("Completion update error:", error);
 
-            // Restore the old status if saving fails
+            // Restore the previous checkbox state if saving fails.
             if (selectedAssignment === assignment) {
                 completionCheckbox.checked =
                     assignment.dataset.completed === "true";
 
-                errorMessage.hidden = false;
+                showToast(
+                    "Could not update completion status. Please try again."
+                );
             }
 
         } finally {
-            // Re-enable the checkbox after saving
             if (selectedAssignment === assignment) {
                 completionCheckbox.disabled = false;
             }
         }
     });
 
-// Retrieve and display files attached to the selected assignment.
-async function loadAssignmentFiles(assignmentId) {
-    const list = document.getElementById("attachment-list");
-    const message = document.getElementById("attachment-message");
+    /*
+     * Retrieve files stored in S3 for the selected assignment.
+     * Build file links using DOM methods rather than HTML strings.
+     */
+    async function loadAssignmentFiles(assignmentId) {
+        const list =
+            document.getElementById("attachment-list");
 
-    list.replaceChildren();
-    message.textContent = "";
-
-    const loading = document.createElement("li");
-    loading.textContent = "Loading attachments...";
-    list.appendChild(loading);
-
-    try {
-        const response = await fetch(
-            `/calendar/${encodeURIComponent(assignmentId)}/files`
-        );
-
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.error || "Unable to load attachments.");
-        }
-
-        // Ignore an old request if the user opened another assignment.
-        if (selectedAssignment?.dataset.id !== String(assignmentId)) {
-            return;
-        }
+        const message =
+            document.getElementById("attachment-message");
 
         list.replaceChildren();
+        message.textContent = "";
 
-        if (result.files.length === 0) {
-            const empty = document.createElement("li");
-            empty.textContent = "No files uploaded yet.";
-            list.appendChild(empty);
+        const loading = document.createElement("li");
+        loading.textContent = "Loading attachments...";
+        list.appendChild(loading);
+
+        try {
+            const response = await fetch(
+                `/calendar/${encodeURIComponent(assignmentId)}/files`
+            );
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    result.error || "Unable to load attachments."
+                );
+            }
+
+            // Discard responses belonging to an older assignment selection.
+            if (
+                selectedAssignment?.dataset.id !==
+                String(assignmentId)
+            ) {
+                return;
+            }
+
+            list.replaceChildren();
+
+            if (result.files.length === 0) {
+                const empty = document.createElement("li");
+                empty.textContent = "No files uploaded yet.";
+                list.appendChild(empty);
+                return;
+            }
+
+            // Display each file with a download link and its size.
+            result.files.forEach(file => {
+                const item = document.createElement("li");
+
+                const link = document.createElement("a");
+
+                link.href =
+                    `/calendar/${encodeURIComponent(assignmentId)}` +
+                    `/files/${encodeURIComponent(file.fileId)}/download`;
+
+                link.textContent = file.name;
+
+                const size = document.createElement("span");
+                size.className = "attachment-size";
+
+                size.textContent =
+                    ` (${Math.ceil(file.size / 1024)} KB)`;
+
+                item.appendChild(link);
+                item.appendChild(size);
+                list.appendChild(item);
+            });
+
+        } catch (error) {
+            if (
+                selectedAssignment?.dataset.id ===
+                String(assignmentId)
+            ) {
+                list.replaceChildren();
+
+                message.textContent =
+                    error.message || "Could not load attachments.";
+
+                showToast(
+                    error.message || "Could not load attachments."
+                );
+            }
+        }
+    }
+
+    /*
+     * Upload a file to the selected assignment without reloading
+     * the Calendar. Refresh the attachment list after a successful upload.
+     */
+    const attachmentForm =
+        document.getElementById("attachment-upload-form");
+
+    attachmentForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const assignmentId = selectedAssignment?.dataset.id;
+
+        const message =
+            document.getElementById("attachment-message");
+
+        const uploadButton =
+            document.getElementById("attachment-upload-button");
+
+        if (!assignmentId) {
+            showToast("Please select an assignment.");
             return;
         }
 
-        result.files.forEach(file => {
-            const item = document.createElement("li");
+        const attachmentInput =
+            document.getElementById("attachment-file");
 
-            const link = document.createElement("a");
-            link.href =
-                `/calendar/${encodeURIComponent(assignmentId)}` +
-                `/files/${encodeURIComponent(file.fileId)}/download`;
+        const file = attachmentInput.files[0];
 
-            link.textContent = file.name;
-
-            const size = document.createElement("span");
-            size.className = "attachment-size";
-            size.textContent =
-                ` (${Math.ceil(file.size / 1024)} KB)`;
-
-            item.appendChild(link);
-            item.appendChild(size);
-            list.appendChild(item);
-        });
-
-    } catch (error) {
-        if (selectedAssignment?.dataset.id === String(assignmentId)) {
-            list.replaceChildren();
-            message.textContent = error.message;
+        if (!file) {
+            showToast("Please choose a file to upload.");
+            return;
         }
-    }
-}
 
+        // Validate file size before contacting the upload endpoint.
+        if (file.size > 10 * 1024 * 1024) {
+            showToast("Files must be 10 MB or smaller.");
+            return;
+        }
 
-// Upload a file without reloading the calendar.
-const attachmentForm =
-    document.getElementById("attachment-upload-form");
+        uploadButton.disabled = true;
+        message.textContent = "Uploading file...";
 
-attachmentForm.addEventListener("submit", async function(event) {
-    event.preventDefault();
+        try {
+            const formData = new FormData(attachmentForm);
 
-    const assignmentId = selectedAssignment?.dataset.id;
-    const message = document.getElementById("attachment-message");
-    const uploadButton =
-        document.getElementById("attachment-upload-button");
+            const response = await fetch(
+                `/calendar/${encodeURIComponent(assignmentId)}/files`,
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
 
-    if (!assignmentId) {
-        message.textContent = "Please select an assignment.";
-        return;
-    }
+            const result = await response.json();
 
-    uploadButton.disabled = true;
-    message.textContent = "Uploading file...";
-
-    try {
-        const formData = new FormData(attachmentForm);
-
-        const response = await fetch(
-            `/calendar/${encodeURIComponent(assignmentId)}/files`,
-            {
-                method: "POST",
-                body: formData
+            if (!response.ok) {
+                throw new Error(
+                    result.error || "File upload failed."
+                );
             }
-        );
 
-        const result = await response.json();
+            // Refresh the file list after the upload succeeds.
+            if (
+                selectedAssignment?.dataset.id ===
+                String(assignmentId)
+            ) {
+                attachmentForm.reset();
 
-        if (!response.ok) {
-            throw new Error(result.error || "File upload failed.");
+                await loadAssignmentFiles(assignmentId);
+
+                if (
+                    selectedAssignment?.dataset.id ===
+                    String(assignmentId)
+                ) {
+                    message.textContent =
+                        "File uploaded successfully.";
+
+                    showToast(
+                        "File uploaded successfully.",
+                        "success"
+                    );
+                }
+            }
+
+        } catch (error) {
+            console.error("Attachment upload error:", error);
+
+            if (
+                selectedAssignment?.dataset.id ===
+                String(assignmentId)
+            ) {
+                message.textContent =
+                    error.message || "File upload failed.";
+
+                showToast(
+                    error.message || "File upload failed."
+                );
+            }
+
+        } finally {
+            uploadButton.disabled = false;
+        }
+    });
+
+    /*
+     * Import assignments from an .ics or .ical file.
+     *
+     * The existing import endpoint redirects to /calendar when
+     * processing succeeds. Fetch follows that redirect, so the
+     * final response URL is checked before showing success.
+     */
+    const importForm =
+        document.getElementById("import-calendar-form");
+
+    importForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const fileInput =
+            importForm.querySelector('input[name="icalFile"]');
+
+        const uploadButton =
+            importForm.querySelector('button[type="submit"]');
+
+        const file = fileInput.files[0];
+
+        if (!file) {
+            showToast("Please select a calendar file.");
+            return;
         }
 
-        attachmentForm.reset();
-
-        await loadAssignmentFiles(assignmentId);
-
-        if (selectedAssignment?.dataset.id === String(assignmentId)) {
-            message.textContent = "File uploaded successfully.";
+        // Accept iCalendar files with either supported extension.
+        if (!/\.(ics|ical)$/i.test(file.name)) {
+            showToast(
+                "Please select a valid .ics or .ical file."
+            );
+            return;
         }
 
-    } catch (error) {
-        message.textContent = error.message;
+        // Match the import endpoint's 5 MB file-size limit.
+        if (file.size > 5 * 1024 * 1024) {
+            showToast(
+                "Calendar files must be 5 MB or smaller."
+            );
+            return;
+        }
 
-    } finally {
-        uploadButton.disabled = false;
-    }
-});
+        uploadButton.disabled = true;
 
+        try {
+            const response = await fetch(importForm.action, {
+                method: "POST",
+                body: new FormData(importForm)
+            });
+
+            const redirectedToCalendar =
+                response.redirected &&
+                new URL(response.url).pathname === "/calendar";
+
+            if (!response.ok || !redirectedToCalendar) {
+                showToast(
+                    "Calendar import failed. Please check the file and try again."
+                );
+                return;
+            }
+
+            // Reload the Calendar and show success after navigation.
+            window.location.assign(
+                "/calendar?notice=imported"
+            );
+
+        } catch (error) {
+            console.error("Calendar import error:", error);
+
+            showToast(
+                "Unable to connect to the server. Please try again."
+            );
+
+        } finally {
+            uploadButton.disabled = false;
+        }
+    });
 </script>
