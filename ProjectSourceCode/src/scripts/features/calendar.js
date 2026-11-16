@@ -5,26 +5,12 @@ const router = express.Router();
 const { db } = require("../db");
 const { getCourses } = require("./courses");
 
-/*
- * CALENDAR ROUTES
- *
- * Handles:
- * - Displaying the monthly Calendar
- * - Returning Calendar assignments as JSON
- * - Creating new assignments
- * - Editing existing assignments
- * - Updating assignment completion status
- *
- * S3 attachment uploads, downloads, and listings
- * are handled separately in assignmentFiles.js.
- *
- * DEVELOPMENT NOTE:
- * Calendar currently uses user ID 1 to remain compatible
- * with the team's existing development setup.
- * Replace this with the authenticated user's ID
- * before deploying a multiuser application.
- */
-const DEVELOPMENT_USER_ID = 1;
+// Authentication for Calendar routes
+const { requireAuth, getCurrentUser } = require("./auth");
+
+
+// Require users to log in before accessing Calendar routes
+router.use(requireAuth);
 
 
 /*
@@ -43,14 +29,7 @@ function isValidMonth(year, month) {
 }
 
 
-/*
- * Validate dates submitted through datetime-local inputs.
- *
- * Required format: YYYY-MM-DDTHH:mm
- *
- * This function is shared by assignment creation
- * and assignment editing to avoid duplicate validation code.
- */
+// Validate dates submitted through datetime-local inputs.
 function isValidDueDate(value) {
     if (typeof value !== "string") {
         return false;
@@ -210,7 +189,7 @@ router.get("/", async (req, res) => {
             );
         }
 
-        const userId = DEVELOPMENT_USER_ID;
+        const userId = getCurrentUser(req).user_id;
 
         // Load assignments and courses for the Calendar page.
         const assignments =
@@ -348,7 +327,7 @@ router.get("/events", async (req, res) => {
             });
         }
 
-        const userId = DEVELOPMENT_USER_ID;
+        const userId = getCurrentUser(req).user_id;
 
         const assignments =
             await getCalendarAssignments(userId, year, month);
@@ -378,7 +357,7 @@ router.get("/events", async (req, res) => {
  */
 router.post("/add", async (req, res) => {
     try {
-        const userId = DEVELOPMENT_USER_ID;
+        const userId = getCurrentUser(req).user_id;
 
         const courseId = Number(req.body.course_id);
 
@@ -535,7 +514,7 @@ router.post("/add", async (req, res) => {
  */
 router.post("/:assignmentId/edit", async (req, res) => {
     try {
-        const userId = DEVELOPMENT_USER_ID;
+        const userId = getCurrentUser(req).user_id;
 
         const assignmentId = Number(req.params.assignmentId);
         const courseId = Number(req.body.course_id);
@@ -697,7 +676,7 @@ router.post("/:assignmentId/edit", async (req, res) => {
  */
 router.post("/:assignmentId/completed", async (req, res) => {
     try {
-        const userId = DEVELOPMENT_USER_ID;
+        const userId = getCurrentUser(req).user_id;
 
         const assignmentId =
             Number(req.params.assignmentId);

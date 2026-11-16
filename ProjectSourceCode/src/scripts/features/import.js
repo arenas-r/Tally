@@ -9,6 +9,9 @@ const ical = require("node-ical");
 
 const { db } = require("../db");
 
+// Authentication for Calendar imports
+const { requireAuth, getCurrentUser } = require("./auth");
+
 // Assign a default priority based on the assignment name.
 function getDefaultPriority(title) {
     const name = String(title || "");
@@ -36,6 +39,9 @@ const upload = multer({
     limits: {fileSize: 5 * 1024 * 1024} // Limits files to 5MB for security
 });
 
+// Require login before accessing Calendar import routes
+router.use(requireAuth);
+
 // Requests here
 
 // basic testing route
@@ -57,7 +63,9 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
         //2. Parse the string data immediately
         const parsedData = await ical.async.parseICS(icalData);
 
-        const userId = 1; // Temp, change when session data added
+        // Associate imported courses and assignments with the logged-in user
+        const userId = getCurrentUser(req).user_id;
+        
         // const url = event.url;
 
         //3. Store the parsed data into the database

@@ -14,6 +14,9 @@ const {
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 const { db } = require('../db');
 
+// Authentication for Calendar attachments
+const { requireAuth, getCurrentUser } = require('./auth');
+
 const {
   ALLOWED_TYPES,
   validateAttachment,
@@ -37,10 +40,12 @@ const upload = multer({
   },
 });
 
-// TEMPORARY: Match the Calendar's hardcoded development user.
-// Replace with session authentication
+// Require login before accessing assignment attachments
+router.use(requireAuth);
+
+// Use the logged-in user's ID for attachment permissions
 router.use((req, res, next) => {
-  req.attachmentUserId = 1;
+  req.attachmentUserId = getCurrentUser(req).user_id;
   next();
 });
 
