@@ -601,3 +601,129 @@ body {
     line-height: 1.5;
 }
 
+
+/* ===== EDIT ASSIGNMENT FEATURE ===== */
+
+/* Match the existing assignment details popup */
+#edit-assignment-dialog {
+    width: min(90%, 520px);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 30px;
+
+    background: #ffffff;
+    color: #202a36;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    box-shadow: 0 12px 36px rgba(25, 48, 74, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Dim the page while editing */
+#edit-assignment-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* Edit form layout */
+#edit-assignment-form {
+    display: grid;
+    gap: 10px;
+}
+
+#edit-assignment-form label {
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* Edit form inputs */
+#edit-assignment-form input,
+#edit-assignment-form select,
+#edit-assignment-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #202a36;
+    font: inherit;
+}
+
+#edit-assignment-form textarea {
+    resize: vertical;
+}
+
+/* Accessible focus indication */
+#edit-assignment-form input:focus,
+#edit-assignment-form select:focus,
+#edit-assignment-form textarea:focus {
+    outline: 3px solid rgba(39, 116, 92, 0.2);
+    border-color: #27745c;
+}
+
+/* Save and cancel buttons */
+#edit-assignment-form .edit-form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+#edit-assignment-button,
+#save-edit-button,
+#cancel-edit-button {
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 8px;
+
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#edit-assignment-button,
+#save-edit-button {
+    background: #27745c;
+    color: #ffffff;
+}
+
+#edit-assignment-button:hover,
+#save-edit-button:hover {
+    background: #205e4b;
+}
+
+#cancel-edit-button {
+    background: #edf1f5;
+    color: #202a36;
+}
+
+#cancel-edit-button:hover {
+    background: #dce5eb;
+}
+
+/* Keep editing notifications visible within the modal */
+#edit-assignment-dialog .dialog-toast {
+    position: sticky;
+    top: 0;
+    left: auto;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 14px;
+    z-index: 2;
+}
+
+/* Small-screen adjustments */
+@media (max-width: 650px) {
+    #edit-assignment-dialog {
+        padding: 20px;
+    }
+
+    #edit-assignment-form .edit-form-actions button {
+        flex: 1;
+    }
+}

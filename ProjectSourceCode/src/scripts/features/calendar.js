@@ -8,28 +8,28 @@ const { getCourses } = require("./courses");
 /*
  * CALENDAR ROUTES
  *
- * This module handles:
- * - Displaying assignments on the monthly Calendar
- * - Returning assignment data as JSON
- * - Creating assignments
+ * Handles:
+ * - Displaying the monthly Calendar
+ * - Returning Calendar assignments as JSON
+ * - Creating new assignments
+ * - Editing existing assignments
  * - Updating assignment completion status
  *
- * Attachment uploads and downloads are handled separately
- * by assignmentFiles.js.
+ * S3 attachment uploads, downloads, and listings
+ * are handled separately in assignmentFiles.js.
  *
  * DEVELOPMENT NOTE:
- * The application currently uses user ID 1 for Calendar operations.
- * This must be replaced with the authenticated user's ID
- * before the application is deployed to production.
+ * Calendar currently uses user ID 1 to remain compatible
+ * with the team's existing development setup.
+ * Replace this with the authenticated user's ID
+ * before deploying a multiuser application.
  */
 const DEVELOPMENT_USER_ID = 1;
 
 
 /*
- * Validate a year and month.
- *
- * The Calendar uses month numbers from 1 (January)
- * through 12 (December).
+ * Validate the requested calendar year and month.
+ * January = 1 and December = 12.
  */
 function isValidMonth(year, month) {
     return (
@@ -44,13 +44,12 @@ function isValidMonth(year, month) {
 
 
 /*
- * Validate a date/time value from an HTML datetime-local input.
+ * Validate dates submitted through datetime-local inputs.
  *
- * Expected format:
- * YYYY-MM-DDTHH:mm
+ * Required format: YYYY-MM-DDTHH:mm
  *
- * This rejects invalid dates such as February 30
- * and invalid times such as 25:00.
+ * This function is shared by assignment creation
+ * and assignment editing to avoid duplicate validation code.
  */
 function isValidDueDate(value) {
     if (typeof value !== "string") {
@@ -79,8 +78,8 @@ function isValidDueDate(value) {
         return false;
     }
 
-    // Use UTC only for date validation, not for converting
-    // the user's selected deadline to another timezone.
+    // UTC is used only to check whether the date exists.
+    // The submitted deadline is not converted to another timezone.
     const date = new Date(
         Date.UTC(year, month - 1, day, hour, minute)
     );
@@ -96,47 +95,35 @@ function isValidDueDate(value) {
 
 
 /*
- * Retrieve assignments due during a selected month.
+ * Retrieve all assignments due during a selected month.
  *
- * The query joins assignments with courses so each
- * Calendar card can display the course information.
+ * The course join limits results to the specified user.
+ * The date range includes the first day of the month
+ * and excludes the first day of the following month.
  *
- * Only assignments belonging to the specified user
- * are returned.
+ * Course ID and due_datetime are also returned so the
+ * Edit Assignment form can be populated correctly.
  */
 async function getCalendarAssignments(userId, year, month) {
-
-    // First day of the requested month.
     const startDate =
         `${year}-${String(month).padStart(2, "0")}-01`;
 
     let nextYear = year;
     let nextMonth = month + 1;
 
-    // Move from December to January of the next year.
     if (nextMonth === 13) {
         nextMonth = 1;
         nextYear++;
     }
 
-    // First day of the following month.
-    // This is the exclusive upper boundary.
     const endDate =
         `${nextYear}-${String(nextMonth).padStart(2, "0")}-01`;
 
-    /*
-     * Filter assignments using:
-     *
-     * due_date >= first day of selected month
-     * due_date <  first day of next month
-     *
-     * This includes every assignment in the selected month,
-     * regardless of its due time.
-     */
     return db.any(
         `
         SELECT
             a.assignment_id,
+            a.course_id,
             a.assignment_name,
             a.description,
             a.priority,
@@ -152,6 +139,11 @@ async function getCalendarAssignments(userId, year, month) {
                 a.due_date,
                 'FMHH12:MI AM'
             ) AS due_time,
+
+            TO_CHAR(
+                a.due_date,
+                'YYYY-MM-DD"T"HH24:MI'
+            ) AS due_datetime,
 
             c.course_name,
             c.course_code
@@ -175,12 +167,14 @@ async function getCalendarAssignments(userId, year, month) {
 /*
  * GET /calendar
  *
- * Render the monthly Calendar page.
+ * Render the monthly calendar.
  *
- * An optional month parameter allows navigation:
+ * Examples:
+ * /calendar
  * /calendar?month=2026-11
  *
- * Without a month parameter, the current month is shown.
+ * Defaults to the current month when no month
+ * query parameter is supplied.
  */
 router.get("/", async (req, res) => {
     try {
@@ -189,9 +183,8 @@ router.get("/", async (req, res) => {
         let year = today.getFullYear();
         let month = today.getMonth() + 1;
 
-        // Read and validate the optional month parameter.
+        // Parse and validate the optional month query parameter.
         if (req.query.month !== undefined) {
-
             if (typeof req.query.month !== "string") {
                 return res.status(400).send(
                     "Invalid calendar month"
@@ -217,24 +210,15 @@ router.get("/", async (req, res) => {
             );
         }
 
-        // Use the current development user.
         const userId = DEVELOPMENT_USER_ID;
 
-        // Retrieve assignments and courses for this user.
+        // Load assignments and courses for the Calendar page.
         const assignments =
             await getCalendarAssignments(userId, year, month);
 
         const courses = await getCourses(userId);
 
-        /*
-         * Organize assignments by their due date.
-         *
-         * Example:
-         * {
-         *   "2026-11-15": [assignment1, assignment2],
-         *   "2026-11-18": [assignment3]
-         * }
-         */
+        // Organize assignments using their YYYY-MM-DD due date.
         const assignmentsByDay = {};
 
         for (const assignment of assignments) {
@@ -247,10 +231,7 @@ router.get("/", async (req, res) => {
             assignmentsByDay[dueDay].push(assignment);
         }
 
-        /*
-         * Determine how the month fits into the
-         * seven-column Calendar grid.
-         */
+        // Determine the weekday of the first day of the month.
         const firstDay =
             new Date(year, month - 1, 1).getDay();
 
@@ -266,16 +247,8 @@ router.get("/", async (req, res) => {
             });
         }
 
-        /*
-         * Build the Calendar days.
-         *
-         * Each day contains:
-         * - Its day number
-         * - Its full date
-         * - All assignments due on that date
-         */
+        // Create the calendar cells and attach assignments.
         for (let day = 1; day <= daysInMonth; day++) {
-
             const dateString =
                 `${year}-${String(month).padStart(2, "0")}` +
                 `-${String(day).padStart(2, "0")}`;
@@ -305,7 +278,6 @@ router.get("/", async (req, res) => {
             nextYear++;
         }
 
-        // Convert the month number into a readable month name.
         const monthName =
             new Date(year, month - 1, 1).toLocaleString(
                 "default",
@@ -315,11 +287,10 @@ router.get("/", async (req, res) => {
         /*
          * Render calendar.hbs.
          *
-         * Handlebars uses this data to build the Calendar
-         * and populate each assignment card.
-         *
-         * Completed assignments are styled in calendar.css
-         * using their data-completed attribute.
+         * Each assignment includes data used by:
+         * - The assignment details popup
+         * - The completed-assignment styling
+         * - The Edit Assignment form
          */
         return res.render("calendar", {
             title: "Calendar",
@@ -352,13 +323,10 @@ router.get("/", async (req, res) => {
 /*
  * GET /calendar/events
  *
- * Return assignments as JSON for a selected month.
+ * Return assignments as JSON for the requested month.
  *
  * Example:
  * /calendar/events?year=2026&month=11
- *
- * This endpoint can be used by Calendar JavaScript
- * or other features needing assignment event data.
  */
 router.get("/events", async (req, res) => {
     try {
@@ -374,7 +342,6 @@ router.get("/events", async (req, res) => {
                 ? today.getMonth() + 1
                 : Number(req.query.month);
 
-        // Reject invalid or out-of-range calendar dates.
         if (!isValidMonth(year, month)) {
             return res.status(400).json({
                 error: "Invalid calendar year or month"
@@ -401,20 +368,18 @@ router.get("/events", async (req, res) => {
 /*
  * POST /calendar/add
  *
- * Create a new assignment using the Calendar form.
+ * Create an assignment.
  *
- * The frontend creates the assignment before uploading files,
- * because the S3 attachment route requires an assignment ID.
+ * The frontend creates the assignment before uploading
+ * attachments because S3 paths require an assignment ID.
  *
- * Response behavior:
- * - JSON request: return the new ID and redirect URL
- * - Standard form: redirect to the assignment's month
+ * JSON requests receive the new ID and redirect URL.
+ * Standard form submissions receive an HTTP 303 redirect.
  */
 router.post("/add", async (req, res) => {
     try {
         const userId = DEVELOPMENT_USER_ID;
 
-        // Read assignment information from the submitted form.
         const courseId = Number(req.body.course_id);
 
         const assignmentName =
@@ -440,12 +405,7 @@ router.post("/add", async (req, res) => {
                 ? null
                 : Number(req.body.estimated_time);
 
-        /*
-         * Validate required assignment information.
-         *
-         * Assignment names must contain 1–150 characters.
-         * A valid course and due date are also required.
-         */
+        // Validate required assignment information.
         if (
             !Number.isSafeInteger(courseId) ||
             courseId <= 0 ||
@@ -458,13 +418,7 @@ router.post("/add", async (req, res) => {
             );
         }
 
-        /*
-         * Priority is optional, but only recognized values
-         * are accepted.
-         *
-         * Estimated time is optional and must be a
-         * nonnegative whole number of minutes when provided.
-         */
+        // Validate optional priority and estimated study time.
         if (
             (
                 priority !== null &&
@@ -483,13 +437,7 @@ router.post("/add", async (req, res) => {
             );
         }
 
-        /*
-         * Verify that the selected course belongs
-         * to the current development user.
-         *
-         * This prevents assignments from being created
-         * under another user's course.
-         */
+        // Make sure the selected course belongs to this user.
         const course = await db.oneOrNone(
             `
             SELECT course_id
@@ -507,10 +455,9 @@ router.post("/add", async (req, res) => {
         }
 
         /*
-         * Save the assignment to PostgreSQL.
+         * Create the assignment and return its generated ID.
          *
-         * RETURNING assignment_id supplies the ID needed
-         * for uploading optional attachments to S3.
+         * The assignment ID is used for optional S3 uploads.
          */
         const createdAssignment = await db.one(
             `
@@ -535,22 +482,13 @@ router.post("/add", async (req, res) => {
             ]
         );
 
-        /*
-         * Build a redirect to the month containing
-         * the newly created assignment.
-         */
+        // Redirect to the month containing the new assignment.
         const month = dueDate.substring(0, 7);
 
         const redirectUrl =
             `/calendar?month=${encodeURIComponent(month)}`;
 
-        /*
-         * The updated calendar.hbs sends:
-         * Accept: application/json
-         *
-         * Return the assignment ID so the frontend can
-         * upload selected files using assignmentFiles.js.
-         */
+        // Return JSON when the Calendar JavaScript creates the record.
         if (
             (req.get("Accept") || "").includes(
                 "application/json"
@@ -559,17 +497,21 @@ router.post("/add", async (req, res) => {
             return res.status(201).json({
                 message: "Assignment created successfully.",
                 assignmentId: createdAssignment.assignment_id,
-                redirectUrl: redirectUrl
+                redirectUrl
             });
         }
 
-        // Support ordinary HTML form submissions as well.
         return res.redirect(303, redirectUrl);
 
     } catch (error) {
         console.error("Error adding assignment:", error);
 
-        // PostgreSQL unique-constraint violation.
+        /*
+         * PostgreSQL error 23505 indicates a unique-constraint
+         * violation, if a matching constraint exists.
+         *
+         * Full duplicate prevention is a separate planned feature.
+         */
         if (error.code === "23505") {
             return res.status(409).send(
                 "Assignment already exists"
@@ -584,30 +526,185 @@ router.post("/add", async (req, res) => {
 
 
 /*
+ * POST /calendar/:assignmentId/edit
+ *
+ * Edit an existing assignment.
+ *
+ * The original assignment ID is preserved.
+ * Completion status and S3 attachments are not modified.
+ */
+router.post("/:assignmentId/edit", async (req, res) => {
+    try {
+        const userId = DEVELOPMENT_USER_ID;
+
+        const assignmentId = Number(req.params.assignmentId);
+        const courseId = Number(req.body.course_id);
+
+        const assignmentName =
+            typeof req.body.assignment_name === "string"
+                ? req.body.assignment_name.trim()
+                : "";
+
+        const description =
+            typeof req.body.description === "string"
+                ? req.body.description
+                : null;
+
+        const dueDate =
+            typeof req.body.due_date === "string"
+                ? req.body.due_date.trim()
+                : "";
+
+        const priority =
+            req.body.priority === "" ||
+            req.body.priority == null
+                ? null
+                : req.body.priority;
+
+        const estimatedTime =
+            req.body.estimated_time === "" ||
+            req.body.estimated_time == null
+                ? null
+                : Number(req.body.estimated_time);
+
+        /*
+         * Reuse the creation date validator.
+         * Validate the assignment ID, course ID, name,
+         * and due date before contacting PostgreSQL.
+         */
+        if (
+            !Number.isSafeInteger(assignmentId) ||
+            assignmentId <= 0 ||
+            !Number.isSafeInteger(courseId) ||
+            courseId <= 0 ||
+            !assignmentName ||
+            assignmentName.length > 150 ||
+            !isValidDueDate(dueDate)
+        ) {
+            return res.status(400).json({
+                error: "Invalid assignment information."
+            });
+        }
+
+        // Validate optional planning fields.
+        if (
+            (
+                priority !== null &&
+                !["low", "medium", "high"].includes(priority)
+            ) ||
+            (
+                estimatedTime !== null &&
+                (
+                    !Number.isSafeInteger(estimatedTime) ||
+                    estimatedTime < 0
+                )
+            )
+        ) {
+            return res.status(400).json({
+                error: "Invalid priority or estimated time."
+            });
+        }
+
+        /*
+         * Only update an assignment if:
+         * - Its existing course belongs to the user.
+         * - Its newly selected course also belongs to the user.
+         *
+         * This permits moving an assignment between the
+         * user's courses without modifying its assignment ID.
+         */
+        const updatedAssignment = await db.oneOrNone(
+            `
+            UPDATE assignments a
+            SET
+                course_id = $1,
+                assignment_name = $2,
+                description = $3,
+                due_date = $4,
+                priority = $5,
+                estimated_time = $6
+            WHERE a.assignment_id = $7
+              AND EXISTS (
+                  SELECT 1
+                  FROM courses c
+                  WHERE c.course_id = a.course_id
+                    AND c.user_id = $8
+              )
+              AND EXISTS (
+                  SELECT 1
+                  FROM courses c
+                  WHERE c.course_id = $1
+                    AND c.user_id = $8
+              )
+            RETURNING a.assignment_id;
+            `,
+            [
+                courseId,
+                assignmentName,
+                description,
+                dueDate,
+                priority,
+                estimatedTime,
+                assignmentId,
+                userId
+            ]
+        );
+
+        if (!updatedAssignment) {
+            return res.status(404).json({
+                error: "Assignment not found or course unavailable."
+            });
+        }
+
+        /*
+         * Return the month containing the updated due date.
+         * The frontend reloads that month so the assignment
+         * appears in the correct calendar cell.
+         */
+        const month = dueDate.substring(0, 7);
+
+        return res.status(200).json({
+            message: "Assignment updated successfully.",
+            assignmentId: updatedAssignment.assignment_id,
+            redirectUrl:
+                `/calendar?month=${encodeURIComponent(month)}`
+        });
+
+    } catch (error) {
+        console.error("Error editing assignment:", error);
+
+        // Handle database uniqueness conflicts if applicable.
+        if (error.code === "23505") {
+            return res.status(409).json({
+                error: "An assignment with these details already exists."
+            });
+        }
+
+        return res.status(500).json({
+            error: "Unable to update assignment."
+        });
+    }
+});
+
+
+/*
  * POST /calendar/:assignmentId/completed
  *
- * Update an assignment's completion status.
+ * Update the completion status of an existing assignment.
  *
- * The frontend sends:
- * completed=true
- * or
- * completed=false
- *
- * PostgreSQL stores the updated Boolean value,
- * which is returned to the frontend as JSON.
+ * The frontend sends completed=true or completed=false.
+ * The server returns the saved Boolean status as JSON.
  */
 router.post("/:assignmentId/completed", async (req, res) => {
     try {
         const userId = DEVELOPMENT_USER_ID;
 
-        // Retrieve the assignment ID and requested status.
         const assignmentId =
             Number(req.params.assignmentId);
 
         const completedValue =
             req.body.completed;
 
-        // An assignment ID must be a positive integer.
         if (
             !Number.isSafeInteger(assignmentId) ||
             assignmentId <= 0
@@ -617,7 +714,6 @@ router.post("/:assignmentId/completed", async (req, res) => {
             });
         }
 
-        // Only explicit Boolean strings are accepted.
         if (
             completedValue !== "true" &&
             completedValue !== "false"
@@ -630,11 +726,8 @@ router.post("/:assignmentId/completed", async (req, res) => {
         const completed = completedValue === "true";
 
         /*
-         * Update only an assignment belonging to
-         * the current development user.
-         *
-         * The course join checks assignment ownership
-         * before applying the completion change.
+         * Update only assignments belonging to the user.
+         * The course join verifies assignment ownership.
          */
         const assignment = await db.oneOrNone(
             `
@@ -651,7 +744,6 @@ router.post("/:assignmentId/completed", async (req, res) => {
             [completed, assignmentId, userId]
         );
 
-        // Return 404 if the assignment does not exist for this user.
         if (!assignment) {
             return res.status(404).json({
                 error: "Assignment not found"
@@ -659,13 +751,9 @@ router.post("/:assignmentId/completed", async (req, res) => {
         }
 
         /*
-         * Return the updated status to calendar.hbs.
-         *
-         * JavaScript updates the selected card's
-         * data-completed attribute after receiving this response.
-         *
-         * The CSS then automatically changes the card's
-         * appearance without requiring a page refresh.
+         * The frontend updates the calendar card's
+         * data-completed attribute after this response.
+         * CSS then applies completed styling automatically.
          */
         return res.status(200).json(assignment);
 
@@ -679,5 +767,5 @@ router.post("/:assignmentId/completed", async (req, res) => {
 });
 
 
-// Export the Calendar router for registration in app.js.
+// Export the Calendar routes for registration in app.js.
 module.exports = router;
