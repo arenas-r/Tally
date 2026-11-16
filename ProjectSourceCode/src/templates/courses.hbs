@@ -19,7 +19,7 @@
         </button>
     </div>
 
-    {{> courses/courseGrid courses=courses}}
+    {{> courses/courseGrid}}
 
     {{#if selectedCourse}}
         {{> courses/courseDetails
@@ -30,4 +30,4 @@
 
 </div>
 
-{{> courses/addCourseModal}}
+{{> courses/courseFormModal}}

@@ -318,89 +318,44 @@
     line-height: 1;
 }
 
-/* ===== ADD COURSE MODAL ===== */
-
-.add-course-modal {
-    border: none;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
-}
-
-.add-course-modal .modal-header {
-    align-items: flex-start;
-    padding: 24px 28px;
-    border-bottom: 1px solid #edf0f2;
-}
-
-.add-course-modal .modal-title {
-    color: #172b36;
-    font-size: 1.25rem;
-    font-weight: 750;
-}
-
-.modal-subtitle {
-    margin: 6px 0 0;
-    color: #778595;
-    font-size: 0.85rem;
-}
-
-.add-course-modal .modal-body {
-    padding: 26px 28px;
-}
-
-.add-course-modal .form-label {
-    color: #263d34;
-    font-size: 0.85rem;
-    font-weight: 650;
-}
-
-.add-course-modal .form-control {
-    padding: 11px 14px;
-    border: 1px solid #e5eaf0;
-    border-radius: 9px;
-    font-size: 0.9rem;
-}
-
-.add-course-modal .form-control:focus {
-    border-color: #8bc8ad;
-    box-shadow: 0 0 0 3px rgba(139, 200, 173, 0.18);
-}
-
-.add-course-modal .modal-footer {
-    padding: 18px 28px;
-    border-top: 1px solid #edf0f2;
-    gap: 10px;
-}
-
-@media (max-width: 575.98px) {
-    .courses-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .add-course-modal .modal-header,
-    .add-course-modal .modal-body,
-    .add-course-modal .modal-footer {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-
-/* ===== COURSE DELETE ===== */
+/* ===== COURSE ACTIONS ===== */
 
 .course-card-wrapper {
     position: relative;
     height: 100%;
 }
 
-.course-delete-form {
+.course-actions {
     position: absolute;
     top: 12px;
     right: 12px;
     z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    opacity: 0;
+    transform: translateY(-5px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
 }
 
-.course-delete-btn {
+.course-card-wrapper:hover .course-actions,
+.course-card-wrapper:focus-within .course-actions {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.course-delete-form {
+    margin: 0;
+}
+
+/* ===== ACTION BUTTONS ===== */
+
+.course-action-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -408,6 +363,7 @@
     width: 36px;
     height: 36px;
 
+    padding: 0;
     border: 1px solid #e5eaf0;
     border-radius: 10px;
 
@@ -418,38 +374,42 @@
 
     cursor: pointer;
 
-    opacity: 0;
-    transform: translateY(-5px);
-
     transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
         background 0.2s ease,
-        color 0.2s ease;
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.course-card-wrapper:hover .course-delete-btn,
-.course-delete-btn:focus-visible {
-    opacity: 1;
-    transform: translateY(0);
+/* Edit */
+.course-edit-btn:hover {
+    background: #ebf7ef;
+    border-color: #d3eadc;
+    color: #27745c;
 }
 
+/* Delete */
 .course-delete-btn:hover {
     background: #fef2f2;
     border-color: #fecaca;
     color: #dc2626;
 }
 
-/* Always visible on touch devices */
+.course-action-btn:focus-visible {
+    outline: 3px solid #8bc8ad;
+    outline-offset: 2px;
+}
+
+/* Always visible on touchscreens */
 @media (hover: none) {
-    .course-delete-btn {
+    .course-actions {
         opacity: 1;
         transform: none;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .course-delete-btn {
+    .course-actions,
+    .course-action-btn {
         transition: none;
     }
 }

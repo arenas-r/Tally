@@ -149,6 +149,50 @@ router.get("/:id", async (req, res) => {
             res.status(500).send(`Failed to delete course: ${err.message}`);
         }
     });
+
+    router.post("/:id/edit", async (req, res) => {
+        try {
+            const userId = await getUser(req);
+            const courseId = req.params.id;
+
+            const courseName = req.body.course_name?.trim();
+            const courseCode = req.body.course_code?.trim();
+            const image = req.body.image?.trim() || null;
+
+            if (!courseName || !courseCode) {
+                return res.status(400).send(
+                    "Course name and code are required"
+                );
+            }
+
+            if (courseName.length > 100 || courseCode.length > 10) {
+                return res.status(400).send(
+                    "Course name or code is too long"
+                );
+            }
+
+            const course = await db.oneOrNone(
+                `UPDATE courses
+                SET course_name = $1,
+                    course_code = $2,
+                    image = $3
+                WHERE course_id = $4
+                AND user_id = $5
+                RETURNING course_id;`,
+                [courseName, courseCode, image, courseId, userId]
+            );
+
+            if (!course) {
+                return res.status(404).send("Course not found");
+            }
+
+            res.redirect(303, `/courses/${course.course_id}`);
+
+        } catch (err) {
+            console.error("Failed to edit course:", err);
+            res.status(500).send("Failed to edit course");
+        }
+    });
 });
  
 module.exports = {

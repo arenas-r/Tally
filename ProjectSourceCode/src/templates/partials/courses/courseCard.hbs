@@ -1,6 +1,7 @@
 <div class="course-card-wrapper h-100">
 
     <a href="/courses/{{course.course_id}}" class="course-link">
+
         <div class="card course-card h-100">
 
             {{#if course.image}}
@@ -26,19 +27,19 @@
             </div>
 
         </div>
+
     </a>
 
-    <form
-        action="/courses/{{course.course_id}}/delete"
-        method="POST"
-        class="course-delete-form"
-        onsubmit="return confirm('Delete this course and all its assignments?');"
-    >
+    <div class="course-actions">
+
+        {{!-- EDIT BUTTON --}}
         <button
-            type="submit"
-            class="course-delete-btn"
-            aria-label="Delete {{course.course_name}}"
-            title="Delete course"
+            type="button"
+            class="course-action-btn course-edit-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#editCourseModal-{{course.course_id}}"
+            aria-label="Edit {{course.course_name}}"
+            title="Edit course"
         >
             <svg
                 viewBox="0 0 24 24"
@@ -51,13 +52,46 @@
                 stroke-linejoin="round"
                 aria-hidden="true"
             >
-                <path d="M3 6h18"/>
-                <path d="M8 6V4h8v2"/>
-                <path d="M5 6l1 14h12l1-14"/>
-                <path d="M10 10v7"/>
-                <path d="M14 10v7"/>
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/>
             </svg>
         </button>
-    </form>
+
+        {{!-- DELETE BUTTON --}}
+        <form
+            action="/courses/{{course.course_id}}/delete"
+            method="POST"
+            class="course-delete-form"
+            onsubmit="return confirm('Delete this course and all its assignments?');"
+        >
+            <button
+                type="submit"
+                class="course-action-btn course-delete-btn"
+                aria-label="Delete {{course.course_name}}"
+                title="Delete course"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M3 6h18"/>
+                    <path d="M8 6V4h8v2"/>
+                    <path d="M5 6l1 14h12l1-14"/>
+                    <path d="M10 10v7"/>
+                    <path d="M14 10v7"/>
+                </svg>
+            </button>
+        </form>
+
+    </div>
 
 </div>
+
+{{> courses/courseFormModal course=course}}
