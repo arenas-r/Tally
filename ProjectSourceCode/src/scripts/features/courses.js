@@ -125,6 +125,30 @@ router.get("/:id", async (req, res) => {
         console.error(err);
         res.status(500).send("Internal server error");
     }
+
+    router.post("/:id/delete", async (req, res) => {
+        try {
+            const userId = await getUser(req);
+            const courseId = req.params.id;
+
+            const result = await db.result(
+                `DELETE FROM courses
+                WHERE course_id = $1
+                AND user_id = $2;`,
+                [courseId, userId]
+            );
+
+            if (result.rowCount === 0) {
+                return res.status(404).send("Course not found");
+            }
+
+            res.redirect("/courses");
+
+        } catch (err) {
+            console.error("Failed to delete course:", err);
+            res.status(500).send(`Failed to delete course: ${err.message}`);
+        }
+    });
 });
  
 module.exports = {
