@@ -18,7 +18,7 @@ async function getCourses(userId) {
     return await db.any(
         `SELECT *
          FROM courses
-         WHERE user_id = $1;`,
+         WHERE user_id = ${userId};`,
         [userId]
     );
 }
@@ -33,20 +33,19 @@ async function getCourse(userId, courseId) {
     );
 }
  
-async function getUpcomingAssignments(userId, courseId) {
+async function getPendingAssignments(userId, courseId) {
     return await db.any(
-        `
-        SELECT a.*
-        FROM assignments a
-        JOIN courses c
-            ON a.course_id = c.course_id
-        WHERE c.user_id = $1
-          AND c.course_id = $2
-          AND a.completed = FALSE
-          AND a.due_date >= CURRENT_TIMESTAMP
-        ORDER BY a.due_date
-        LIMIT 3;
-        `,
+        `SELECT
+            a.*,
+            (a.due_date < CURRENT_TIMESTAMP) AS overdue
+         FROM assignments a
+         JOIN courses c
+             ON a.course_id = c.course_id
+         WHERE c.user_id = $1
+           AND c.course_id = $2
+           AND a.completed = FALSE
+         ORDER BY a.due_date ASC
+         LIMIT 10;`,
         [userId, courseId]
     );
 }
@@ -114,11 +113,11 @@ router.get("/:id", async (req, res) => {
             return res.status(404).send("Course not found");
         }
  
-        const assignments = await getUpcomingAssignments(
+        const assignments = await getPendingAssignments(
             userId,
             courseId
         );
- 
+        
         res.render("courses", {
             title: selectedCourse.name,
             stylesheet: "courses.css",
@@ -204,5 +203,5 @@ router.get("/:id", async (req, res) => {
 module.exports = {
     router,
     getCourses,
-    getUpcomingAssignments
+    getPendingAssignments
 };
