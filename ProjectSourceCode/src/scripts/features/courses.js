@@ -3,9 +3,15 @@ const router = express.Router();
 
 const { db } = require("../db");
 
-// Requests here
+const {
+    requireAuth,
+    getCurrentUser
+} = require("./auth"); 
+
+router.use(requireAuth);
+
 async function getUser(req) {
-    return 1; // TODO: REFACTOR THIS LATER
+    return getCurrentUser(req).user_id;
 }
  
 async function getCourses(userId) {
@@ -58,7 +64,7 @@ router.get("/", async (req, res) => {
  
     } catch (err) {
         console.error(err);
-        res.status(500).send("Internal server error");
+        res.status(500).send(`Internal server error: ${err.message}`);
     }
 });
 
