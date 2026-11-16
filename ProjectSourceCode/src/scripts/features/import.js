@@ -60,14 +60,6 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
             // const description = null; // testing purposes
             const dueDate = event.end;
 
-            // console.log("Assignment:", event.summary);
-            // console.log("Start:", event.start);
-            // console.log("End:", event.end);
-            // console.log("Start ISO:", event.start?.toISOString());
-            // console.log("End ISO:", event.end?.toISOString());
-            // console.log("Date Only:", event.datetype);
-            // console.log("Is Date Only:", event.start?.dateOnly);
-
             // 1. Find or create the course
             const courseQuery = `
                 INSERT INTO courses (

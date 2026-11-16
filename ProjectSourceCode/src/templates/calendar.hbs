@@ -168,8 +168,9 @@
                             data-id="{{assignment_id}}"
                             data-name="{{assignment_name}}"
                             data-course="{{course_code}} {{course_name}}"
-                            data-date="{{due_day}}"
-                            data-time="{{due_time}}"
+                            {{!-- data-date="{{due_day}}"
+                            data-time="{{due_time}}" --}}
+                            data-due-date="{{due_date}}"
                             data-description="{{description}}"
                             data-priority="{{priority}}"
                             data-estimated="{{estimated_time}}"
@@ -182,7 +183,7 @@
                                 {{course_code}} {{course_name}}
                             </span>
 
-                            <span>
+                            <span class="assignment-time">
                                 {{due_time}}
                             </span>
 
@@ -258,6 +259,25 @@
 
     // Track the assignment currently being viewed
     let selectedAssignment = null;
+
+    // Format assignment dates and times using the browser's timezone
+    document.querySelectorAll(".calendar-assignment").forEach(assignment => {
+        const date = new Date(assignment.dataset.dueDate);
+
+        assignment.querySelector(".assignment-time").textContent =
+            new Intl.DateTimeFormat(undefined, {
+                hour: "numeric",
+                minute: "2-digit"
+            }).format(date);
+
+        // Store the browser-local date for the assignment details
+        assignment.dataset.date =
+            new Intl.DateTimeFormat("en-CA", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit"
+            }).format(date);
+    });
 
     // Show or hide the assignment and import form
     function toggleForms(form) {
@@ -435,5 +455,17 @@
             }
         }
     });
+
+    function formatAssignmentDate(dateValue) {
+        const date = new Date(dateValue);
+
+        return new Intl.DateTimeFormat(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit"
+        }).format(date);
+    }
 
 </script>

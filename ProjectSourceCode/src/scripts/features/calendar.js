@@ -1,10 +1,10 @@
-
 const express = require("express");
 const router = express.Router();
 
 const { db } = require("../db");
 const { getCourses } = require("./courses");
 
+const { formatAssignmentDate } = require("../utils/dateUtils");
 
 // Get all assignments for a selected month
 async function getCalendarAssignments(userId, year, month) {
@@ -36,8 +36,7 @@ async function getCalendarAssignments(userId, year, month) {
       a.priority,
       a.estimated_time,
       a.completed,
-      TO_CHAR(a.due_date, 'YYYY-MM-DD') AS due_day,
-      TO_CHAR(a.due_date, 'FMHH12:MI AM') AS due_time,
+      a.due_date AS due_date,
       c.course_name,
       c.course_code
     FROM assignments a
@@ -78,16 +77,40 @@ router.get("/", async (req, res) => {
 
     const courses = await getCourses(userId);
 
-    // Group assignments by their due date
+    // Group assignments by their local calendar date
     const assignmentsByDay = {};
 
     for (const assignment of assignments) {
-      if (!assignmentsByDay[assignment.due_day]) {
-        assignmentsByDay[assignment.due_day] = [];
+      const dueDate = new Date(assignment.due_date);
+
+      const dateString = [
+        dueDate.getFullYear(),
+        String(dueDate.getMonth() + 1).padStart(2, "0"),
+        String(dueDate.getDate()).padStart(2, "0")
+      ].join("-");
+
+      if (!assignmentsByDay[dateString]) {
+        assignmentsByDay[dateString] = [];
       }
 
-      assignmentsByDay[assignment.due_day].push(assignment);
+      // Format the assignment time in the browser later
+      assignment.due_time = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "2-digit"
+      }).format(dueDate);
+
+      assignment.due_day = dateString;
+
+      assignmentsByDay[dateString].push(assignment);
     }
+
+    // for (const assignment of assignments) {
+    //   if (!assignmentsByDay[assignment.due_day]) {
+    //     assignmentsByDay[assignment.due_day] = [];
+    //   }
+
+    //   assignmentsByDay[assignment.due_day].push(assignment);
+    // }
 
     // Find the first weekday and number of days
     const firstDay =

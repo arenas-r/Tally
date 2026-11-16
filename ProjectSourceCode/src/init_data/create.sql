@@ -31,7 +31,7 @@ CREATE TABLE assignments (
     course_id INTEGER NOT NULL,
     assignment_name VARCHAR(150) NOT NULL,
     description TEXT,
-    due_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    due_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     priority VARCHAR(15)
         CHECK (priority IN ('low', 'medium', 'high')),
