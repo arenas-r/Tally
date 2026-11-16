@@ -1,8 +1,7 @@
 <div
     class="modal fade"
-    id="addCourseModal"
+    id="{{#if course}}editCourseModal-{{course.course_id}}{{else}}addCourseModal{{/if}}"
     tabindex="-1"
-    aria-labelledby="addCourseModalLabel"
     aria-hidden="true"
 >
     <div class="modal-dialog modal-dialog-centered">
@@ -10,11 +9,16 @@
 
             <div class="modal-header">
                 <div>
-                    <h5 class="modal-title" id="addCourseModalLabel">
-                        Add Course
+                    <h5 class="modal-title">
+                        {{#if course}}Edit Course{{else}}Add Course{{/if}}
                     </h5>
+
                     <p class="modal-subtitle">
-                        Create a new course to track assignments.
+                        {{#if course}}
+                            Update your course information.
+                        {{else}}
+                            Create a new course to track assignments.
+                        {{/if}}
                     </p>
                 </div>
 
@@ -26,51 +30,56 @@
                 ></button>
             </div>
 
-            <form action="/courses" method="POST">
-
+            <form
+                action="{{#if course}}/courses/{{course.course_id}}/edit{{else}}/courses{{/if}}"
+                method="POST"
+            >
                 <div class="modal-body">
 
                     <div class="mb-3">
-                        <label for="courseName" class="form-label">
+                        <label class="form-label">
                             Course Name
                         </label>
+
                         <input
                             type="text"
-                            class="form-control"
-                            id="courseName"
                             name="course_name"
+                            class="form-control"
                             placeholder="Introduction to Computer Science"
-                            maxlength="150"
+                            value="{{course.course_name}}"
+                            maxlength="100"
                             required
                         >
                     </div>
 
                     <div class="mb-3">
-                        <label for="courseCode" class="form-label">
+                        <label class="form-label">
                             Course Code
                         </label>
+
                         <input
                             type="text"
-                            class="form-control"
-                            id="courseCode"
                             name="course_code"
+                            class="form-control"
                             placeholder="CSCI 1300"
-                            maxlength="30"
+                            value="{{course.course_code}}"
+                            maxlength="10"
                             required
                         >
                     </div>
 
                     <div class="mb-3">
-                        <label for="courseImage" class="form-label">
+                        <label class="form-label">
                             Image URL
                             <span class="text-muted">(Optional)</span>
                         </label>
+
                         <input
                             type="url"
-                            class="form-control"
-                            id="courseImage"
                             name="image"
+                            class="form-control"
                             placeholder="https://example.com/image.jpg"
+                            value="{{course.image}}"
                         >
                     </div>
 
@@ -86,10 +95,9 @@
                     </button>
 
                     <button type="submit" class="add-course-btn">
-                        Create Course
+                        {{#if course}}Save Changes{{else}}Create Course{{/if}}
                     </button>
                 </div>
-
             </form>
 
         </div>
