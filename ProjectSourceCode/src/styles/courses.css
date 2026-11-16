@@ -385,3 +385,71 @@
         padding-right: 20px;
     }
 }
+
+/* ===== COURSE DELETE ===== */
+
+.course-card-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.course-delete-form {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+}
+
+.course-delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid #e5eaf0;
+    border-radius: 10px;
+
+    background: #fff;
+    color: #778595;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+
+    cursor: pointer;
+
+    opacity: 0;
+    transform: translateY(-5px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.course-card-wrapper:hover .course-delete-btn,
+.course-delete-btn:focus-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.course-delete-btn:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+/* Always visible on touch devices */
+@media (hover: none) {
+    .course-delete-btn {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .course-delete-btn {
+        transition: none;
+    }
+}
