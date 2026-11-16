@@ -61,6 +61,36 @@ router.get("/", async (req, res) => {
         res.status(500).send("Internal server error");
     }
 });
+
+router.post("/", async (req, res) => {
+    try {
+        const userId = await getUser(req);
+
+        const courseName = req.body.course_name?.trim();
+        const courseCode = req.body.course_code?.trim();
+        const image = req.body.image?.trim() || null;
+
+        if (!courseName || !courseCode) {
+            return res.status(400).send(
+                "Course name and code are required"
+            );
+        }
+
+        const course = await db.one(
+            `INSERT INTO courses
+                (user_id, course_name, course_code, image)
+             VALUES ($1, $2, $3, $4)
+             RETURNING course_id;`,
+            [userId, courseName, courseCode, image]
+        );
+
+        res.redirect(`/courses/${course.course_id}`);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send(`Failed to create course: ${err.message}`);
+    }
+});
  
 router.get("/:id", async (req, res) => {
     try {
