@@ -64,11 +64,13 @@ const importRoutes = require("./features/import");
 const landingRoutes = require("./features/landing");
 const loginRoutes = require("./features/login");
 const pathRoutes = require("./features/path");
+const assignmentFileRoutes = require("./features/assignmentFiles");
 
 
 // Connect each module to its URL
 app.use("/", landingRoutes);
 app.use("/dashboard", dashboardRoutes);
+app.use("/calendar", assignmentFileRoutes);
 app.use("/calendar", calendarRoutes);
 app.use("/courses", coursesRoutes);
 app.use("/import", importRoutes);

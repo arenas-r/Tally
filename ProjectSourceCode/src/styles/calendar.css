@@ -438,3 +438,121 @@ body {
         font-size: 11px;
     }
 }
+
+
+/* ===== CALENDAR ASSIGNMENT ATTACHMENTS ===== */
+
+#assignment-attachments {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+#assignment-attachments h3 {
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+#assignment-attachments h4 {
+    margin: 20px 0 10px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+#assignment-attachments .attachment-help {
+    color: #657386;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+#attachment-upload-form {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+#attachment-upload-form label {
+    font-weight: 600;
+}
+
+#attachment-file {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+}
+
+#attachment-upload-button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #27745c;
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#attachment-upload-button:hover {
+    background: #205e4b;
+}
+
+#attachment-upload-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#attachment-message {
+    font-size: 0.9rem;
+    color: #536159;
+}
+
+#attachment-message:empty {
+    display: none;
+}
+
+#attachment-list {
+    margin: 0;
+    padding-left: 22px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+#attachment-list li {
+    padding: 6px 0;
+    overflow-wrap: anywhere;
+}
+
+#attachment-list a {
+    color: #27745c;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+#attachment-list a:hover {
+    color: #205e4b;
+}
+
+.attachment-size {
+    color: #657386;
+    font-size: 0.8rem;
+}
+
+
+/* Success notifications on the calendar */
+.assignment-toast.success {
+    background: #eaf7ef;
+    color: #1f5e3b;
+    border-color: #27745c;
+}
+
+/* Help text for the new assignment file input */
+#new-assignment-form .attachment-help {
+    margin: 0 0 12px;
+    color: #657386;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}

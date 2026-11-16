@@ -69,7 +69,6 @@ router.get("/", async (req, res) => {
       month = today.getMonth() + 1;
     }
 
-    // Temporary test user
     const userId = 1;
 
     // Retrieve assignments and courses
@@ -177,7 +176,6 @@ router.get("/events", async (req, res) => {
     const month =
       Number(req.query.month) || today.getMonth() + 1;
 
-    // Temporary test user
     const userId = 1;
 
     // Retrieve assignments for the selected month
@@ -201,7 +199,6 @@ router.get("/events", async (req, res) => {
 router.post("/add", async (req, res) => {
   try {
 
-    // Temporary test user
     const userId = 1;
 
     // Get assignment information from the form
@@ -253,33 +250,48 @@ router.post("/add", async (req, res) => {
       return res.status(400).send("Invalid course selected");
     }
 
-    // Save the assignment as incomplete by default
-    await db.none(
-      `
-      INSERT INTO assignments (
-        course_id,
-        assignment_name,
-        description,
-        due_date,
-        priority,
-        estimated_time
-      )
-      VALUES ($1, $2, $3, $4, $5, $6);
-      `,
-      [
-        courseId,
-        assignmentName,
-        description,
-        dueDate,
-        priority,
-        estimatedTime
-      ]
+    
+    // Save the assignment and retrieve its new ID.
+    const createdAssignment = await db.one(
+        `
+        INSERT INTO assignments (
+            course_id,
+            assignment_name,
+            description,
+            due_date,
+            priority,
+            estimated_time
+        )
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING assignment_id;
+        `,
+        [
+            courseId,
+            assignmentName,
+            description,
+            dueDate,
+            priority,
+            estimatedTime
+        ]
     );
 
-    // Open the month containing the new assignment
+    // Find the month containing the assignment.
     const month = dueDate.substring(0, 7);
+    const redirectUrl = `/calendar?month=${encodeURIComponent(month)}`;
 
-    res.redirect(303, `/calendar?month=${month}`);
+    // The JavaScript form needs the new assignment ID
+    // so that it can upload the selected files to S3.
+    if ((req.get("Accept") || "").includes("application/json")) {
+        return res.status(201).json({
+            message: "Assignment created successfully.",
+            assignmentId: createdAssignment.assignment_id,
+            redirectUrl
+        });
+    }
+
+    // Preserve ordinary HTML form submissions.
+    return res.redirect(303, redirectUrl);
+
 
   } catch (error) {
     console.error("Error adding assignment:", error);
@@ -299,7 +311,6 @@ router.post("/add", async (req, res) => {
 router.post("/:assignmentId/completed", async (req, res) => {
   try {
 
-    // Temporary test user
     const userId = 1;
 
     // Get the assignment ID and new completion status
