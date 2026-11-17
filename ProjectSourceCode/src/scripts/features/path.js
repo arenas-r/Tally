@@ -3,75 +3,67 @@ const router = express.Router();
 
 const { db } = require("../db")
 
+const {
+    requireAuth,
+    getCurrentUser
+} = require("./auth"); 
+
+router.use(requireAuth);
+
+async function getUser(req) {
+    return getCurrentUser(req).user_id;
+}
 // Requests here
 
 // GET route for /path
-/*
-router.get('/', (req, res) => {
-    const sampleAssignments = [
-        {
-            assignment_name: 'Calculus Homework 3',
-            due_date: 'due in 1 day, 6:00pm',
-            priority: 'High',
-            completed: 'True',
-            estimated_time: '2 hours',
-            description: 'Complete problems 1-15 on washer method.'
-        },
-        {
-            assignment_name: 'Data Structures Lab 6',
-            due_date: 'in two days, 11:59 pm',
-            priority: 'Medium',
-            completed: 'False',
-            estimated_time: '3 hours',
-            description: 'Implement binary search peak-finding algorithm.'
-        }
-    ];
 
-    res.render('path', {
-        title: 'Homework Path Dashboard',
-        assignment: sampleAssignments, // This array feeds into your Handlebars partial
-        isPathPage: true
-    });
-});
-*/
 router.get('/',async (req, res)=>{
     try{
+        const userID = await getUser(req);
+        console.log("👉 CURRENT LOGGED-IN USER ID:", userID);
         const sortBy = req.query.sort || 'due_date';
-        let orderByClause = 'assignments.due_date ASC';
+        let orderByClause = 'a.due_date ASC';
         if(sortBy === 'priority'){
             orderByClause = `
             CASE
-                WHEN assignments.priority = 'high' THEN 1
-                WHEN assignments.priority = 'medium' THEN 2
-                WHEN assignments.priority = 'low' THEN 3
+                WHEN a.priority = 'high' THEN 1
+                WHEN a.priority = 'medium' THEN 2
+                WHEN a.priority = 'low' THEN 3
                 ELSE 4
             END ASC
         `;
         }
         else if(sortBy === 'assignment_name'){
-            orderByClause = 'assignments.assignment_name ASC';
+            orderByClause = 'a.assignment_name ASC';
         }
         if(sortBy === 'estimated_time'){
-            orderByClause = 'assignments.estimated_time DESC';
+            orderByClause = 'a.estimated_time DESC';
         }        
         const assignmentData = await db.any(`
             SELECT
-            assignment_name,
-            description,
-            TO_CHAR(due_date, 'Mon DD, YYYY') AS due_date,
-            priority,
-            estimated_time,
-            completed
-            FROM assignments
+            a.assignment_name,
+            a.description,
+            TO_CHAR(a.due_date, 'Mon DD, YYYY') AS due_date,
+            a.priority,
+            a.estimated_time,
+            a.completed
+            FROM assignments a
+            JOIN courses c
+                ON a.course_id = c.course_id
+            WHERE c.user_id = $1
+                AND a.completed = FALSE
             ORDER BY ${orderByClause}
-
-
-            `);
+            `,[userID]);
+            console.log("👉 ASSIGNMENTS FOUND FOR PATH:", assignmentData);
 
             //Get metadata that will be used to detect changes from the database, find the number of assignments in databse
             const countResult = await db.one(
-                'SELECT COUNT(*) FROM assignments'
-            );
+                `SELECT COUNT(*) 
+                FROM assignments a
+                JOIN courses c
+                    ON a.course_id = c.course_id
+                WHERE c.user_id = $1
+            `,[userID]);
             //Convert database count into clean JS integer
             const totalCount = parseInt(countResult.count)
             /* 
