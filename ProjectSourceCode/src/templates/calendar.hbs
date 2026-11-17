@@ -131,6 +131,9 @@
                 name="icalFile"
                 accept=".ics,.ical"
             >
+            <input type="hidden" 
+                name="timezone" 
+                id="userTimezone">
 
             <button type="submit">
                 Upload
@@ -195,8 +198,7 @@
                             data-course-id="{{course_id}}"
                             data-name="{{assignment_name}}"
                             data-course="{{course_code}} {{course_name}}"
-                            data-date="{{due_day}}"
-                            data-time="{{due_time}}"
+                            data-due-date="{{due_date}}"
                             data-datetime="{{due_datetime}}"
                             data-description="{{description}}"
                             data-priority="{{priority}}"
@@ -212,7 +214,7 @@
                                 {{course_code}} {{course_name}}
                             </span>
 
-                            <span>
+                            <span class="assignment-time">
                                 {{due_time}}
                             </span>
                         </button>
@@ -329,20 +331,29 @@
         <ul id="attachment-list"></ul>
     </section>
 
-    <!-- Open the Edit Assignment dialog -->
-    <button
-        type="button"
-        id="edit-assignment-button"
-        onclick="openEditAssignment()">
-        Edit Assignment
-    </button>
+    <!-- Show an error if deletion fails -->
+    <p id="delete-error" role="alert" hidden>
+        Unable to delete assignment. Please try again.
+    </p>
 
-    <button
-        type="button"
-        id="close-details-button"
-        onclick="document.getElementById('assignment-details-dialog').close()">
-        Close
-    </button>
+    <!-- Modal action buttons -->
+    <div class="modal-actions">
+        <div class="modal-actions-left">
+            <button type="button" id="edit-assignment-button"
+                onclick="openEditAssignment()">
+                Edit Assignment
+            </button>
+
+            <button type="button" id="close-details-button"
+                onclick="document.getElementById('assignment-details-dialog').close()">
+                Close
+            </button>
+        </div>
+
+        <button type="button" id="delete-details-button">
+            Delete
+        </button>
+    </div>
 </dialog>
 
 
@@ -473,6 +484,61 @@
 
     // Reference to the currently selected assignment card.
     let selectedAssignment = null;
+
+    // Get the browsers timezone
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const url = new URL(window.location.href);
+
+    if (url.searchParams.get("timezone") !== userTimeZone) {
+        url.searchParams.set("timezone", userTimeZone);
+        window.location.replace(url.href);
+    }
+
+    // Format assignment dates and times using the browser's timezone
+    document.querySelectorAll(".calendar-assignment").forEach(assignment => {
+        const date = new Date(assignment.dataset.dueDate);
+
+        // Store the browser-local date and time for the Edit form.
+        const localParts = new Intl.DateTimeFormat("en-US", {
+            timeZone: userTimeZone,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hourCycle: "h23"
+        }).formatToParts(date);
+
+        const parts = {};
+
+        localParts.forEach(part => {
+            parts[part.type] = part.value;
+        });
+
+        assignment.dataset.datetime =
+            `${parts.year}-${parts.month}-${parts.day}` +
+            `T${parts.hour}:${parts.minute}`;
+
+        assignment.querySelector(".assignment-time").textContent =
+            new Intl.DateTimeFormat(undefined, {
+                hour: "numeric",
+                minute: "2-digit"
+            }).format(date);
+
+        // Store the browser-local date for the assignment details
+        assignment.dataset.date =
+            new Intl.DateTimeFormat("en-CA", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit"
+            }).format(date);
+
+        assignment.dataset.time = new Intl.DateTimeFormat("en-US", {
+            timeZone: userTimeZone,
+            hour: "numeric",
+            minute: "2-digit"
+        }).format(date);
+    });
 
 
     /*
@@ -659,6 +725,7 @@
             const assignmentData = new FormData(form);
 
             assignmentData.delete("assignment_files");
+            assignmentData.append("timezone", userTimeZone);
 
             const createResponse = await fetch("/calendar/add", {
                 method: "POST",
@@ -934,6 +1001,8 @@
             const editData =
                 new URLSearchParams(new FormData(editForm));
 
+            editData.append("timezone", userTimeZone);
+
             const response = await fetch(
                 `/calendar/${encodeURIComponent(assignmentId)}/edit`,
                 {
@@ -1107,6 +1176,84 @@
             }
         }
     );
+
+    // Delete the currently selected assignment
+    const deleteButton =
+        document.getElementById("delete-details-button");
+
+    deleteButton.addEventListener("click", async function() {
+
+        // Make sure an assignment is selected
+        if (!selectedAssignment) {
+            return;
+        }
+
+        // Ask for confirmation before deleting
+        const confirmed = window.confirm(
+            "Are you sure you want to permanently delete this assignment?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        const assignment = selectedAssignment;
+        const assignmentId = assignment.dataset.id;
+
+        const errorMessage = document.getElementById("delete-error");
+
+        errorMessage.hidden = true;
+        deleteButton.disabled = true;
+
+        try {
+            const response = await fetch(
+                `/calendar/${assignmentId}/delete`,
+                {
+                    method: "POST"
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Unable to delete assignment");
+            }
+
+            // Remove the assignment from the calendar
+            assignment.remove();
+
+            // Close the details modal
+            document.getElementById("assignment-details-dialog").close();
+
+            selectedAssignment = null;
+
+            showToast("Assignment deleted successfully.");
+
+        } catch (error) {
+            console.error("Assignment deletion error:", error);
+            errorMessage.hidden = false;
+
+        } finally {
+            deleteButton.disabled = false;
+        }
+    });
+
+    function formatAssignmentDate(dateValue) {
+        const date = new Date(dateValue);
+
+        return new Intl.DateTimeFormat(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit"
+        }).format(date);
+    };
+
+    // Automatically detect the user's timezone when uploading an iCal file
+    document.querySelector("#import-calendar-form").addEventListener("submit", function () {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById("userTimezone").value = timezone;
+        console.log("Timezone being submitted:", timezone);
+    });
 
 
     /*

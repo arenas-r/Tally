@@ -7,6 +7,7 @@ const router = express.Router();
 const multer = require("multer");
 const ical = require("node-ical");
 
+const{ DateTime } = require("luxon");
 const { db } = require("../db");
 
 // Authentication for Calendar imports
@@ -57,6 +58,21 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
     }
 
     try {
+        // Validate the browser's timezone
+        // const timeZone = req.body.timezone;
+        // if (!timeZone || !DateTime.now().setZone(timeZone).isValid) {
+        //     return res.status(400).send("Invalid or missing timezone.");
+        // }
+
+        const timeZone = req.body.timezone;
+
+        console.log("Received timezone:", timeZone);
+
+        if (!timeZone || !DateTime.now().setZone(timeZone).isValid) {
+            console.error("Invalid or missing browser timezone:", timeZone);
+            return res.status(400).send(`Invalid or missing timezone: ${timeZone}`);
+        }
+
         //1. Convert the binary buffer back into a readable string
         const icalData = req.file.buffer.toString('utf-8')
 
@@ -72,6 +88,11 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
         for (const event of Object.values(parsedData)) {
             if (event.type !== 'VEVENT') continue;
 
+            // Skip Canvas calendar events that aren't assignments
+            if (event.uid && event.uid.includes("event-calendar-event")) {
+                continue;
+            }
+            
             // Gather all the needed data
             const summary = event.summary || '';
 
@@ -88,15 +109,7 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
             // Determine the default priority for this assignment
             const priority = getDefaultPriority(title);
 
-            const dueDate = event.end;
-
-            // console.log("Assignment:", event.summary);
-            // console.log("Start:", event.start);
-            // console.log("End:", event.end);
-            // console.log("Start ISO:", event.start?.toISOString());
-            // console.log("End ISO:", event.end?.toISOString());
-            // console.log("Date Only:", event.datetype);
-            // console.log("Is Date Only:", event.start?.dateOnly);
+            const dueDate = getAssignmentDueDate(event, timeZone);
 
             // 1. Find or create the course
             const courseQuery = `
@@ -186,5 +199,31 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
         res.status(500).send('Failed to parse iCal file.');
     }
 });
+
+function getAssignmentDueDate(event, timeZone) {
+
+    // All-day event
+    if (event.start.dateOnly) {
+
+        // Get the original calendar date from the iCal file
+        const date = event.start.toISOString().substring(0, 10);
+
+        // Set the deadline to 11:59 PM in the user's timezone
+        return DateTime.fromISO(date, {
+            zone: timeZone
+        })
+        .set({
+            hour: 23,
+            minute: 59,
+            second: 0,
+            millisecond: 0
+        })
+        .toUTC()
+        .toJSDate();
+    }
+
+    // Regular timed event: preserve its original timestamp
+    return event.end;
+};
 
 module.exports = router;
