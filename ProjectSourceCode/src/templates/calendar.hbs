@@ -498,6 +498,27 @@
     document.querySelectorAll(".calendar-assignment").forEach(assignment => {
         const date = new Date(assignment.dataset.dueDate);
 
+        // Store the browser-local date and time for the Edit form.
+        const localParts = new Intl.DateTimeFormat("en-US", {
+            timeZone: userTimeZone,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hourCycle: "h23"
+        }).formatToParts(date);
+
+        const parts = {};
+
+        localParts.forEach(part => {
+            parts[part.type] = part.value;
+        });
+
+        assignment.dataset.datetime =
+            `${parts.year}-${parts.month}-${parts.day}` +
+            `T${parts.hour}:${parts.minute}`;
+
         assignment.querySelector(".assignment-time").textContent =
             new Intl.DateTimeFormat(undefined, {
                 hour: "numeric",
@@ -704,6 +725,7 @@
             const assignmentData = new FormData(form);
 
             assignmentData.delete("assignment_files");
+            assignmentData.append("timezone", userTimeZone);
 
             const createResponse = await fetch("/calendar/add", {
                 method: "POST",
@@ -978,6 +1000,8 @@
         try {
             const editData =
                 new URLSearchParams(new FormData(editForm));
+
+            editData.append("timezone", userTimeZone);
 
             const response = await fetch(
                 `/calendar/${encodeURIComponent(assignmentId)}/edit`,

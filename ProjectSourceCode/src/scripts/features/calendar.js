@@ -71,6 +71,26 @@ function isValidDueDate(value) {
     );
 }
 
+// Convert a browser-local date/time into a UTC Date for PostgreSQL.
+function getUtcDueDate(value, timeZone) {
+    if (
+        !isValidDueDate(value) ||
+        typeof timeZone !== "string" ||
+        !DateTime.now().setZone(timeZone).isValid
+    ) {
+        return null;
+    }
+
+    const localDateTime = DateTime.fromISO(value, {
+        zone: timeZone
+    });
+
+    if (!localDateTime.isValid) {
+        return null;
+    }
+
+    return localDateTime.toUTC().toJSDate();
+}
 
 /*
  * Retrieve all assignments due during a selected month.
@@ -392,6 +412,9 @@ router.post("/add", async (req, res) => {
                 ? req.body.due_date.trim()
                 : "";
 
+        const timeZone = req.body.timezone;
+        const dueDateUtc = getUtcDueDate(dueDate, timeZone);
+
         const priority = req.body.priority || null;
 
         const estimatedTime =
@@ -406,7 +429,7 @@ router.post("/add", async (req, res) => {
             courseId <= 0 ||
             !assignmentName ||
             assignmentName.length > 150 ||
-            !isValidDueDate(dueDate)
+            !dueDateUtc
         ) {
             return res.status(400).send(
                 "Invalid assignment information"
@@ -471,7 +494,7 @@ router.post("/add", async (req, res) => {
                 courseId,
                 assignmentName,
                 description,
-                dueDate,
+                dueDateUtc,
                 priority,
                 estimatedTime
             ]
@@ -550,6 +573,9 @@ router.post("/:assignmentId/edit", async (req, res) => {
                 ? req.body.due_date.trim()
                 : "";
 
+        const timeZone = req.body.timezone;
+        const dueDateUtc = getUtcDueDate(dueDate, timeZone);
+
         const priority =
             req.body.priority === "" ||
             req.body.priority == null
@@ -574,7 +600,7 @@ router.post("/:assignmentId/edit", async (req, res) => {
             courseId <= 0 ||
             !assignmentName ||
             assignmentName.length > 150 ||
-            !isValidDueDate(dueDate)
+            !dueDateUtc
         ) {
             return res.status(400).json({
                 error: "Invalid assignment information."
@@ -637,7 +663,7 @@ router.post("/:assignmentId/edit", async (req, res) => {
                 courseId,
                 assignmentName,
                 description,
-                dueDate,
+                dueDateUtc,
                 priority,
                 estimatedTime,
                 assignmentId,
