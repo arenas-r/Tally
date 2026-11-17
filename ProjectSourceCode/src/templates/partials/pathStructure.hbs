@@ -1,5 +1,29 @@
 <!-- <link rel="stylesheet" href=".css"> -->
 <link rel="stylesheet" href="/styles/path.css">
+<div class = "position-absolute end-0 pe-3" style="z-index: 1050;">
+    <button class="btn btn-outline-dark" id="completedSidebarToggle" type="button">
+        ☰ View Completed Assignments
+    </button>
+</div>
+
+<div id="completedSidebar" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="completedSidebarLabel">
+    <div class = "offcanvas-header">
+        <h5 class="offcanvas-title" id="completedSidebarLabel">Completed Assignments</h5>
+        <button type="button" class="btn-close" id="completedSidebarClose" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="list-group list-group-flush" id="completed-assignments-list">
+            {{#each completedAssignments}}
+                <li class = "list-group-item">
+                    <span class="text-decoration-line-through d-block fw-semibold">{{this.assignment_name}}</span>                    
+                    <small class="text-muted">Course: {{this.course_name}}</small>
+                </li>
+            {{else}}
+            <li class="list-group-item text-muted">No completed Tasks Yet</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
 
 <div class ="dropdown mb-4">
     <button class="btn btn-dark dropdown-toggle" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -143,4 +167,19 @@ function updateDOM(assignments) {
 
 // Poll every 5 seconds
 setInterval(smartPoll, 5000);
+</script>
+
+<script>
+    const toggleBtn = document.getElementById('completedSidebarToggle');
+    const closeBtn = document.getElementById('completedSidebarClose');
+    const sidebar = document.getElementById('completedSidebar');
+
+    toggleBtn.addEventListener('click', () =>{
+        sidebar.classList.add('show');
+        toggleBtn.style.display = 'none';
+    });
+    closeBtn.addEventListener('click', () => {
+        sidebar.classList.remove('show');
+        toggleBtn.style.display = 'block';
+    });
 </script>
