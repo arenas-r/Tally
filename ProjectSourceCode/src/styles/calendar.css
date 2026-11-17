@@ -264,6 +264,38 @@ body {
     border-left: 4px solid #27745c;
 }
 
+
+/* Completed assignments: muted green with a clear status indicator */
+.calendar-page .calendar-assignment[data-completed="true"] {
+    background: #e8f4ed;
+    border-color: #b7d9c4;
+    border-left: 4px solid #27745c;
+}
+
+/* Keep completed assignments green when hovered */
+.calendar-page .calendar-assignment[data-completed="true"]:hover {
+    background: #d9ecdf;
+    border-color: #27745c;
+}
+
+/* Strike through completed assignment names */
+.calendar-page .calendar-assignment[data-completed="true"] strong {
+    color: #47725e;
+    text-decoration: line-through;
+}
+
+/* Add a checkmark before completed assignment names */
+.calendar-page .calendar-assignment[data-completed="true"] strong::before {
+    content: "✓ ";
+    color: #27745c;
+    font-weight: 700;
+}
+
+/* Make secondary information less prominent */
+.calendar-page .calendar-assignment[data-completed="true"] span {
+    color: #658171;
+}
+
 /* Assignment error notification */
 .assignment-toast {
     position: fixed;
@@ -291,6 +323,26 @@ body {
 .assignment-toast[hidden] {
     display: none;
 }
+
+
+/* Success notification appearance */
+.assignment-toast.success {
+    background: #e8f4ed;
+    color: #205e4b;
+    border-color: #27745c;
+}
+
+/* Toast displayed within the assignment dialog */
+#assignment-details-dialog .dialog-toast {
+    position: sticky;
+    top: 0;
+    left: auto;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 14px;
+    z-index: 2;
+}
+
 
 /* Assignment details pop-up */
 #assignment-details-dialog {
@@ -436,5 +488,242 @@ body {
 
     .calendar-page .calendar-assignment {
         font-size: 11px;
+    }
+}
+
+
+/* ===== CALENDAR ASSIGNMENT ATTACHMENTS ===== */
+
+#assignment-attachments {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+#assignment-attachments h3 {
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+#assignment-attachments h4 {
+    margin: 20px 0 10px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+#assignment-attachments .attachment-help {
+    color: #657386;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+#attachment-upload-form {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+#attachment-upload-form label {
+    font-weight: 600;
+}
+
+#attachment-file {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+}
+
+#attachment-upload-button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #27745c;
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#attachment-upload-button:hover {
+    background: #205e4b;
+}
+
+#attachment-upload-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#attachment-message {
+    font-size: 0.9rem;
+    color: #536159;
+}
+
+#attachment-message:empty {
+    display: none;
+}
+
+#attachment-list {
+    margin: 0;
+    padding-left: 22px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+#attachment-list li {
+    padding: 6px 0;
+    overflow-wrap: anywhere;
+}
+
+#attachment-list a {
+    color: #27745c;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+#attachment-list a:hover {
+    color: #205e4b;
+}
+
+.attachment-size {
+    color: #657386;
+    font-size: 0.8rem;
+}
+
+/* Help text for the new assignment file input */
+#new-assignment-form .attachment-help {
+    margin: 0 0 12px;
+    color: #657386;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+
+/* ===== EDIT ASSIGNMENT FEATURE ===== */
+
+/* Match the existing assignment details popup */
+#edit-assignment-dialog {
+    width: min(90%, 520px);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 30px;
+
+    background: #ffffff;
+    color: #202a36;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    box-shadow: 0 12px 36px rgba(25, 48, 74, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Dim the page while editing */
+#edit-assignment-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* Edit form layout */
+#edit-assignment-form {
+    display: grid;
+    gap: 10px;
+}
+
+#edit-assignment-form label {
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* Edit form inputs */
+#edit-assignment-form input,
+#edit-assignment-form select,
+#edit-assignment-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #202a36;
+    font: inherit;
+}
+
+#edit-assignment-form textarea {
+    resize: vertical;
+}
+
+/* Accessible focus indication */
+#edit-assignment-form input:focus,
+#edit-assignment-form select:focus,
+#edit-assignment-form textarea:focus {
+    outline: 3px solid rgba(39, 116, 92, 0.2);
+    border-color: #27745c;
+}
+
+/* Save and cancel buttons */
+#edit-assignment-form .edit-form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+#edit-assignment-button,
+#save-edit-button,
+#cancel-edit-button {
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 8px;
+
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#edit-assignment-button,
+#save-edit-button {
+    background: #27745c;
+    color: #ffffff;
+}
+
+#edit-assignment-button:hover,
+#save-edit-button:hover {
+    background: #205e4b;
+}
+
+#cancel-edit-button {
+    background: #edf1f5;
+    color: #202a36;
+}
+
+#cancel-edit-button:hover {
+    background: #dce5eb;
+}
+
+/* Keep editing notifications visible within the modal */
+#edit-assignment-dialog .dialog-toast {
+    position: sticky;
+    top: 0;
+    left: auto;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 14px;
+    z-index: 2;
+}
+
+/* Small-screen adjustments */
+@media (max-width: 650px) {
+    #edit-assignment-dialog {
+        padding: 20px;
+    }
+
+    #edit-assignment-form .edit-form-actions button {
+        flex: 1;
     }
 }
