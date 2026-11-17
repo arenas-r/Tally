@@ -14,6 +14,7 @@ CREATE TABLE courses (
     user_id INTEGER NOT NULL,
     course_name VARCHAR(100) NOT NULL,
     course_code VARCHAR(10),
+    image TEXT,
 
     CONSTRAINT fk_courses_user
         FOREIGN KEY (user_id)
@@ -69,23 +70,31 @@ CREATE TABLE assignment_files (
         ON DELETE CASCADE
 );
 INSERT INTO users (username, email, password_hash)
-VALUES('testuser', 'testuser@example.com','fakepasswordhash');
+VALUES ('testuser', 'testuser@example.com', 'fakepasswordhash');
 
+INSERT INTO courses (user_id, course_name, course_code)
+VALUES (1, 'Calculus', 'Math123');
 
-INSERT INTO courses(user_id, course_name, course_code)
-VALUES (1,'Calculus', 'Math123');
-
-
-INSERT INTO assignments (course_id, assignment_name, description, due_date, priority, estimated_time, completed) 
-values (2,'Homework 5', 'Homework for math class','2026-11-29', 'high', 2, true);
+INSERT INTO assignments (
+    course_id, assignment_name, description,
+    due_date, priority, estimated_time, completed
+)
+VALUES (
+    1, 'Homework 5', 'Homework for math class',
+    '2026-11-29', 'high', 2, true
+);
 
 INSERT INTO users (username, email, password_hash)
-VALUES('testuser2', 'testuser2@example.com','fakepasswordhash2');
+VALUES ('testuser2', 'testuser2@example.com', 'fakepasswordhash2');
 
+INSERT INTO courses (user_id, course_name, course_code)
+VALUES (2, 'Science', 'Science123');
 
-INSERT INTO courses(user_id, course_name, course_code)
-VALUES (3,'Science', 'Science123');
-
-
-INSERT INTO assignments (course_id, assignment_name, description, due_date, priority, estimated_time, completed) 
-values (5,'Homework 12', 'Homework for science class','2026-12-2', 'high', 2, true);
+INSERT INTO assignments (
+    course_id, assignment_name, description,
+    due_date, priority, estimated_time, completed
+)
+VALUES (
+    2, 'Homework 12', 'Homework for science class',
+    '2026-12-02', 'high', 2, true
+);
