@@ -101,6 +101,7 @@ async function getCalendarAssignments(userId, year, month) {
         `
         SELECT
             a.assignment_id,
+            a.due_date,
             a.course_id,
             a.assignment_name,
             a.description,
@@ -765,7 +766,7 @@ router.post("/:assignmentId/completed", async (req, res) => {
 router.post("/:assignmentId/delete", async (req, res) => {
   try {
     // Temporary test user (use authenticated user ID when ready)
-    const userId = 1;
+    const userId = getCurrentUser(req).user_id;
 
     const assignmentId = Number(req.params.assignmentId);
 

@@ -248,15 +248,6 @@
         hidden>
     </div>
 
-    <!-- Notifications inside the details dialog -->
-    <div
-        id="details-toast"
-        class="assignment-toast dialog-toast"
-        role="status"
-        aria-live="polite"
-        hidden>
-    </div>
-
     <h2 id="details-name"></h2>
     <p id="details-course"></p>
 
@@ -340,20 +331,29 @@
         <ul id="attachment-list"></ul>
     </section>
 
-    <!-- Open the Edit Assignment dialog -->
-    <button
-        type="button"
-        id="edit-assignment-button"
-        onclick="openEditAssignment()">
-        Edit Assignment
-    </button>
+    <!-- Show an error if deletion fails -->
+    <p id="delete-error" role="alert" hidden>
+        Unable to delete assignment. Please try again.
+    </p>
 
-    <button
-        type="button"
-        id="close-details-button"
-        onclick="document.getElementById('assignment-details-dialog').close()">
-        Close
-    </button>
+    <!-- Modal action buttons -->
+    <div class="modal-actions">
+        <div class="modal-actions-left">
+            <button type="button" id="edit-assignment-button"
+                onclick="openEditAssignment()">
+                Edit Assignment
+            </button>
+
+            <button type="button" id="close-details-button"
+                onclick="document.getElementById('assignment-details-dialog').close()">
+                Close
+            </button>
+        </div>
+
+        <button type="button" id="delete-details-button">
+            Delete
+        </button>
+    </div>
 </dialog>
 
 
@@ -464,29 +464,6 @@
             </button>
         </div>
     </form>
-    <!-- Show an error if deletion fails -->
-    <p id="delete-error" role="alert" hidden>
-        Unable to delete assignment. Please try again.
-    </p>
-
-    <!-- Modal action buttons -->
-    <div class="modal-actions">
-
-        <button
-            type="button"
-            id="close-details-button"
-            onclick="document.getElementById('assignment-details-dialog').close()">
-            Close
-        </button>
-
-        <button
-            type="button"
-            id="delete-details-button">
-            Delete
-        </button>
-
-    </div>
-
 </dialog>
 
 
@@ -507,40 +484,6 @@
 
     // Reference to the currently selected assignment card.
     let selectedAssignment = null;
-
-    // Get the browsers timezone
-    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const url = new URL(window.location.href);
-
-    if (url.searchParams.get("timezone") !== userTimeZone) {
-        url.searchParams.set("timezone", userTimeZone);
-        window.location.replace(url.href);
-    }
-
-    // Format assignment dates and times using the browser's timezone
-    document.querySelectorAll(".calendar-assignment").forEach(assignment => {
-        const date = new Date(assignment.dataset.dueDate);
-
-        assignment.querySelector(".assignment-time").textContent =
-            new Intl.DateTimeFormat(undefined, {
-                hour: "numeric",
-                minute: "2-digit"
-            }).format(date);
-
-        // Store the browser-local date for the assignment details
-        assignment.dataset.date =
-            new Intl.DateTimeFormat("en-CA", {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit"
-            }).format(date);
-
-        assignment.dataset.time = new Intl.DateTimeFormat("en-US", {
-            timeZone: userTimeZone,
-            hour: "numeric",
-            minute: "2-digit"
-        }).format(date);
-    });
 
     // Get the browsers timezone
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
