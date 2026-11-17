@@ -1,0 +1,112 @@
+.account-page { 
+    max-width: 850px;
+    margin: 0 auto; 
+}
+.account-heading { 
+    margin-bottom: 24px; 
+}
+.account-heading h1 { 
+    margin-bottom: 7px; 
+    font-size: clamp(1.7rem, 3vw, 2.1rem); 
+}
+.account-heading > p:last-child { 
+    margin: 0; 
+    color: #66746c; 
+}
+.account-eyebrow { 
+    margin: 0 0 8px; 
+    color: #285b49; 
+    font-size: .72rem; 
+    font-weight: 700; 
+    letter-spacing: .1em; 
+    text-transform: uppercase; 
+}
+.account-card { 
+    padding: clamp(20px, 4vw, 34px); 
+    background: #fff; 
+    border: 1px solid #e1e6e0; 
+    border-radius: 8px; 
+}
+.account-section-title { 
+    display: flex; 
+    align-items: center; 
+    gap: 14px; 
+    margin-bottom: 22px; 
+}
+.account-section-title h2 { 
+    margin: 0 0 4px; 
+    font-size: 1.05rem; 
+}
+.account-section-title p { 
+    margin: 0; 
+    color: #66746c; 
+    font-size: .88rem; 
+}
+.school-icon { 
+    border-radius: 10px; 
+}
+.account-fields { 
+    display: grid; 
+    grid-template-columns: 180px minmax(0, 1fr); 
+    align-items: center; 
+    gap: 14px 20px; 
+}
+.account-fields label { 
+    font-size: .9rem; 
+    font-weight: 600; 
+}
+.account-fields input, .account-fields select { 
+    width: 100%; 
+    min-height: 42px; 
+    padding: 9px 12px; 
+    border: 1px solid #dfe5df; 
+    border-radius: 5px; 
+    color: #26332d; 
+    background: #fff; 
+    font: inherit; 
+}
+.account-fields input[readonly] { 
+    background: #f7f8f5; 
+    color: #66746c; 
+}
+.account-fields small { 
+    grid-column: 2; 
+    margin-top: -10px; 
+    color: #66746c; 
+    font-size: .78rem; 
+}
+.school-title { 
+    margin-top: 36px; 
+}
+.account-actions { 
+    display: flex; 
+    justify-content: flex-end; 
+    margin-top: 30px; 
+    padding-top: 22px; 
+    border-top: 1px solid #edf0ec; 
+}
+.account-notice, .account-error { 
+    margin: 0 0 18px; 
+    padding: 11px 14px; 
+    border-radius: 5px; 
+}
+.account-notice { 
+    color: #1e493a; 
+    background: #eaf4ed; 
+}
+.account-error { 
+    color: #9b2c2c; 
+    background: #fff0f0; 
+}
+@media (max-width: 600px) { 
+    .account-fields { 
+        grid-template-columns: 1fr; 
+        gap: 8px; 
+    } 
+    .account-fields label:not(:first-child) { 
+        margin-top: 10px; 
+    } 
+    .account-fields small { 
+        grid-column: 1; margin-top: -3px; 
+    } 
+}

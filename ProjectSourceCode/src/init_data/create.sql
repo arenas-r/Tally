@@ -4,6 +4,10 @@ CREATE TABLE users (
     username VARCHAR(64) UNIQUE NOT NULL,
     email VARCHAR(200) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
+    full_name VARCHAR(120),
+    school VARCHAR(160),
+    major VARCHAR(120),
+    year_of_study VARCHAR(40),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
