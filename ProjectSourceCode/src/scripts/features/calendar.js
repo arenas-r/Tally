@@ -372,6 +372,50 @@ router.post("/:assignmentId/completed", async (req, res) => {
   }
 });
 
+// Delete an assignment
+router.post("/:assignmentId/delete", async (req, res) => {
+  try {
+    // Temporary test user (use authenticated user ID when ready)
+    const userId = 1;
+
+    const assignmentId = Number(req.params.assignmentId);
+
+    if (!Number.isSafeInteger(assignmentId) || assignmentId <= 0) {
+      return res.status(400).json({
+        error: "Invalid assignment ID"
+      });
+    }
+
+    const deletedAssignment = await db.oneOrNone(
+      `
+      DELETE FROM assignments a
+      USING courses c
+      WHERE a.course_id = c.course_id
+        AND a.assignment_id = $1
+        AND c.user_id = $2
+      RETURNING a.assignment_id;
+      `,
+      [assignmentId, userId]
+    );
+
+    if (!deletedAssignment) {
+      return res.status(404).json({
+        error: "Assignment not found"
+      });
+    }
+
+    res.status(200).json({
+      message: "Assignment deleted successfully"
+    });
+
+  } catch (error) {
+    console.error("Error deleting assignment:", error);
+
+    res.status(500).json({
+      error: "Unable to delete assignment"
+    });
+  }
+});
 
 // Export the calendar routes
 module.exports = router;

@@ -331,6 +331,30 @@ body {
     white-space: pre-wrap;
 }
 
+/* Formatting for close button and delete button */
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Delete button for assignment details */
+#delete-details-button {
+    margin-top: 14px;
+    padding: 13px 18px;
+
+    background: #dc3545;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 /* Close button for assignment details */
 #close-details-button {
     margin-top: 14px;
