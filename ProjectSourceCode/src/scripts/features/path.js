@@ -37,6 +37,23 @@ router.get('/', (req, res) => {
 router.get('/',async (req, res)=>{
     try{
         const sortBy = req.query.sort || 'due_date';
+        let orderByClause = 'assignments.due_date ASC';
+        if(sortBy === 'priority'){
+            orderByClause = `
+            CASE
+                WHEN assignments.priority = 'high' THEN 1
+                WHEN assignments.priority = 'medium' THEN 2
+                WHEN assignments.priority = 'low' THEN 3
+                ELSE 4
+            END ASC
+        `;
+        }
+        else if(sortBy === 'assignment_name'){
+            orderByClause = 'assignments.assignment_name ASC';
+        }
+        if(sortBy === 'estimated_time'){
+            orderByClause = 'assignments.estimated_time DESC';
+        }        
         const assignmentData = await db.any(`
             SELECT
             assignment_name,
@@ -46,7 +63,7 @@ router.get('/',async (req, res)=>{
             estimated_time,
             completed
             FROM assignments
-            ORDER BY ${sortBy} ASC
+            ORDER BY ${orderByClause}
 
 
             `);
@@ -74,7 +91,8 @@ router.get('/',async (req, res)=>{
             res.render('path',{
                 assignment: assignmentData,
                 totalCount: totalCount,
-                isPathPage: true
+                isPathPage: true,
+                activeSort: sortBy
             });
     }catch(err){
         res.status(400).json({

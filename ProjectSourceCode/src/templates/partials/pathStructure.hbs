@@ -3,18 +3,36 @@
 
 <div class ="dropdown mb-4">
     <button class="btn btn-dark dropdown-toggle" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        ⚙️ Filter
+        ⚙️ <span id="sort-button-text">Filter</span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="sortDropdown">
         <li><a class="dropdown-item" href="/path?sort=due_date">Due Date</a></li>
         <li><a class="dropdown-item" href="/path?sort=priority">Priority</a></li>
         <li><a class="dropdown-item" href="/path?sort=assignment_name">Assignment Name</a></li>
-        <!--<li><a class="dropdown-item" href="/path?sort=estimated_time">Estimated Time</a></li>-->
+        <li><a class="dropdown-item" href="/path?sort=estimated_time">Estimated Time</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="/path">Reset Default</a></li>
     </ul>
 </div>
 
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const currentSort = params.get('sort');
+    const label =document.getElementById('sort-button-text');
+
+    if(currentSort === 'priority'){
+        label.innerText = 'Sorted by Priority';
+    }
+    else if(currentSort === 'estimated_time'){
+        label.innerText = 'Sorted by Time';
+    }
+    else if(currentSort === 'assignment_name'){
+        label.innerText = 'Sorted by Assignment Name';
+    }
+    else{
+        label.innerText = 'Sorted by Due Date';
+    }
+</script>
 
 <!-- Outer Container / Card Box -->
 <div class="path-structure" id="assignment-container">
