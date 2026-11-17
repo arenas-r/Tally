@@ -25,9 +25,26 @@ const {
 
 const router = express.Router();
 
-const s3 = new S3Client({
-  region: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION,
-});
+
+function makeS3Client(endpoint) {
+  const options = {
+    region: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'us-east-1',
+  };
+
+  if (endpoint) {
+    options.endpoint = endpoint;
+    options.forcePathStyle = true;
+  }
+
+  return new S3Client(options);
+}
+
+const s3 = makeS3Client(process.env.S3_ENDPOINT);
+
+const downloadS3 = process.env.S3_PUBLIC_ENDPOINT
+  ? makeS3Client(process.env.S3_PUBLIC_ENDPOINT)
+  : s3;
+
 
 const BUCKET = process.env.AWS_S3_BUCKET;
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -212,7 +229,7 @@ router.get('/:assignmentId/files/:fileId/download', async (req, res) => {
     }));
 
     const url = await getSignedUrl(
-      s3,
+      downloadS3,
       new GetObjectCommand({
         Bucket: BUCKET,
         Key: key
