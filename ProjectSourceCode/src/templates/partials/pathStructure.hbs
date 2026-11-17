@@ -1,5 +1,21 @@
 <!-- <link rel="stylesheet" href=".css"> -->
 <link rel="stylesheet" href="/styles/path.css">
+
+<div class ="dropdown mb-4">
+    <button class="btn btn-dark dropdown-toggle" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        ⚙️ Filter
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+        <li><a class="dropdown-item" href="/path?sort=due_date">Due Date</a></li>
+        <li><a class="dropdown-item" href="/path?sort=priority">Priority</a></li>
+        <li><a class="dropdown-item" href="/path?sort=assignment_name">Assignment Name</a></li>
+        <!--<li><a class="dropdown-item" href="/path?sort=estimated_time">Estimated Time</a></li>-->
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/path">Reset Default</a></li>
+    </ul>
+</div>
+
+
 <!-- Outer Container / Card Box -->
 <div class="path-structure" id="assignment-container">
     {{#each assignment}}

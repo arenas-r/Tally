@@ -35,8 +35,8 @@ router.get('/', (req, res) => {
 });
 */
 router.get('/',async (req, res)=>{
-
     try{
+        const sortBy = req.query.sort || 'due_date';
         const assignmentData = await db.any(`
             SELECT
             assignment_name,
@@ -46,7 +46,7 @@ router.get('/',async (req, res)=>{
             estimated_time,
             completed
             FROM assignments
-            ORDER BY assignments.due_date ASC
+            ORDER BY ${sortBy} ASC
 
 
             `);
