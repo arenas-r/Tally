@@ -413,3 +413,15 @@
         transition: none;
     }
 }
+
+/* ===== OVERDUE ASSIGNMENTS ===== */
+
+.assignment-status.overdue {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+.assignment-card:has(.assignment-status.overdue) .assignment-due {
+    color: #dc2626;
+}
