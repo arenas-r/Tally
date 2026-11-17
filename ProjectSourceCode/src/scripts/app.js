@@ -20,6 +20,9 @@ const hbs = handlebars.create({
   extname: 'hbs',
   layoutsDir: path.join(__dirname, '../templates/layouts'),
   partialsDir: path.join(__dirname, '../templates/partials'),
+  helpers: {
+    eq: (left, right) => left === right,
+  },
 });
 
 app.engine('hbs', hbs.engine);
@@ -64,7 +67,7 @@ const importRoutes = require("./features/import");
 const landingRoutes = require("./features/landing");
 const loginRoutes = require("./features/login");
 const pathRoutes = require("./features/path");
-
+const accountRoutes = require("./features/account");
 
 // Connect each module to its URL
 app.use("/", landingRoutes);
@@ -74,7 +77,7 @@ app.use("/courses", coursesRoutes);
 app.use("/import", importRoutes);
 app.use("/login", loginRoutes);
 app.use("/path", pathRoutes);
-
+app.use("/account", accountRoutes);
 
 // Export app for testing
 module.exports = app;
