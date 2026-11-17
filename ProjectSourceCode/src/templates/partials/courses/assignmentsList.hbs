@@ -1,4 +1,3 @@
-
 <div class="assignments-list">
 
     {{#each assignments}}
@@ -17,9 +16,15 @@
                     </p>
                 </div>
 
-                <span class="assignment-status">
-                    Upcoming
-                </span>
+                {{#if overdue}}
+                    <span class="assignment-status overdue">
+                        Overdue
+                    </span>
+                {{else}}
+                    <span class="assignment-status">
+                        Upcoming
+                    </span>
+                {{/if}}
 
             </div>
 
@@ -34,7 +39,7 @@
     {{else}}
 
         <p class="assignments-empty">
-            No upcoming assignments.
+            No pending assignments.
         </p>
 
     {{/each}}

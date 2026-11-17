@@ -14,6 +14,7 @@ CREATE TABLE courses (
     user_id INTEGER NOT NULL,
     course_name VARCHAR(100) NOT NULL,
     course_code VARCHAR(10),
+    image TEXT,
 
     CONSTRAINT fk_courses_user
         FOREIGN KEY (user_id)
