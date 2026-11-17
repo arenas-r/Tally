@@ -109,6 +109,7 @@
             method="POST" 
             enctype="multipart/form-data">
                 <input type="file" name="icalFile" accept=".ics, .ical">
+                <input type="hidden" name="timezone" id="userTimezone">
                 <button type="submit">Upload</button>
         </form>
     </div>
@@ -260,6 +261,15 @@
     // Track the assignment currently being viewed
     let selectedAssignment = null;
 
+    // Get the browsers timezone
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const url = new URL(window.location.href);
+
+    if (url.searchParams.get("timezone") !== userTimeZone) {
+        url.searchParams.set("timezone", userTimeZone);
+        window.location.replace(url.href);
+    }
+
     // Format assignment dates and times using the browser's timezone
     document.querySelectorAll(".calendar-assignment").forEach(assignment => {
         const date = new Date(assignment.dataset.dueDate);
@@ -277,6 +287,12 @@
                 month: "2-digit",
                 day: "2-digit"
             }).format(date);
+
+        assignment.dataset.time = new Intl.DateTimeFormat("en-US", {
+            timeZone: userTimeZone,
+            hour: "numeric",
+            minute: "2-digit"
+        }).format(date);
     });
 
     // Show or hide the assignment and import form
@@ -466,6 +482,13 @@
             hour: "numeric",
             minute: "2-digit"
         }).format(date);
-    }
+    };
+
+    // Automatically detect the user's timezone when uploading an iCal file
+    document.querySelector("#import-calendar-form").addEventListener("submit", function () {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById("userTimezone").value = timezone;
+        console.log("Timezone being submitted:", timezone);
+    });
 
 </script>

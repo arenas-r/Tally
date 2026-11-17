@@ -3,8 +3,7 @@ const router = express.Router();
 
 const { db } = require("../db");
 const { getCourses } = require("./courses");
-
-const { formatAssignmentDate } = require("../utils/dateUtils");
+const { DateTime } = require("luxon");
 
 // Get all assignments for a selected month
 async function getCalendarAssignments(userId, year, month) {
@@ -56,6 +55,7 @@ async function getCalendarAssignments(userId, year, month) {
 router.get("/", async (req, res) => {
   try {
     const today = new Date();
+    const timeZone = req.query.timezone || "UTC";
 
     let year;
     let month;
@@ -83,18 +83,19 @@ router.get("/", async (req, res) => {
     for (const assignment of assignments) {
       const dueDate = new Date(assignment.due_date);
 
-      const dateString = [
-        dueDate.getFullYear(),
-        String(dueDate.getMonth() + 1).padStart(2, "0"),
-        String(dueDate.getDate()).padStart(2, "0")
-      ].join("-");
+      const dateString = new Intl.DateTimeFormat("en-CA", {
+        timeZone: timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).format(dueDate);
 
       if (!assignmentsByDay[dateString]) {
         assignmentsByDay[dateString] = [];
       }
 
-      // Format the assignment time in the browser later
       assignment.due_time = new Intl.DateTimeFormat("en-US", {
+        timeZone: timeZone,
         hour: "numeric",
         minute: "2-digit"
       }).format(dueDate);
@@ -103,14 +104,6 @@ router.get("/", async (req, res) => {
 
       assignmentsByDay[dateString].push(assignment);
     }
-
-    // for (const assignment of assignments) {
-    //   if (!assignmentsByDay[assignment.due_day]) {
-    //     assignmentsByDay[assignment.due_day] = [];
-    //   }
-
-    //   assignmentsByDay[assignment.due_day].push(assignment);
-    // }
 
     // Find the first weekday and number of days
     const firstDay =
