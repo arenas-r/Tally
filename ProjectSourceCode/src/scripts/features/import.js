@@ -10,6 +10,27 @@ const ical = require("node-ical");
 const{ DateTime } = require("luxon");
 const { db } = require("../db");
 
+// Authentication for Calendar imports
+const { requireAuth, getCurrentUser } = require("./auth");
+
+// Assign a default priority based on the assignment name.
+function getDefaultPriority(title) {
+    const name = String(title || "");
+
+    // Low priority: short tasks like surverys, readings, etc.
+    if (/\b(survey|feedback|reading|discussion|participation|poll)\b/i.test(name)) {
+        return "low";
+    }
+
+    // High priority: exams and major projects
+    if (/\b(final|midterm|exam|test|project|capstone)(?=\b|\d)/i.test(name)) {
+        return "high";
+    }
+
+    // Medium priority: homework, quizzes, labs, and other assignments
+    return "medium";
+}
+
 // Multer will temporarily store the file in the server's RAM as a buffer
 // Memory will be naturally released once done parsing
 // Will limit file size to avoid Out of memory crashes
@@ -18,6 +39,9 @@ const upload = multer({
     storage:storage,
     limits: {fileSize: 5 * 1024 * 1024} // Limits files to 5MB for security
 });
+
+// Require login before accessing Calendar import routes
+router.use(requireAuth);
 
 // Requests here
 
@@ -55,7 +79,9 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
         //2. Parse the string data immediately
         const parsedData = await ical.async.parseICS(icalData);
 
-        const userId = 1; // Temp, change when session data added
+        // Associate imported courses and assignments with the logged-in user
+        const userId = getCurrentUser(req).user_id;
+        
         // const url = event.url;
 
         //3. Store the parsed data into the database
@@ -79,6 +105,10 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
             const courseCode = course.match(/^[A-Z]+\s*\d+/)?.[0].replace(/\s/g, '') || '';
             const description = event.description || null;
             // const description = null; // testing purposes
+
+            // Determine the default priority for this assignment
+            const priority = getDefaultPriority(title);
+
             const dueDate = getAssignmentDueDate(event, timeZone);
 
             // 1. Find or create the course
@@ -104,17 +134,29 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
 
             const courseId = courseResult.course_id;
 
-            // Create the assignment
+            // Create the assignment with its suggested priority.
             const assignmentQuery = `
                 INSERT INTO assignments (
                     course_id,
                     assignment_name,
                     description,
-                    due_date
+                    due_date,
+                    priority
                 )
-                VALUES ($1, $2, $3, ${dueDate ? "$4" : "DEFAULT"})
+                VALUES (
+                    $1,
+                    $2,
+                    $3,
+                    ${dueDate ? "$4" : "DEFAULT"},
+                    ${dueDate ? "$5" : "$4"}
+                )
+
                 ON CONFLICT (course_id, assignment_name, due_date)
-                DO NOTHING
+                DO UPDATE SET
+                    priority = COALESCE(
+                        assignments.priority,
+                        EXCLUDED.priority
+                    )
 
                 RETURNING *;
             `;
@@ -128,20 +170,23 @@ router.post('/icalSubmission',  upload.single('icalFile'), async (req, res) => {
             // console.log('URL', event.url);
 
             let assignmentResult;
-            if(dueDate) {
-                 assignmentResult = await db.any(assignmentQuery, [
-                    courseId,
-                    title,
-                    description,
-                    dueDate
-                ]);
-            } else {
-                assignmentResult = await db.any(assignmentQuery, [
-                    courseId,
-                    title,
-                    description
-                ]);
-            }
+
+                if (dueDate) {
+                    assignmentResult = await db.any(assignmentQuery, [
+                        courseId,
+                        title,
+                        description,
+                        dueDate,
+                        priority
+                    ]);
+                } else {
+                    assignmentResult = await db.any(assignmentQuery, [
+                        courseId,
+                        title,
+                        description,
+                        priority
+                    ]);
+                }
 
             // console.log(assignmentResult);
         }

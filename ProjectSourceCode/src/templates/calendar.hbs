@@ -1,16 +1,17 @@
 
 <div class="calendar-page">
 
-    <!-- Assignment error notifications -->
+    <!-- Page-level notifications for Calendar operations -->
     <div
         id="assignment-toast"
         class="assignment-toast"
-        role="alert"
+        role="status"
+        aria-live="polite"
         hidden>
     </div>
 
+    <!-- Buttons for opening the assignment and import forms -->
     <div class="calendar-buttons">
-        <!-- Show or hide the assignment form -->
         <button
             type="button"
             id="add-assignment-button"
@@ -18,7 +19,6 @@
             + Add Assignment
         </button>
 
-        <!-- Show or hide the import form -->
         <button
             type="button"
             id="import-calendar-button"
@@ -27,7 +27,7 @@
         </button>
     </div>
 
-    <!-- Form for adding new assignments -->
+    <!-- Create a new assignment -->
     <div id="assignment-form-container" hidden>
         <h2>New Assignment</h2>
 
@@ -36,7 +36,6 @@
             action="/calendar/add"
             method="POST">
 
-            <!-- Course selection -->
             <label for="course_id">Course</label>
             <select id="course_id" name="course_id" required>
                 <option value="" selected disabled>
@@ -50,8 +49,9 @@
                 {{/each}}
             </select>
 
-            <!-- Assignment information -->
-            <label for="assignment_name">Assignment Name</label>
+            <label for="assignment_name">
+                Assignment Name
+            </label>
             <input
                 type="text"
                 id="assignment_name"
@@ -93,28 +93,55 @@
                 min="0"
             >
 
+            <!-- Files are uploaded after the assignment has an ID -->
+            <label for="new-assignment-files">
+                Assignment Files (Optional)
+            </label>
+            <input
+                type="file"
+                id="new-assignment-files"
+                name="assignment_files"
+                accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.rtf,.png,.jpg,.jpeg"
+                multiple
+            >
+
+            <p class="attachment-help">
+                Attach PDF, Word, Excel, PowerPoint, text, or image files.
+                Maximum 10 MB per file.
+            </p>
+
             <button type="submit">
                 Save Assignment
             </button>
-
         </form>
     </div>
 
-    <!-- Form for importing calendars -->
+    <!-- Import assignments from an iCalendar file -->
     <div id="import-calendar-form-container" hidden>
         <h2>Import Calendar</h2>
 
-        <form id="import-calendar-form"
-            action="/import/icalSubmission" 
-            method="POST" 
+        <form
+            id="import-calendar-form"
+            action="/import/icalSubmission"
+            method="POST"
             enctype="multipart/form-data">
-                <input type="file" name="icalFile" accept=".ics, .ical">
-                <input type="hidden" name="timezone" id="userTimezone">
-                <button type="submit">Upload</button>
+
+            <input
+                type="file"
+                name="icalFile"
+                accept=".ics,.ical"
+            >
+            <input type="hidden" 
+                name="timezone" 
+                id="userTimezone">
+
+            <button type="submit">
+                Upload
+            </button>
         </form>
     </div>
 
-    <!-- Calendar header and month navigation -->
+    <!-- Calendar title and month navigation -->
     <header class="calendar-header">
         <h1>Calendar</h1>
 
@@ -131,7 +158,7 @@
         </div>
     </header>
 
-    <!-- Days of the week -->
+    <!-- Weekday headers -->
     <div class="calendar-weekdays">
         <div>Sun</div>
         <div>Mon</div>
@@ -142,43 +169,46 @@
         <div>Sat</div>
     </div>
 
-    <!-- Calendar days and assignments -->
+    <!-- Calendar grid containing the month's assignments -->
     <div class="calendar-grid">
-
         {{#each days}}
 
             {{#if isBlank}}
 
-                <!-- Blank days before the month starts -->
                 <div class="calendar-day blank"></div>
 
             {{else}}
 
                 <div class="calendar-day">
-
                     <div class="day-number">
                         {{day}}
                     </div>
 
-                    <!-- Clickable assignments with details stored in data attributes -->
                     {{#each assignments}}
 
+                        <!--
+                            Store assignment details on the Calendar card.
+                            The details and edit dialogs use these values
+                            without needing another database request.
+                        -->
                         <button
                             type="button"
                             class="calendar-assignment {{priority}}"
                             data-id="{{assignment_id}}"
+                            data-course-id="{{course_id}}"
                             data-name="{{assignment_name}}"
                             data-course="{{course_code}} {{course_name}}"
-                            {{!-- data-date="{{due_day}}"
-                            data-time="{{due_time}}" --}}
                             data-due-date="{{due_date}}"
+                            data-datetime="{{due_datetime}}"
                             data-description="{{description}}"
                             data-priority="{{priority}}"
                             data-estimated="{{estimated_time}}"
                             data-completed="{{completed}}"
                             onclick="openAssignmentDetails(this)">
 
-                            <strong>{{assignment_name}}</strong>
+                            <strong>
+                                {{assignment_name}}
+                            </strong>
 
                             <span>
                                 {{course_code}} {{course_name}}
@@ -187,31 +217,49 @@
                             <span class="assignment-time">
                                 {{due_time}}
                             </span>
-
                         </button>
 
                     {{/each}}
-
                 </div>
 
             {{/if}}
 
         {{/each}}
-
     </div>
-
 </div>
 
-<!-- Assignment details pop-up -->
+
+<!--
+    ASSIGNMENT DETAILS DIALOG
+
+    Displays assignment information, completion status,
+    and S3 attachments. Editing opens a separate dialog.
+-->
 <dialog
     id="assignment-details-dialog"
     aria-labelledby="details-name">
 
-    <h2 id="details-name"></h2>
+    <!-- Notifications inside the details dialog -->
+    <div
+        id="details-toast"
+        class="assignment-toast dialog-toast"
+        role="status"
+        aria-live="polite"
+        hidden>
+    </div>
 
+    <!-- Notifications inside the details dialog -->
+    <div
+        id="details-toast"
+        class="assignment-toast dialog-toast"
+        role="status"
+        aria-live="polite"
+        hidden>
+    </div>
+
+    <h2 id="details-name"></h2>
     <p id="details-course"></p>
 
-    <!-- Assignment information -->
     <p>
         <strong>Due Date:</strong>
         <span id="details-due"></span>
@@ -232,7 +280,7 @@
         <span id="details-estimated"></span>
     </p>
 
-    <!-- Update assignment completion -->
+    <!-- Save completion changes immediately when checked -->
     <label for="details-completed">
         <input
             type="checkbox"
@@ -241,11 +289,181 @@
         Completed
     </label>
 
-    <!-- Show an error if the completion update fails -->
+    <!-- Hidden fallback message for completion errors -->
     <p id="completion-error" role="alert" hidden>
         Unable to update completion status. Please try again.
     </p>
 
+    <!-- Assignment attachments stored in AWS S3 -->
+    <section
+        id="assignment-attachments"
+        aria-labelledby="attachments-heading">
+
+        <h3 id="attachments-heading">
+            Attachments
+        </h3>
+
+        <p class="attachment-help">
+            Upload PDF, Word, Excel, PowerPoint, text, or image files.
+            Maximum file size: 10 MB.
+        </p>
+
+        <!-- Upload another file to the existing assignment -->
+        <form id="attachment-upload-form">
+            <label for="attachment-file">
+                Choose a file
+            </label>
+
+            <input
+                type="file"
+                id="attachment-file"
+                name="attachment"
+                accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.rtf,.png,.jpg,.jpeg"
+                required
+            >
+
+            <button
+                type="submit"
+                id="attachment-upload-button">
+                Upload File
+            </button>
+        </form>
+
+        <!-- Inline status for loading and uploading attachments -->
+        <p
+            id="attachment-message"
+            role="status"
+            aria-live="polite">
+        </p>
+
+        <h4>Uploaded Files</h4>
+        <ul id="attachment-list"></ul>
+    </section>
+
+    <!-- Open the Edit Assignment dialog -->
+    <button
+        type="button"
+        id="edit-assignment-button"
+        onclick="openEditAssignment()">
+        Edit Assignment
+    </button>
+
+    <button
+        type="button"
+        id="close-details-button"
+        onclick="document.getElementById('assignment-details-dialog').close()">
+        Close
+    </button>
+</dialog>
+
+
+<!--
+    EDIT ASSIGNMENT DIALOG
+
+    Updates an existing database record rather than creating
+    a new assignment. The existing ID and attachments remain.
+-->
+<dialog
+    id="edit-assignment-dialog"
+    aria-labelledby="edit-assignment-heading">
+
+    <!-- Editing notifications remain visible above modal content -->
+    <div
+        id="edit-toast"
+        class="assignment-toast dialog-toast"
+        role="status"
+        aria-live="polite"
+        hidden>
+    </div>
+
+    <h2 id="edit-assignment-heading">
+        Edit Assignment
+    </h2>
+
+    <form id="edit-assignment-form">
+
+        <label for="edit-course-id">Course</label>
+        <select
+            id="edit-course-id"
+            name="course_id"
+            required>
+
+            {{#each courses}}
+                <option value="{{course_id}}">
+                    {{course_code}} - {{course_name}}
+                </option>
+            {{/each}}
+        </select>
+
+        <label for="edit-assignment-name">
+            Assignment Name
+        </label>
+        <input
+            type="text"
+            id="edit-assignment-name"
+            name="assignment_name"
+            maxlength="150"
+            required
+        >
+
+        <label for="edit-description">
+            Description
+        </label>
+        <textarea
+            id="edit-description"
+            name="description"
+            rows="3"
+        ></textarea>
+
+        <label for="edit-due-date">
+            Due Date and Time
+        </label>
+        <input
+            type="datetime-local"
+            id="edit-due-date"
+            name="due_date"
+            required
+        >
+
+        <label for="edit-priority">
+            Priority
+        </label>
+        <select
+            id="edit-priority"
+            name="priority">
+
+            <option value="">No Priority</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+
+        <label for="edit-estimated-time">
+            Estimated Time (minutes)
+        </label>
+        <input
+            type="number"
+            id="edit-estimated-time"
+            name="estimated_time"
+            min="0"
+        >
+
+        <!-- Save changes or return without saving -->
+        <div class="edit-form-actions">
+            <button
+                type="submit"
+                id="save-edit-button">
+                Save Changes
+            </button>
+
+            <button
+                type="button"
+                id="cancel-edit-button"
+                onclick="cancelEditAssignment()">
+                Cancel
+            </button>
+        </div>
+    </form>
     <!-- Show an error if deletion fails -->
     <p id="delete-error" role="alert" hidden>
         Unable to delete assignment. Please try again.
@@ -271,9 +489,23 @@
 
 </dialog>
 
-<script>
 
-    // Track the assignment currently being viewed
+<script>
+    /*
+     * CALENDAR FRONTEND
+     *
+     * Handles:
+     * - Showing and hiding forms
+     * - Success and error notifications
+     * - Creating assignments
+     * - Opening assignment details
+     * - Editing assignments
+     * - Updating completion status
+     * - Listing and uploading S3 attachments
+     * - Importing iCalendar files
+     */
+
+    // Reference to the currently selected assignment card.
     let selectedAssignment = null;
 
     // Get the browsers timezone
@@ -310,96 +542,359 @@
         }).format(date);
     });
 
-    // Show or hide the assignment and import form
+    // Get the browsers timezone
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const url = new URL(window.location.href);
+
+    if (url.searchParams.get("timezone") !== userTimeZone) {
+        url.searchParams.set("timezone", userTimeZone);
+        window.location.replace(url.href);
+    }
+
+    // Format assignment dates and times using the browser's timezone
+    document.querySelectorAll(".calendar-assignment").forEach(assignment => {
+        const date = new Date(assignment.dataset.dueDate);
+
+        assignment.querySelector(".assignment-time").textContent =
+            new Intl.DateTimeFormat(undefined, {
+                hour: "numeric",
+                minute: "2-digit"
+            }).format(date);
+
+        // Store the browser-local date for the assignment details
+        assignment.dataset.date =
+            new Intl.DateTimeFormat("en-CA", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit"
+            }).format(date);
+
+        assignment.dataset.time = new Intl.DateTimeFormat("en-US", {
+            timeZone: userTimeZone,
+            hour: "numeric",
+            minute: "2-digit"
+        }).format(date);
+    });
+
+
+    /*
+     * Display either the assignment creation form
+     * or the calendar import form.
+     */
     function toggleForms(form) {
-        const assignmentContainer = document.getElementById("assignment-form-container");
-        const importContainer = document.getElementById("import-calendar-form-container");
+        const assignmentContainer =
+            document.getElementById("assignment-form-container");
 
-        switch(form) {
-            case "assignment":
-                if (!importContainer.hidden) {
-                    importContainer.hidden = !importContainer.hidden;
-                }
+        const importContainer =
+            document.getElementById("import-calendar-form-container");
 
-                assignmentContainer.hidden = !assignmentContainer.hidden;
-                break;
-            case "import":
-                if (!assignmentContainer.hidden) {
-                    assignmentContainer.hidden = !assignmentContainer.hidden;
-                }
+        if (form === "assignment") {
+            importContainer.hidden = true;
+            assignmentContainer.hidden = !assignmentContainer.hidden;
 
-                importContainer.hidden = !importContainer.hidden;
-                break;
+        } else if (form === "import") {
+            assignmentContainer.hidden = true;
+            importContainer.hidden = !importContainer.hidden;
         }
     }
 
-    // Display a notification for 10 seconds
-    function showToast(message) {
-        const toast = document.getElementById("assignment-toast");
+
+    /*
+     * Display a temporary success or error notification.
+     *
+     * When a modal dialog is open, the toast appears inside
+     * that dialog so it is not hidden behind the modal.
+     */
+    function showToast(message, type = "error") {
+        const pageToast =
+            document.getElementById("assignment-toast");
+
+        const detailsToast =
+            document.getElementById("details-toast");
+
+        const editToast =
+            document.getElementById("edit-toast");
+
+        const detailsDialog =
+            document.getElementById("assignment-details-dialog");
+
+        const editDialog =
+            document.getElementById("edit-assignment-dialog");
+
+        // Display the notification in the active dialog or page.
+        const toast = editDialog.open
+            ? editToast
+            : detailsDialog.open
+                ? detailsToast
+                : pageToast;
+
+        // Hide earlier notifications.
+        for (const element of [
+            pageToast,
+            detailsToast,
+            editToast
+        ]) {
+            element.hidden = true;
+        }
 
         toast.textContent = message;
+
+        toast.classList.toggle(
+            "success",
+            type === "success"
+        );
+
+        toast.setAttribute(
+            "role",
+            type === "error" ? "alert" : "status"
+        );
+
         toast.hidden = false;
 
-        // Reset the notification timer
+        // Prevent an older timer from hiding a newer notification.
         clearTimeout(window.assignmentToastTimer);
 
         window.assignmentToastTimer = setTimeout(() => {
             toast.hidden = true;
-        }, 10000);
+        }, type === "success" ? 4500 : 8000);
     }
 
-    // Send new assignments without a normal form submission
-    const form = document.getElementById("new-assignment-form");
+
+    /*
+     * Show operation results after a page redirect.
+     *
+     * The notice parameter is removed after use so
+     * refreshing the page does not repeat the notification.
+     */
+    const noticeParams =
+        new URLSearchParams(window.location.search);
+
+    const notice = noticeParams.get("notice");
+
+    if (notice === "updated") {
+        showToast(
+            "Assignment updated successfully!",
+            "success"
+        );
+
+    } else if (notice === "imported") {
+        showToast(
+            "Calendar file processed successfully.",
+            "success"
+        );
+
+    } else if (notice === "created") {
+        showToast(
+            "Assignment created successfully!",
+            "success"
+        );
+
+    } else if (notice === "created-uploaded") {
+        showToast(
+            "Assignment created and all files uploaded successfully!",
+            "success"
+        );
+
+    } else if (notice === "created-upload-warning") {
+        showToast(
+            "Assignment created, but one or more files failed to upload. Open the assignment to retry."
+        );
+    }
+
+    if (notice) {
+        const cleanUrl = new URL(window.location.href);
+
+        cleanUrl.searchParams.delete("notice");
+
+        window.history.replaceState(
+            {},
+            "",
+            cleanUrl.pathname +
+            cleanUrl.search +
+            cleanUrl.hash
+        );
+    }
+
+
+    /*
+     * CREATE AN ASSIGNMENT
+     *
+     * First create the PostgreSQL assignment record.
+     * After the server returns its ID, upload each
+     * optional attachment using the existing S3 route.
+     */
+    const form =
+        document.getElementById("new-assignment-form");
 
     form.addEventListener("submit", async function(event) {
         event.preventDefault();
 
-        // Prevent duplicate clicks while saving
-        const saveButton = form.querySelector('button[type="submit"]');
+        const saveButton =
+            form.querySelector('button[type="submit"]');
+
+        const originalButtonText =
+            saveButton.textContent;
+
+        const fileInput =
+            document.getElementById("new-assignment-files");
+
+        const selectedFiles =
+            Array.from(fileInput.files);
+
+        const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+        // Reject files exceeding the S3 upload limit.
+        for (const file of selectedFiles) {
+            if (file.size > MAX_FILE_SIZE) {
+                showToast(
+                    `${file.name} exceeds the 10 MB file limit.`
+                );
+                return;
+            }
+        }
+
         saveButton.disabled = true;
+        saveButton.textContent = "Creating assignment...";
 
         try {
-            const formData = new FormData(form);
+            // Send only assignment fields to the creation route.
+            const assignmentData = new FormData(form);
 
-            const response = await fetch("/calendar/add", {
+            assignmentData.delete("assignment_files");
+
+            const createResponse = await fetch("/calendar/add", {
                 method: "POST",
-                body: new URLSearchParams(formData)
+                headers: {
+                    "Accept": "application/json"
+                },
+                body: new URLSearchParams(assignmentData)
             });
 
-            // Handle duplicate assignments
-            if (response.status === 409) {
+            if (createResponse.status === 409) {
                 showToast("This assignment already exists.");
                 return;
             }
 
-            // Handle other submission errors
-            if (!response.ok) {
-                showToast("Unable to save assignment. Please try again.");
-                return;
+            if (!createResponse.ok) {
+                throw new Error(
+                    "Unable to create assignment. Check the form and try again."
+                );
             }
 
-            // Navigate to the new assignment's month
-            window.location.assign(response.url);
+            const created = await createResponse.json();
+
+            if (!created.assignmentId || !created.redirectUrl) {
+                throw new Error(
+                    "The server did not return an assignment ID."
+                );
+            }
+
+            let failedUploads = 0;
+
+            // Upload files individually to the new assignment.
+            for (const file of selectedFiles) {
+                saveButton.textContent =
+                    `Uploading ${file.name}...`;
+
+                const uploadData = new FormData();
+
+                uploadData.append("attachment", file);
+
+                try {
+                    const uploadResponse = await fetch(
+                        `/calendar/${encodeURIComponent(created.assignmentId)}/files`,
+                        {
+                            method: "POST",
+                            body: uploadData
+                        }
+                    );
+
+                    if (!uploadResponse.ok) {
+                        failedUploads++;
+
+                        console.error(
+                            "File upload failed:",
+                            file.name,
+                            uploadResponse.status
+                        );
+                    }
+
+                } catch (uploadError) {
+                    failedUploads++;
+
+                    console.error(
+                        `Error uploading ${file.name}:`,
+                        uploadError
+                    );
+                }
+            }
+
+            // Navigate to the month containing the assignment.
+            const redirectUrl = new URL(
+                created.redirectUrl,
+                window.location.origin
+            );
+
+            // Show the appropriate notification after reloading.
+            if (failedUploads > 0) {
+                redirectUrl.searchParams.set(
+                    "notice",
+                    "created-upload-warning"
+                );
+
+            } else if (selectedFiles.length > 0) {
+                redirectUrl.searchParams.set(
+                    "notice",
+                    "created-uploaded"
+                );
+
+            } else {
+                redirectUrl.searchParams.set(
+                    "notice",
+                    "created"
+                );
+            }
+
+            window.location.assign(
+                redirectUrl.pathname + redirectUrl.search
+            );
 
         } catch (error) {
-            console.error("Assignment submission error:", error);
-            showToast("Unable to connect to the server.");
+            console.error(
+                "Assignment creation error:",
+                error
+            );
+
+            showToast(
+                error.message || "Unable to create assignment."
+            );
 
         } finally {
             saveButton.disabled = false;
+            saveButton.textContent = originalButtonText;
         }
     });
 
-    // Fill and open the assignment details pop-up
+
+    /*
+     * OPEN ASSIGNMENT DETAILS
+     *
+     * Read the selected card's data attributes and
+     * populate the details dialog without another
+     * database request.
+     */
     function openAssignmentDetails(assignment) {
         const data = assignment.dataset;
 
         selectedAssignment = assignment;
 
-        // Clear previous errors
-        document.getElementById("completion-error").hidden = true;
+        // Clear messages left over from another assignment.
+        document.getElementById("completion-error").hidden =
+            true;
 
-        // Display the selected assignment's information
+        document.getElementById("details-toast").hidden =
+            true;
+
         document.getElementById("details-name").textContent =
             data.name;
 
@@ -416,76 +911,304 @@
             data.priority || "Not specified";
 
         document.getElementById("details-estimated").textContent =
-            data.estimated ? `${data.estimated} minutes` : "Not specified";
+            data.estimated
+                ? `${data.estimated} minutes`
+                : "Not specified";
 
-        // Load the saved completion status
-        document.getElementById("details-completed").checked =
+        // Use the saved completion status.
+        const completionCheckbox =
+            document.getElementById("details-completed");
+
+        completionCheckbox.checked =
             data.completed === "true";
 
-        document.getElementById("assignment-details-dialog").showModal();
+        completionCheckbox.disabled = false;
+
+        // Clear the attachment form and its previous status.
+        document.getElementById(
+            "attachment-upload-form"
+        ).reset();
+
+        document.getElementById(
+            "attachment-message"
+        ).textContent = "";
+
+        document.getElementById(
+            "assignment-details-dialog"
+        ).showModal();
+
+        // Retrieve the selected assignment's S3 files.
+        loadAssignmentFiles(data.id);
     }
 
-    // Save completion changes to the server
-    const completionCheckbox =
-        document.getElementById("details-completed");
 
-    completionCheckbox.addEventListener("change", async function() {
+    /*
+     * OPEN EDIT ASSIGNMENT
+     *
+     * Prefill the form from the selected assignment's data.
+     * Closing the details dialog before opening the edit
+     * dialog prevents overlapping modal windows.
+     */
+    function openEditAssignment() {
+        if (!selectedAssignment) {
+            showToast("Please select an assignment first.");
+            return;
+        }
 
-        // Get the selected assignment and checkbox value
-        const assignment = selectedAssignment;
-        const assignmentId = assignment.dataset.id;
-        const completed = completionCheckbox.checked;
+        const data = selectedAssignment.dataset;
 
-        const errorMessage =
-            document.getElementById("completion-error");
+        document.getElementById("edit-course-id").value =
+            data.courseId;
 
-        // Disable the checkbox while saving
-        errorMessage.hidden = true;
-        completionCheckbox.disabled = true;
+        document.getElementById("edit-assignment-name").value =
+            data.name;
+
+        document.getElementById("edit-description").value =
+            data.description || "";
+
+        document.getElementById("edit-due-date").value =
+            data.datetime || "";
+
+        document.getElementById("edit-priority").value =
+            data.priority || "";
+
+        document.getElementById("edit-estimated-time").value =
+            data.estimated || "";
+
+        document.getElementById("edit-toast").hidden =
+            true;
+
+        document.getElementById(
+            "assignment-details-dialog"
+        ).close();
+
+        document.getElementById(
+            "edit-assignment-dialog"
+        ).showModal();
+    }
+
+
+    /*
+     * CANCEL EDITING
+     *
+     * Close the edit form without sending a request
+     * and return to the assignment details dialog.
+     */
+    function cancelEditAssignment() {
+        document.getElementById(
+            "edit-assignment-dialog"
+        ).close();
+
+        document.getElementById(
+            "assignment-details-dialog"
+        ).showModal();
+    }
+
+
+    /*
+     * SAVE EDITED ASSIGNMENT
+     *
+     * Submit the edited fields to the Calendar edit route.
+     * The server updates the same assignment record.
+     * After saving, reload the month containing the deadline.
+     */
+    const editForm =
+        document.getElementById("edit-assignment-form");
+
+    editForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        if (!selectedAssignment) {
+            showToast("No assignment selected.");
+            return;
+        }
+
+        const assignmentId =
+            selectedAssignment.dataset.id;
+
+        const saveButton =
+            document.getElementById("save-edit-button");
+
+        saveButton.disabled = true;
+        saveButton.textContent = "Saving Changes...";
 
         try {
+            const editData =
+                new URLSearchParams(new FormData(editForm));
+
             const response = await fetch(
-                `/calendar/${assignmentId}/completed`,
+                `/calendar/${encodeURIComponent(assignmentId)}/edit`,
                 {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
+                        "Accept": "application/json",
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
                     },
-                    body: new URLSearchParams({
-                        completed: String(completed)
-                    })
+                    body: editData
                 }
             );
 
-            // Check if the update succeeded
-            if (!response.ok) {
-                throw new Error("Unable to update assignment");
+            // Display a database uniqueness conflict when present.
+            if (response.status === 409) {
+                showToast(
+                    "An assignment with these details already exists."
+                );
+                return;
             }
 
-            const updatedAssignment = await response.json();
+            if (!response.ok) {
+                let errorMessage =
+                    "Unable to save assignment changes.";
 
-            // Update the assignment's stored status
-            assignment.dataset.completed =
-                String(updatedAssignment.completed);
+                try {
+                    const result = await response.json();
+
+                    if (result.error) {
+                        errorMessage = result.error;
+                    }
+
+                } catch (parseError) {
+                    // Keep the default message for non-JSON errors.
+                }
+
+                throw new Error(errorMessage);
+            }
+
+            const result = await response.json();
+
+            if (!result.redirectUrl) {
+                throw new Error(
+                    "The server did not provide a Calendar redirect."
+                );
+            }
+
+            /*
+             * Reload the correct month so changes to names,
+             * courses, due dates, and priorities are displayed.
+             */
+            const redirectUrl = new URL(
+                result.redirectUrl,
+                window.location.origin
+            );
+
+            redirectUrl.searchParams.set(
+                "notice",
+                "updated"
+            );
+
+            window.location.assign(
+                redirectUrl.pathname + redirectUrl.search
+            );
 
         } catch (error) {
-            console.error("Completion update error:", error);
+            console.error(
+                "Assignment editing error:",
+                error
+            );
 
-            // Restore the old status if saving fails
-            if (selectedAssignment === assignment) {
-                completionCheckbox.checked =
-                    assignment.dataset.completed === "true";
-
-                errorMessage.hidden = false;
-            }
+            showToast(
+                error.message || "Unable to save assignment changes."
+            );
 
         } finally {
-            // Re-enable the checkbox after saving
-            if (selectedAssignment === assignment) {
-                completionCheckbox.disabled = false;
-            }
+            saveButton.disabled = false;
+            saveButton.textContent = "Save Changes";
         }
     });
+
+
+    /*
+     * UPDATE COMPLETION STATUS
+     *
+     * Save the checkbox value to PostgreSQL.
+     * When the request succeeds, update data-completed
+     * on the assignment card so CSS changes its appearance.
+     */
+    const completionCheckbox =
+        document.getElementById("details-completed");
+
+    completionCheckbox.addEventListener(
+        "change",
+        async function() {
+            const assignment = selectedAssignment;
+
+            if (!assignment) {
+                return;
+            }
+
+            const assignmentId = assignment.dataset.id;
+            const completed = completionCheckbox.checked;
+
+            const errorMessage =
+                document.getElementById("completion-error");
+
+            errorMessage.hidden = true;
+            completionCheckbox.disabled = true;
+
+            try {
+                const response = await fetch(
+                    `/calendar/${encodeURIComponent(assignmentId)}/completed`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                                "application/x-www-form-urlencoded"
+                        },
+                        body: new URLSearchParams({
+                            completed: String(completed)
+                        })
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Unable to update assignment"
+                    );
+                }
+
+                const updatedAssignment =
+                    await response.json();
+
+                // Update the card only after the server saves.
+                assignment.dataset.completed =
+                    String(updatedAssignment.completed);
+
+                if (selectedAssignment === assignment) {
+                    completionCheckbox.checked =
+                        updatedAssignment.completed === true;
+
+                    showToast(
+                        updatedAssignment.completed
+                            ? "Assignment marked as completed."
+                            : "Assignment marked as incomplete.",
+                        "success"
+                    );
+                }
+
+            } catch (error) {
+                console.error(
+                    "Completion update error:",
+                    error
+                );
+
+                if (selectedAssignment === assignment) {
+                    // Restore the previous state if saving fails.
+                    completionCheckbox.checked =
+                        assignment.dataset.completed === "true";
+
+                    showToast(
+                        "Could not update completion status. Please try again."
+                    );
+                }
+
+            } finally {
+                if (selectedAssignment === assignment) {
+                    completionCheckbox.disabled = false;
+                }
+            }
+        }
+    );
 
     // Delete the currently selected assignment
     const deleteButton =
@@ -565,4 +1288,304 @@
         console.log("Timezone being submitted:", timezone);
     });
 
+
+    /*
+     * LOAD S3 ATTACHMENTS
+     *
+     * Retrieve file metadata from the Calendar attachment API
+     * and build safe download links with DOM methods.
+     */
+    async function loadAssignmentFiles(assignmentId) {
+        const list =
+            document.getElementById("attachment-list");
+
+        const message =
+            document.getElementById("attachment-message");
+
+        list.replaceChildren();
+        message.textContent = "";
+
+        const loading = document.createElement("li");
+        loading.textContent = "Loading attachments...";
+        list.appendChild(loading);
+
+        try {
+            const response = await fetch(
+                `/calendar/${encodeURIComponent(assignmentId)}/files`
+            );
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    result.error || "Unable to load attachments."
+                );
+            }
+
+            // Ignore results from a previously selected assignment.
+            if (
+                selectedAssignment?.dataset.id !==
+                String(assignmentId)
+            ) {
+                return;
+            }
+
+            list.replaceChildren();
+
+            if (result.files.length === 0) {
+                const empty = document.createElement("li");
+
+                empty.textContent =
+                    "No files uploaded yet.";
+
+                list.appendChild(empty);
+                return;
+            }
+
+            // Add one downloadable link for each S3 object.
+            result.files.forEach(file => {
+                const item = document.createElement("li");
+
+                const link = document.createElement("a");
+
+                link.href =
+                    `/calendar/${encodeURIComponent(assignmentId)}` +
+                    `/files/${encodeURIComponent(file.fileId)}/download`;
+
+                link.textContent = file.name;
+
+                const size = document.createElement("span");
+
+                size.className = "attachment-size";
+
+                size.textContent =
+                    ` (${Math.ceil(file.size / 1024)} KB)`;
+
+                item.appendChild(link);
+                item.appendChild(size);
+
+                list.appendChild(item);
+            });
+
+        } catch (error) {
+            if (
+                selectedAssignment?.dataset.id ===
+                String(assignmentId)
+            ) {
+                list.replaceChildren();
+
+                message.textContent =
+                    error.message || "Could not load attachments.";
+
+                showToast(
+                    error.message || "Could not load attachments."
+                );
+            }
+        }
+    }
+
+
+    /*
+     * UPLOAD AN S3 ATTACHMENT
+     *
+     * Upload a file to the selected assignment and
+     * refresh the attachment list without reloading the page.
+     */
+    const attachmentForm =
+        document.getElementById("attachment-upload-form");
+
+    attachmentForm.addEventListener(
+        "submit",
+        async function(event) {
+            event.preventDefault();
+
+            const assignmentId =
+                selectedAssignment?.dataset.id;
+
+            const message =
+                document.getElementById("attachment-message");
+
+            const uploadButton =
+                document.getElementById("attachment-upload-button");
+
+            if (!assignmentId) {
+                showToast("Please select an assignment.");
+                return;
+            }
+
+            const attachmentInput =
+                document.getElementById("attachment-file");
+
+            const file = attachmentInput.files[0];
+
+            if (!file) {
+                showToast("Please choose a file to upload.");
+                return;
+            }
+
+            // Match the S3 upload endpoint's size limit.
+            if (file.size > 10 * 1024 * 1024) {
+                showToast("Files must be 10 MB or smaller.");
+                return;
+            }
+
+            uploadButton.disabled = true;
+            message.textContent = "Uploading file...";
+
+            try {
+                const formData =
+                    new FormData(attachmentForm);
+
+                const response = await fetch(
+                    `/calendar/${encodeURIComponent(assignmentId)}/files`,
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                        result.error || "File upload failed."
+                    );
+                }
+
+                // Refresh only if the same assignment is selected.
+                if (
+                    selectedAssignment?.dataset.id ===
+                    String(assignmentId)
+                ) {
+                    attachmentForm.reset();
+
+                    await loadAssignmentFiles(assignmentId);
+
+                    if (
+                        selectedAssignment?.dataset.id ===
+                        String(assignmentId)
+                    ) {
+                        message.textContent =
+                            "File uploaded successfully.";
+
+                        showToast(
+                            "File uploaded successfully.",
+                            "success"
+                        );
+                    }
+                }
+
+            } catch (error) {
+                console.error(
+                    "Attachment upload error:",
+                    error
+                );
+
+                if (
+                    selectedAssignment?.dataset.id ===
+                    String(assignmentId)
+                ) {
+                    message.textContent =
+                        error.message || "File upload failed.";
+
+                    showToast(
+                        error.message || "File upload failed."
+                    );
+                }
+
+            } finally {
+                uploadButton.disabled = false;
+            }
+        }
+    );
+
+
+    /*
+     * IMPORT ICALENDAR FILES
+     *
+     * Validate the selected file before sending it to
+     * the existing import endpoint.
+     *
+     * The endpoint redirects to /calendar on success.
+     */
+    const importForm =
+        document.getElementById("import-calendar-form");
+
+    importForm.addEventListener(
+        "submit",
+        async function(event) {
+            event.preventDefault();
+
+            const fileInput =
+                importForm.querySelector('input[name="icalFile"]');
+
+            const uploadButton =
+                importForm.querySelector('button[type="submit"]');
+
+            const file = fileInput.files[0];
+
+            if (!file) {
+                showToast("Please select a calendar file.");
+                return;
+            }
+
+            // Accept .ics and .ical extensions.
+            if (!/\.(ics|ical)$/i.test(file.name)) {
+                showToast(
+                    "Please select a valid .ics or .ical file."
+                );
+                return;
+            }
+
+            // Match the import endpoint's 5 MB file limit.
+            if (file.size > 5 * 1024 * 1024) {
+                showToast(
+                    "Calendar files must be 5 MB or smaller."
+                );
+                return;
+            }
+
+            uploadButton.disabled = true;
+
+            try {
+                const response = await fetch(
+                    importForm.action,
+                    {
+                        method: "POST",
+                        body: new FormData(importForm)
+                    }
+                );
+
+                // Check for the import route's success redirect.
+                const redirectedToCalendar =
+                    response.redirected &&
+                    new URL(response.url).pathname === "/calendar";
+
+                if (!response.ok || !redirectedToCalendar) {
+                    showToast(
+                        "Calendar import failed. Please check the file and try again."
+                    );
+                    return;
+                }
+
+                // Reload Calendar with a success notification.
+                window.location.assign(
+                    "/calendar?notice=imported"
+                );
+
+            } catch (error) {
+                console.error(
+                    "Calendar import error:",
+                    error
+                );
+
+                showToast(
+                    "Unable to connect to the server. Please try again."
+                );
+
+            } finally {
+                uploadButton.disabled = false;
+            }
+        }
+    );
 </script>

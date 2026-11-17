@@ -1,0 +1,12 @@
+services:
+  web:
+    environment:
+      AWS_PROFILE: ${AWS_PROFILE:-tally-dev}
+      AWS_SHARED_CREDENTIALS_FILE: /aws/credentials
+      AWS_CONFIG_FILE: /aws/config
+
+    volumes:
+      - type: bind
+        source: ${AWS_HOST_DIR:?Set AWS_HOST_DIR in your local .env}
+        target: /aws
+        read_only: true
