@@ -1,0 +1,53 @@
+<section class="account-page" aria-labelledby="account-title">
+  <header class="account-heading">
+    <p class="account-eyebrow">Your profile</p>
+    <h1 id="account-title">Account</h1>
+    <p>Manage your personal and school information.</p>
+  </header>
+
+  {{#if saved}}<p class="account-notice" role="status">Your profile has been saved.</p>{{/if}}
+  {{#if error}}<p class="account-error" role="alert">{{error}}</p>{{/if}}
+
+  <form class="account-card" action="/account" method="POST">
+    <div class="account-section-title">
+      <div><h2>Personal information</h2></div>
+    </div>
+
+    <div class="account-fields">
+      <label for="full_name">Name</label>
+      <input id="full_name" name="full_name" type="text" maxlength="120" autocomplete="name" placeholder="Your name" value="{{profile.full_name}}">
+
+      <label for="username">Username</label>
+      <input id="username" type="text" value="{{profile.username}}" readonly aria-describedby="username-help">
+      <small id="username-help">Your username is used to sign in and can’t be changed here.</small>
+
+      <label for="email">Email</label>
+      <input id="email" type="email" value="{{profile.email}}" readonly>
+    </div>
+
+    <div class="account-section-title school-title">
+      <div><h2>School information</h2></div>
+    </div>
+
+    <div class="account-fields">
+      <label for="school">School</label>
+      <input id="school" name="school" type="text" maxlength="160" autocomplete="organization" placeholder="College or university" value="{{profile.school}}">
+
+      <label for="major">Major or program</label>
+      <input id="major" name="major" type="text" maxlength="120" placeholder="e.g. Biology" value="{{profile.major}}">
+
+      <label for="year_of_study">Year of study</label>
+      <select id="year_of_study" name="year_of_study">
+        <option value="" {{#unless profile.year_of_study}}selected{{/unless}}>Choose your year</option>
+        <option value="Freshman" {{#if (eq profile.year_of_study "First year")}}selected{{/if}}>First year</option>
+        <option value="Sophomore" {{#if (eq profile.year_of_study "Second year")}}selected{{/if}}>Second year</option>
+        <option value="Junior" {{#if (eq profile.year_of_study "Third year")}}selected{{/if}}>Third year</option>
+        <option value="Senior" {{#if (eq profile.year_of_study "Fourth year")}}selected{{/if}}>Fourth year</option>
+        <option value="Graduate student" {{#if (eq profile.year_of_study "Graduate student")}}selected{{/if}}>Graduate student</option>
+        <option value="Other" {{#if (eq profile.year_of_study "Other")}}selected{{/if}}>Other</option>
+      </select>
+    </div>
+
+    <div class="account-actions"><button class="button" type="submit">Save changes</button></div>
+  </form>
+</section>

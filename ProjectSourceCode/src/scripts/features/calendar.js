@@ -1,10 +1,9 @@
-
 const express = require("express");
 const router = express.Router();
 
 const { db } = require("../db");
 const { getCourses } = require("./courses");
-
+const { DateTime } = require("luxon");
 // Authentication for Calendar routes
 const { requireAuth, getCurrentUser } = require("./auth");
 
@@ -72,6 +71,26 @@ function isValidDueDate(value) {
     );
 }
 
+// Convert a browser-local date/time into a UTC Date for PostgreSQL.
+function getUtcDueDate(value, timeZone) {
+    if (
+        !isValidDueDate(value) ||
+        typeof timeZone !== "string" ||
+        !DateTime.now().setZone(timeZone).isValid
+    ) {
+        return null;
+    }
+
+    const localDateTime = DateTime.fromISO(value, {
+        zone: timeZone
+    });
+
+    if (!localDateTime.isValid) {
+        return null;
+    }
+
+    return localDateTime.toUTC().toJSDate();
+}
 
 /*
  * Retrieve all assignments due during a selected month.
@@ -102,6 +121,7 @@ async function getCalendarAssignments(userId, year, month) {
         `
         SELECT
             a.assignment_id,
+            a.due_date,
             a.course_id,
             a.assignment_name,
             a.description,
@@ -156,8 +176,9 @@ async function getCalendarAssignments(userId, year, month) {
  * query parameter is supplied.
  */
 router.get("/", async (req, res) => {
-    try {
-        const today = new Date();
+  try {
+    const today = new Date();
+    const timeZone = req.query.timezone || "UTC";
 
         let year = today.getFullYear();
         let month = today.getMonth() + 1;
@@ -197,18 +218,33 @@ router.get("/", async (req, res) => {
 
         const courses = await getCourses(userId);
 
-        // Organize assignments using their YYYY-MM-DD due date.
-        const assignmentsByDay = {};
+    // Group assignments by their local calendar date
+    const assignmentsByDay = {};
 
-        for (const assignment of assignments) {
-            const dueDay = assignment.due_day;
+    for (const assignment of assignments) {
+      const dueDate = new Date(assignment.due_date);
 
-            if (!assignmentsByDay[dueDay]) {
-                assignmentsByDay[dueDay] = [];
-            }
+      const dateString = new Intl.DateTimeFormat("en-CA", {
+        timeZone: timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).format(dueDate);
 
-            assignmentsByDay[dueDay].push(assignment);
-        }
+      if (!assignmentsByDay[dateString]) {
+        assignmentsByDay[dateString] = [];
+      }
+
+      assignment.due_time = new Intl.DateTimeFormat("en-US", {
+        timeZone: timeZone,
+        hour: "numeric",
+        minute: "2-digit"
+      }).format(dueDate);
+
+      assignment.due_day = dateString;
+
+      assignmentsByDay[dateString].push(assignment);
+    }
 
         // Determine the weekday of the first day of the month.
         const firstDay =
@@ -376,6 +412,9 @@ router.post("/add", async (req, res) => {
                 ? req.body.due_date.trim()
                 : "";
 
+        const timeZone = req.body.timezone;
+        const dueDateUtc = getUtcDueDate(dueDate, timeZone);
+
         const priority = req.body.priority || null;
 
         const estimatedTime =
@@ -390,7 +429,7 @@ router.post("/add", async (req, res) => {
             courseId <= 0 ||
             !assignmentName ||
             assignmentName.length > 150 ||
-            !isValidDueDate(dueDate)
+            !dueDateUtc
         ) {
             return res.status(400).send(
                 "Invalid assignment information"
@@ -455,7 +494,7 @@ router.post("/add", async (req, res) => {
                 courseId,
                 assignmentName,
                 description,
-                dueDate,
+                dueDateUtc,
                 priority,
                 estimatedTime
             ]
@@ -534,6 +573,9 @@ router.post("/:assignmentId/edit", async (req, res) => {
                 ? req.body.due_date.trim()
                 : "";
 
+        const timeZone = req.body.timezone;
+        const dueDateUtc = getUtcDueDate(dueDate, timeZone);
+
         const priority =
             req.body.priority === "" ||
             req.body.priority == null
@@ -558,7 +600,7 @@ router.post("/:assignmentId/edit", async (req, res) => {
             courseId <= 0 ||
             !assignmentName ||
             assignmentName.length > 150 ||
-            !isValidDueDate(dueDate)
+            !dueDateUtc
         ) {
             return res.status(400).json({
                 error: "Invalid assignment information."
@@ -621,7 +663,7 @@ router.post("/:assignmentId/edit", async (req, res) => {
                 courseId,
                 assignmentName,
                 description,
-                dueDate,
+                dueDateUtc,
                 priority,
                 estimatedTime,
                 assignmentId,
@@ -723,6 +765,7 @@ router.post("/:assignmentId/completed", async (req, res) => {
             [completed, assignmentId, userId]
         );
 
+        // Handle assignments that do not exist
         if (!assignment) {
             return res.status(404).json({
                 error: "Assignment not found"
@@ -745,6 +788,50 @@ router.post("/:assignmentId/completed", async (req, res) => {
     }
 });
 
+// Delete an assignment
+router.post("/:assignmentId/delete", async (req, res) => {
+  try {
+    // Temporary test user (use authenticated user ID when ready)
+    const userId = getCurrentUser(req).user_id;
+
+    const assignmentId = Number(req.params.assignmentId);
+
+    if (!Number.isSafeInteger(assignmentId) || assignmentId <= 0) {
+      return res.status(400).json({
+        error: "Invalid assignment ID"
+      });
+    }
+
+    const deletedAssignment = await db.oneOrNone(
+      `
+      DELETE FROM assignments a
+      USING courses c
+      WHERE a.course_id = c.course_id
+        AND a.assignment_id = $1
+        AND c.user_id = $2
+      RETURNING a.assignment_id;
+      `,
+      [assignmentId, userId]
+    );
+
+    if (!deletedAssignment) {
+      return res.status(404).json({
+        error: "Assignment not found"
+      });
+    }
+
+    res.status(200).json({
+      message: "Assignment deleted successfully"
+    });
+
+  } catch (error) {
+    console.error("Error deleting assignment:", error);
+
+    res.status(500).json({
+      error: "Unable to delete assignment"
+    });
+  }
+});
 
 // Export the Calendar routes for registration in app.js.
 module.exports = router;

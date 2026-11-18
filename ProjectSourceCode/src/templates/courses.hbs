@@ -31,3 +31,20 @@
 </div>
 
 {{> courses/courseFormModal}}
+
+<script>
+    document.querySelectorAll(".assignment-due").forEach(assignment => {
+        const date = new Date(assignment.dataset.dueDate);
+
+        const formattedDate = new Intl.DateTimeFormat(undefined, {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+            hour: "numeric",
+            minute: "2-digit"
+        }).format(date);
+
+        assignment.querySelector(".formatted-due-date").textContent =
+            formattedDate;
+    });
+</script>
