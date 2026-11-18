@@ -60,10 +60,16 @@ Tests use the separate PostgreSQL test database configured through `test.env`.
 Run the test suite using the project's test Docker Compose configuration:
 
 ```bash
-docker compose -f docker-compose.test.yml up --build
+docker compose -p tally-tests -f docker-compose.test.yaml run --rm --no-deps tests npm ci
+docker compose -p tally-tests -f docker-compose.test.yaml up --abort-on-container-exit      --exit-code-from tests
 ```
 
 ## Cleanup
+
+Shut the containers down
+```bash
+docker compose -p tally-tests -f docker-compose.test.yaml down
+```
 
 Registration integration tests generate unique usernames and email addresses using UUIDs.
 
