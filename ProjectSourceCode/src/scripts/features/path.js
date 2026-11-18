@@ -20,7 +20,6 @@ async function getUser(req) {
 router.get('/',async (req, res)=>{
     try{
         const userID = await getUser(req);
-        console.log("👉 CURRENT LOGGED-IN USER ID:", userID);
         const sortBy = req.query.sort || 'due_date';
         let orderByClause = 'a.due_date ASC';
         if(sortBy === 'priority'){
