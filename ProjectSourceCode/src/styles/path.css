@@ -1,58 +1,158 @@
-body{
-    background-color: #0b0f19;
-    color:#f8fafc;
-    font-family: sans-serif;
-    margin:0;
+.homework-path-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.homework-path-page > h1 {
+  color: var(--ink);
+}
+
+.path-structure {
+  display: flex;
+  max-width: 780px;
+  flex-direction: column;
+  gap: 48px;
+  margin: 26px auto 0;
+  padding: 0 20px 12px;
 }
 
 .node-card {
-    background-color: #0f172a; /*dark background for the box */
-    border: 2px solid #38bdf8;  /* Draws a border around the box */
-    border-radius: 14px;        /* Rounds the corners */
-    padding: 24px;             /* Adds breathing room inside the box */
-    width: 200px;              /* Sets a clean width for the card */
-    text-align: left;        /* Centers the text inside */
+  position: relative;
+  width: 82%;
+  max-width: 620px;
+  padding: 0;
+  border: 1px solid #e1e6e0;
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  transition: border-color .2s ease;
+}
 
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+.node-card:nth-child(even) {
+  align-self: flex-end;
 }
-.content{
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
+
+.node-card:not(:last-child)::after {
+  position: absolute;
+  bottom: -36px;
+  left: 50%;
+  color: var(--green);
+  content: "↓";
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateX(-50%);
 }
+
+.node-card:hover,
+.node-card.active {
+  border-color: #aabdaf;
+}
+
+.collapsible {
+  display: flex;
+  width: 100%;
+  min-height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.collapsible:hover {
+  background: #f7f8f5;
+}
+
+.collapsible:focus-visible {
+  outline: 2px solid #789985;
+  outline-offset: 2px;
+}
+
+.node-assignment {
+  min-width: 0;
+  color: var(--ink);
+  font-size: .97rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.card-text {
+  flex: 0 0 auto;
+  margin: 0 !important;
+  color: var(--muted) !important;
+  font-size: .83rem;
+  white-space: nowrap;
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height .3s ease, opacity .2s ease;
+}
+
 .node-card.active .content {
-    max-height: 500px;
-    opacity: 1;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #ce2121; 
+  max-height: 460px;
+  margin: 0 18px;
+  padding: 12px 0 16px;
+  border-top: 1px solid #e1e6e0;
+  opacity: 1;
 }
-/*
-.node-priority.High{
-    border-left: 5-x solid #ff4d4d;
-    background-color: rgba(255,77,77,0.03);
-}
-.node-priority.low{
-    border-left: 5-x solid #dad3d3;
-}*/
 
-.path-structure{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap:50px
+.content p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.5;
 }
-.node-card:not(:last-child)::after{
-    content: "↓";
-    position: absolute;
-    bottom: -35px;      /* Pulls it down into the gap */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    color: #a43636;        /* Match your text/theme color */
-    font-weight: bold;
+
+@media (max-width: 600px) {
+  .path-structure {
+    gap: 40px;
+    margin-top: 20px;
+    padding: 0 8px 10px;
+  }
+
+  .node-card {
+    width: 92%;
+  }
+
+  .node-card:not(:last-child)::after {
+    bottom: -32px;
+    font-size: 22px;
+  }
+
+  .collapsible {
+    min-height: 66px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 5px 12px;
+    padding: 13px;
+  }
+
+  .node-assignment {
+    flex-basis: 100%;
+  }
+
+  .card-text {
+    font-size: .78rem;
+  }
+
+  .node-card.active .content {
+    margin-right: 13px;
+    margin-left: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .node-card,
+  .content {
+    transition: none;
+  }
 }
