@@ -1,5 +1,68 @@
 <!-- <link rel="stylesheet" href=".css"> -->
 <link rel="stylesheet" href="/styles/path.css">
+<!-- Creates the sidebar panel button-->
+<div class = "position-absolute end-0 pe-3" style="z-index: 1050;">
+    <button class="btn btn-outline-dark" id="completedSidebarToggle" type="button">
+        ☰ View Completed Assignments
+    </button>
+</div>
+
+<div id="completedSidebar" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="completedSidebarLabel">
+    <div class = "offcanvas-header">
+        <h5 class="offcanvas-title" id="completedSidebarLabel">Completed Assignments</h5>
+        <button type="button" class="btn-close" id="completedSidebarClose" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="list-group list-group-flush" id="completed-assignments-list">
+            {{#each completedAssignments}}
+                <li class = "list-group-item">
+                    <span class="text-decoration-line-through d-block fw-semibold">{{this.assignment_name}}</span>                    
+                    <small class="text-muted">Course: {{this.course_name}}</small>
+                </li>
+            {{else}}
+            <li class="list-group-item text-muted">No completed Tasks Yet</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+
+<div class ="dropdown mb-4">
+    <button class="btn btn-dark dropdown-toggle" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        ⚙️ <span id="sort-button-text">Filter</span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+        <li><a class="dropdown-item" href="/path?sort=due_date">Due Date</a></li>
+        <li><a class="dropdown-item" href="/path?sort=priority">Priority</a></li>
+        <li><a class="dropdown-item" href="/path?sort=assignment_name">Assignment Name</a></li>
+        <li><a class="dropdown-item" href="/path?sort=estimated_time">Estimated Time</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/path">Reset Default</a></li>
+    </ul>
+</div>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const currentSort = params.get('sort');
+    const label =document.getElementById('sort-button-text');
+
+    if(currentSort === 'priority'){
+        label.innerText = 'Sorted by Priority';
+    }
+    else if(currentSort === 'estimated_time'){
+        label.innerText = 'Sorted by Time';
+    }
+    else if(currentSort === 'assignment_name'){
+        label.innerText = 'Sorted by Assignment Name';
+    }
+    else{
+        label.innerText = 'Sorted by Due Date';
+    }
+</script>
+
+<div>
+    <button class="btn btn-outline-secondary btn-sm" type="button" onclick="expandAll()">Expand All</button>
+    <button class="btn btn-outline-secondary btn-sm" type="button" onclick="collapseAll()">Collapse All</button>
+</div>
+
 <!-- Outer Container / Card Box -->
 <div class="path-structure" id="assignment-container">
     {{#each assignment}}
@@ -35,9 +98,20 @@
         }
     });
 </script>
+<script>
+    function expandAll(){
+        const cards = document.querySelectorAll('.node-card');
+        cards.forEach(card => card.classList.add('active'));
+    }
+    function collapseAll(){
+        const cards = document.querySelectorAll('.node-card');
+        cards.forEach(card=>card.classList.remove('active'));
+    }
+</script>
 
 <script>
 let lastKnownCount = {{totalCount}};
+let lastCompletedCount ={{completedCount}};
 
 async function smartPoll() {
     // Will keep for now, Don't poll if user is typing but still need to add this functionality of manual editing
@@ -52,9 +126,11 @@ async function smartPoll() {
         const result = await response.json();
         //Check to see if more cards have been added
         if (result.status === "Success") {
-            if (result.count !== lastKnownCount) {
+            //If either count changes in completed or non completed assignments
+            if (result.count !== lastKnownCount || result.completedCount !== lastCompletedCount) {
                 lastKnownCount = result.count;
-                updateDOM(result.data);
+                lastCompletedCount = result.completedCount;
+                updateDOM(result.data, result.completedData);
             }
         }
     } catch (error) {
@@ -62,8 +138,9 @@ async function smartPoll() {
     }
 }
 
-function updateDOM(assignments) {
+function updateDOM(assignments, completedAssignments) {
     const container = document.getElementById('assignment-container');
+    const completedList = document.getElementById('completed-assignments-list'); 
     
     container.style.opacity = '0.5';
 
@@ -88,6 +165,23 @@ function updateDOM(assignments) {
             `;
             container.appendChild(card);
         });
+        //Re creates the completed assignment list within the sidebar
+        if (completedList && completedAssignments) {
+            completedList.innerHTML = "";
+            if (completedAssignments.length === 0) {
+                completedList.innerHTML = `<li class="list-group-item text-muted">No completed tasks yet</li>`;
+            } else {
+                completedAssignments.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'list-group-item';
+                    li.innerHTML = `
+                        <span class="text-decoration-line-through d-block fw-semibold">${item.assignment_name}</span>
+                        <small class="text-muted">Course: ${item.course_name || ''}</small>
+                    `;
+                    completedList.appendChild(li);
+                });
+            }
+        }        
 
         container.style.opacity = '1';
     }, 150);
@@ -95,4 +189,19 @@ function updateDOM(assignments) {
 
 // Poll every 5 seconds
 setInterval(smartPoll, 5000);
+</script>
+
+<script>
+    const toggleBtn = document.getElementById('completedSidebarToggle');
+    const closeBtn = document.getElementById('completedSidebarClose');
+    const sidebar = document.getElementById('completedSidebar');
+
+    toggleBtn.addEventListener('click', () =>{
+        sidebar.classList.add('show');
+        toggleBtn.style.display = 'none';
+    });
+    closeBtn.addEventListener('click', () => {
+        sidebar.classList.remove('show');
+        toggleBtn.style.display = 'block';
+    });
 </script>
