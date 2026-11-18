@@ -39,33 +39,64 @@ router.get('/',async (req, res)=>{
         if(sortBy === 'estimated_time'){
             orderByClause = 'a.estimated_time DESC';
         }        
-        const assignmentData = await db.any(`
-            SELECT
-            a.assignment_name,
-            a.description,
-            TO_CHAR(a.due_date, 'Mon DD, YYYY') AS due_date,
-            a.priority,
-            a.estimated_time,
-            a.completed
-            FROM assignments a
-            JOIN courses c
-                ON a.course_id = c.course_id
-            WHERE c.user_id = $1
-                AND a.completed = FALSE
-            ORDER BY ${orderByClause}
-            `,[userID]);
-            console.log("👉 ASSIGNMENTS FOUND FOR PATH:", assignmentData);
 
-            //Get metadata that will be used to detect changes from the database, find the number of assignments in databse
-            const countResult = await db.one(
-                `SELECT COUNT(*) 
+        // Fetch active assignments, completed assignments, and counts in parallel using pg-promise
+        const [assignmentData, completedAssignments, activeCountResult, completedCountResult] = await Promise.all([
+            //Query for any item that is not completed
+            db.any(`
+                SELECT
+                a.assignment_name,
+                a.description,
+                TO_CHAR(a.due_date, 'Mon DD, YYYY') AS due_date,
+                a.priority,
+                a.estimated_time,
+                a.completed,
+                c.course_name
                 FROM assignments a
                 JOIN courses c
                     ON a.course_id = c.course_id
                 WHERE c.user_id = $1
-            `,[userID]);
+                    AND a.completed = FALSE
+                ORDER BY ${orderByClause}
+            `, [userID]),
+            //Query for any item that is completed
+            db.any(`
+                SELECT
+                a.assignment_name,
+                a.description,
+                TO_CHAR(a.due_date, 'Mon DD, YYYY') AS due_date,
+                a.priority,
+                a.estimated_time,
+                a.completed,
+                c.course_name
+                FROM assignments a
+                JOIN courses c
+                    ON a.course_id = c.course_id
+                WHERE c.user_id = $1
+                    AND a.completed = TRUE
+                ORDER BY a.due_date DESC
+            `, [userID]),
+            //Returns the count for how many items exist for this user that are not completed
+            db.one(`
+                SELECT COUNT(*) 
+                FROM assignments a
+                JOIN courses c
+                    ON a.course_id = c.course_id
+                WHERE c.user_id = $1 AND a.completed = FALSE
+            `, [userID]),
+            //Returns the count of how many items exist for this user that are completed
+            db.one(`
+                SELECT COUNT(*) 
+                FROM assignments a
+                JOIN courses c
+                    ON a.course_id = c.course_id
+                WHERE c.user_id = $1 AND a.completed = TRUE
+            `, [userID])
+        ]);
+
             //Convert database count into clean JS integer
-            const totalCount = parseInt(countResult.count)
+            const totalCount = parseInt(activeCountResult.count);
+            const completedCount = parseInt(completedCountResult.count);
             /* 
             This function below is to check is the user only requested new data (such as updating the database)
             and if so will only add the new data in without rebuilding the entire html file
@@ -74,7 +105,9 @@ router.get('/',async (req, res)=>{
                 return res.json({
                     status: "Success",
                     count: totalCount,
-                    data:assignmentData
+                    completedCount: completedCount,//Used for polling
+                    data:assignmentData,
+                    completedData: completedAssignments //Used for polling
                 });
             }
             /*This here is to see if the user requested the entire html page again 
@@ -82,7 +115,9 @@ router.get('/',async (req, res)=>{
             */
             res.render('path',{
                 assignment: assignmentData,
+                completedAssignments: completedAssignments, //Used in the handlebars for the page load
                 totalCount: totalCount,
+                completedCount: completedCount, //Also used in the handlebars for the page load
                 isPathPage: true,
                 activeSort: sortBy
             });

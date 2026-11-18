@@ -1,5 +1,6 @@
 <!-- <link rel="stylesheet" href=".css"> -->
 <link rel="stylesheet" href="/styles/path.css">
+<!-- Creates the sidebar panel button-->
 <div class = "position-absolute end-0 pe-3" style="z-index: 1050;">
     <button class="btn btn-outline-dark" id="completedSidebarToggle" type="button">
         ☰ View Completed Assignments
@@ -110,6 +111,7 @@
 
 <script>
 let lastKnownCount = {{totalCount}};
+let lastCompletedCount ={{completedCount}};
 
 async function smartPoll() {
     // Will keep for now, Don't poll if user is typing but still need to add this functionality of manual editing
@@ -124,9 +126,11 @@ async function smartPoll() {
         const result = await response.json();
         //Check to see if more cards have been added
         if (result.status === "Success") {
-            if (result.count !== lastKnownCount) {
+            //If either count changes in completed or non completed assignments
+            if (result.count !== lastKnownCount || result.completedCount !== lastCompletedCount) {
                 lastKnownCount = result.count;
-                updateDOM(result.data);
+                lastCompletedCount = result.completedCount;
+                updateDOM(result.data, result.completedData);
             }
         }
     } catch (error) {
@@ -134,8 +138,9 @@ async function smartPoll() {
     }
 }
 
-function updateDOM(assignments) {
+function updateDOM(assignments, completedAssignments) {
     const container = document.getElementById('assignment-container');
+    const completedList = document.getElementById('completed-assignments-list'); 
     
     container.style.opacity = '0.5';
 
@@ -160,6 +165,23 @@ function updateDOM(assignments) {
             `;
             container.appendChild(card);
         });
+        //Re creates the completed assignment list within the sidebar
+        if (completedList && completedAssignments) {
+            completedList.innerHTML = "";
+            if (completedAssignments.length === 0) {
+                completedList.innerHTML = `<li class="list-group-item text-muted">No completed tasks yet</li>`;
+            } else {
+                completedAssignments.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'list-group-item';
+                    li.innerHTML = `
+                        <span class="text-decoration-line-through d-block fw-semibold">${item.assignment_name}</span>
+                        <small class="text-muted">Course: ${item.course_name || ''}</small>
+                    `;
+                    completedList.appendChild(li);
+                });
+            }
+        }        
 
         container.style.opacity = '1';
     }, 150);
