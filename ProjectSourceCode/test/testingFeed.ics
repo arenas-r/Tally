@@ -1,0 +1,2467 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:icalendar-ruby
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Brendan Johnson Calendar (Canvas)
+X-WR-CALDESC:Calendar events for the user\, Brendan Johnson
+BEGIN:VEVENT
+DTSTAMP:20261005T203000Z
+UID:event-assignment-2764437
+DTSTART:20261002T170000Z
+DTEND:20261002T170000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Quiz 6 [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764437
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260928T171500Z
+UID:event-assignment-2775883
+DTSTART:20261002T212000Z
+DTEND:20261002T212000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Quiz 5 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775883
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261002T230000Z
+UID:event-assignment-2857917
+DTSTART;VALUE=DATE;VALUE=DATE:20261002
+CLASS:PUBLIC
+DESCRIPTION:You can view detailed grading for the exam here: [Exam 1 feedba
+ ck - Only to view the exam] (https://canvas.colorado.edu/courses/138130/as
+ signments/2881439). The answer key to the exam can be found here: [3308-F2
+ 6-Exam1-answer-key.pdf] (https://canvas.colorado.edu/courses/138130/files/
+ 85515955?wrap=1)\n\nIf you received a 75% (22.5 out of 30) or higher\, you
+  have met expectations for this exam.\n\nIf you did not meet expectations 
+ for the exam\, please verify your solution against the provided answer key
+  and if there is a discrepancy you may reach out ONLY to Prof. Nath direct
+ ly. Kindly do not reach out the TAs or other course staff about exam grade
+ s.
+SEQUENCE:0
+SUMMARY:Exam 1 [CSCI 3308 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=10&year=2026#assignment_2857917
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>You can view detailed grading for the exam here: <a title
+ ="Exam 1 - Only to view your exam" href="https://canvas.colorado.edu/cours
+ es/138130/assignments/2881439" data-course-type="assignments" data-publish
+ ed="true" data-api-endpoint="https://canvas.colorado.edu/api/v1/courses/13
+ 8130/assignments/2881439" data-api-returntype="Assignment">Exam 1 feedback
+  - Only to view the exam</a>. The answer key to the exam can be found here
+ : <a class="instructure_file_link instructure_scribd_file inline_disabled"
+  title="3308-F26-Exam1-answer-key.pdf" href="https://canvas.colorado.edu/c
+ ourses/138130/files/85515955?wrap=1" target="_blank" data-canvas-previewab
+ le="false" data-api-endpoint="https://canvas.colorado.edu/api/v1/courses/1
+ 38130/files/85515955" data-api-returntype="File">3308-F26-Exam1-answer-key
+ .pdf</a></p>\n<p>If you received a 75% (22.5 out of 30) or higher\, you ha
+ ve met expectations for this exam.</p>\n<p>If you did not meet expectation
+ s for the exam\, please verify your solution against the provided answer k
+ ey and if there is a discrepancy you may reach out ONLY to Prof. Nath dire
+ ctly. Kindly do not reach out the TAs or other course staff about exam gra
+ des.</p><script src="https://instructure-uploads.s3.amazonaws.com/account_
+ 107720000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T214000Z
+UID:event-assignment-2752253
+DTSTART;VALUE=DATE;VALUE=DATE:20261002
+CLASS:PUBLIC
+DESCRIPTION:----------------------\nAPPM 2360  Homework 06\n--------------
+ --------\n\nYou will download the homework here [Homework06.pdf] (https://
+ canvas.colorado.edu/courses/137419/files/85418934?wrap=1)  Download Homew
+ ork01.pdfand then upload your solutions to Gradescope using the link below
+ .
+SEQUENCE:0
+SUMMARY:Homework 06 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=10&year=2026#assignment_2752253
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><div id="dp-wrapper" class="dp-wrapper dp-flat-sections" dat
+ a-header-class="dp-header dp-flat-sections" data-nav-class="container-flui
+ d dp-link-grid dp-flat-sections dp-fs-1" data-img-url="https://designtools
+ .ciditools.com/css/images/banner_desert_sky.png"><header class="dp-header 
+ dp-flat-sections">\n<h2 class="dp-heading"><span class="dp-header-pre"><sp
+ an class="dp-header-pre-1">APPM 2360</span>&nbsp\;</span> <span class="dp-
+ header-title">Homework 06</span></h2>\n</header>\n<p>You will download the
+  homework here <a class="instructure_file_link instructure_scribd_file inl
+ ine_disabled" title="Homework06.pdf" href="https://canvas.colorado.edu/cou
+ rses/137419/files/85418934?wrap=1" target="_blank" data-api-endpoint="http
+ s://canvas.colorado.edu/api/v1/courses/137419/files/85418934" data-api-ret
+ urntype="File">Homework06.pdf</a><span class="instructure_file_holder link
+ _holder instructure_file_link_holder">&nbsp\;<span class="screenreader-onl
+ y"> Download Homework01.pdf</span></span>and then upload your solutions to
+  Gradescope using the link below.</p>\n</div><script src="https://instruct
+ ure-uploads.s3.amazonaws.com/account_107720000000000001/attachments/740358
+ 75/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260928T175400Z
+UID:event-assignment-2771151
+DTSTART;VALUE=DATE;VALUE=DATE:20261002
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Lab #2 - Bomb Lab Interview Grading Signup [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2771151
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261007T184700Z
+UID:event-assignment-2862220
+DTSTART;VALUE=DATE;VALUE=DATE:20261002
+CLASS:PUBLIC
+DESCRIPTION:Defusing a binary "bomb". For this lab\, you will reverse-engin
+ eer an executable so as to avoid detonating the bomb along the way. As for
+  the previous lab\, start by accepting the assignment in GitHub Classroom\
+ , then carefully reading the instructions contained in the readme.\n\nPlea
+ se remember that you have to complete the lab AND the subsequent interview
+  grading to receive points on the lab.\n\n \n\n\\
+SEQUENCE:0
+SUMMARY:Lab 2 - Bomb Lab [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2862220
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>Defusing a binary "bomb". For this lab\, you will reverse
+ -engineer an executable so as to avoid detonating the bomb along the way. 
+ As for the previous lab\, start by accepting the assignment in GitHub Clas
+ sroom\, then carefully reading the instructions contained in the readme.</
+ p>\n<p>Please remember that you have to complete the lab AND the subsequen
+ t interview grading to receive points on the lab.</p>\n<p>&nbsp\;</p>\n<p>
+ \\</p><script src="https://instructure-uploads.s3.amazonaws.com/account_10
+ 7720000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261001T164300Z
+UID:event-calendar-event-1244126
+DTSTART:20261006T162000Z
+DTEND:20261006T163000Z
+CLASS:PUBLIC
+DESCRIPTION:
+LOCATION:CSEL except Fridays are in ECOT 832
+SEQUENCE:0
+SUMMARY:CSCI 3308 - Lab 5 - Interview grading [CSCI 3308 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=10&year=2026#calendar_event_1244126
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261012T212400Z
+UID:event-assignment-2775864
+DTSTART;VALUE=DATE;VALUE=DATE:20261007
+CLASS:PUBLIC
+DESCRIPTION: \n\n* Submit online via Canvas by uploading single pdf\, make
+  sure to name the file accordingly\, eg ECEN2250_Homework4\n\n* Scan B&W a
+ t 150-300 dpi into a single easily readable pdf\, no credit for multiple p
+ dfs\n\n* Write the problem number and box your answer\, make it easy for t
+ he grader to grade\, if the grader can't read it\, then they can't grade i
+ t and will not give any credit\n\n* Keep a copy of your work\n\n* Make sur
+ e that when you submit homework that it is submitted properly\, it is the 
+ students responsibility\, no exceptions.\n\n* No late work beyond 24 hours
+  late will be accepted (except in cases of documented emergencies or previ
+ ous arrangements). (With prior approval of late submission) When submittin
+ g late work\, use Canvas\, if the Canvas Assignment is closed\, then submi
+ t it via email using your @colorado.edu account and send it to both Ariell
+ e ([amblum@colorado.edu] (mailto:amblum@colorado.edu)) with the assignment
+  attached to the email\, email title = 'ECEN 2250 - Late Homework Submissi
+ on <Insert Your Name>'\n\n* The homework will builds from the previous wee
+ k’s work\, so it is essential that students do the homework every week\,
+  otherwise students will be lost in the course. \n\n* See the Syllabus fo
+ r additional details.\n\n[Homework] (https://canvas.colorado.edu/courses/1
+ 38441/modules/967837)\n\n* Cheating on homework cheats students out of dev
+ eloping the knowledge\, skills\, and ability gained from taking ECEN 2250 
+ and will only serve to make subsequent course content too challenging to u
+ nderstand and complete. Courses that use ECEN 2250 as a prerequisite will 
+ then become extremely stressful because the student does not have the prer
+ equisite knowledge to apply to more challenging situations. Avoid this sit
+ uation by putting in the time to learn the material. The homework should t
+ ake time and be challenging\, it should be hard to understand\, that is wh
+ y you are taking the course\, because it is not simple.\n\n* Tips for doin
+ g well on the weekly homework and in this course: always attend lecture\, 
+ ask questions during lecture\, read the textbook both before lecture and a
+ fter lecture\, do practice problems from lecture\, quizzes\, and the textb
+ ook. Attend office hours and ask questions\, create problems for other stu
+ dents in the course and practice solving the problems\, talk about the con
+ cepts with other students\, help other students who are struggling. Make f
+ lash card on basic topics and practice them. When homework solutions are r
+ eleased\, go over them and compare them with your solutions and make sure 
+ you understand any differences\, go to office hours to ask questions about
+  any differences. Invest time\, energy\, and effort into your education.
+SEQUENCE:0
+SUMMARY:Homework 6 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775864
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>&nbsp\;</p>\n<ul>\n<li>Submit online via Canvas by upload
+ ing <strong>single </strong>pdf\, make sure to name the file accordingly\,
+  eg ECEN2250_Homework4</li>\n<li>Scan B&amp\;W at 150-300 dpi into a singl
+ e easily readable pdf\, <strong>no credit for multiple pdfs</strong>\n</li
+ >\n</ul>\n<ul>\n<li>Write the problem number and box your answer\, make it
+  easy for the grader to grade\, if the grader can't read it\, then they ca
+ n't grade it and will not give any credit</li>\n<li>Keep a copy of your wo
+ rk</li>\n<li>Make sure that when you submit homework that it is submitted 
+ properly\, it is the students responsibility\, no exceptions.</li>\n<li>No
+  late work beyond 24 hours late will be accepted (except in cases of docum
+ ented emergencies or previous arrangements). (With prior approval of late 
+ submission) When submitting late work\, use Canvas\, if the Canvas Assignm
+ ent is closed\, then submit it via email using your @colorado.edu account 
+ and send it to both Arielle (<a href="mailto:amblum@colorado.edu">amblum@c
+ olorado.edu</a>) with the assignment attached to the email\, email title =
+  'ECEN 2250 - Late Homework Submission &lt\;Insert Your Name&gt\;'</li>\n<
+ li>The homework will builds from the previous week’s work\, so it is ess
+ ential that students do the homework every week\, otherwise students will 
+ be lost in the course.&nbsp\;</li>\n<li>See the Syllabus for additional de
+ tails.</li>\n</ul>\n<p><a title="Homework" href="https://canvas.colorado.e
+ du/courses/138441/modules/967837" data-api-endpoint="https://canvas.colora
+ do.edu/api/v1/courses/138441/modules/967837" data-api-returntype="Module">
+ Homework</a></p>\n<ul>\n<li>Cheating on homework cheats students out of de
+ veloping the knowledge\, skills\, and ability gained from taking ECEN 2250
+  and will only serve to make subsequent course content too challenging to 
+ understand and complete. Courses that use ECEN 2250 as a prerequisite will
+  then become extremely stressful because the student does not have the pre
+ requisite knowledge to apply to more challenging situations. Avoid this si
+ tuation by putting in the time to learn the material. The homework should 
+ take time and be challenging\, it should be hard to understand\, that is w
+ hy you are taking the course\, because it is not simple.</li>\n<li>Tips fo
+ r doing well on the weekly homework and in this course: always attend lect
+ ure\, ask questions during lecture\, read the textbook both before lecture
+  and after lecture\, do practice problems from lecture\, quizzes\, and the
+  textbook. Attend office hours and ask questions\, create problems for oth
+ er students in the course and practice solving the problems\, talk about t
+ he concepts with other students\, help other students who are struggling. 
+ Make flash card on basic topics and practice them. When homework solutions
+  are released\, go over them and compare them with your solutions and make
+  sure you understand any differences\, go to office hours to ask questions
+  about any differences. Invest time\, energy\, and effort into your educat
+ ion.</li>\n</ul><script src="https://instructure-uploads.s3.amazonaws.com/
+ account_107720000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261014T181200Z
+UID:event-assignment-2775872
+DTSTART;VALUE=DATE;VALUE=DATE:20261007
+CLASS:PUBLIC
+DESCRIPTION:All labs must be typed.\n\nHandwritten labs will result in ZERO
+  credit!\n\n* Submit online via Canvas by uploading single pdf\, make sure
+  to name the file accordingly\, eg ECEN2250_Lab1\n\n* Scan color 300 dpi i
+ nto a single easily readable pdf\, no credit for multiple pdfs\n\n* Make i
+ t easy for the grader to grade\, if the grader can't read it\, then they c
+ an't grade it and will not give any credit\n\n* Keep a copy of your work\n
+ \n* Make sure that when you submit lab that it is submitted properly\, it 
+ is the students responsibility\, no exceptions.\n\n* No late work beyond 2
+ 4 hours late will be accepted (except in cases of documented emergencies o
+ r previous arrangements). (With prior approval of late submission) When su
+ bmitting late work\, use Canvas\, if the Canvas Assignment is closed\, the
+ n submit it via email using your @colorado.edu account and send it to both
+  Arielle ([amblum@colorado.edu] (mailto:amblum@colorado.edu)) AND ALL of t
+ he LAs with the assignment attached to the email\, email title = 'ECEN 225
+ 0 - Late Lab Submission #<Insert lab Number> <Insert Your Name>'\n\n* The 
+ Labs will build from the previous week’s work\, so it is essential that 
+ students do the lab every week\, otherwise students will be lost in the co
+ urse. \n\n* Students are responsible for ensuring that their .pdf file up
+ loaded properly for the submission by downloading their pdf after submitti
+ ng the assignment to verify that there are no issues\, the pdf is readable
+ \, the written work is legible and the file is not corrupted or too large.
+  Failure to do so will result in the student receiving NO CREDIT for the a
+ ssignment submission if there are any issues as outlined above.\n\n* See t
+ he Syllabus for additional details.\n\n[Labs] (https://canvas.colorado.edu
+ /courses/138441/modules/967838)\n\nAll supplemental videos can be found on
+  Canvas > Modules > [Video Modules] (https://canvas.colorado.edu/courses/1
+ 38441/modules/967843) \n\n* Cheating on labs cheats students out of devel
+ oping the knowledge\, skills\, and ability gained from taking ECEN 2250 an
+ d will only serve to make subsequent course content too challenging to und
+ erstand and complete. Courses that use ECEN 2250 as a prerequisite will th
+ en become extremely stressful because the student does not have the prereq
+ uisite knowledge to apply to more challenging situations. Avoid this situa
+ tion by putting in the time to learn the material. The lab should take tim
+ e and be challenging\, it should be hard to understand\, that is why you a
+ re taking the course\, because it is not simple.\n\n* Tips for doing well 
+ on the weekly labs and in this course: always attend lecture\, ask questio
+ ns during lecture\, read the textbook both before lecture and after lectur
+ e\, do practice problems from lecture\, quizzes\, and the textbook. Attend
+  office hours and ask questions\, create problems for other students in th
+ e course and practice solving the problems\, talk about the concepts with 
+ other students\, help other students who are struggling. Make flash card o
+ n basic topics and practice them. Go to office hours to ask questions abou
+ t any differences.\n\n* Invest time\, energy\, and effort into your educat
+ ion.
+SEQUENCE:0
+SUMMARY:Lab 5 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775872
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>All labs must be typed.</p>\n<p>Handwritten labs will res
+ ult in ZERO credit!</p>\n<ul>\n<li>Submit online via Canvas by uploading <
+ strong>single </strong>pdf\, make sure to name the file accordingly\, eg E
+ CEN2250_Lab1</li>\n<li>Scan color 300 dpi into a single easily readable pd
+ f\, <strong>no credit for multiple pdfs</strong>\n</li>\n</ul>\n<ul>\n<li>
+ Make it easy for the grader to grade\, if the grader can't read it\, then 
+ they can't grade it and will not give any credit</li>\n<li>Keep a copy of 
+ your work</li>\n<li>Make sure that when you submit lab that it is submitte
+ d properly\, it is the students responsibility\, no exceptions.</li>\n<li>
+ No late work beyond 24 hours late will be accepted (except in cases of doc
+ umented emergencies or previous arrangements). (With prior approval of lat
+ e submission) When submitting late work\, use Canvas\, if the Canvas Assig
+ nment is closed\, then submit it via email using your @colorado.edu accoun
+ t and send it to both Arielle (<a href="mailto:amblum@colorado.edu">amblum
+ @colorado.edu</a>) AND ALL of the LAs with the assignment attached to the 
+ email\, email title = 'ECEN 2250 - Late Lab Submission #&lt\;Insert lab Nu
+ mber&gt\; &lt\;Insert Your Name&gt\;'</li>\n<li>The Labs will build from t
+ he previous week’s work\, so it is essential that students do the lab ev
+ ery week\, otherwise students will be lost in the course.&nbsp\;</li>\n<li
+ ><span style="background-color: #fbeeb8\;">Students are responsible for en
+ suring that their .pdf file uploaded properly for the submission by downlo
+ ading their pdf after submitting the assignment to verify that there are n
+ o issues\, the pdf is readable\, the written work is legible and the file 
+ is not corrupted or too large. Failure to do so will result in the student
+  receiving NO CREDIT for the assignment submission if there are any issues
+  as outlined above.</span></li>\n<li>See the Syllabus for additional detai
+ ls.</li>\n</ul>\n<p><a title="Labs" href="https://canvas.colorado.edu/cour
+ ses/138441/modules/967838" data-course-type="modules" data-published="true
+ " data-api-endpoint="https://canvas.colorado.edu/api/v1/courses/138441/mod
+ ules/967838" data-api-returntype="Module">Labs</a></p>\n<p style="padding-
+ left: 40px\;">All supplemental videos can be found on Canvas &gt\; Modules
+  &gt\; <a title="Video Modules" href="https://canvas.colorado.edu/courses/
+ 138441/modules/967843" data-api-endpoint="https://canvas.colorado.edu/api/
+ v1/courses/138441/modules/967843" data-api-returntype="Module">Video Modul
+ es</a>&nbsp\;</p>\n<ul>\n<li>Cheating on labs cheats students out of devel
+ oping the knowledge\, skills\, and ability gained from taking ECEN 2250 an
+ d will only serve to make subsequent course content too challenging to und
+ erstand and complete. Courses that use ECEN 2250 as a prerequisite will th
+ en become extremely stressful because the student does not have the prereq
+ uisite knowledge to apply to more challenging situations. Avoid this situa
+ tion by putting in the time to learn the material. The lab should take tim
+ e and be challenging\, it should be hard to understand\, that is why you a
+ re taking the course\, because it is not simple.</li>\n<li>Tips for doing 
+ well on the weekly labs and in this course: always attend lecture\, ask qu
+ estions during lecture\, read the textbook both before lecture and after l
+ ecture\, do practice problems from lecture\, quizzes\, and the textbook. A
+ ttend office hours and ask questions\, create problems for other students 
+ in the course and practice solving the problems\, talk about the concepts 
+ with other students\, help other students who are struggling. Make flash c
+ ard on basic topics and practice them. Go to office hours to ask questions
+  about any differences.</li>\n<li>Invest time\, energy\, and effort into y
+ our education.</li>\n</ul><script src="https://instructure-uploads.s3.amaz
+ onaws.com/account_107720000000000001/attachments/74035875/dp_app.js"></scr
+ ipt>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T185500Z
+UID:event-assignment-2771897
+DTSTART;VALUE=DATE;VALUE=DATE:20261007
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Reading Quiz - 3.7 [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2771897
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261015T003100Z
+UID:event-assignment-2764423
+DTSTART:20261009T160000Z
+DTEND:20261009T160000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Midterm 1 [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764423
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261005T171500Z
+UID:event-assignment-2775884
+DTSTART:20261009T212000Z
+DTEND:20261009T212000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Quiz 6 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775884
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T214000Z
+UID:event-assignment-2752254
+DTSTART;VALUE=DATE;VALUE=DATE:20261009
+CLASS:PUBLIC
+DESCRIPTION:----------------------\nAPPM 2360  Homework 07\n--------------
+ --------\n\nYou will download the homework here [Homework07.pdf] (https://
+ canvas.colorado.edu/courses/137419/files/85418935?wrap=1)  Download Homew
+ ork01.pdfand then upload your solutions to Gradescope using the link below
+ .
+SEQUENCE:0
+SUMMARY:Homework 07 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=10&year=2026#assignment_2752254
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><div id="dp-wrapper" class="dp-wrapper dp-flat-sections" dat
+ a-header-class="dp-header dp-flat-sections" data-nav-class="container-flui
+ d dp-link-grid dp-flat-sections dp-fs-1" data-img-url="https://designtools
+ .ciditools.com/css/images/banner_desert_sky.png"><header class="dp-header 
+ dp-flat-sections">\n<h2 class="dp-heading"><span class="dp-header-pre"><sp
+ an class="dp-header-pre-1">APPM 2360</span>&nbsp\;</span> <span class="dp-
+ header-title">Homework 07</span></h2>\n</header>\n<p>You will download the
+  homework here <a class="instructure_file_link instructure_scribd_file inl
+ ine_disabled" title="Homework07.pdf" href="https://canvas.colorado.edu/cou
+ rses/137419/files/85418935?wrap=1" target="_blank" data-api-endpoint="http
+ s://canvas.colorado.edu/api/v1/courses/137419/files/85418935" data-api-ret
+ urntype="File">Homework07.pdf</a><span class="instructure_file_holder link
+ _holder instructure_file_link_holder">&nbsp\;<span class="screenreader-onl
+ y"> Download Homework01.pdf</span></span>and then upload your solutions to
+  Gradescope using the link below.</p>\n</div><script src="https://instruct
+ ure-uploads.s3.amazonaws.com/account_107720000000000001/attachments/740358
+ 75/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261022T152700Z
+UID:event-assignment-2857952
+DTSTART;VALUE=DATE;VALUE=DATE:20261009
+CLASS:PUBLIC
+DESCRIPTION:Only 1 person per team is required to fill this google form: ht
+ tps://forms.gle/y9ZL7ZsdxwEikVsFA\n\n[Links to an external site.] (https:/
+ /forms.gle/LeKDPyLDcSoDbbJE7)\n\nMake sure to read through this [project g
+ uideLinks to an external site.] (https://cuboulder-csci3308.pages.dev/docs
+ /project/) to understand the expectations of the project.
+SEQUENCE:0
+SUMMARY:Project Ideas Survey [CSCI 3308 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=10&year=2026#assignment_2857952
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>Only 1 person per team is required to fill this google fo
+ rm: <a href="https://forms.gle/y9ZL7ZsdxwEikVsFA" target="_blank">https://
+ forms.gle/y9ZL7ZsdxwEikVsFA</a></p>\n<p><a class="external" href="https://
+ forms.gle/LeKDPyLDcSoDbbJE7" target="_blank"><span class="external_link_ic
+ on" role="presentation"><span class="screenreader-only">Links to an extern
+ al site.</span></span></a></p>\n<p>Make sure to read through this <a class
+ ="inline_disabled external" title="Link" href="https://cuboulder-csci3308.
+ pages.dev/docs/project/" target="_blank"><span>project guide</span><span c
+ lass="external_link_icon" role="presentation"><span class="screenreader-on
+ ly">Links to an external site.</span></span></a> to understand the expecta
+ tions of the project.</p><script src="https://instructure-uploads.s3.amazo
+ naws.com/account_107720000000000001/attachments/74035875/dp_app.js"></scri
+ pt>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T162700Z
+UID:event-assignment-2752245
+DTSTART:20261015T004500Z
+DTEND:20261015T004500Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Exam02 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=10&year=2026#assignment_2752245
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261021T051700Z
+UID:event-assignment-2764416
+DTSTART;VALUE=DATE;VALUE=DATE:20261014
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:HW 7 Autograded [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764416
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261021T051800Z
+UID:event-assignment-2764417
+DTSTART;VALUE=DATE;VALUE=DATE:20261014
+CLASS:PUBLIC
+DESCRIPTION:Homework 7 is due: 11:59 PM Wednesday\, Oct 14th.\n\nAll HW is 
+ completed in Jupyter notebooks (.ipynb file).  \n\n[Use this link to acc
+ ess HW 7] (https://coding.csel.io/hub/user-redirect/git-pull?repo=https%3A
+ %2F%2Fgithub.com%2Fcsci3022%2Ffa26-student&urlpath=lab%2Ftree%2Ffa26-stude
+ nt%2Fhw%2Fhw07%2Fhw07.ipynb&branch=main) (this will open the assignment i
+ n the CSCI JupyterHub coding environment).  \n\n \n\nGrading\n\n*\n\nGr
+ ading is broken down into autograded answers and manually graded answers:\
+ n\n* For manually graded answers you must show and explain all steps.  \
+ n\n* For autograded answers\, the results of your code are compared to pro
+ vided and/or hidden tests.  The visible tests are mainly sanity checks. F
+ or example\, a sanity check might verify that the answer you entered is a 
+ number as expected\, and not a word. The hidden tests generally check for 
+ correctness\, and are invisible to students while they are doing the assig
+ nment (hidden tests are run once the assignment has been submitted to Grad
+ escope).\n\n \n\nSubmission Instructions:\n\nAfter running the final cell
+  in the notebook provided at the link above\, 2 files will be created: a z
+ ip file and pdf file.  You can download them using the links provided in 
+ the notebook OR by finding them in the same folder where the HW7 Juptyer n
+ otebook resides in your JuptyerHub.   \n\nTo receive credit on this assi
+ gnment\, you must submit BOTH of these files\nto their respective Gradesc
+ ope portals: \n\n* Homework 7 Autograded : Submit the zip file that is o
+ utput by jupyter notebook to the HW 7 Autograded assignment in Gradescope.
+ \n\n* Homework 7 Manually Graded:  Submit the pdf that is output by the 
+ juptyer notebook to the HW7 Manually Graded assignment in Gradescope.  Yo
+ u must match the pages in your PDF to the problems in Gradescope to receiv
+ e full credit.  \n\nSubmissions that are not submitted to Gradescope by 
+ the deadline will not be counted for credit.\n\n \n\nCollaboration Policy
+ \n\nData science is a collaborative activity.  However a key step in lear
+ ning and retention is creating solutions on your own.  Below are example
+ s of acceptable vs unacceptable use of resources and collaboration when do
+ ing HW assignments in CSCI 3022.\n\nThe following would be some examples o
+ f cheating when working on HW assignments in CSCI 3022.  Any of these con
+ stitute a violation of the course's collaboration policy and will result i
+ n an F in the course and a trip to the honor council.   \n\n* Consulting
+  web pages that may have a solution to a given homework problem or one sim
+ ilar is cheating.  However\, consulting the class notes\, and web pages t
+ hat explain the material taught in class but do NOT show a solution to the
+  homework problem in question are permissible to view.  Clearly\, there's
+  a fuzzy line here between a valid use of resources and cheating. To avoid
+  this line\, one should merely consult the course notes\, the course textb
+ ook\, and references that contain syntax and/or formulas.\n\n* Copying a s
+ egment of code or math solution of three lines or more from another studen
+ t from a printout\, handwritten copy\, or by looking at their computer scr
+ een\n\n* Sharing a segment of code or math solution of three lines or more
+  with another student\n\n*  Taking a copy of another student's work (or a
+  solution found online) and then editing that copy\n\n* Reading someone el
+ se’s solution to a problem on the HW before writing your own.\n\n* Askin
+ g someone to write all or part of a program or solution for you.\n\n* Aski
+ ng someone else for the code necessary to fix the error for you\, other th
+ an for simple syntactical errors\n\nOn the other hand\, the following are 
+ some examples of things which would NOT usually be\nconsidered to be cheat
+ ing:\n\n* Working on a HW problem on your own first and then discussing wi
+ th a classmate a particular part in the problem solution where you are stu
+ ck.  After clarifying any questions you then continue to write your solut
+ ion independently.\n\n* Asking someone (or searching online) how a particu
+ lar construct in the language works.\n\n* Asking someone (or searching onl
+ ine) how to formulate a particular construct in the language.\n\n* Asking 
+ someone for help in finding an error in your program.  \n\n* Asking someo
+ ne why a particular construct does not work as you expected in a given pro
+ gram.\n   \n\nTo test whether you are truly doing your own work and reta
+ ining what you've learned you should be able to easily reproduce from scra
+ tch and explain a HW solution that was your own when asked in office hours
+  by a TA/Instructor or on a quiz/exam.   \n\nIf you have difficulty in f
+ ormulating the general solution to a problem on your own\, or\nyou have di
+ fficulty in translating that general solution into a program\, it is advis
+ able to see\nyour instructor or teaching assistant rather than another stu
+ dent as this situation can easily\nlead to a\, possibly inadvertent\, chea
+ ting situation.\n\nWe are here to help!  Visit HW Hours and/or post quest
+ ions on Piazza!
+SEQUENCE:0
+SUMMARY:HW 7 Manually Graded [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764417
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p><strong><span>Homework 7 is due: 11:59 PM Wednesday\, Oct
+  14th.</span></strong></p>\n<p>All HW is completed in Jupyter notebooks (.
+ ipynb file).&nbsp\;&nbsp\;</p>\n<p><span><a class="inline_disabled" href="
+ https://coding.csel.io/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithu
+ b.com%2Fcsci3022%2Ffa26-student&amp\;urlpath=lab%2Ftree%2Ffa26-student%2Fh
+ w%2Fhw07%2Fhw07.ipynb&amp\;branch=main" target="_blank">Use this link to a
+ ccess HW 7</a>&nbsp\;</span>(this will open the assignment in the CSCI Jup
+ yterHub coding environment).&nbsp\;&nbsp\;</p>\n<p>&nbsp\;</p>\n<p><strong
+ >Grading</strong></p>\n<ul>\n<li>\n<p>Grading is broken down into autograd
+ ed answers and manually graded answers:</p>\n<ul>\n<li>For manually graded
+  answers you must show and explain all steps.&nbsp\;&nbsp\;</li>\n<li>For 
+ autograded answers\, the results of your code are compared to provided and
+ /or hidden tests. &nbsp\;The visible tests are mainly sanity checks. For e
+ xample\, a sanity check might verify that the answer you entered is a numb
+ er as expected\, and not a word. The hidden tests generally check for corr
+ ectness\, and are invisible to students while they are doing the assignmen
+ t (hidden tests are run once the assignment has been submitted to Gradesco
+ pe).</li>\n</ul>\n</li>\n</ul>\n<p>&nbsp\;</p>\n<p><strong>Submission Inst
+ ructions</strong>:</p>\n<p>After running the final cell in the notebook pr
+ ovided at the link above\, 2 files will be created: a zip file and pdf fil
+ e. &nbsp\;You can download them using the links provided in the notebook O
+ R by finding them in the same folder where the HW7 Juptyer notebook reside
+ s in your JuptyerHub.&nbsp\; &nbsp\;</p>\n<p>To receive credit on this ass
+ ignment\,<span>&nbsp\;</span><strong>you must submit BOTH of these files</
+ strong><br><strong>to their respective Gradescope portals</strong>:&nbsp\;
+ </p>\n<ul>\n<li><strong>Homework 7 Autograded<span>&nbsp\;</span></strong>
+ : Submit the zip file that is output by jupyter notebook to the HW 7 Autog
+ raded assignment in Gradescope.</li>\n<li><strong>Homework 7 Manually Grad
+ ed:<span>&nbsp\;</span><span>&nbsp\;</span></strong>Submit the pdf that is
+  output by the juptyer notebook to the HW7 Manually Graded assignment in G
+ radescope.&nbsp\; You must match the pages in your PDF to the problems in 
+ Gradescope to receive full credit.&nbsp\;&nbsp\;</li>\n</ul>\n<p>Submissio
+ ns that are not submitted to Gradescope by the deadline will not be counte
+ d for credit.</p>\n<p>&nbsp\;</p>\n<p><span><strong>Collaboration Policy</
+ strong></span></p>\n<p>Data science is a collaborative activity. &nbsp\;Ho
+ wever a key step in learning and retention is creating solutions on your o
+ wn.&nbsp\;&nbsp\;Below are examples of acceptable vs unacceptable use of r
+ esources and collaboration when doing HW assignments in CSCI 3022.</p>\n<p
+ ><br>The following would be some <strong>examples of cheating</strong> whe
+ n working on HW assignments in CSCI 3022. &nbsp\;Any of these constitute a
+  <strong>violation of the course's collaboration policy and will result in
+  an F in the course and a trip to the honor council</strong>. &nbsp\;&nbsp
+ \;</p>\n<ul>\n<li>Consulting web pages that may have a solution to a given
+  homework problem or one similar is cheating. &nbsp\;However\, consulting 
+ the class notes\, and web pages that explain the material taught in class 
+ but do NOT show a solution to the homework problem in question are permiss
+ ible to view. &nbsp\;Clearly\, there's a fuzzy line here between a valid u
+ se of resources and cheating. To avoid this line\, one should merely consu
+ lt the course notes\, the course textbook\, and references that contain sy
+ ntax and/or formulas.</li>\n<li>Copying a segment of code or math solution
+  of three lines or more from another student from a printout\, handwritten
+  copy\, or by looking at their computer screen</li>\n<li>Sharing a segment
+  of code or math solution of three lines or more with another student</li>
+ \n<li>&nbsp\;Taking a copy of another student's work (or a solution found 
+ online) and then editing that copy</li>\n<li>Reading someone else’s solu
+ tion to a problem on the HW before writing your own.</li>\n<li>Asking some
+ one to write all or part of a program or solution for you.</li>\n<li>Askin
+ g someone else for the code necessary to fix the error for you\, other tha
+ n for simple syntactical errors<br><br></li>\n</ul>\n<p>On the other hand\
+ , the following are some examples of things which would NOT usually be<br>
+ considered to be cheating:</p>\n<ul>\n<li>Working on a HW problem on your 
+ own first and then discussing with a classmate a particular part in the pr
+ oblem solution where you are stuck. &nbsp\;After clarifying any questions 
+ you then continue to write your solution independently.</li>\n<li>Asking s
+ omeone (or searching online) how a particular construct in the language wo
+ rks.</li>\n<li>Asking someone (or searching online) how to formulate a par
+ ticular construct in the language.</li>\n<li>Asking someone for help in fi
+ nding an error in your program. &nbsp\;</li>\n<li>Asking someone why a par
+ ticular construct does not work as you expected in a given program.<br>&nb
+ sp\; &nbsp\;</li>\n</ul>\n<p>To test whether you are truly doing your own 
+ work and retaining what you've learned you should be able to easily reprod
+ uce from scratch and explain a HW solution that was your own when asked in
+  office hours by a TA/Instructor or on a quiz/exam. &nbsp\;&nbsp\;</p>\n<p
+ >If you have difficulty in formulating the general solution to a problem o
+ n your own\, or<br>you have difficulty in translating that general solutio
+ n into a program\, it is advisable to see<br>your instructor or teaching a
+ ssistant rather than another student as this situation can easily<br>lead 
+ to a\, possibly inadvertent\, cheating situation.</p>\n<p>We are here to h
+ elp! &nbsp\;Visit HW Hours and/or post questions on Piazza!</p><script src
+ ="https://instructure-uploads.s3.amazonaws.com/account_107720000000000001/
+ attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261008T140000Z
+UID:event-assignment-2764450
+DTSTART;VALUE=DATE;VALUE=DATE:20261014
+CLASS:PUBLIC
+DESCRIPTION:Video Assignment: Multinomial Distribution\; Sampling
+SEQUENCE:0
+SUMMARY:HW 7 Video Assignment: Sampling and Multinomial Distrbution [CSCI 3
+ 022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764450
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>Video Assignment: Multinomial Distribution\; Sampling</p>
+ <script src="https://instructure-uploads.s3.amazonaws.com/account_10772000
+ 0000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261001T160000Z
+UID:event-assignment-2857942
+DTSTART;VALUE=DATE;VALUE=DATE:20261014
+CLASS:PUBLIC
+DESCRIPTION:Instructions: https://cuboulder-csci3308.pages.dev/docs/labs/la
+ b6
+SEQUENCE:0
+SUMMARY:Lab 6 - Application Server [CSCI 3308 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=10&year=2026#assignment_2857942
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>Instructions: <a href="https://cuboulder-csci3308.pages.d
+ ev/docs/labs/lab6">https://cuboulder-csci3308.pages.dev/docs/labs/lab6</a>
+ </p><script src="https://instructure-uploads.s3.amazonaws.com/account_1077
+ 20000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T033200Z
+UID:event-assignment-2775865
+DTSTART;VALUE=DATE;VALUE=DATE:20261015
+CLASS:PUBLIC
+DESCRIPTION:*\n\n* Submit online via Canvas by uploading single pdf\, make 
+ sure to name the file accordingly\, eg ECEN2250_Homework4\n\n* Scan B&W at
+  150-300 dpi into a single easily readable pdf\, no credit for multiple pd
+ fs\n\n* Write the problem number and box your answer\, make it easy for th
+ e grader to grade\, if the grader can't read it\, then they can't grade it
+  and will not give any credit\n\n* Keep a copy of your work\n\n* Make sure
+  that when you submit homework that it is submitted properly\, it is the s
+ tudents responsibility\, no exceptions.\n\n* No late work beyond 24 hours 
+ late will be accepted (except in cases of documented emergencies or previo
+ us arrangements). (With prior approval of late submission) When submitting
+  late work\, use Canvas\, if the Canvas Assignment is closed\, then submit
+  it via email using your @colorado.edu account and send it to both Arielle
+  ([amblum@colorado.edu] (mailto:amblum@colorado.edu)) AND ALL of the LAs w
+ ith the assignment attached to the email\, email title = 'ECEN 2250 - Late
+  Homework Submission <Insert Your Name>'\n\n* The homework will builds fro
+ m the previous week’s work\, so it is essential that students do the hom
+ ework every week\, otherwise students will be lost in the course. \n\n* S
+ tudents are responsible for ensuring that their .pdf file uploaded properl
+ y for the submission by downloading their pdf after submitting the assignm
+ ent to verify that there are no issues\, the pdf is readable\, the written
+  work is legible and the file is not corrupted or too large. Failure to do
+  so will result in the student receiving NO CREDIT for the assignment subm
+ ission if there are any issues as outlined above.\n\n* See the Syllabus fo
+ r additional details.\n\n[Homework] (https://canvas.colorado.edu/courses/1
+ 38441/modules/967837)\n\n* Cheating on homework cheats students out of dev
+ eloping the knowledge\, skills\, and ability gained from taking ECEN 2250 
+ and will only serve to make subsequent course content too challenging to u
+ nderstand and complete. Courses that use ECEN 2250 as a prerequisite will 
+ then become extremely stressful because the student does not have the prer
+ equisite knowledge to apply to more challenging situations. Avoid this sit
+ uation by putting in the time to learn the material. The homework should t
+ ake time and be challenging\, it should be hard to understand\, that is wh
+ y you are taking the course\, because it is not simple.\n\n* Tips for doin
+ g well on the weekly homework and in this course: always attend lecture\, 
+ ask questions during lecture\, read the textbook both before lecture and a
+ fter lecture\, do practice problems from lecture\, quizzes\, and the textb
+ ook. Attend office hours and ask questions\, create problems for other stu
+ dents in the course and practice solving the problems\, talk about the con
+ cepts with other students\, help other students who are struggling. Make f
+ lash card on basic topics and practice them. When homework solutions are r
+ eleased\, go over them and compare them with your solutions and make sure 
+ you understand any differences\, go to office hours to ask questions about
+  any differences.\n\n* Invest time\, energy\, and effort into your educati
+ on.
+SEQUENCE:0
+SUMMARY:Homework 7 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775865
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><ul>\n<li style="list-style-type: none\;">\n<ul>\n<li>Submit
+  online via Canvas by uploading <strong>single </strong>pdf\, make sure to
+  name the file accordingly\, eg ECEN2250_Homework4</li>\n<li>Scan B&amp\;W
+  at 150-300 dpi into a single easily readable pdf\, <strong>no credit for 
+ multiple pdfs</strong></li>\n</ul>\n<ul>\n<li>Write the problem number and
+  box your answer\, make it easy for the grader to grade\, if the grader ca
+ n't read it\, then they can't grade it and will not give any credit</li>\n
+ <li>Keep a copy of your work</li>\n<li>Make sure that when you submit home
+ work that it is submitted properly\, it is the students responsibility\, n
+ o exceptions.</li>\n<li>No late work beyond 24 hours late will be accepted
+  (except in cases of documented emergencies or previous arrangements). (Wi
+ th prior approval of late submission) When submitting late work\, use Canv
+ as\, if the Canvas Assignment is closed\, then submit it via email using y
+ our @colorado.edu account and send it to both Arielle (<a href="mailto:amb
+ lum@colorado.edu">amblum@colorado.edu</a>) AND ALL of the LAs with the ass
+ ignment attached to the email\, email title = 'ECEN 2250 - Late Homework S
+ ubmission &lt\;Insert Your Name&gt\;'</li>\n<li>The homework will builds f
+ rom the previous week’s work\, so it is essential that students do the h
+ omework every week\, otherwise students will be lost in the course.&nbsp\;
+ </li>\n<li><span style="background-color: #fbeeb8\;">Students are responsi
+ ble for ensuring that their .pdf file uploaded properly for the submission
+  by downloading their pdf after submitting the assignment to verify that t
+ here are no issues\, the pdf is readable\, the written work is legible and
+  the file is not corrupted or too large. Failure to do so will result in t
+ he student receiving NO CREDIT for the assignment submission if there are 
+ any issues as outlined above.</span></li>\n<li>See the Syllabus for additi
+ onal details.</li>\n</ul>\n<p><a title="Homework" href="https://canvas.col
+ orado.edu/courses/138441/modules/967837" data-api-endpoint="https://canvas
+ .colorado.edu/api/v1/courses/138441/modules/967837" data-api-returntype="M
+ odule">Homework</a></p>\n<ul>\n<li>Cheating on homework cheats students ou
+ t of developing the knowledge\, skills\, and ability gained from taking EC
+ EN 2250 and will only serve to make subsequent course content too challeng
+ ing to understand and complete. Courses that use ECEN 2250 as a prerequisi
+ te will then become extremely stressful because the student does not have 
+ the prerequisite knowledge to apply to more challenging situations. Avoid 
+ this situation by putting in the time to learn the material. The homework 
+ should take time and be challenging\, it should be hard to understand\, th
+ at is why you are taking the course\, because it is not simple.</li>\n<li>
+ Tips for doing well on the weekly homework and in this course: always atte
+ nd lecture\, ask questions during lecture\, read the textbook both before 
+ lecture and after lecture\, do practice problems from lecture\, quizzes\, 
+ and the textbook. Attend office hours and ask questions\, create problems 
+ for other students in the course and practice solving the problems\, talk 
+ about the concepts with other students\, help other students who are strug
+ gling. Make flash card on basic topics and practice them. When homework so
+ lutions are released\, go over them and compare them with your solutions a
+ nd make sure you understand any differences\, go to office hours to ask qu
+ estions about any differences.</li>\n<li>Invest time\, energy\, and effort
+  into your education.</li>\n</ul>\n</li>\n</ul><script src="https://instru
+ cture-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403
+ 5875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T214400Z
+UID:event-assignment-2775873
+DTSTART;VALUE=DATE;VALUE=DATE:20261015
+CLASS:PUBLIC
+DESCRIPTION:All labs must be typed.\n\nHandwritten labs will result in ZERO
+  credit!\n\n* Submit online via Canvas by uploading single pdf\, make sure
+  to name the file accordingly\, eg ECEN2250_Lab1\n\n* Scan color 300 dpi i
+ nto a single easily readable pdf\, no credit for multiple pdfs\n\n* Make i
+ t easy for the grader to grade\, if the grader can't read it\, then they c
+ an't grade it and will not give any credit\n\n* Keep a copy of your work\n
+ \n* Make sure that when you submit lab that it is submitted properly\, it 
+ is the students responsibility\, no exceptions.\n\n* No late work beyond 2
+ 4 hours late will be accepted (except in cases of documented emergencies o
+ r previous arrangements). (With prior approval of late submission) When su
+ bmitting late work\, use Canvas\, if the Canvas Assignment is closed\, the
+ n submit it via email using your @colorado.edu account and send it to both
+  Arielle ([amblum@colorado.edu] (mailto:amblum@colorado.edu)) AND ALL of t
+ he LAs with the assignment attached to the email\, email title = 'ECEN 225
+ 0 - Late Lab Submission #<Insert lab Number> <Insert Your Name>'\n\n* The 
+ Labs will build from the previous week’s work\, so it is essential that 
+ students do the lab every week\, otherwise students will be lost in the co
+ urse. \n\n* Students are responsible for ensuring that their .pdf file up
+ loaded properly for the submission by downloading their pdf after submitti
+ ng the assignment to verify that there are no issues\, the pdf is readable
+ \, the written work is legible and the file is not corrupted or too large.
+  Failure to do so will result in the student receiving NO CREDIT for the a
+ ssignment submission if there are any issues as outlined above.\n\n* See t
+ he Syllabus for additional details.\n\n[Labs] (https://canvas.colorado.edu
+ /courses/138441/modules/967838)\n\nAll supplemental videos can be found on
+  Canvas > Modules > [Video Modules] (https://canvas.colorado.edu/courses/1
+ 38441/modules/967843) \n\n* Cheating on labs cheats students out of devel
+ oping the knowledge\, skills\, and ability gained from taking ECEN 2250 an
+ d will only serve to make subsequent course content too challenging to und
+ erstand and complete. Courses that use ECEN 2250 as a prerequisite will th
+ en become extremely stressful because the student does not have the prereq
+ uisite knowledge to apply to more challenging situations. Avoid this situa
+ tion by putting in the time to learn the material. The lab should take tim
+ e and be challenging\, it should be hard to understand\, that is why you a
+ re taking the course\, because it is not simple.\n\n* Tips for doing well 
+ on the weekly labs and in this course: always attend lecture\, ask questio
+ ns during lecture\, read the textbook both before lecture and after lectur
+ e\, do practice problems from lecture\, quizzes\, and the textbook. Attend
+  office hours and ask questions\, create problems for other students in th
+ e course and practice solving the problems\, talk about the concepts with 
+ other students\, help other students who are struggling. Make flash card o
+ n basic topics and practice them. Go to office hours to ask questions abou
+ t any differences.\n\n* Invest time\, energy\, and effort into your educat
+ ion.
+SEQUENCE:0
+SUMMARY:Lab 6 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775873
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>All labs must be typed.</p>\n<p>Handwritten labs will res
+ ult in ZERO credit!</p>\n<ul>\n<li>Submit online via Canvas by uploading <
+ strong>single </strong>pdf\, make sure to name the file accordingly\, eg E
+ CEN2250_Lab1</li>\n<li>Scan color 300 dpi into a single easily readable pd
+ f\, <strong>no credit for multiple pdfs</strong></li>\n</ul>\n<ul>\n<li>Ma
+ ke it easy for the grader to grade\, if the grader can't read it\, then th
+ ey can't grade it and will not give any credit</li>\n<li>Keep a copy of yo
+ ur work</li>\n<li>Make sure that when you submit lab that it is submitted 
+ properly\, it is the students responsibility\, no exceptions.</li>\n<li>No
+  late work beyond 24 hours late will be accepted (except in cases of docum
+ ented emergencies or previous arrangements). (With prior approval of late 
+ submission) When submitting late work\, use Canvas\, if the Canvas Assignm
+ ent is closed\, then submit it via email using your @colorado.edu account 
+ and send it to both Arielle (<a href="mailto:amblum@colorado.edu">amblum@c
+ olorado.edu</a>) AND ALL of the LAs with the assignment attached to the em
+ ail\, email title = 'ECEN 2250 - Late Lab Submission #&lt\;Insert lab Numb
+ er&gt\; &lt\;Insert Your Name&gt\;'</li>\n<li>The Labs will build from the
+  previous week’s work\, so it is essential that students do the lab ever
+ y week\, otherwise students will be lost in the course.&nbsp\;</li>\n<li><
+ span style="background-color: #fbeeb8\;">Students are responsible for ensu
+ ring that their .pdf file uploaded properly for the submission by download
+ ing their pdf after submitting the assignment to verify that there are no 
+ issues\, the pdf is readable\, the written work is legible and the file is
+  not corrupted or too large. Failure to do so will result in the student r
+ eceiving NO CREDIT for the assignment submission if there are any issues a
+ s outlined above.</span></li>\n<li>See the Syllabus for additional details
+ .</li>\n</ul>\n<p><a title="Labs" href="https://canvas.colorado.edu/course
+ s/138441/modules/967838" data-course-type="modules" data-published="true" 
+ data-api-endpoint="https://canvas.colorado.edu/api/v1/courses/138441/modul
+ es/967838" data-api-returntype="Module">Labs</a></p>\n<p style="padding-le
+ ft: 40px\;">All supplemental videos can be found on Canvas &gt\; Modules &
+ gt\; <a title="Video Modules" href="https://canvas.colorado.edu/courses/13
+ 8441/modules/967843" data-api-endpoint="https://canvas.colorado.edu/api/v1
+ /courses/138441/modules/967843" data-api-returntype="Module">Video Modules
+ </a>&nbsp\;</p>\n<ul>\n<li>Cheating on labs cheats students out of develop
+ ing the knowledge\, skills\, and ability gained from taking ECEN 2250 and 
+ will only serve to make subsequent course content too challenging to under
+ stand and complete. Courses that use ECEN 2250 as a prerequisite will then
+  become extremely stressful because the student does not have the prerequi
+ site knowledge to apply to more challenging situations. Avoid this situati
+ on by putting in the time to learn the material. The lab should take time 
+ and be challenging\, it should be hard to understand\, that is why you are
+  taking the course\, because it is not simple.</li>\n<li>Tips for doing we
+ ll on the weekly labs and in this course: always attend lecture\, ask ques
+ tions during lecture\, read the textbook both before lecture and after lec
+ ture\, do practice problems from lecture\, quizzes\, and the textbook. Att
+ end office hours and ask questions\, create problems for other students in
+  the course and practice solving the problems\, talk about the concepts wi
+ th other students\, help other students who are struggling. Make flash car
+ d on basic topics and practice them. Go to office hours to ask questions a
+ bout any differences.</li>\n<li>Invest time\, energy\, and effort into you
+ r education.</li>\n</ul><script src="https://instructure-uploads.s3.amazon
+ aws.com/account_107720000000000001/attachments/74035875/dp_app.js"></scrip
+ t>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261012T171500Z
+UID:event-assignment-2775885
+DTSTART:20261016T212000Z
+DTEND:20261016T212000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Quiz 7 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775885
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261031T002500Z
+UID:event-assignment-override-502224
+DTSTART:20261016T213000Z
+DTEND:20261016T213000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Exam #2: Machine Level Representation of Programs  [Section 200] (C
+ SCI 2400-200) [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2771917
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T214000Z
+UID:event-assignment-2752255
+DTSTART;VALUE=DATE;VALUE=DATE:20261016
+CLASS:PUBLIC
+DESCRIPTION:----------------------\nAPPM 2360 Homework 08\n----------------
+ ------\n\nYou will download the homework here [Homework08.pdf] (https://ca
+ nvas.colorado.edu/courses/137419/files/85628644?wrap=1)  Download Homewor
+ k01.pdfand then upload your solutions to Gradescope using the link below.
+SEQUENCE:0
+SUMMARY:Homework 08 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=10&year=2026#assignment_2752255
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><div id="dp-wrapper" class="dp-wrapper dp-flat-sections" dat
+ a-header-class="dp-header dp-flat-sections" data-nav-class="container-flui
+ d dp-link-grid dp-flat-sections dp-fs-1" data-img-url="https://designtools
+ .ciditools.com/css/images/banner_desert_sky.png"><header class="dp-header 
+ dp-flat-sections">\n<h2 class="dp-heading"><span class="dp-header-pre"><sp
+ an class="dp-header-pre-1">APPM 2360</span> </span> <span class="dp-header
+ -title">Homework 08</span></h2>\n</header>\n<p>You will download the homew
+ ork here <a class="instructure_file_link instructure_scribd_file inline_di
+ sabled" title="Homework08.pdf" href="https://canvas.colorado.edu/courses/1
+ 37419/files/85628644?wrap=1" target="_blank" data-api-endpoint="https://ca
+ nvas.colorado.edu/api/v1/courses/137419/files/85628644" data-api-returntyp
+ e="File">Homework08.pdf</a><span class="instructure_file_holder link_holde
+ r instructure_file_link_holder">&nbsp\;<span class="screenreader-only"> Do
+ wnload Homework01.pdf</span></span>and then upload your solutions to Grade
+ scope using the link below.</p>\n</div><script src="https://instructure-up
+ loads.s3.amazonaws.com/account_107720000000000001/attachments/74035875/dp_
+ app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T185600Z
+UID:event-assignment-2771910
+DTSTART;VALUE=DATE;VALUE=DATE:20261016
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Reading Quiz - 3.8-3.9 [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2771910
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T185600Z
+UID:event-assignment-2771923
+DTSTART;VALUE=DATE;VALUE=DATE:20261016
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Reading Quiz 3.9 & 3.10 [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2771923
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T192700Z
+UID:event-assignment-2862222
+DTSTART;VALUE=DATE;VALUE=DATE:20261018
+CLASS:PUBLIC
+DESCRIPTION:---------------\nLab: Attack Lab\n---------------\n\n \n\nThe 
+ Attack Lab: Understanding Buffer Overflow Bugs\n--------------------------
+ ------------------------\n\n \n\nThis assignment asks you to construct fi
+ ve different attacks across two programs\, each containing distinct securi
+ ty vulnerabilities. Below is a brief overview\, but you should:\n\n* Watch
+  the AttackLab tutorial video\n\n* Download the PDF included in your GitHu
+ b repository and follow it as you work through the lab\n\nWhat you will le
+ arn\n\nBy completing this lab\, you will:\n\n* Explore several techniques 
+ attackers use to exploit poorly protected programs\, especially those vuln
+ erable to buffer overflows.\n\n* Gain insight into how to write more secur
+ e code and how compilers and operating systems help reduce vulnerability.\
+ n\n* Deepen your understanding of the x86‑64 stack layout and calling co
+ nventions.\n\n* Learn more about how x86‑64 instructions are encoded.\n\
+ n* Build additional experience using debugging tools such as GDB and OBJDU
+ MP.\n\nYou should also review Sections 3.10.3 and 3.10.4 of the CS:APP3e t
+ extbook as reference material.\n\nImportant note:\nThis lab provides hands
+ -on exposure to techniques used to exploit security flaws in operating sys
+ tems and network servers. The goal is to help you understand how programs 
+ behave at runtime and how these weaknesses arise so that you can avoid the
+ m in your own systems code. These techniques must not be used for any unau
+ thorized access to computing resources.\n\n \n\nLogistics\n\nThis is an i
+ ndividual assignment. Your target programs are custom‑generated for you.
+ \n\nGetting the files\n\nAfter cloning your GitHub repository\, consult th
+ e README.md for setup instructions.\n\nWhat to submit\n\nSubmit your work 
+ by adding the required solution files to your repository\, committing\, an
+ d pushing them to GitHub.\n\nYou must produce five input files correspondi
+ ng to the five phases shown in Figure 1 of the lab writeup. These files mu
+ st be placed in your target directory and named exactly:\n\n* ctarget.l1.t
+ xt\n\n* ctarget.l2.txt\n\n* ctarget.l3.txt\n\n* rtarget.l2.txt\n\n* rtarge
+ t.l3.txt\n\nFor example\, if your target directory is target4\, your files
+  should be named:\n\n* target4/ctarget.l1.txt\n\n* target4/ctarget.l2.txt\
+ n\n* target4/ctarget.l3.txt\n\n* target4/rtarget.l2.txt\n\n* target4/rtarg
+ et.l3.txt
+SEQUENCE:0
+SUMMARY:Lab 3 - Attack Lab [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2862222
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><h2>Lab: Attack Lab</h2>\n<div id="intro" class="box py-3 ge
+ neralbox boxaligncenter">\n<div class="no-overflow">\n<p>&nbsp\;</p>\n<div
+  title="Page 1">\n<h3>The Attack Lab: Understanding Buffer Overflow Bugs</
+ h3>\n<p>&nbsp\;</p>\n<p>This assignment asks you to construct five differe
+ nt attacks across two programs\, each containing distinct security vulnera
+ bilities. Below is a brief overview\, but you should:</p>\n<ul>\n<li>Watch
+  the AttackLab tutorial video</li>\n<li>Download the PDF included in your 
+ GitHub repository and follow it as you work through the lab</li>\n</ul>\n<
+ p>What you will learn</p>\n<p>By completing this lab\, you will:</p>\n<ul>
+ \n<li>Explore several techniques attackers use to exploit poorly protected
+  programs\, especially those vulnerable to buffer overflows.</li>\n<li>Gai
+ n insight into how to write more secure code and how compilers and operati
+ ng systems help reduce vulnerability.</li>\n<li>Deepen your understanding 
+ of the x86‑64 stack layout and calling conventions.</li>\n<li>Learn more
+  about how x86‑64 instructions are encoded.</li>\n<li>Build additional e
+ xperience using debugging tools such as GDB and OBJDUMP.</li>\n</ul>\n<p>Y
+ ou should also review Sections 3.10.3 and 3.10.4 of the CS:APP3e textbook 
+ as reference material.</p>\n<p><strong>Important note:</strong><br>This la
+ b provides hands-on exposure to techniques used to exploit security flaws 
+ in operating systems and network servers. The goal is to help you understa
+ nd how programs behave at runtime and how these weaknesses arise so that y
+ ou can avoid them in your own systems code. These techniques must not be u
+ sed for any unauthorized access to computing resources.</p>\n<p>&nbsp\;</p
+ >\n<p><strong>Logistics</strong></p>\n<p>This is an individual assignment.
+  Your target programs are custom‑generated for you.</p>\n<p><strong>Gett
+ ing the files</strong></p>\n<p>After cloning your GitHub repository\, cons
+ ult the <code>README.md</code> for setup instructions.</p>\n<p><strong>Wha
+ t to submit</strong></p>\n<p>Submit your work by adding the required solut
+ ion files to your repository\, committing\, and pushing them to GitHub.</p
+ >\n<p>You must produce five input files corresponding to the five phases s
+ hown in Figure 1 of the lab writeup. These files must be placed in your ta
+ rget directory and named exactly:</p>\n<ul>\n<li><code>ctarget.l1.txt</cod
+ e></li>\n<li><code>ctarget.l2.txt</code></li>\n<li><code>ctarget.l3.txt</c
+ ode></li>\n<li><code>rtarget.l2.txt</code></li>\n<li><code>rtarget.l3.txt<
+ /code></li>\n</ul>\n<p>For example\, if your target directory is <code>tar
+ get4</code>\, your files should be named:</p>\n<ul>\n<li><code>target4/cta
+ rget.l1.txt</code></li>\n<li><code>target4/ctarget.l2.txt</code></li>\n<li
+ ><code>target4/ctarget.l3.txt</code></li>\n<li><code>target4/rtarget.l2.tx
+ t</code></li>\n<li><code>target4/rtarget.l3.txt</code></li>\n</ul>\n</div>
+ \n</div>\n</div><script src="https://instructure-uploads.s3.amazonaws.com/
+ account_107720000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261023T143200Z
+UID:event-assignment-2775850
+DTSTART:20261019T212000Z
+DTEND:20261019T212000Z
+CLASS:PUBLIC
+DESCRIPTION:In-class Exams during regularly scheduled lecture time at the r
+ egularly scheduled location\n\nNo calculator\n\nNo crib sheet
+SEQUENCE:0
+SUMMARY:Exam II [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775850
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>In-class Exams during regularly scheduled lecture time at
+  the regularly scheduled location</p>\n<p>No calculator</p>\n<p>No crib sh
+ eet</p><script src="https://instructure-uploads.s3.amazonaws.com/account_1
+ 07720000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261029T011000Z
+UID:event-assignment-2764418
+DTSTART;VALUE=DATE;VALUE=DATE:20261021
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:HW 8 Autograded [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764418
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261029T010700Z
+UID:event-assignment-2764419
+DTSTART;VALUE=DATE;VALUE=DATE:20261021
+CLASS:PUBLIC
+DESCRIPTION:Homework 8 is due: 11:59 PM Wednesday\, Oct 21st. \n\nAll HW i
+ s completed in Jupyter notebooks (.ipynb file).  \n\n[Use this link to a
+ ccess HW 8] (https://coding.csel.io/hub/user-redirect/git-pull?repo=https%
+ 3A%2F%2Fgithub.com%2Fcsci3022%2Ffa26-student&urlpath=lab%2Ftree%2Ffa26-stu
+ dent%2Fhw%2Fhw08%2Fhw08.ipynb&branch=main)Links to an external site.Links 
+ to an external site.Links to an external site. (this will open the assign
+ ment in the CSCI JupyterHub coding environment).  \n\n \n\nGrading\n\n*
+ \n\nGrading is broken down into autograded answers and manually graded ans
+ wers:\n\n* For manually graded answers you must show and explain all steps
+ .  \n\n* For autograded answers\, the results of your code are compared 
+ to provided and/or hidden tests.  The visible tests are mainly sanity che
+ cks. For example\, a sanity check might verify that the answer you entered
+  is a number as expected\, and not a word. The hidden tests generally chec
+ k for correctness\, and are invisible to students while they are doing the
+  assignment (hidden tests are run once the assignment has been submitted t
+ o Gradescope).\n\n \n\nSubmission Instructions:\n\nAfter running the fina
+ l cell in the notebook provided at the link above\, 2 files will be create
+ d: a zip file and pdf file.  You can download them using the links provid
+ ed in the notebook OR by finding them in the same folder where the HW1 Jup
+ tyer notebook resides in your JuptyerHub.   \n\nTo receive credit on thi
+ s assignment\, you must submit BOTH of these files\nto their respective G
+ radescope portals: \n\n* Homework 8 Autograded : Submit the zip file tha
+ t is output by jupyter notebook to the HW 8 Autograded assignment in Grade
+ scope.\n\n* Homework 8 Manually Graded:  Submit the pdf that is output b
+ y the juptyer notebook to the HW8 Manually Graded assignment in Gradescope
+ .  You must match the pages in your PDF to the problems in Gradescope to 
+ receive full credit.  \n\nSubmissions that are not submitted to Gradesco
+ pe by the deadline will not be counted for credit.\n\n \n\nCollaboration 
+ Policy\n\nData science is a collaborative activity.  However a key step i
+ n learning and retention is creating solutions on your own.  Below are e
+ xamples of acceptable vs unacceptable use of resources and collaboration w
+ hen doing HW assignments in CSCI 3022.\n\nThe following would be some exam
+ ples of cheating when working on HW assignments in CSCI 3022.  Any of th
+ ese constitute a violation of the course's collaboration policy and will r
+ esult in an F in the course and a trip to the honor council.   \n\n* Con
+ sulting web pages that may have a solution to a given homework problem or 
+ one similar is cheating.  However\, consulting the class notes\, and web 
+ pages that explain the material taught in class but do NOT show a solution
+  to the homework problem in question are permissible to view.  Clearly\, 
+ there's a fuzzy line here between a valid use of resources and cheating. T
+ o avoid this line\, one should merely consult the course notes\, the cours
+ e textbook\, and references that contain syntax and/or formulas.\n\n* Copy
+ ing a segment of code or math solution of three lines or more from another
+  student from a printout\, handwritten copy\, or by looking at their compu
+ ter screen\n\n* Sharing a segment of code or math solution of three lines 
+ or more with another student\n\n*  Taking a copy of another student's wor
+ k (or a solution found online) and then editing that copy\n\n* Reading som
+ eone else’s solution to a problem on the HW before writing your own.\n\n
+ * Asking someone to write all or part of a program or solution for you.\n\
+ n* Asking someone else for the code necessary to fix the error for you\, o
+ ther than for simple syntactical errors\n\nOn the other hand\, the followi
+ ng are some examples of things which would NOT usually be\nconsidered to b
+ e cheating:\n\n* Working on a HW problem on your own first and then discus
+ sing with a classmate a particular part in the problem solution where you 
+ are stuck.  After clarifying any questions you then continue to write you
+ r solution independently.\n\n* Asking someone (or searching online) how a 
+ particular construct in the language works.\n\n* Asking someone (or search
+ ing online) how to formulate a particular construct in the language.\n\n* 
+ Asking someone for help in finding an error in your program.  \n\n* Askin
+ g someone why a particular construct does not work as you expected in a gi
+ ven program.\n   \n\nTo test whether you are truly doing your own work a
+ nd retaining what you've learned you should be able to easily reproduce fr
+ om scratch and explain a HW solution that was your own when asked in offic
+ e hours by a TA/Instructor or on a quiz/exam.   \n\nIf you have difficul
+ ty in formulating the general solution to a problem on your own\, or\nyou 
+ have difficulty in translating that general solution into a program\, it i
+ s advisable to see\nyour instructor or teaching assistant rather than anot
+ her student as this situation can easily\nlead to a\, possibly inadvertent
+ \, cheating situation.\n\nWe are here to help!  Visit HW Hours and/or pos
+ t questions on Piazza!
+SEQUENCE:0
+SUMMARY:HW 8 Manually Graded [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764419
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p><strong><span>Homework 8 is due: 11:59 PM Wednesday\, Oct
+  21st.&nbsp\;</span></strong></p>\n<p>All HW is completed in Jupyter noteb
+ ooks (.ipynb file).&nbsp\;&nbsp\;</p>\n<p><span><a class="inline_disabled"
+  href="https://coding.csel.io/hub/user-redirect/git-pull?repo=https%3A%2F%
+ 2Fgithub.com%2Fcsci3022%2Ffa26-student&amp\;urlpath=lab%2Ftree%2Ffa26-stud
+ ent%2Fhw%2Fhw08%2Fhw08.ipynb&amp\;branch=main" target="_blank">Use this li
+ nk to access HW 8</a><span class="external_link_icon" role="presentation">
+ <span class="screenreader-only">Links to an external site.</span></span><s
+ pan class="external_link_icon" role="presentation"><span class="screenread
+ er-only">Links to an external site.</span></span><span class="external_lin
+ k_icon" role="presentation"><span class="screenreader-only">Links to an ex
+ ternal site.</span></span>&nbsp\;</span>(this will open the assignment in 
+ the CSCI JupyterHub coding environment).&nbsp\;&nbsp\;</p>\n<p>&nbsp\;</p>
+ \n<p><strong>Grading</strong></p>\n<ul>\n<li>\n<p>Grading is broken down i
+ nto autograded answers and manually graded answers:</p>\n<ul>\n<li>For man
+ ually graded answers you must show and explain all steps.&nbsp\;&nbsp\;</l
+ i>\n<li>For autograded answers\, the results of your code are compared to 
+ provided and/or hidden tests. &nbsp\;The visible tests are mainly sanity c
+ hecks. For example\, a sanity check might verify that the answer you enter
+ ed is a number as expected\, and not a word. The hidden tests generally ch
+ eck for correctness\, and are invisible to students while they are doing t
+ he assignment (hidden tests are run once the assignment has been submitted
+  to Gradescope).</li>\n</ul>\n</li>\n</ul>\n<p>&nbsp\;</p>\n<p><strong>Sub
+ mission Instructions</strong>:</p>\n<p>After running the final cell in the
+  notebook provided at the link above\, 2 files will be created: a zip file
+  and pdf file. &nbsp\;You can download them using the links provided in th
+ e notebook OR by finding them in the same folder where the HW1 Juptyer not
+ ebook resides in your JuptyerHub.&nbsp\; &nbsp\;</p>\n<p>To receive credit
+  on this assignment\,<span>&nbsp\;</span><strong>you must submit BOTH of t
+ hese files</strong><br><strong>to their respective Gradescope portals</str
+ ong>:&nbsp\;</p>\n<ul>\n<li><strong>Homework 8 Autograded<span>&nbsp\;</sp
+ an></strong>: Submit the zip file that is output by jupyter notebook to th
+ e HW 8 Autograded assignment in Gradescope.</li>\n<li><strong>Homework 8 M
+ anually Graded:<span>&nbsp\;</span><span>&nbsp\;</span></strong>Submit the
+  pdf that is output by the juptyer notebook to the HW8 Manually Graded ass
+ ignment in Gradescope.&nbsp\; You must match the pages in your PDF to the 
+ problems in Gradescope to receive full credit.&nbsp\;&nbsp\;</li>\n</ul>\n
+ <p>Submissions that are not submitted to Gradescope by the deadline will n
+ ot be counted for credit.</p>\n<p>&nbsp\;</p>\n<p><span><strong>Collaborat
+ ion Policy</strong></span></p>\n<p>Data science is a collaborative activit
+ y. &nbsp\;However a key step in learning and retention is creating solutio
+ ns on your own.&nbsp\;&nbsp\;Below are examples of acceptable vs unaccepta
+ ble use of resources and collaboration when doing HW assignments in CSCI 3
+ 022.</p>\n<p><br>The following would be some <strong>examples of cheating<
+ /strong>&nbsp\;when working on HW assignments in CSCI 3022. &nbsp\;Any of 
+ these constitute a <strong>violation of the course's collaboration policy 
+ and will result in an F in the course and a trip to the honor council</str
+ ong>. &nbsp\;&nbsp\;</p>\n<ul>\n<li>Consulting web pages that may have a s
+ olution to a given homework problem or one similar is cheating. &nbsp\;How
+ ever\, consulting the class notes\, and web pages that explain the materia
+ l taught in class but do NOT show a solution to the homework problem in qu
+ estion are permissible to view. &nbsp\;Clearly\, there's a fuzzy line here
+  between a valid use of resources and cheating. To avoid this line\, one s
+ hould merely consult the course notes\, the course textbook\, and referenc
+ es that contain syntax and/or formulas.</li>\n<li>Copying a segment of cod
+ e or math solution of three lines or more from another student from a prin
+ tout\, handwritten copy\, or by looking at their computer screen</li>\n<li
+ >Sharing a segment of code or math solution of three lines or more with an
+ other student</li>\n<li>&nbsp\;Taking a copy of another student's work (or
+  a solution found online) and then editing that copy</li>\n<li>Reading som
+ eone else’s solution to a problem on the HW before writing your own.</li
+ >\n<li>Asking someone to write all or part of a program or solution for yo
+ u.</li>\n<li>Asking someone else for the code necessary to fix the error f
+ or you\, other than for simple syntactical errors<br><br></li>\n</ul>\n<p>
+ On the other hand\, the following are some examples of things which would 
+ NOT usually be<br>considered to be cheating:</p>\n<ul>\n<li>Working on a H
+ W problem on your own first and then discussing with a classmate a particu
+ lar part in the problem solution where you are stuck. &nbsp\;After clarify
+ ing any questions you then continue to write your solution independently.<
+ /li>\n<li>Asking someone (or searching online) how a particular construct 
+ in the language works.</li>\n<li>Asking someone (or searching online) how 
+ to formulate a particular construct in the language.</li>\n<li>Asking some
+ one for help in finding an error in your program. &nbsp\;</li>\n<li>Asking
+  someone why a particular construct does not work as you expected in a giv
+ en program.<br>&nbsp\; &nbsp\;</li>\n</ul>\n<p>To test whether you are tru
+ ly doing your own work and retaining what you've learned you should be abl
+ e to easily reproduce from scratch and explain a HW solution that was your
+  own when asked in office hours by a TA/Instructor or on a quiz/exam. &nbs
+ p\;&nbsp\;</p>\n<p>If you have difficulty in formulating the general solut
+ ion to a problem on your own\, or<br>you have difficulty in translating th
+ at general solution into a program\, it is advisable to see<br>your instru
+ ctor or teaching assistant rather than another student as this situation c
+ an easily<br>lead to a\, possibly inadvertent\, cheating situation.</p>\n<
+ p>We are here to help! &nbsp\;Visit HW Hours and/or post questions on Piaz
+ za!</p><script src="https://instructure-uploads.s3.amazonaws.com/account_1
+ 07720000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261029T011800Z
+UID:event-assignment-2764446
+DTSTART;VALUE=DATE;VALUE=DATE:20261021
+CLASS:PUBLIC
+DESCRIPTION:CI for Proportions Using CLT
+SEQUENCE:0
+SUMMARY:HW 8 Video Assignment: Confidence Intervals for Proportions  [CSCI 
+ 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764446
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>CI for Proportions Using CLT</p><script src="https://inst
+ ructure-uploads.s3.amazonaws.com/account_107720000000000001/attachments/74
+ 035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261020T210900Z
+UID:event-assignment-2857944
+DTSTART;VALUE=DATE;VALUE=DATE:20261021
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Lab 7 - Web Services [CSCI 3308 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=10&year=2026#assignment_2857944
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260929T133900Z
+UID:event-assignment-2752267
+DTSTART;VALUE=DATE;VALUE=DATE:20261022
+CLASS:PUBLIC
+DESCRIPTION:Quizzes uploaded more than 10 minutes after the end of recitati
+ on are considered late.
+SEQUENCE:0
+SUMMARY:Quiz06 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=10&year=2026#assignment_2752267
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p style="text-align: center\;"><em>Quizzes uploaded more th
+ an 10 minutes after the end of recitation are considered late.</em></p><sc
+ ript src="https://instructure-uploads.s3.amazonaws.com/account_10772000000
+ 0000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261027T043200Z
+UID:event-assignment-2764438
+DTSTART:20261023T170000Z
+DTEND:20261023T170000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Quiz 7 [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764438
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261018T174100Z
+UID:event-assignment-2752256
+DTSTART;VALUE=DATE;VALUE=DATE:20261023
+CLASS:PUBLIC
+DESCRIPTION:----------------------\nAPPM 2360  Homework 09\n--------------
+ --------\n\nYou will download the homework here [Homework09.pdf] (https://
+ canvas.colorado.edu/courses/137419/files/85734124?wrap=1)  Download Homew
+ ork01.pdfand then upload your solutions to Gradescope using the link below
+ .
+SEQUENCE:0
+SUMMARY:Homework 09 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=10&year=2026#assignment_2752256
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><div id="dp-wrapper" class="dp-wrapper dp-flat-sections" dat
+ a-header-class="dp-header dp-flat-sections" data-nav-class="container-flui
+ d dp-link-grid dp-flat-sections dp-fs-1" data-img-url="https://designtools
+ .ciditools.com/css/images/banner_desert_sky.png"><header class="dp-header 
+ dp-flat-sections">\n<h2 class="dp-heading"><span class="dp-header-pre"><sp
+ an class="dp-header-pre-1">APPM 2360</span>&nbsp\;</span> <span class="dp-
+ header-title">Homework 09</span></h2>\n</header>\n<p>You will download the
+  homework here <a class="instructure_file_link instructure_scribd_file inl
+ ine_disabled" title="Homework09.pdf" href="https://canvas.colorado.edu/cou
+ rses/137419/files/85734124?wrap=1" target="_blank" data-api-endpoint="http
+ s://canvas.colorado.edu/api/v1/courses/137419/files/85734124" data-api-ret
+ urntype="File">Homework09.pdf</a><span class="instructure_file_holder link
+ _holder instructure_file_link_holder">&nbsp\;<span class="screenreader-onl
+ y"> Download Homework01.pdf</span></span>and then upload your solutions to
+  Gradescope using the link below.</p>\n</div><script src="https://instruct
+ ure-uploads.s3.amazonaws.com/account_107720000000000001/attachments/740358
+ 75/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261022T213500Z
+UID:event-calendar-event-1254636
+DTSTART:20261027T161000Z
+DTEND:20261027T162000Z
+CLASS:PUBLIC
+DESCRIPTION:
+LOCATION:CSEL. Except Friday appointments in ECOT 832
+SEQUENCE:0
+SUMMARY:CSCI 3308 - Lab 7 - Interview grading [CSCI 3308 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=10&year=2026#calendar_event_1254636
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261023T225600Z
+UID:event-assignment-2775866
+DTSTART;VALUE=DATE;VALUE=DATE:20261028
+CLASS:PUBLIC
+DESCRIPTION:*\n\n* Submit online via Canvas by uploading single pdf\, make 
+ sure to name the file accordingly\, eg ECEN2250_Homework4\n\n* Scan B&W at
+  150-300 dpi into a single easily readable pdf\, no credit for multiple pd
+ fs\n\n* Write the problem number and box your answer\, make it easy for th
+ e grader to grade\, if the grader can't read it\, then they can't grade it
+  and will not give any credit\n\n* Keep a copy of your work\n\n* Make sure
+  that when you submit homework that it is submitted properly\, it is the s
+ tudents responsibility\, no exceptions.\n\n* No late work beyond 24 hours 
+ late will be accepted (except in cases of documented emergencies or previo
+ us arrangements). (With prior approval of late submission) When submitting
+  late work\, use Canvas\, if the Canvas Assignment is closed\, then submit
+  it via email using your @colorado.edu account and send it to both Arielle
+  ([amblum@colorado.edu] (mailto:amblum@colorado.edu)) AND ALL of the LAs w
+ ith the assignment attached to the email\, email title = 'ECEN 2250 - Late
+  Homework Submission <Insert Your Name>'\n\n* The homework will builds fro
+ m the previous week’s work\, so it is essential that students do the hom
+ ework every week\, otherwise students will be lost in the course. \n\n* S
+ tudents are responsible for ensuring that their .pdf file uploaded properl
+ y for the submission by downloading their pdf after submitting the assignm
+ ent to verify that there are no issues\, the pdf is readable\, the written
+  work is legible and the file is not corrupted or too large. Failure to do
+  so will result in the student receiving NO CREDIT for the assignment subm
+ ission if there are any issues as outlined above.\n\n* See the Syllabus fo
+ r additional details.\n\n[Homework] (https://canvas.colorado.edu/courses/1
+ 38441/modules/967837)\n\n* Cheating on homework cheats students out of dev
+ eloping the knowledge\, skills\, and ability gained from taking ECEN 2250 
+ and will only serve to make subsequent course content too challenging to u
+ nderstand and complete. Courses that use ECEN 2250 as a prerequisite will 
+ then become extremely stressful because the student does not have the prer
+ equisite knowledge to apply to more challenging situations. Avoid this sit
+ uation by putting in the time to learn the material. The homework should t
+ ake time and be challenging\, it should be hard to understand\, that is wh
+ y you are taking the course\, because it is not simple.\n\n* Tips for doin
+ g well on the weekly homework and in this course: always attend lecture\, 
+ ask questions during lecture\, read the textbook both before lecture and a
+ fter lecture\, do practice problems from lecture\, quizzes\, and the textb
+ ook. Attend office hours and ask questions\, create problems for other stu
+ dents in the course and practice solving the problems\, talk about the con
+ cepts with other students\, help other students who are struggling. Make f
+ lash card on basic topics and practice them. When homework solutions are r
+ eleased\, go over them and compare them with your solutions and make sure 
+ you understand any differences\, go to office hours to ask questions about
+  any differences.\n\n* Invest time\, energy\, and effort into your educati
+ on.
+SEQUENCE:0
+SUMMARY:Homework 8 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775866
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><ul>\n<li style="list-style-type: none\;">\n<ul>\n<li>Submit
+  online via Canvas by uploading <strong>single </strong>pdf\, make sure to
+  name the file accordingly\, eg ECEN2250_Homework4</li>\n<li>Scan B&amp\;W
+  at 150-300 dpi into a single easily readable pdf\, <strong>no credit for 
+ multiple pdfs</strong>\n</li>\n</ul>\n<ul>\n<li>Write the problem number a
+ nd box your answer\, make it easy for the grader to grade\, if the grader 
+ can't read it\, then they can't grade it and will not give any credit</li>
+ \n<li>Keep a copy of your work</li>\n<li>Make sure that when you submit ho
+ mework that it is submitted properly\, it is the students responsibility\,
+  no exceptions.</li>\n<li>No late work beyond 24 hours late will be accept
+ ed (except in cases of documented emergencies or previous arrangements). (
+ With prior approval of late submission) When submitting late work\, use Ca
+ nvas\, if the Canvas Assignment is closed\, then submit it via email using
+  your @colorado.edu account and send it to both Arielle (<a href="mailto:a
+ mblum@colorado.edu">amblum@colorado.edu</a>) AND ALL of the LAs with the a
+ ssignment attached to the email\, email title = 'ECEN 2250 - Late Homework
+  Submission &lt\;Insert Your Name&gt\;'</li>\n<li>The homework will builds
+  from the previous week’s work\, so it is essential that students do the
+  homework every week\, otherwise students will be lost in the course.&nbsp
+ \;</li>\n<li><span style="background-color: #fbeeb8\;">Students are respon
+ sible for ensuring that their .pdf file uploaded properly for the submissi
+ on by downloading their pdf after submitting the assignment to verify that
+  there are no issues\, the pdf is readable\, the written work is legible a
+ nd the file is not corrupted or too large. Failure to do so will result in
+  the student receiving NO CREDIT for the assignment submission if there ar
+ e any issues as outlined above.</span></li>\n<li>See the Syllabus for addi
+ tional details.</li>\n</ul>\n<p><a title="Homework" href="https://canvas.c
+ olorado.edu/courses/138441/modules/967837" data-api-endpoint="https://canv
+ as.colorado.edu/api/v1/courses/138441/modules/967837" data-api-returntype=
+ "Module">Homework</a></p>\n<ul>\n<li>Cheating on homework cheats students 
+ out of developing the knowledge\, skills\, and ability gained from taking 
+ ECEN 2250 and will only serve to make subsequent course content too challe
+ nging to understand and complete. Courses that use ECEN 2250 as a prerequi
+ site will then become extremely stressful because the student does not hav
+ e the prerequisite knowledge to apply to more challenging situations. Avoi
+ d this situation by putting in the time to learn the material. The homewor
+ k should take time and be challenging\, it should be hard to understand\, 
+ that is why you are taking the course\, because it is not simple.</li>\n<l
+ i>Tips for doing well on the weekly homework and in this course: always at
+ tend lecture\, ask questions during lecture\, read the textbook both befor
+ e lecture and after lecture\, do practice problems from lecture\, quizzes\
+ , and the textbook. Attend office hours and ask questions\, create problem
+ s for other students in the course and practice solving the problems\, tal
+ k about the concepts with other students\, help other students who are str
+ uggling. Make flash card on basic topics and practice them. When homework 
+ solutions are released\, go over them and compare them with your solutions
+  and make sure you understand any differences\, go to office hours to ask 
+ questions about any differences.</li>\n<li>Invest time\, energy\, and effo
+ rt into your education.</li>\n</ul>\n</li>\n</ul><script src="https://inst
+ ructure-uploads.s3.amazonaws.com/account_107720000000000001/attachments/74
+ 035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261023T225700Z
+UID:event-assignment-2775874
+DTSTART;VALUE=DATE;VALUE=DATE:20261028
+CLASS:PUBLIC
+DESCRIPTION:All labs must be typed.\n\nHandwritten labs will result in ZERO
+  credit!\n\n* Submit online via Canvas by uploading single pdf\, make sure
+  to name the file accordingly\, eg ECEN2250_Lab1\n\n* Scan color 300 dpi i
+ nto a single easily readable pdf\, no credit for multiple pdfs\n\n* Make i
+ t easy for the grader to grade\, if the grader can't read it\, then they c
+ an't grade it and will not give any credit\n\n* Keep a copy of your work\n
+ \n* Make sure that when you submit lab that it is submitted properly\, it 
+ is the students responsibility\, no exceptions.\n\n* No late work beyond 2
+ 4 hours late will be accepted (except in cases of documented emergencies o
+ r previous arrangements). (With prior approval of late submission) When su
+ bmitting late work\, use Canvas\, if the Canvas Assignment is closed\, the
+ n submit it via email using your @colorado.edu account and send it to both
+  Arielle ([amblum@colorado.edu] (mailto:amblum@colorado.edu)) AND ALL of t
+ he LAs with the assignment attached to the email\, email title = 'ECEN 225
+ 0 - Late Lab Submission #<Insert lab Number> <Insert Your Name>'\n\n* The 
+ Labs will build from the previous week’s work\, so it is essential that 
+ students do the lab every week\, otherwise students will be lost in the co
+ urse. \n\n* Students are responsible for ensuring that their .pdf file up
+ loaded properly for the submission by downloading their pdf after submitti
+ ng the assignment to verify that there are no issues\, the pdf is readable
+ \, the written work is legible and the file is not corrupted or too large.
+  Failure to do so will result in the student receiving NO CREDIT for the a
+ ssignment submission if there are any issues as outlined above.\n\n* See t
+ he Syllabus for additional details.\n\n[Labs] (https://canvas.colorado.edu
+ /courses/138441/modules/967838)\n\nAll supplemental videos can be found on
+  Canvas > Modules > [Video Modules] (https://canvas.colorado.edu/courses/1
+ 38441/modules/967843) \n\n* Cheating on labs cheats students out of devel
+ oping the knowledge\, skills\, and ability gained from taking ECEN 2250 an
+ d will only serve to make subsequent course content too challenging to und
+ erstand and complete. Courses that use ECEN 2250 as a prerequisite will th
+ en become extremely stressful because the student does not have the prereq
+ uisite knowledge to apply to more challenging situations. Avoid this situa
+ tion by putting in the time to learn the material. The lab should take tim
+ e and be challenging\, it should be hard to understand\, that is why you a
+ re taking the course\, because it is not simple.\n\n* Tips for doing well 
+ on the weekly labs and in this course: always attend lecture\, ask questio
+ ns during lecture\, read the textbook both before lecture and after lectur
+ e\, do practice problems from lecture\, quizzes\, and the textbook. Attend
+  office hours and ask questions\, create problems for other students in th
+ e course and practice solving the problems\, talk about the concepts with 
+ other students\, help other students who are struggling. Make flash card o
+ n basic topics and practice them. Go to office hours to ask questions abou
+ t any differences.\n\n* Invest time\, energy\, and effort into your educat
+ ion.
+SEQUENCE:0
+SUMMARY:Lab 7 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775874
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>All labs must be typed.</p>\n<p>Handwritten labs will res
+ ult in ZERO credit!</p>\n<ul>\n<li>Submit online via Canvas by uploading <
+ strong>single </strong>pdf\, make sure to name the file accordingly\, eg E
+ CEN2250_Lab1</li>\n<li>Scan color 300 dpi into a single easily readable pd
+ f\, <strong>no credit for multiple pdfs</strong>\n</li>\n</ul>\n<ul>\n<li>
+ Make it easy for the grader to grade\, if the grader can't read it\, then 
+ they can't grade it and will not give any credit</li>\n<li>Keep a copy of 
+ your work</li>\n<li>Make sure that when you submit lab that it is submitte
+ d properly\, it is the students responsibility\, no exceptions.</li>\n<li>
+ No late work beyond 24 hours late will be accepted (except in cases of doc
+ umented emergencies or previous arrangements). (With prior approval of lat
+ e submission) When submitting late work\, use Canvas\, if the Canvas Assig
+ nment is closed\, then submit it via email using your @colorado.edu accoun
+ t and send it to both Arielle (<a href="mailto:amblum@colorado.edu">amblum
+ @colorado.edu</a>) AND ALL of the LAs with the assignment attached to the 
+ email\, email title = 'ECEN 2250 - Late Lab Submission #&lt\;Insert lab Nu
+ mber&gt\; &lt\;Insert Your Name&gt\;'</li>\n<li>The Labs will build from t
+ he previous week’s work\, so it is essential that students do the lab ev
+ ery week\, otherwise students will be lost in the course.&nbsp\;</li>\n<li
+ ><span style="background-color: #fbeeb8\;">Students are responsible for en
+ suring that their .pdf file uploaded properly for the submission by downlo
+ ading their pdf after submitting the assignment to verify that there are n
+ o issues\, the pdf is readable\, the written work is legible and the file 
+ is not corrupted or too large. Failure to do so will result in the student
+  receiving NO CREDIT for the assignment submission if there are any issues
+  as outlined above.</span></li>\n<li>See the Syllabus for additional detai
+ ls.</li>\n</ul>\n<p><a title="Labs" href="https://canvas.colorado.edu/cour
+ ses/138441/modules/967838" data-course-type="modules" data-published="true
+ " data-api-endpoint="https://canvas.colorado.edu/api/v1/courses/138441/mod
+ ules/967838" data-api-returntype="Module">Labs</a></p>\n<p style="padding-
+ left: 40px\;">All supplemental videos can be found on Canvas &gt\; Modules
+  &gt\; <a title="Video Modules" href="https://canvas.colorado.edu/courses/
+ 138441/modules/967843" data-api-endpoint="https://canvas.colorado.edu/api/
+ v1/courses/138441/modules/967843" data-api-returntype="Module">Video Modul
+ es</a>&nbsp\;</p>\n<ul>\n<li>Cheating on labs cheats students out of devel
+ oping the knowledge\, skills\, and ability gained from taking ECEN 2250 an
+ d will only serve to make subsequent course content too challenging to und
+ erstand and complete. Courses that use ECEN 2250 as a prerequisite will th
+ en become extremely stressful because the student does not have the prereq
+ uisite knowledge to apply to more challenging situations. Avoid this situa
+ tion by putting in the time to learn the material. The lab should take tim
+ e and be challenging\, it should be hard to understand\, that is why you a
+ re taking the course\, because it is not simple.</li>\n<li>Tips for doing 
+ well on the weekly labs and in this course: always attend lecture\, ask qu
+ estions during lecture\, read the textbook both before lecture and after l
+ ecture\, do practice problems from lecture\, quizzes\, and the textbook. A
+ ttend office hours and ask questions\, create problems for other students 
+ in the course and practice solving the problems\, talk about the concepts 
+ with other students\, help other students who are struggling. Make flash c
+ ard on basic topics and practice them. Go to office hours to ask questions
+  about any differences.</li>\n<li>Invest time\, energy\, and effort into y
+ our education.</li>\n</ul><script src="https://instructure-uploads.s3.amaz
+ onaws.com/account_107720000000000001/attachments/74035875/dp_app.js"></scr
+ ipt>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261022T150600Z
+UID:event-assignment-2764421
+DTSTART;VALUE=DATE;VALUE=DATE:20261028
+CLASS:PUBLIC
+DESCRIPTION:Homework 9 is due: 11:59 PM Wednesday\, Oct 28th. \n\nAll HW i
+ s completed in Jupyter notebooks (.ipynb file).  \n\n[Use this link to a
+ ccess HW 9] (https://coding.csel.io/hub/user-redirect/git-pull?repo=https%
+ 3A%2F%2Fgithub.com%2Fcsci3022%2Ffa26-student&urlpath=lab%2Ftree%2Ffa26-stu
+ dent%2Fhw%2Fhw09%2Fhw09.ipynb&branch=main)Links to an external site.Links 
+ to an external site.Links to an external site. (this will open the assign
+ ment in the CSCI JupyterHub coding environment).  \n\n \n\nGrading\n\n*
+ \n\nGrading is broken down into autograded answers and manually graded ans
+ wers:\n\n* For manually graded answers you must show and explain all steps
+ .  \n\n* For autograded answers\, the results of your code are compared 
+ to provided and/or hidden tests.  The visible tests are mainly sanity che
+ cks. For example\, a sanity check might verify that the answer you entered
+  is a number as expected\, and not a word. The hidden tests generally chec
+ k for correctness\, and are invisible to students while they are doing the
+  assignment (hidden tests are run once the assignment has been submitted t
+ o Gradescope).\n\n \n\nSubmission Instructions:\n\nAfter running the fina
+ l cell in the notebook provided at the link above\, 2 files will be create
+ d: a zip file and pdf file.  You can download them using the links provid
+ ed in the notebook OR by finding them in the same folder where the HW1 Jup
+ tyer notebook resides in your JuptyerHub.   \n\nTo receive credit on thi
+ s assignment\, you must submit BOTH of these files\nto their respective G
+ radescope portals: \n\n* Homework 9 Autograded : Submit the zip file tha
+ t is output by jupyter notebook to the HW 10 Autograded assignment in Grad
+ escope.\n\n* Homework 9 Manually Graded:  Submit the pdf that is output 
+ by the juptyer notebook to the HW 10 Manually Graded assignment in Gradesc
+ ope.  You must match the pages in your PDF to the problems in Gradescope 
+ to receive full credit.  \n\nSubmissions that are not submitted to Grade
+ scope by the deadline will not be counted for credit.\n\n \n\nCollaborati
+ on Policy\n\nData science is a collaborative activity.  However a key ste
+ p in learning and retention is creating solutions on your own.  Below ar
+ e examples of acceptable vs unacceptable use of resources and collaboratio
+ n when doing HW assignments in CSCI 3022.\n\nThe following would be some *
+ *examples of cheating** when working on HW assignments in CSCI 3022.  Any
+  of these constitute a **violation of the course's collaboration policy an
+ d will result in an F in the course and a trip to the honor council**.  
+  \n\n* Consulting web pages that may have a solution to a given homework 
+ problem or one similar is cheating.  However\, consulting the class notes
+ \, and web pages that explain the material taught in class but do NOT show
+  a solution to the homework problem in question are permissible to view. 
+  Clearly\, there's a fuzzy line here between a valid use of resources and
+  cheating. To avoid this line\, one should merely consult the course notes
+ \, the course textbook\, and references that contain syntax and/or formula
+ s.\n\n* Copying a segment of code or math solution of three lines or more 
+ from another student from a printout\, handwritten copy\, or by looking at
+  their computer screen\n\n* Sharing a segment of code or math solution of 
+ three lines or more with another student\n\n*  Taking a copy of another s
+ tudent's work (or a solution found online) and then editing that copy\n\n*
+  Reading someone else’s solution to a problem on the HW before writing y
+ our own.\n\n* Asking someone to write all or part of a program or solution
+  for you.\n\n* Asking someone else for the code necessary to fix the error
+  for you\, other than for simple syntactical errors\n\nOn the other hand\,
+  the following are some examples of things which would NOT usually be\ncon
+ sidered to be cheating:\n\n* Working on a HW problem on your own first and
+  then discussing with a classmate a particular part in the problem solutio
+ n where you are stuck.  After clarifying any questions you then continue 
+ to write your solution independently.\n\n* Asking someone (or searching on
+ line) how a particular construct in the language works.\n\n* Asking someon
+ e (or searching online) how to formulate a particular construct in the lan
+ guage.\n\n* Asking someone for help in finding an error in your program. 
+  \n\n* Asking someone why a particular construct does not work as you exp
+ ected in a given program.\n   \n\nTo test whether you are truly doing yo
+ ur own work and retaining what you've learned you should be able to easily
+  reproduce from scratch and explain a HW solution that was your own when a
+ sked in office hours by a TA/Instructor or on a quiz/exam.   \n\nIf you 
+ have difficulty in formulating the general solution to a problem on your o
+ wn\, or\nyou have difficulty in translating that general solution into a p
+ rogram\, it is advisable to see\nyour instructor or teaching assistant rat
+ her than another student as this situation can easily\nlead to a\, possibl
+ y inadvertent\, cheating situation.\n\nWe are here to help!  Visit HW Hou
+ rs and/or post questions on Piazza!
+SEQUENCE:0
+SUMMARY:HW 9 [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764421
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p><strong><span>Homework 9 is due: 11:59 PM Wednesday\, Oct
+  28th.&nbsp\;</span></strong></p>\n<p>All HW is completed in Jupyter noteb
+ ooks (.ipynb file).&nbsp\;&nbsp\;</p>\n<p><span><a class="inline_disabled"
+  href="https://coding.csel.io/hub/user-redirect/git-pull?repo=https%3A%2F%
+ 2Fgithub.com%2Fcsci3022%2Ffa26-student&amp\;urlpath=lab%2Ftree%2Ffa26-stud
+ ent%2Fhw%2Fhw09%2Fhw09.ipynb&amp\;branch=main" target="_blank">Use this li
+ nk to access HW 9</a><span class="external_link_icon" role="presentation">
+ <span class="screenreader-only">Links to an external site.</span></span><s
+ pan class="external_link_icon" role="presentation"><span class="screenread
+ er-only">Links to an external site.</span></span><span class="external_lin
+ k_icon" role="presentation"><span class="screenreader-only">Links to an ex
+ ternal site.</span></span>&nbsp\;</span>(this will open the assignment in 
+ the CSCI JupyterHub coding environment).&nbsp\;&nbsp\;</p>\n<p>&nbsp\;</p>
+ \n<p><strong>Grading</strong></p>\n<ul>\n<li>\n<p>Grading is broken down i
+ nto autograded answers and manually graded answers:</p>\n<ul>\n<li>For man
+ ually graded answers you must show and explain all steps.&nbsp\;&nbsp\;</l
+ i>\n<li>For autograded answers\, the results of your code are compared to 
+ provided and/or hidden tests. &nbsp\;The visible tests are mainly sanity c
+ hecks. For example\, a sanity check might verify that the answer you enter
+ ed is a number as expected\, and not a word. The hidden tests generally ch
+ eck for correctness\, and are invisible to students while they are doing t
+ he assignment (hidden tests are run once the assignment has been submitted
+  to Gradescope).</li>\n</ul>\n</li>\n</ul>\n<p>&nbsp\;</p>\n<p><strong>Sub
+ mission Instructions</strong>:</p>\n<p>After running the final cell in the
+  notebook provided at the link above\, 2 files will be created: a zip file
+  and pdf file. &nbsp\;You can download them using the links provided in th
+ e notebook OR by finding them in the same folder where the HW1 Juptyer not
+ ebook resides in your JuptyerHub.&nbsp\; &nbsp\;</p>\n<p>To receive credit
+  on this assignment\,<span>&nbsp\;</span><strong>you must submit BOTH of t
+ hese files</strong><br><strong>to their respective Gradescope portals</str
+ ong>:&nbsp\;</p>\n<ul>\n<li><strong>Homework 9 Autograded<span>&nbsp\;</sp
+ an></strong>: Submit the zip file that is output by jupyter notebook to th
+ e HW 10 Autograded assignment in Gradescope.</li>\n<li><strong>Homework 9 
+ Manually Graded:<span>&nbsp\;</span><span>&nbsp\;</span></strong>Submit th
+ e pdf that is output by the juptyer notebook to the HW 10 Manually Graded 
+ assignment in Gradescope.&nbsp\; You must match the pages in your PDF to t
+ he problems in Gradescope to receive full credit.&nbsp\;&nbsp\;</li>\n</ul
+ >\n<p>Submissions that are not submitted to Gradescope by the deadline wil
+ l not be counted for credit.</p>\n<p>&nbsp\;</p>\n<p><span><strong>Collabo
+ ration Policy</strong></span></p>\n<p>Data science is a collaborative acti
+ vity. &nbsp\;However a key step in learning and retention is creating solu
+ tions on your own.&nbsp\;&nbsp\;Below are examples of acceptable vs unacce
+ ptable use of resources and collaboration when doing HW assignments in CSC
+ I 3022.</p>\n<p><br>The following would be some **examples of cheating** w
+ hen working on HW assignments in CSCI 3022. &nbsp\;Any of these constitute
+  a **violation of the course's collaboration policy and will result in an 
+ F in the course and a trip to the honor council**. &nbsp\;&nbsp\;</p>\n<ul
+ >\n<li>Consulting web pages that may have a solution to a given homework p
+ roblem or one similar is cheating. &nbsp\;However\, consulting the class n
+ otes\, and web pages that explain the material taught in class but do NOT 
+ show a solution to the homework problem in question are permissible to vie
+ w. &nbsp\;Clearly\, there's a fuzzy line here between a valid use of resou
+ rces and cheating. To avoid this line\, one should merely consult the cour
+ se notes\, the course textbook\, and references that contain syntax and/or
+  formulas.</li>\n<li>Copying a segment of code or math solution of three l
+ ines or more from another student from a printout\, handwritten copy\, or 
+ by looking at their computer screen</li>\n<li>Sharing a segment of code or
+  math solution of three lines or more with another student</li>\n<li>&nbsp
+ \;Taking a copy of another student's work (or a solution found online) and
+  then editing that copy</li>\n<li>Reading someone else’s solution to a p
+ roblem on the HW before writing your own.</li>\n<li>Asking someone to writ
+ e all or part of a program or solution for you.</li>\n<li>Asking someone e
+ lse for the code necessary to fix the error for you\, other than for simpl
+ e syntactical errors<br><br></li>\n</ul>\n<p>On the other hand\, the follo
+ wing are some examples of things which would NOT usually be<br>considered 
+ to be cheating:</p>\n<ul>\n<li>Working on a HW problem on your own first a
+ nd then discussing with a classmate a particular part in the problem solut
+ ion where you are stuck. &nbsp\;After clarifying any questions you then co
+ ntinue to write your solution independently.</li>\n<li>Asking someone (or 
+ searching online) how a particular construct in the language works.</li>\n
+ <li>Asking someone (or searching online) how to formulate a particular con
+ struct in the language.</li>\n<li>Asking someone for help in finding an er
+ ror in your program. &nbsp\;</li>\n<li>Asking someone why a particular con
+ struct does not work as you expected in a given program.<br>&nbsp\; &nbsp\
+ ;</li>\n</ul>\n<p>To test whether you are truly doing your own work and re
+ taining what you've learned you should be able to easily reproduce from sc
+ ratch and explain a HW solution that was your own when asked in office hou
+ rs by a TA/Instructor or on a quiz/exam. &nbsp\;&nbsp\;</p>\n<p>If you hav
+ e difficulty in formulating the general solution to a problem on your own\
+ , or<br>you have difficulty in translating that general solution into a pr
+ ogram\, it is advisable to see<br>your instructor or teaching assistant ra
+ ther than another student as this situation can easily<br>lead to a\, poss
+ ibly inadvertent\, cheating situation.</p>\n<p>We are here to help! &nbsp\
+ ;Visit HW Hours and/or post questions on Piazza!</p><script src="https://i
+ nstructure-uploads.s3.amazonaws.com/account_107720000000000001/attachments
+ /74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261029T225800Z
+UID:event-assignment-2857946
+DTSTART;VALUE=DATE;VALUE=DATE:20261028
+CLASS:PUBLIC
+DESCRIPTION:Lab instructions can be found here: https://cuboulder-csci3308.
+ pages.dev/docs/labs/lab8 \n\n \n\nONE PERSON PER TEAM must submit a GitH
+ ub link to the project proposal to this assignment. Link to a document on 
+ any other cloud resource like google drive\, one drive etc. will not be ac
+ cepted as a valid submission.
+SEQUENCE:0
+SUMMARY:Lab 8 - Project Kick Start - Requires submission on Canvas [CSCI 33
+ 08 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=10&year=2026#assignment_2857946
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>Lab instructions can be found here: <a href="https://cubo
+ ulder-csci3308.pages.dev/docs/labs/lab8">https://cuboulder-csci3308.pages.
+ dev/docs/labs/lab8</a>&nbsp\;</p>\n<p>&nbsp\;</p>\n<p>ONE PERSON PER TEAM 
+ must submit a GitHub link to the project proposal to this assignment. Link
+  to a document on any other cloud resource like google drive\, one drive e
+ tc. will not be accepted as a valid submission.</p><script src="https://in
+ structure-uploads.s3.amazonaws.com/account_107720000000000001/attachments/
+ 74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261022T170800Z
+UID:event-assignment-2764444
+DTSTART;VALUE=DATE;VALUE=DATE:20261028
+CLASS:PUBLIC
+DESCRIPTION:Video Assignment: AB Testing and Randomized Controlled Trials
+SEQUENCE:0
+SUMMARY:Video Assignment: AB Testing and Randomized Controlled Trials [CSCI
+  3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764444
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>Video Assignment: AB Testing and Randomized Controlled Tr
+ ials</p><script src="https://instructure-uploads.s3.amazonaws.com/account_
+ 107720000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T214000Z
+UID:event-assignment-2752268
+DTSTART;VALUE=DATE;VALUE=DATE:20261029
+CLASS:PUBLIC
+DESCRIPTION:Quizzes uploaded more than 10 minutes after the end of recitati
+ on are considered late.
+SEQUENCE:0
+SUMMARY:Quiz07 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=10&year=2026#assignment_2752268
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p style="text-align: center\;"><em>Quizzes uploaded more th
+ an 10 minutes after the end of recitation are considered late.</em></p><sc
+ ript src="https://instructure-uploads.s3.amazonaws.com/account_10772000000
+ 0000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261030T160000Z
+UID:event-assignment-2764439
+DTSTART:20261030T170000Z
+DTEND:20261030T170000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Quiz 8 [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=10&year=2026#assignment_2764439
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T171500Z
+UID:event-assignment-2775886
+DTSTART:20261030T212000Z
+DTEND:20261030T212000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Quiz 8 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=10&year=2026#assignment_2775886
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T164000Z
+UID:event-assignment-2857921
+DTSTART;VALUE=DATE;VALUE=DATE:20261030
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Group Evaluation - 1 [CSCI 3308 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=10&year=2026#assignment_2857921
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T041300Z
+UID:event-assignment-2752257
+DTSTART;VALUE=DATE;VALUE=DATE:20261030
+CLASS:PUBLIC
+DESCRIPTION:-----------\nAPPM 2360\nHomework 10\n-----------\n\nYou will do
+ wnload the homework here [Homework10.pdf] (https://canvas.colorado.edu/cou
+ rses/137419/files/85898854?wrap=1)  Download Homework01.pdfand then uploa
+ d your solutions to Gradescope using the link below.
+SEQUENCE:0
+SUMMARY:Homework 10 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=10&year=2026#assignment_2752257
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><div id="dp-wrapper" class="dp-wrapper dp-flat-sections" dat
+ a-header-class="dp-header dp-flat-sections" data-nav-class="container-flui
+ d dp-link-grid dp-flat-sections dp-fs-1" data-img-url="https://designtools
+ .ciditools.com/css/images/banner_desert_sky.png"><header class="dp-header 
+ dp-flat-sections">\n<h2 class="dp-heading"><span class="dp-header-pre">APP
+ M 2360<br></span> <span class="dp-header-title">Homework 10</span></h2>\n<
+ /header>\n<p>You will download the homework here <a class="instructure_fil
+ e_link instructure_scribd_file inline_disabled" title="Homework10.pdf" hre
+ f="https://canvas.colorado.edu/courses/137419/files/85898854?wrap=1" targe
+ t="_blank" data-api-endpoint="https://canvas.colorado.edu/api/v1/courses/1
+ 37419/files/85898854" data-api-returntype="File">Homework10.pdf</a><span c
+ lass="instructure_file_holder link_holder instructure_file_link_holder">&n
+ bsp\;<span class="screenreader-only"> Download Homework01.pdf</span></span
+ >and then upload your solutions to Gradescope using the link below.</p>\n<
+ /div><script src="https://instructure-uploads.s3.amazonaws.com/account_107
+ 720000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T164000Z
+UID:event-assignment-2857925
+DTSTART;VALUE=DATE;VALUE=DATE:20261030
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Individual Evaluation - 1 [CSCI 3308 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=10&year=2026#assignment_2857925
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261027T173300Z
+UID:event-assignment-2771153
+DTSTART;VALUE=DATE;VALUE=DATE:20261030
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Lab #4 Performance Lab Interview Grading Signup [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2771153
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T175900Z
+UID:event-assignment-2862223
+DTSTART;VALUE=DATE;VALUE=DATE:20261030
+CLASS:PUBLIC
+DESCRIPTION:Download your performance lab code from GitHub.\n\n------------
+ -----------------------------------\n\nIMPORTANT: The interview grading si
+ gn-up slots will be posted during the week of the lab deadline. The sign-u
+ p deadline is the same as the lab deadline.\n-----------------------------
+ --------------------------------------------------------------------------
+ -------------------------------------------------\n\n \n\nThe readme for 
+ the lab is available in your repository.\n\nThis assignment deals with opt
+ imizing memory-intensive code. Image processing offers many examples of fu
+ nctions that can benefit from optimization. In this lab\, you’ll be impr
+ oving the overall performance of an “image processing” application by 
+ a factor of about 25 – an extra credit phase will challenge you to incre
+ ase the speed further.\n\nThis lab uses GitHub actions to grade your lab 
+ performance. Every time you commit and push your changes to Github\, the c
+ ode will run on a specific computer with 2 cores. You can get the "Actions
+ " tab of your GitHub repository to determine the score. While you can deve
+ lop the code on any machine you like\, the evaluation will be done using t
+ hese specific computers. You can get more information about the processor 
+ model\, the cache size(s)\, and the specific features of that machine by l
+ ooking at the cat /proc/cpuinfo action from a run. You can determine you
+ r score by looking at the last ./Judge action.
+SEQUENCE:0
+SUMMARY:Lab 4 - Performance Lab [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2862223
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><div title="Page 1">\n<div>\n<div>\n<h3><span><strong>Downlo
+ ad your performance lab code from GitHub.</strong><br></span></h3>\n<h3><s
+ trong>IMPORTANT: The interview grading sign-up slots will be posted during
+  the week of the lab deadline. The sign-up deadline is the same as the lab
+  deadline.</strong></h3>\n<p>&nbsp\;</p>\n<p><span>The readme for the lab 
+ is available in your repository.</span></p>\n<p>This assignment deals with
+  optimizing memory-intensive code. Image processing offers many examples o
+ f functions that can benefit from optimization. In this lab\, you’ll be 
+ improving the overall performance of an “image processing” application
+  by a factor of about 25 – an extra credit phase will challenge you to i
+ ncrease the speed further.</p>\n</div>\n</div>\n</div>\n<p><span>This lab 
+ uses </span><em>GitHub actions</em><span>&nbsp\;to grade your lab performa
+ nce. Every time you commit and push your changes to Github\, the code will
+  run on a specific computer with 2 cores. You can get the "Actions" tab of
+  your GitHub repository to determine the score. While you can develop the 
+ code on any machine you like\, the evaluation will be done using these spe
+ cific computers. You can get more information about the processor model\, 
+ the cache size(s)\, and the specific features of that machine by looking a
+ t the&nbsp\;</span><strong>cat /proc/cpuinfo</strong><span>&nbsp\;action f
+ rom a run. You can determine your score by looking at the last&nbsp\;</spa
+ n><strong>./Judge</strong><span> action.</span></p><script src="https://in
+ structure-uploads.s3.amazonaws.com/account_107720000000000001/attachments/
+ 74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T185600Z
+UID:event-assignment-2771924
+DTSTART;VALUE=DATE;VALUE=DATE:20261030
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Reading Quiz 5.1-5.6 [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2771924
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261026T185600Z
+UID:event-assignment-2771911
+DTSTART;VALUE=DATE;VALUE=DATE:20261030
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Reading Quiz Ch 5 & 4 [CSCI 2400]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138122&month=10&year=2026#assignment_2771911
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261029T055900Z
+UID:event-assignment-2775867
+DTSTART;VALUE=DATE;VALUE=DATE:20261104
+CLASS:PUBLIC
+DESCRIPTION:*\n\n* Submit online via Canvas by uploading single pdf\, make 
+ sure to name the file accordingly\, eg ECEN2250_Homework4\n\n* Scan B&W at
+  150-300 dpi into a single easily readable pdf\, no credit for multiple pd
+ fs\n\n* Write the problem number and box your answer\, make it easy for th
+ e grader to grade\, if the grader can't read it\, then they can't grade it
+  and will not give any credit\n\n* Keep a copy of your work\n\n* Make sure
+  that when you submit homework that it is submitted properly\, it is the s
+ tudents responsibility\, no exceptions.\n\n* No late work beyond 24 hours 
+ late will be accepted (except in cases of documented emergencies or previo
+ us arrangements). (With prior approval of late submission) When submitting
+  late work\, use Canvas\, if the Canvas Assignment is closed\, then submit
+  it via email using your @colorado.edu account and send it to both Arielle
+  ([amblum@colorado.edu] (mailto:amblum@colorado.edu)) AND ALL of the LAs w
+ ith the assignment attached to the email\, email title = 'ECEN 2250 - Late
+  Homework Submission <Insert Your Name>'\n\n* The homework will builds fro
+ m the previous week’s work\, so it is essential that students do the hom
+ ework every week\, otherwise students will be lost in the course. \n\n* S
+ tudents are responsible for ensuring that their .pdf file uploaded properl
+ y for the submission by downloading their pdf after submitting the assignm
+ ent to verify that there are no issues\, the pdf is readable\, the written
+  work is legible and the file is not corrupted or too large. Failure to do
+  so will result in the student receiving NO CREDIT for the assignment subm
+ ission if there are any issues as outlined above.\n\n* See the Syllabus fo
+ r additional details.\n\n[Homework] (https://canvas.colorado.edu/courses/1
+ 38441/modules/967837)\n\n* Cheating on homework cheats students out of dev
+ eloping the knowledge\, skills\, and ability gained from taking ECEN 2250 
+ and will only serve to make subsequent course content too challenging to u
+ nderstand and complete. Courses that use ECEN 2250 as a prerequisite will 
+ then become extremely stressful because the student does not have the prer
+ equisite knowledge to apply to more challenging situations. Avoid this sit
+ uation by putting in the time to learn the material. The homework should t
+ ake time and be challenging\, it should be hard to understand\, that is wh
+ y you are taking the course\, because it is not simple.\n\n* Tips for doin
+ g well on the weekly homework and in this course: always attend lecture\, 
+ ask questions during lecture\, read the textbook both before lecture and a
+ fter lecture\, do practice problems from lecture\, quizzes\, and the textb
+ ook. Attend office hours and ask questions\, create problems for other stu
+ dents in the course and practice solving the problems\, talk about the con
+ cepts with other students\, help other students who are struggling. Make f
+ lash card on basic topics and practice them. When homework solutions are r
+ eleased\, go over them and compare them with your solutions and make sure 
+ you understand any differences\, go to office hours to ask questions about
+  any differences.\n\n* Invest time\, energy\, and effort into your educati
+ on.
+SEQUENCE:0
+SUMMARY:Homework 9 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=11&year=2026#assignment_2775867
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><ul>\n<li style="list-style-type: none\;">\n<ul>\n<li>Submit
+  online via Canvas by uploading <strong>single </strong>pdf\, make sure to
+  name the file accordingly\, eg ECEN2250_Homework4</li>\n<li>Scan B&amp\;W
+  at 150-300 dpi into a single easily readable pdf\, <strong>no credit for 
+ multiple pdfs</strong>\n</li>\n</ul>\n<ul>\n<li>Write the problem number a
+ nd box your answer\, make it easy for the grader to grade\, if the grader 
+ can't read it\, then they can't grade it and will not give any credit</li>
+ \n<li>Keep a copy of your work</li>\n<li>Make sure that when you submit ho
+ mework that it is submitted properly\, it is the students responsibility\,
+  no exceptions.</li>\n<li>No late work beyond 24 hours late will be accept
+ ed (except in cases of documented emergencies or previous arrangements). (
+ With prior approval of late submission) When submitting late work\, use Ca
+ nvas\, if the Canvas Assignment is closed\, then submit it via email using
+  your @colorado.edu account and send it to both Arielle (<a href="mailto:a
+ mblum@colorado.edu">amblum@colorado.edu</a>) AND ALL of the LAs with the a
+ ssignment attached to the email\, email title = 'ECEN 2250 - Late Homework
+  Submission &lt\;Insert Your Name&gt\;'</li>\n<li>The homework will builds
+  from the previous week’s work\, so it is essential that students do the
+  homework every week\, otherwise students will be lost in the course.&nbsp
+ \;</li>\n<li><span style="background-color: #fbeeb8\;">Students are respon
+ sible for ensuring that their .pdf file uploaded properly for the submissi
+ on by downloading their pdf after submitting the assignment to verify that
+  there are no issues\, the pdf is readable\, the written work is legible a
+ nd the file is not corrupted or too large. Failure to do so will result in
+  the student receiving NO CREDIT for the assignment submission if there ar
+ e any issues as outlined above.</span></li>\n<li>See the Syllabus for addi
+ tional details.</li>\n</ul>\n<p><a title="Homework" href="https://canvas.c
+ olorado.edu/courses/138441/modules/967837" data-api-endpoint="https://canv
+ as.colorado.edu/api/v1/courses/138441/modules/967837" data-api-returntype=
+ "Module">Homework</a></p>\n<ul>\n<li>Cheating on homework cheats students 
+ out of developing the knowledge\, skills\, and ability gained from taking 
+ ECEN 2250 and will only serve to make subsequent course content too challe
+ nging to understand and complete. Courses that use ECEN 2250 as a prerequi
+ site will then become extremely stressful because the student does not hav
+ e the prerequisite knowledge to apply to more challenging situations. Avoi
+ d this situation by putting in the time to learn the material. The homewor
+ k should take time and be challenging\, it should be hard to understand\, 
+ that is why you are taking the course\, because it is not simple.</li>\n<l
+ i>Tips for doing well on the weekly homework and in this course: always at
+ tend lecture\, ask questions during lecture\, read the textbook both befor
+ e lecture and after lecture\, do practice problems from lecture\, quizzes\
+ , and the textbook. Attend office hours and ask questions\, create problem
+ s for other students in the course and practice solving the problems\, tal
+ k about the concepts with other students\, help other students who are str
+ uggling. Make flash card on basic topics and practice them. When homework 
+ solutions are released\, go over them and compare them with your solutions
+  and make sure you understand any differences\, go to office hours to ask 
+ questions about any differences.</li>\n<li>Invest time\, energy\, and effo
+ rt into your education.</li>\n</ul>\n</li>\n</ul><script src="https://inst
+ ructure-uploads.s3.amazonaws.com/account_107720000000000001/attachments/74
+ 035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261028T060000Z
+UID:event-assignment-2775875
+DTSTART;VALUE=DATE;VALUE=DATE:20261104
+CLASS:PUBLIC
+DESCRIPTION:All labs must be typed.\n\nHandwritten labs will result in ZERO
+  credit!\n\n* Submit online via Canvas by uploading single pdf\, make sure
+  to name the file accordingly\, eg ECEN2250_Lab1\n\n* Scan color 300 dpi i
+ nto a single easily readable pdf\, no credit for multiple pdfs\n\n* Make i
+ t easy for the grader to grade\, if the grader can't read it\, then they c
+ an't grade it and will not give any credit\n\n* Keep a copy of your work\n
+ \n* Make sure that when you submit lab that it is submitted properly\, it 
+ is the students responsibility\, no exceptions.\n\n* No late work beyond 2
+ 4 hours late will be accepted (except in cases of documented emergencies o
+ r previous arrangements). (With prior approval of late submission) When su
+ bmitting late work\, use Canvas\, if the Canvas Assignment is closed\, the
+ n submit it via email using your @colorado.edu account and send it to both
+  Arielle ([amblum@colorado.edu] (mailto:amblum@colorado.edu)) AND ALL of t
+ he LAs with the assignment attached to the email\, email title = 'ECEN 225
+ 0 - Late Lab Submission #<Insert lab Number> <Insert Your Name>'\n\n* The 
+ Labs will build from the previous week’s work\, so it is essential that 
+ students do the lab every week\, otherwise students will be lost in the co
+ urse. \n\n* Students are responsible for ensuring that their .pdf file up
+ loaded properly for the submission by downloading their pdf after submitti
+ ng the assignment to verify that there are no issues\, the pdf is readable
+ \, the written work is legible and the file is not corrupted or too large.
+  Failure to do so will result in the student receiving NO CREDIT for the a
+ ssignment submission if there are any issues as outlined above.\n\n* See t
+ he Syllabus for additional details.\n\n[Labs] (https://canvas.colorado.edu
+ /courses/138441/modules/967838)\n\nAll supplemental videos can be found on
+  Canvas > Modules > [Video Modules] (https://canvas.colorado.edu/courses/1
+ 38441/modules/967843) \n\n* Cheating on labs cheats students out of devel
+ oping the knowledge\, skills\, and ability gained from taking ECEN 2250 an
+ d will only serve to make subsequent course content too challenging to und
+ erstand and complete. Courses that use ECEN 2250 as a prerequisite will th
+ en become extremely stressful because the student does not have the prereq
+ uisite knowledge to apply to more challenging situations. Avoid this situa
+ tion by putting in the time to learn the material. The lab should take tim
+ e and be challenging\, it should be hard to understand\, that is why you a
+ re taking the course\, because it is not simple.\n\n* Tips for doing well 
+ on the weekly labs and in this course: always attend lecture\, ask questio
+ ns during lecture\, read the textbook both before lecture and after lectur
+ e\, do practice problems from lecture\, quizzes\, and the textbook. Attend
+  office hours and ask questions\, create problems for other students in th
+ e course and practice solving the problems\, talk about the concepts with 
+ other students\, help other students who are struggling. Make flash card o
+ n basic topics and practice them. Go to office hours to ask questions abou
+ t any differences.\n\n* Invest time\, energy\, and effort into your educat
+ ion.
+SEQUENCE:0
+SUMMARY:Lab 8 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=11&year=2026#assignment_2775875
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>All labs must be typed.</p>\n<p>Handwritten labs will res
+ ult in ZERO credit!</p>\n<ul>\n<li>Submit online via Canvas by uploading <
+ strong>single </strong>pdf\, make sure to name the file accordingly\, eg E
+ CEN2250_Lab1</li>\n<li>Scan color 300 dpi into a single easily readable pd
+ f\, <strong>no credit for multiple pdfs</strong>\n</li>\n</ul>\n<ul>\n<li>
+ Make it easy for the grader to grade\, if the grader can't read it\, then 
+ they can't grade it and will not give any credit</li>\n<li>Keep a copy of 
+ your work</li>\n<li>Make sure that when you submit lab that it is submitte
+ d properly\, it is the students responsibility\, no exceptions.</li>\n<li>
+ No late work beyond 24 hours late will be accepted (except in cases of doc
+ umented emergencies or previous arrangements). (With prior approval of lat
+ e submission) When submitting late work\, use Canvas\, if the Canvas Assig
+ nment is closed\, then submit it via email using your @colorado.edu accoun
+ t and send it to both Arielle (<a href="mailto:amblum@colorado.edu">amblum
+ @colorado.edu</a>) AND ALL of the LAs with the assignment attached to the 
+ email\, email title = 'ECEN 2250 - Late Lab Submission #&lt\;Insert lab Nu
+ mber&gt\; &lt\;Insert Your Name&gt\;'</li>\n<li>The Labs will build from t
+ he previous week’s work\, so it is essential that students do the lab ev
+ ery week\, otherwise students will be lost in the course.&nbsp\;</li>\n<li
+ ><span style="background-color: #fbeeb8\;">Students are responsible for en
+ suring that their .pdf file uploaded properly for the submission by downlo
+ ading their pdf after submitting the assignment to verify that there are n
+ o issues\, the pdf is readable\, the written work is legible and the file 
+ is not corrupted or too large. Failure to do so will result in the student
+  receiving NO CREDIT for the assignment submission if there are any issues
+  as outlined above.</span></li>\n<li>See the Syllabus for additional detai
+ ls.</li>\n</ul>\n<p><a title="Labs" href="https://canvas.colorado.edu/cour
+ ses/138441/modules/967838" data-course-type="modules" data-published="true
+ " data-api-endpoint="https://canvas.colorado.edu/api/v1/courses/138441/mod
+ ules/967838" data-api-returntype="Module">Labs</a></p>\n<p style="padding-
+ left: 40px\;">All supplemental videos can be found on Canvas &gt\; Modules
+  &gt\; <a title="Video Modules" href="https://canvas.colorado.edu/courses/
+ 138441/modules/967843" data-api-endpoint="https://canvas.colorado.edu/api/
+ v1/courses/138441/modules/967843" data-api-returntype="Module">Video Modul
+ es</a>&nbsp\;</p>\n<ul>\n<li>Cheating on labs cheats students out of devel
+ oping the knowledge\, skills\, and ability gained from taking ECEN 2250 an
+ d will only serve to make subsequent course content too challenging to und
+ erstand and complete. Courses that use ECEN 2250 as a prerequisite will th
+ en become extremely stressful because the student does not have the prereq
+ uisite knowledge to apply to more challenging situations. Avoid this situa
+ tion by putting in the time to learn the material. The lab should take tim
+ e and be challenging\, it should be hard to understand\, that is why you a
+ re taking the course\, because it is not simple.</li>\n<li>Tips for doing 
+ well on the weekly labs and in this course: always attend lecture\, ask qu
+ estions during lecture\, read the textbook both before lecture and after l
+ ecture\, do practice problems from lecture\, quizzes\, and the textbook. A
+ ttend office hours and ask questions\, create problems for other students 
+ in the course and practice solving the problems\, talk about the concepts 
+ with other students\, help other students who are struggling. Make flash c
+ ard on basic topics and practice them. Go to office hours to ask questions
+  about any differences.</li>\n<li>Invest time\, energy\, and effort into y
+ our education.</li>\n</ul><script src="https://instructure-uploads.s3.amaz
+ onaws.com/account_107720000000000001/attachments/74035875/dp_app.js"></scr
+ ipt>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261029T140000Z
+UID:event-assignment-2857948
+DTSTART;VALUE=DATE;VALUE=DATE:20261104
+CLASS:PUBLIC
+DESCRIPTION:Lab instructions can be found here: https://cuboulder-csci3308.
+ pages.dev/docs/labs/lab9\n\n \n\nONE PERSON PER TEAM must submit a GitHub
+  link to the GitHub project board to this assignment. Make sure that the P
+ roject Board is public.
+SEQUENCE:0
+SUMMARY:Lab 9 - Project Requirements - Requires submission on Canvas [CSCI 
+ 3308 - F26]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138130&month=11&year=2026#assignment_2857948
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p>Lab instructions can be found here: <a class="external" h
+ ref="https://cuboulder-csci3308.pages.dev/docs/labs/lab9" target="_blank">
+ https://cuboulder-csci3308.pages.dev/docs/labs/lab9</a></p>\n<p>&nbsp\;</p
+ >\n<p><span>ONE PERSON PER TEAM must submit a GitHub link to the GitHub pr
+ oject board to this assignment. Make sure that the Project Board is public
+ .</span></p><script src="https://instructure-uploads.s3.amazonaws.com/acco
+ unt_107720000000000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T214000Z
+UID:event-assignment-2752269
+DTSTART;VALUE=DATE;VALUE=DATE:20261105
+CLASS:PUBLIC
+DESCRIPTION:Quizzes uploaded more than 10 minutes after the end of recitati
+ on are considered late.
+SEQUENCE:0
+SUMMARY:Quiz08 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=11&year=2026#assignment_2752269
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p style="text-align: center\;"><em>Quizzes uploaded more th
+ an 10 minutes after the end of recitation are considered late.</em></p><sc
+ ript src="https://instructure-uploads.s3.amazonaws.com/account_10772000000
+ 0000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260819T214600Z
+UID:event-assignment-2764424
+DTSTART:20261106T180000Z
+DTEND:20261106T180000Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Midterm 2 [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=11&year=2026#assignment_2764424
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260817T195700Z
+UID:event-assignment-2775887
+DTSTART:20261106T222000Z
+DTEND:20261106T222000Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Quiz 9 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=11&year=2026#assignment_2775887
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261025T222900Z
+UID:event-assignment-2752261
+DTSTART;VALUE=DATE;VALUE=DATE:20261106
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Project02 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=11&year=2026#assignment_2752261
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260820T221100Z
+UID:event-assignment-2775851
+DTSTART:20261109T222000Z
+DTEND:20261109T222000Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Exam III [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=11&year=2026#assignment_2775851
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T214000Z
+UID:event-assignment-2752246
+DTSTART:20261112T014500Z
+DTEND:20261112T014500Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Exam03 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=11&year=2026#assignment_2752246
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260826T164300Z
+UID:event-assignment-2764404
+DTSTART;VALUE=DATE;VALUE=DATE:20261111
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:HW 10 [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=11&year=2026#assignment_2764404
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260817T195700Z
+UID:event-assignment-2775858
+DTSTART;VALUE=DATE;VALUE=DATE:20261118
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Homework 10 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=11&year=2026#assignment_2775858
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260817T195700Z
+UID:event-assignment-2775876
+DTSTART;VALUE=DATE;VALUE=DATE:20261118
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Lab 9 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=11&year=2026#assignment_2775876
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260819T215000Z
+UID:event-assignment-2764427
+DTSTART;VALUE=DATE;VALUE=DATE:20261118
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Project Part 1 Manually Graded [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=11&year=2026#assignment_2764427
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261025T222900Z
+UID:event-assignment-2872559
+DTSTART:20261120T000000Z
+DTEND:20261120T000000Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Project02 Quiz [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=11&year=2026#assignment_2872559
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T214000Z
+UID:event-assignment-2752270
+DTSTART;VALUE=DATE;VALUE=DATE:20261119
+CLASS:PUBLIC
+DESCRIPTION:Quizzes uploaded more than 10 minutes after the end of recitati
+ on are considered late.
+SEQUENCE:0
+SUMMARY:Quiz09 [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=11&year=2026#assignment_2752270
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.amazonaws.com/account_107720000000000001/attachments/7403587
+ 6/dp_app.css"><p style="text-align: center\;"><em>Quizzes uploaded more th
+ an 10 minutes after the end of recitation are considered late.</em></p><sc
+ ript src="https://instructure-uploads.s3.amazonaws.com/account_10772000000
+ 0000001/attachments/74035875/dp_app.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260819T165200Z
+UID:event-assignment-2764440
+DTSTART:20261120T180000Z
+DTEND:20261120T180000Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Quiz 9 [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=11&year=2026#assignment_2764440
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260817T195700Z
+UID:event-assignment-2775878
+DTSTART:20261120T222000Z
+DTEND:20261120T222000Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Quiz 10 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=11&year=2026#assignment_2775878
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260817T195700Z
+UID:event-assignment-2775859
+DTSTART;VALUE=DATE;VALUE=DATE:20261202
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Homework 11 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=12&year=2026#assignment_2775859
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260819T215100Z
+UID:event-assignment-2764431
+DTSTART;VALUE=DATE;VALUE=DATE:20261202
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Project Part 2 [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=12&year=2026#assignment_2764431
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260817T195700Z
+UID:event-assignment-2775879
+DTSTART:20261204T222000Z
+DTEND:20261204T222000Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Quiz 11 [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=12&year=2026#assignment_2775879
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261016T214000Z
+UID:event-assignment-2752247
+DTSTART:20261207T173000Z
+DTEND:20261207T173000Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Final Exam [APPM 2360]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 137419&month=12&year=2026#assignment_2752247
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260820T220900Z
+UID:event-assignment-override-486828
+DTSTART:20261208T230000Z
+DTEND:20261208T230000Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Final Exam (ECEN 2250-002) [ECEN 2250-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 138441&month=12&year=2026#assignment_2775856
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260819T214700Z
+UID:event-assignment-override-486256
+DTSTART:20261210T050000Z
+DTEND:20261210T050000Z
+CLASS:PUBLIC
+SEQUENCE:0
+SUMMARY:Final Exam (CSCI 3022-001) [CSCI 3022-001\,002]
+URL;VALUE=URI:https://canvas.colorado.edu/calendar?include_contexts=course_
+ 141915&month=12&year=2026#assignment_2764401
+END:VEVENT
+END:VCALENDAR

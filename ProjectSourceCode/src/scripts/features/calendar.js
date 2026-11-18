@@ -5,357 +5,746 @@ const router = express.Router();
 const { db } = require("../db");
 const { getCourses } = require("./courses");
 
+// Authentication for Calendar routes
+const { requireAuth, getCurrentUser } = require("./auth");
 
-// Get all assignments for a selected month
-async function getCalendarAssignments(userId, year, month) {
 
-  // Calculate the first day of the month
-  const startDate =
-    `${year}-${String(month).padStart(2, "0")}-01`;
+// Require users to log in before accessing Calendar routes
+router.use(requireAuth);
 
-  let nextYear = year;
-  let nextMonth = month + 1;
 
-  // Handle December to January
-  if (nextMonth === 13) {
-    nextMonth = 1;
-    nextYear++;
-  }
-
-  // Calculate the first day of the next month
-  const endDate =
-    `${nextYear}-${String(nextMonth).padStart(2, "0")}-01`;
-
-  // Retrieve assignments and their course information
-  return db.any(
-    `
-    SELECT
-      a.assignment_id,
-      a.assignment_name,
-      a.description,
-      a.priority,
-      a.estimated_time,
-      a.completed,
-      TO_CHAR(a.due_date, 'YYYY-MM-DD') AS due_day,
-      TO_CHAR(a.due_date, 'FMHH12:MI AM') AS due_time,
-      c.course_name,
-      c.course_code
-    FROM assignments a
-    JOIN courses c
-      ON a.course_id = c.course_id
-    WHERE c.user_id = $1
-      AND a.due_date >= $2::date
-      AND a.due_date < $3::date
-    ORDER BY a.due_date;
-    `,
-    [userId, startDate, endDate]
-  );
+/*
+ * Validate the requested calendar year and month.
+ * January = 1 and December = 12.
+ */
+function isValidMonth(year, month) {
+    return (
+        Number.isInteger(year) &&
+        Number.isInteger(month) &&
+        year >= 100 &&
+        year <= 9999 &&
+        month >= 1 &&
+        month <= 12
+    );
 }
 
 
-// Display the calendar page
-router.get("/", async (req, res) => {
-  try {
-    const today = new Date();
-
-    let year;
-    let month;
-
-    // Use the requested month or the current month
-    if (req.query.month) {
-      [year, month] = req.query.month.split("-").map(Number);
-    } else {
-      year = today.getFullYear();
-      month = today.getMonth() + 1;
+// Validate dates submitted through datetime-local inputs.
+function isValidDueDate(value) {
+    if (typeof value !== "string") {
+        return false;
     }
 
-    // Temporary test user
-    const userId = 1;
+    const match =
+        /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(value);
 
-    // Retrieve assignments and courses
-    const assignments =
-      await getCalendarAssignments(userId, year, month);
-
-    const courses = await getCourses(userId);
-
-    // Group assignments by their due date
-    const assignmentsByDay = {};
-
-    for (const assignment of assignments) {
-      if (!assignmentsByDay[assignment.due_day]) {
-        assignmentsByDay[assignment.due_day] = [];
-      }
-
-      assignmentsByDay[assignment.due_day].push(assignment);
+    if (!match) {
+        return false;
     }
 
-    // Find the first weekday and number of days
-    const firstDay =
-      new Date(year, month - 1, 1).getDay();
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+    const hour = Number(match[4]);
+    const minute = Number(match[5]);
 
-    const daysInMonth =
-      new Date(year, month, 0).getDate();
-
-    const days = [];
-
-    // Add blank cells before the first day
-    for (let i = 0; i < firstDay; i++) {
-      days.push({
-        isBlank: true
-      });
+    if (
+        !isValidMonth(year, month) ||
+        day < 1 ||
+        hour > 23 ||
+        minute > 59
+    ) {
+        return false;
     }
 
-    // Create each day and include its assignments
-    for (let day = 1; day <= daysInMonth; day++) {
+    // UTC is used only to check whether the date exists.
+    // The submitted deadline is not converted to another timezone.
+    const date = new Date(
+        Date.UTC(year, month - 1, day, hour, minute)
+    );
 
-      const dateString =
-        `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    return (
+        date.getUTCFullYear() === year &&
+        date.getUTCMonth() === month - 1 &&
+        date.getUTCDate() === day &&
+        date.getUTCHours() === hour &&
+        date.getUTCMinutes() === minute
+    );
+}
 
-      days.push({
-        day: day,
-        date: dateString,
-        assignments: assignmentsByDay[dateString] || []
-      });
-    }
 
-    // Calculate the previous month
-    let previousMonth = month - 1;
-    let previousYear = year;
+/*
+ * Retrieve all assignments due during a selected month.
+ *
+ * The course join limits results to the specified user.
+ * The date range includes the first day of the month
+ * and excludes the first day of the following month.
+ *
+ * Course ID and due_datetime are also returned so the
+ * Edit Assignment form can be populated correctly.
+ */
+async function getCalendarAssignments(userId, year, month) {
+    const startDate =
+        `${year}-${String(month).padStart(2, "0")}-01`;
 
-    if (previousMonth === 0) {
-      previousMonth = 12;
-      previousYear--;
-    }
-
-    // Calculate the next month
-    let nextMonth = month + 1;
     let nextYear = year;
+    let nextMonth = month + 1;
 
     if (nextMonth === 13) {
-      nextMonth = 1;
-      nextYear++;
+        nextMonth = 1;
+        nextYear++;
     }
 
-    // Convert the month number to its name
-    const monthName =
-      new Date(year, month - 1)
-        .toLocaleString("default", { month: "long" });
+    const endDate =
+        `${nextYear}-${String(nextMonth).padStart(2, "0")}-01`;
 
-    // Send calendar information to calendar.hbs
-    res.render("calendar", {
-      title: "Calendar",
-      stylesheet: "calendar.css",
+    return db.any(
+        `
+        SELECT
+            a.assignment_id,
+            a.course_id,
+            a.assignment_name,
+            a.description,
+            a.priority,
+            a.estimated_time,
+            a.completed,
 
-      monthLabel: `${monthName} ${year}`,
+            TO_CHAR(
+                a.due_date,
+                'YYYY-MM-DD'
+            ) AS due_day,
 
-      days: days,
-      courses: courses,
+            TO_CHAR(
+                a.due_date,
+                'FMHH12:MI AM'
+            ) AS due_time,
 
-      previousMonth:
-        `${previousYear}-${String(previousMonth).padStart(2, "0")}`,
+            TO_CHAR(
+                a.due_date,
+                'YYYY-MM-DD"T"HH24:MI'
+            ) AS due_datetime,
 
-      nextMonth:
-        `${nextYear}-${String(nextMonth).padStart(2, "0")}`
-    });
+            c.course_name,
+            c.course_code
 
-  } catch (error) {
-    console.error("Calendar error:", error);
-    res.status(500).send("Unable to load calendar");
-  }
+        FROM assignments a
+
+        JOIN courses c
+            ON a.course_id = c.course_id
+
+        WHERE c.user_id = $1
+          AND a.due_date >= $2::date
+          AND a.due_date < $3::date
+
+        ORDER BY a.due_date;
+        `,
+        [userId, startDate, endDate]
+    );
+}
+
+
+/*
+ * GET /calendar
+ *
+ * Render the monthly calendar.
+ *
+ * Examples:
+ * /calendar
+ * /calendar?month=2026-11
+ *
+ * Defaults to the current month when no month
+ * query parameter is supplied.
+ */
+router.get("/", async (req, res) => {
+    try {
+        const today = new Date();
+
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+
+        // Parse and validate the optional month query parameter.
+        if (req.query.month !== undefined) {
+            if (typeof req.query.month !== "string") {
+                return res.status(400).send(
+                    "Invalid calendar month"
+                );
+            }
+
+            const match =
+                /^(\d{4})-(\d{2})$/.exec(req.query.month);
+
+            if (!match) {
+                return res.status(400).send(
+                    "Invalid calendar month"
+                );
+            }
+
+            year = Number(match[1]);
+            month = Number(match[2]);
+        }
+
+        if (!isValidMonth(year, month)) {
+            return res.status(400).send(
+                "Invalid calendar month"
+            );
+        }
+
+        const userId = getCurrentUser(req).user_id;
+
+        // Load assignments and courses for the Calendar page.
+        const assignments =
+            await getCalendarAssignments(userId, year, month);
+
+        const courses = await getCourses(userId);
+
+        // Organize assignments using their YYYY-MM-DD due date.
+        const assignmentsByDay = {};
+
+        for (const assignment of assignments) {
+            const dueDay = assignment.due_day;
+
+            if (!assignmentsByDay[dueDay]) {
+                assignmentsByDay[dueDay] = [];
+            }
+
+            assignmentsByDay[dueDay].push(assignment);
+        }
+
+        // Determine the weekday of the first day of the month.
+        const firstDay =
+            new Date(year, month - 1, 1).getDay();
+
+        const daysInMonth =
+            new Date(year, month, 0).getDate();
+
+        const days = [];
+
+        // Insert blank cells before the first day of the month.
+        for (let i = 0; i < firstDay; i++) {
+            days.push({
+                isBlank: true
+            });
+        }
+
+        // Create the calendar cells and attach assignments.
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateString =
+                `${year}-${String(month).padStart(2, "0")}` +
+                `-${String(day).padStart(2, "0")}`;
+
+            days.push({
+                day: day,
+                date: dateString,
+                assignments: assignmentsByDay[dateString] || []
+            });
+        }
+
+        // Calculate the previous month for navigation.
+        let previousMonth = month - 1;
+        let previousYear = year;
+
+        if (previousMonth === 0) {
+            previousMonth = 12;
+            previousYear--;
+        }
+
+        // Calculate the next month for navigation.
+        let nextMonth = month + 1;
+        let nextYear = year;
+
+        if (nextMonth === 13) {
+            nextMonth = 1;
+            nextYear++;
+        }
+
+        const monthName =
+            new Date(year, month - 1, 1).toLocaleString(
+                "default",
+                { month: "long" }
+            );
+
+        /*
+         * Render calendar.hbs.
+         *
+         * Each assignment includes data used by:
+         * - The assignment details popup
+         * - The completed-assignment styling
+         * - The Edit Assignment form
+         */
+        return res.render("calendar", {
+            title: "Calendar",
+            stylesheet: "calendar.css",
+
+            monthLabel: `${monthName} ${year}`,
+
+            days: days,
+            courses: courses,
+
+            previousMonth:
+                `${previousYear}-` +
+                String(previousMonth).padStart(2, "0"),
+
+            nextMonth:
+                `${nextYear}-` +
+                String(nextMonth).padStart(2, "0")
+        });
+
+    } catch (error) {
+        console.error("Calendar error:", error);
+
+        return res.status(500).send(
+            "Unable to load calendar"
+        );
+    }
 });
 
 
-// Return calendar assignments as JSON
+/*
+ * GET /calendar/events
+ *
+ * Return assignments as JSON for the requested month.
+ *
+ * Example:
+ * /calendar/events?year=2026&month=11
+ */
 router.get("/events", async (req, res) => {
-  try {
-    const today = new Date();
+    try {
+        const today = new Date();
 
-    // Get the requested year and month
-    const year =
-      Number(req.query.year) || today.getFullYear();
+        const year =
+            req.query.year === undefined
+                ? today.getFullYear()
+                : Number(req.query.year);
 
-    const month =
-      Number(req.query.month) || today.getMonth() + 1;
+        const month =
+            req.query.month === undefined
+                ? today.getMonth() + 1
+                : Number(req.query.month);
 
-    // Temporary test user
-    const userId = 1;
+        if (!isValidMonth(year, month)) {
+            return res.status(400).json({
+                error: "Invalid calendar year or month"
+            });
+        }
 
-    // Retrieve assignments for the selected month
-    const assignments =
-      await getCalendarAssignments(userId, year, month);
+        const userId = getCurrentUser(req).user_id;
 
-    // Return assignment data as JSON
-    res.status(200).json(assignments);
+        const assignments =
+            await getCalendarAssignments(userId, year, month);
 
-  } catch (error) {
-    console.error("Calendar events error:", error);
+        return res.status(200).json(assignments);
 
-    res.status(500).json({
-      error: "Unable to retrieve calendar events"
-    });
-  }
+    } catch (error) {
+        console.error("Calendar events error:", error);
+
+        return res.status(500).json({
+            error: "Unable to retrieve calendar events"
+        });
+    }
 });
 
 
-// Add a new assignment
+/*
+ * POST /calendar/add
+ *
+ * Create an assignment.
+ *
+ * The frontend creates the assignment before uploading
+ * attachments because S3 paths require an assignment ID.
+ *
+ * JSON requests receive the new ID and redirect URL.
+ * Standard form submissions receive an HTTP 303 redirect.
+ */
 router.post("/add", async (req, res) => {
-  try {
+    try {
+        const userId = getCurrentUser(req).user_id;
 
-    // Temporary test user
-    const userId = 1;
+        const courseId = Number(req.body.course_id);
 
-    // Get assignment information from the form
-    const courseId = Number(req.body.course_id);
-    const assignmentName = (req.body.assignment_name || "").trim();
-    const description = req.body.description || null;
-    const dueDate = req.body.due_date;
-    const priority = req.body.priority || null;
+        const assignmentName =
+            typeof req.body.assignment_name === "string"
+                ? req.body.assignment_name.trim()
+                : "";
 
-    const estimatedTime =
-      req.body.estimated_time === "" ||
-      req.body.estimated_time == null
-        ? null
-        : Number(req.body.estimated_time);
+        const description =
+            typeof req.body.description === "string"
+                ? req.body.description
+                : null;
 
-    // Validate required assignment information
-    if (
-      !Number.isInteger(courseId) ||
-      courseId <= 0 ||
-      !assignmentName ||
-      assignmentName.length > 150 ||
-      !dueDate
-    ) {
-      return res.status(400).send("Invalid assignment information");
+        const dueDate =
+            typeof req.body.due_date === "string"
+                ? req.body.due_date.trim()
+                : "";
+
+        const priority = req.body.priority || null;
+
+        const estimatedTime =
+            req.body.estimated_time === "" ||
+            req.body.estimated_time == null
+                ? null
+                : Number(req.body.estimated_time);
+
+        // Validate required assignment information.
+        if (
+            !Number.isSafeInteger(courseId) ||
+            courseId <= 0 ||
+            !assignmentName ||
+            assignmentName.length > 150 ||
+            !isValidDueDate(dueDate)
+        ) {
+            return res.status(400).send(
+                "Invalid assignment information"
+            );
+        }
+
+        // Validate optional priority and estimated study time.
+        if (
+            (
+                priority !== null &&
+                !["low", "medium", "high"].includes(priority)
+            ) ||
+            (
+                estimatedTime !== null &&
+                (
+                    !Number.isSafeInteger(estimatedTime) ||
+                    estimatedTime < 0
+                )
+            )
+        ) {
+            return res.status(400).send(
+                "Invalid priority or estimated time"
+            );
+        }
+
+        // Make sure the selected course belongs to this user.
+        const course = await db.oneOrNone(
+            `
+            SELECT course_id
+            FROM courses
+            WHERE course_id = $1
+              AND user_id = $2;
+            `,
+            [courseId, userId]
+        );
+
+        if (!course) {
+            return res.status(400).send(
+                "Invalid course selected"
+            );
+        }
+
+        /*
+         * Create the assignment and return its generated ID.
+         *
+         * The assignment ID is used for optional S3 uploads.
+         */
+        const createdAssignment = await db.one(
+            `
+            INSERT INTO assignments (
+                course_id,
+                assignment_name,
+                description,
+                due_date,
+                priority,
+                estimated_time
+            )
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING assignment_id;
+            `,
+            [
+                courseId,
+                assignmentName,
+                description,
+                dueDate,
+                priority,
+                estimatedTime
+            ]
+        );
+
+        // Redirect to the month containing the new assignment.
+        const month = dueDate.substring(0, 7);
+
+        const redirectUrl =
+            `/calendar?month=${encodeURIComponent(month)}`;
+
+        // Return JSON when the Calendar JavaScript creates the record.
+        if (
+            (req.get("Accept") || "").includes(
+                "application/json"
+            )
+        ) {
+            return res.status(201).json({
+                message: "Assignment created successfully.",
+                assignmentId: createdAssignment.assignment_id,
+                redirectUrl
+            });
+        }
+
+        return res.redirect(303, redirectUrl);
+
+    } catch (error) {
+        console.error("Error adding assignment:", error);
+
+        /*
+         * PostgreSQL error 23505 indicates a unique-constraint
+         * violation, if a matching constraint exists.
+         *
+         * Full duplicate prevention is a separate planned feature.
+         */
+        if (error.code === "23505") {
+            return res.status(409).send(
+                "Assignment already exists"
+            );
+        }
+
+        return res.status(500).send(
+            "Unable to add assignment"
+        );
     }
-
-    // Validate priority and estimated time
-    if (
-      (priority !== null &&
-        !["low", "medium", "high"].includes(priority)) ||
-      (estimatedTime !== null &&
-        (!Number.isSafeInteger(estimatedTime) || estimatedTime < 0))
-    ) {
-      return res.status(400).send("Invalid priority or estimated time");
-    }
-
-    // Verify that the course belongs to the user
-    const course = await db.oneOrNone(
-      `
-      SELECT course_id
-      FROM courses
-      WHERE course_id = $1
-        AND user_id = $2;
-      `,
-      [courseId, userId]
-    );
-
-    if (!course) {
-      return res.status(400).send("Invalid course selected");
-    }
-
-    // Save the assignment as incomplete by default
-    await db.none(
-      `
-      INSERT INTO assignments (
-        course_id,
-        assignment_name,
-        description,
-        due_date,
-        priority,
-        estimated_time
-      )
-      VALUES ($1, $2, $3, $4, $5, $6);
-      `,
-      [
-        courseId,
-        assignmentName,
-        description,
-        dueDate,
-        priority,
-        estimatedTime
-      ]
-    );
-
-    // Open the month containing the new assignment
-    const month = dueDate.substring(0, 7);
-
-    res.redirect(303, `/calendar?month=${month}`);
-
-  } catch (error) {
-    console.error("Error adding assignment:", error);
-
-    // Reject duplicate assignments
-    if (error.code === "23505") {
-      return res.status(409).send("Assignment already exists");
-    }
-
-    // Handle other database errors
-    res.status(500).send("Unable to add assignment");
-  }
 });
 
 
-// Update an assignment's completion status
+/*
+ * POST /calendar/:assignmentId/edit
+ *
+ * Edit an existing assignment.
+ *
+ * The original assignment ID is preserved.
+ * Completion status and S3 attachments are not modified.
+ */
+router.post("/:assignmentId/edit", async (req, res) => {
+    try {
+        const userId = getCurrentUser(req).user_id;
+
+        const assignmentId = Number(req.params.assignmentId);
+        const courseId = Number(req.body.course_id);
+
+        const assignmentName =
+            typeof req.body.assignment_name === "string"
+                ? req.body.assignment_name.trim()
+                : "";
+
+        const description =
+            typeof req.body.description === "string"
+                ? req.body.description
+                : null;
+
+        const dueDate =
+            typeof req.body.due_date === "string"
+                ? req.body.due_date.trim()
+                : "";
+
+        const priority =
+            req.body.priority === "" ||
+            req.body.priority == null
+                ? null
+                : req.body.priority;
+
+        const estimatedTime =
+            req.body.estimated_time === "" ||
+            req.body.estimated_time == null
+                ? null
+                : Number(req.body.estimated_time);
+
+        /*
+         * Reuse the creation date validator.
+         * Validate the assignment ID, course ID, name,
+         * and due date before contacting PostgreSQL.
+         */
+        if (
+            !Number.isSafeInteger(assignmentId) ||
+            assignmentId <= 0 ||
+            !Number.isSafeInteger(courseId) ||
+            courseId <= 0 ||
+            !assignmentName ||
+            assignmentName.length > 150 ||
+            !isValidDueDate(dueDate)
+        ) {
+            return res.status(400).json({
+                error: "Invalid assignment information."
+            });
+        }
+
+        // Validate optional planning fields.
+        if (
+            (
+                priority !== null &&
+                !["low", "medium", "high"].includes(priority)
+            ) ||
+            (
+                estimatedTime !== null &&
+                (
+                    !Number.isSafeInteger(estimatedTime) ||
+                    estimatedTime < 0
+                )
+            )
+        ) {
+            return res.status(400).json({
+                error: "Invalid priority or estimated time."
+            });
+        }
+
+        /*
+         * Only update an assignment if:
+         * - Its existing course belongs to the user.
+         * - Its newly selected course also belongs to the user.
+         *
+         * This permits moving an assignment between the
+         * user's courses without modifying its assignment ID.
+         */
+        const updatedAssignment = await db.oneOrNone(
+            `
+            UPDATE assignments a
+            SET
+                course_id = $1,
+                assignment_name = $2,
+                description = $3,
+                due_date = $4,
+                priority = $5,
+                estimated_time = $6
+            WHERE a.assignment_id = $7
+              AND EXISTS (
+                  SELECT 1
+                  FROM courses c
+                  WHERE c.course_id = a.course_id
+                    AND c.user_id = $8
+              )
+              AND EXISTS (
+                  SELECT 1
+                  FROM courses c
+                  WHERE c.course_id = $1
+                    AND c.user_id = $8
+              )
+            RETURNING a.assignment_id;
+            `,
+            [
+                courseId,
+                assignmentName,
+                description,
+                dueDate,
+                priority,
+                estimatedTime,
+                assignmentId,
+                userId
+            ]
+        );
+
+        if (!updatedAssignment) {
+            return res.status(404).json({
+                error: "Assignment not found or course unavailable."
+            });
+        }
+
+        /*
+         * Return the month containing the updated due date.
+         * The frontend reloads that month so the assignment
+         * appears in the correct calendar cell.
+         */
+        const month = dueDate.substring(0, 7);
+
+        return res.status(200).json({
+            message: "Assignment updated successfully.",
+            assignmentId: updatedAssignment.assignment_id,
+            redirectUrl:
+                `/calendar?month=${encodeURIComponent(month)}`
+        });
+
+    } catch (error) {
+        console.error("Error editing assignment:", error);
+
+        // Handle database uniqueness conflicts if applicable.
+        if (error.code === "23505") {
+            return res.status(409).json({
+                error: "An assignment with these details already exists."
+            });
+        }
+
+        return res.status(500).json({
+            error: "Unable to update assignment."
+        });
+    }
+});
+
+
+/*
+ * POST /calendar/:assignmentId/completed
+ *
+ * Update the completion status of an existing assignment.
+ *
+ * The frontend sends completed=true or completed=false.
+ * The server returns the saved Boolean status as JSON.
+ */
 router.post("/:assignmentId/completed", async (req, res) => {
-  try {
+    try {
+        const userId = getCurrentUser(req).user_id;
 
-    // Temporary test user
-    const userId = 1;
+        const assignmentId =
+            Number(req.params.assignmentId);
 
-    // Get the assignment ID and new completion status
-    const assignmentId = Number(req.params.assignmentId);
-    const completedValue = req.body.completed;
+        const completedValue =
+            req.body.completed;
 
-    // Validate the assignment ID
-    if (!Number.isSafeInteger(assignmentId) || assignmentId <= 0) {
-      return res.status(400).json({
-        error: "Invalid assignment ID"
-      });
+        if (
+            !Number.isSafeInteger(assignmentId) ||
+            assignmentId <= 0
+        ) {
+            return res.status(400).json({
+                error: "Invalid assignment ID"
+            });
+        }
+
+        if (
+            completedValue !== "true" &&
+            completedValue !== "false"
+        ) {
+            return res.status(400).json({
+                error: "Invalid completion status"
+            });
+        }
+
+        const completed = completedValue === "true";
+
+        /*
+         * Update only assignments belonging to the user.
+         * The course join verifies assignment ownership.
+         */
+        const assignment = await db.oneOrNone(
+            `
+            UPDATE assignments a
+            SET completed = $1
+            FROM courses c
+            WHERE a.course_id = c.course_id
+              AND a.assignment_id = $2
+              AND c.user_id = $3
+            RETURNING
+                a.assignment_id,
+                a.completed;
+            `,
+            [completed, assignmentId, userId]
+        );
+
+        if (!assignment) {
+            return res.status(404).json({
+                error: "Assignment not found"
+            });
+        }
+
+        /*
+         * The frontend updates the calendar card's
+         * data-completed attribute after this response.
+         * CSS then applies completed styling automatically.
+         */
+        return res.status(200).json(assignment);
+
+    } catch (error) {
+        console.error("Error updating assignment:", error);
+
+        return res.status(500).json({
+            error: "Unable to update assignment"
+        });
     }
-
-    // Only accept true or false
-    if (completedValue !== "true" && completedValue !== "false") {
-      return res.status(400).json({
-        error: "Invalid completion status"
-      });
-    }
-
-    const completed = completedValue === "true";
-
-    // Update the assignment in PostgreSQL
-    // Only update assignments belonging to the user
-    const assignment = await db.oneOrNone(
-      `
-      UPDATE assignments a
-      SET completed = $1
-      FROM courses c
-      WHERE a.course_id = c.course_id
-        AND a.assignment_id = $2
-        AND c.user_id = $3
-      RETURNING a.assignment_id, a.completed;
-      `,
-      [completed, assignmentId, userId]
-    );
-
-    // Handle assignments that do not exist
-    if (!assignment) {
-      return res.status(404).json({
-        error: "Assignment not found"
-      });
-    }
-
-    // Return the updated completion status
-    res.status(200).json(assignment);
-
-  } catch (error) {
-    console.error("Error updating assignment:", error);
-
-    res.status(500).json({
-      error: "Unable to update assignment"
-    });
-  }
 });
 
 
-// Export the calendar routes
+// Export the Calendar routes for registration in app.js.
 module.exports = router;

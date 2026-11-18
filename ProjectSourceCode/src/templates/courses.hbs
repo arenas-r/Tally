@@ -1,0 +1,33 @@
+<div class="container py-4 courses-page">
+
+    <div class="courses-header">
+        <div>
+            <h2 class="courses-title">My Courses</h2>
+            <p class="courses-subtitle">
+                Manage your courses and assignments.
+            </p>
+        </div>
+
+        <button
+            type="button"
+            class="add-course-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#addCourseModal"
+        >
+            <span>+</span>
+            Add Course
+        </button>
+    </div>
+
+    {{> courses/courseGrid}}
+
+    {{#if selectedCourse}}
+        {{> courses/courseDetails
+            course=selectedCourse
+            assignments=assignments
+        }}
+    {{/if}}
+
+</div>
+
+{{> courses/courseFormModal}}
