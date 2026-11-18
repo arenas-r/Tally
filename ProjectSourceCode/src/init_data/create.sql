@@ -72,9 +72,4 @@ CREATE TABLE assignment_files (
         FOREIGN KEY (assignment_id)
         REFERENCES assignments(assignment_id)
         ON DELETE CASCADE
-<<<<<<< HEAD
 );
-=======
-);
-
->>>>>>> cedd599 (added user session functionality, and some personalization)
