@@ -54,7 +54,8 @@ router.get("/", async (req, res) => {
             assignments,
             courses,
             workload,
-            completionPercentage
+            completionPercentage,
+            stylesheet: "dashboard.css"
         });
 
     } catch (error) {
