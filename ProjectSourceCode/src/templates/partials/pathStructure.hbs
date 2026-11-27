@@ -16,8 +16,11 @@
         <ul class="list-group list-group-flush" id="completed-assignments-list">
             {{#each completedAssignments}}
                 <li class = "list-group-item">
-                    <span class="text-decoration-line-through d-block fw-semibold">{{this.assignment_name}}</span>                    
-                    <small class="text-muted">Course: {{this.course_name}}</small>
+                    <div>
+                        <span class="text-decoration-line-through d-block fw-semibold">{{this.assignment_name}}</span>                    
+                        <small class="text-muted">Course: {{this.course_name}}</small>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary uncomplete-btn" data-id="{{this.assignment_id}}">Undo</button>
                 </li>
             {{else}}
             <li class="list-group-item text-muted">No completed Tasks Yet</li>
@@ -81,7 +84,8 @@
             <!--Can add completion status that makes this dissapear and go into the compelted section or something-->        
             <p class="node-status">Status: {{completed}}</p>
             <p class="node-time">Estimated Time: {{estimated_time}}</p>
-            <p class="node-descriptions">Description: {{description}}</p>        
+            <p class="node-descriptions">Description: {{description}}</p>
+            <button type="button" class = "btn btn-sm btn-outline-success complete-btn" data-id = "{{assignment_id}}">Mark Complete</button>        
         </div>
     </div>
     {{/each}}
@@ -161,8 +165,12 @@ function updateDOM(assignments, completedAssignments) {
                     <p class="node-status">Status: ${item.completed}</p>
                     <p class="node-time">Estimated Time: ${item.estimated_time}</p>
                     <p class="node-descriptions">Description: ${item.description}</p>
+                    <button type="button" class="btn btn-sm btn-outline-success complete-btn" data-id="${item.assignment_id}">Mark Complete</button>
                 </div>
             `;
+
+
+
             container.appendChild(card);
         });
         //Re creates the completed assignment list within the sidebar
@@ -175,8 +183,11 @@ function updateDOM(assignments, completedAssignments) {
                     const li = document.createElement('li');
                     li.className = 'list-group-item';
                     li.innerHTML = `
-                        <span class="text-decoration-line-through d-block fw-semibold">${item.assignment_name}</span>
-                        <small class="text-muted">Course: ${item.course_name || ''}</small>
+                        <div>
+                            <span class="text-decoration-line-through d-block fw-semibold">${item.assignment_name}</span>
+                            <small class="text-muted">Course: ${item.course_name || ''}</small>
+                        <div/>
+                        <button type="button" class="btn btn-sm btn-outline-secondary uncomplete-btn" data-id="${item.assignment_id}">Undo</button>
                     `;
                     completedList.appendChild(li);
                 });
@@ -204,4 +215,34 @@ setInterval(smartPoll, 5000);
         sidebar.classList.remove('show');
         toggleBtn.style.display = 'block';
     });
+</script>
+
+<script>
+    document.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".complete-btn");
+    if (!btn) return;
+
+    const res = await fetch(`/calendar/${btn.dataset.id}/completed`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ completed: "true" })
+    });
+
+    if (res.ok) smartPoll();
+});
+</script>
+
+<script>
+    document.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".uncomplete-btn");
+    if (!btn) return;
+
+    const res = await fetch(`/calendar/${btn.dataset.id}/completed`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ completed: "false" })
+    });
+
+    if (res.ok) smartPoll();
+});
 </script>

@@ -46,6 +46,8 @@ router.get('/',async (req, res)=>{
                 SELECT
                 a.assignment_name,
                 a.description,
+                a.assignment_id,
+                a.assignment_name,
                 TO_CHAR(a.due_date, 'Mon DD, YYYY') AS due_date,
                 a.priority,
                 a.estimated_time,
@@ -63,6 +65,8 @@ router.get('/',async (req, res)=>{
                 SELECT
                 a.assignment_name,
                 a.description,
+                a.assignment_id,
+                a.assignment_name,
                 TO_CHAR(a.due_date, 'Mon DD, YYYY') AS due_date,
                 a.priority,
                 a.estimated_time,
